@@ -1,118 +1,224 @@
+#!/usr/bin/env python3
+"""
+Noise ceiling per voxel (default) or per Glasser region (optional).
+
+Input:
+  - A pickle produced by your grouping script:
+      { condition_key: [beta_vec, beta_vec, ...] }
+    where each beta_vec is length = #voxels (MNI) or #surface vertices (Glasser).
+
+Computation:
+  - For each condition with >= min repetitions:
+      * Randomly split repetitions into two halves
+      * Average each half -> two condition-by-(voxels or regions) matrices
+      * Pearson correlation per column between the two halves
+  - Repeat bootstrap splits and average the column-wise r (Fisher z not needed
+    here since we average across bootstraps of the same split-half statistic).
+  - If --use_glasser, average voxel/vertex betas within each atlas label *per trial*
+    before the split (region-level ceiling).
+
+Outputs:
+  - Histogram figure
+  - Pickle of the per-(voxel|region) noise ceiling values
+
+Example:
+python noise_ceiling_tradition.py \
+    --subject sub-01 \
+    --input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data/delay/trial_level_betas/grouped_betas/task_relevant_only/sub-01_task_condition_betas.pkl \
+    --output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/traditional_way \
+    --n_bootstrap 1  --min_reps 4 --seed 123
+
+Enable Glasser region-level:
+  ... --use_glasser \
+      --atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii
+"""
+import argparse
 import pickle
-import numpy as np
-import pandas as pd
-from scipy.stats import pearsonr
-import matplotlib.pyplot as plt
 from pathlib import Path
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import pearsonr
 import nibabel as nib
 
-# ==== Config ====
-subject = "sub-01"
-region_level = True
-atlas_path = "/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii"
 
-# ==== Helper ====
+# ---------- helpers ----------
+
 def rowwise_correlation(X, Y):
-    """Compute Pearson r for each column (voxel or region) between X and Y using scipy."""
-    assert X.shape == Y.shape
-    r = np.zeros(X.shape[1])
-    for i in range(X.shape[1]):
-        x_col = X[:, i]
-        y_col = Y[:, i]
-        if np.all(x_col == x_col[0]) or np.all(y_col == y_col[0]):
-            r[i] = np.nan
+    """Column-wise Pearson r between matrices X and Y (same shape). Returns (n_cols,) with NaNs for constant cols."""
+    assert X.shape == Y.shape, f"Shape mismatch: {X.shape} vs {Y.shape}"
+    n = X.shape[1]
+    out = np.full(n, np.nan, dtype=np.float32)
+    for i in range(n):
+        x = X[:, i]
+        y = Y[:, i]
+        # guard against constants
+        if np.allclose(x, x[0]) or np.allclose(y, y[0]):
             continue
-        r[i], _ = pearsonr(x_col, y_col)
-    return r
+        r, _ = pearsonr(x, y)
+        out[i] = r
+    return out
 
-# ==== Load atlas and get label mapping ====
-if region_level:
-    dlabel = nib.load(atlas_path)
-    atlas_data = dlabel.get_fdata().squeeze()
-    unique_labels = np.unique(atlas_data)
-    region_labels = unique_labels[unique_labels > 0]  # remove unlabeled 0
-    region_labels = region_labels.astype(int)
-    n_regions = len(region_labels)
 
-# ==== Load Betas ====
-input_path = f"/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/grouped_betas/task_relevant_only/{subject}_task_condition_betas.pkl"
-with open(input_path, "rb") as f:
-    condition_betas = pickle.load(f)
+def load_glasser_labels(atlas_path: str):
+    """Load Glasser .dlabel/.nii labels -> (labels_vector, region_ids_sorted)."""
+    lab_img = nib.load(atlas_path)
+    lab = np.asarray(lab_img.get_fdata()).squeeze()  # 1D vector for CIFTI label or 3D/nd -> flatten
+    lab = lab.reshape(-1)
+    # keep positive labels
+    region_ids = np.unique(lab)
+    region_ids = region_ids[region_ids > 0].astype(int)
+    return lab, region_ids
 
-valid_conditions = [k for k, v in condition_betas.items() if len(v) >= 4]
-if not valid_conditions:
-    raise ValueError("No valid conditions with at least 4 repetitions.")
 
-# ==== Bootstrap NC Calculation ====
-n_bootstrap = 10
-all_bootstrapped_ncs = []
+def make_region_averager(labels_vec: np.ndarray, region_ids: np.ndarray):
+    """Return a function avg_by_region(trials x features) -> (trials x n_regions)."""
+    # Precompute boolean masks (or indices) per region
+    idxs = [np.where(labels_vec == rid)[0] for rid in region_ids]
 
-for b in range(n_bootstrap):
-    half1_matrix = []
-    half2_matrix = []
+    def avg_by_region(A):
+        # A: (n_trials, n_features)
+        out = np.full((A.shape[0], len(region_ids)), np.nan, dtype=np.float32)
+        for j, idx in enumerate(idxs):
+            if idx.size == 0:
+                continue
+            # nanmean over selected features
+            out[:, j] = np.nanmean(A[:, idx], axis=1)
+        return out
 
-    for cond in valid_conditions:
-        betas = np.stack(condition_betas[cond], axis=0)  # (n_reps, n_voxels)
-        n_trials, n_vox = betas.shape
+    return avg_by_region
 
-        if region_level:
-            # Average across voxels in each region per trial
-            betas_region = np.full((n_trials, n_regions), np.nan)
-            for i, region_id in enumerate(region_labels):
-                region_mask = (atlas_data == region_id)
-                if region_mask.sum() == 0:
-                    continue
-                betas_region[:, i] = np.nanmean(betas[:, region_mask], axis=1)
-            betas = betas_region  # (n_trials, n_regions)
 
-        if betas.shape[0] < 4:
+# ---------- main ----------
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--subject", required=True)
+    ap.add_argument("--input_pickle", required=True,
+                    help="Path to {condition: [beta_vec,...]} produced by grouping script")
+    ap.add_argument("--output_dir", required=True)
+    ap.add_argument("--n_bootstrap", type=int, default=50)
+    ap.add_argument("--min_reps", type=int, default=4,
+                    help="Minimum repetitions per condition to include")
+    ap.add_argument("--seed", type=int, default=0)
+
+    # Glasser toggle
+    ap.add_argument("--use_glasser", action="store_true",
+                    help="If set, average trial betas within Glasser regions before computing NC")
+    ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii",
+                    help="Path to Glasser atlas labels (.dlabel.nii or NIfTI) — used only if --use_glasser")
+
+    args = ap.parse_args()
+    rng = np.random.default_rng(args.seed)
+
+    # ----- load grouped betas -----
+    input_path = Path(args.input_pickle)
+    with open(input_path, "rb") as f:
+        condition_betas = pickle.load(f)
+
+    # filter conditions with enough reps
+    valid_conditions = [k for k, v in condition_betas.items() if len(v) >= args.min_reps]
+    if not valid_conditions:
+        raise SystemExit(f"No valid conditions with at least {args.min_reps} repetitions found in {input_path}")
+
+    # infer feature length from first condition
+    first_vec = np.asarray(condition_betas[valid_conditions[0]][0])
+    n_features = first_vec.size
+
+    # ----- optional Glasser region mapping -----
+    if args.use_glasser:
+        labels_vec, region_ids = load_glasser_labels(args.atlas_path)
+        labels_vec = labels_vec.astype(int)
+
+        if labels_vec.size != n_features:
+            raise SystemExit(
+                f"Atlas feature count ({labels_vec.size}) != beta vector length ({n_features}). "
+                "Make sure your beta vectors and atlas live in the same space/indexing."
+            )
+        avg_by_region = make_region_averager(labels_vec, region_ids)
+        n_units = len(region_ids)
+        unit_name = "region"
+    else:
+        avg_by_region = None
+        n_units = n_features
+        unit_name = "voxel"
+
+    # ----- bootstrap split-half NC -----
+    boot_nc = []
+
+    for b in range(args.n_bootstrap):
+        half1_rows = []
+        half2_rows = []
+
+        for cond in valid_conditions:
+            # stack repetitions for this condition: (n_reps, n_features)
+            reps = np.stack([np.asarray(v).reshape(-1) for v in condition_betas[cond]], axis=0)
+            if reps.shape[0] < args.min_reps:
+                continue
+
+            # (optional) average into regions per trial
+            if avg_by_region is not None:
+                reps = avg_by_region(reps)  # (n_reps, n_regions)
+
+            # split reps into two halves
+            perm = rng.permutation(reps.shape[0])
+            mid = reps.shape[0] // 2
+            A = reps[perm[:mid]].mean(axis=0)   # (n_units,)
+            B = reps[perm[mid:]].mean(axis=0)   # (n_units,)
+
+            # require both halves non-empty
+            if A.size == 0 or B.size == 0:
+                continue
+
+            half1_rows.append(A)
+            half2_rows.append(B)
+
+        if not half1_rows or not half2_rows:
+            # nothing usable this bootstrap
             continue
 
-        # Random split
-        perm = np.random.permutation(betas.shape[0])
-        half1_mean = betas[perm[:len(perm) // 2]].mean(axis=0)
-        half2_mean = betas[perm[len(perm) // 2:]].mean(axis=0)
+        H1 = np.stack(half1_rows, axis=0)   # (n_conditions_kept, n_units)
+        H2 = np.stack(half2_rows, axis=0)   # (n_conditions_kept, n_units)
 
-        half1_matrix.append(half1_mean)
-        half2_matrix.append(half2_mean)
+        nc_b = rowwise_correlation(H1, H2)  # (n_units,)
+        boot_nc.append(nc_b)
 
-    if not half1_matrix or not half2_matrix:
-        print(f"⚠️ Bootstrap {b} skipped due to insufficient data.")
-        continue
+    if not boot_nc:
+        raise SystemExit("No bootstrap iterations produced valid splits — not enough data per condition.")
 
-    half1_matrix = np.stack(half1_matrix, axis=0)
-    half2_matrix = np.stack(half2_matrix, axis=0)
+    noise_ceiling = np.nanmean(np.stack(boot_nc, axis=0), axis=0)  # (n_units,)
 
-    nc = rowwise_correlation(half1_matrix, half2_matrix)
-    all_bootstrapped_ncs.append(nc)
+    # ----- save & plot -----
+    outdir = Path(args.output_dir)
+    outdir.mkdir(parents=True, exist_ok=True)
 
-# ==== Final Noise Ceiling ====
-noise_ceiling = np.nanmean(np.stack(all_bootstrapped_ncs, axis=0), axis=0)
+    clipped_nc = np.clip(noise_ceiling, -1, 1)
+    plt.figure(figsize=(10, 6))
+    plt.hist(clipped_nc[np.isfinite(clipped_nc)], bins=60, edgecolor='black')
+    plt.title(f"Noise Ceiling Distribution ({args.subject}, per-{unit_name})")
+    plt.xlabel("Noise Ceiling (Pearson r)")
+    plt.ylabel(f"Number of {unit_name}s")
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
 
-# ==== Save and Plot ====
-unit = "region" if region_level else "voxel"
-clipped_nc = np.clip(noise_ceiling, -10, 10)
+    fig_path = outdir / f"{args.subject}_noise_ceiling_distribution_per_{unit_name}.png"
+    plt.savefig(fig_path, dpi=300, bbox_inches="tight")
+    plt.close()
 
-plt.figure(figsize=(10, 6))
-plt.hist(clipped_nc, bins=50, edgecolor='black')
-plt.title(f"Distribution of Noise Ceilings ({subject}, {unit}-wise)")
-plt.xlabel("Noise Ceiling (Pearson r)")
-plt.ylabel(f"Number of {unit}s")
-plt.grid(True)
-plt.tight_layout()
+    nc_save_path = outdir / f"{args.subject}_noise_ceiling_per_{unit_name}.pkl"
+    with open(nc_save_path, "wb") as f:
+        pickle.dump(noise_ceiling, f)
 
-output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/traditional_way")
-output_dir.mkdir(parents=True, exist_ok=True)
-fig_path = output_dir / f"{subject}_noise_ceiling_distribution_per_{unit}.png"
-plt.savefig(fig_path)
-plt.close()
+    print(f"📊 Plot saved: {fig_path}")
+    print(f"💾 Noise ceiling saved: {nc_save_path}")
+    if args.use_glasser:
+        # also save the region id order, so you can map results back later
+        meta_path = outdir / f"{args.subject}_noise_ceiling_per_{unit_name}_meta.pkl"
+        with open(meta_path, "wb") as f:
+            pickle.dump({"region_ids": region_ids}, f)
+        print(f"🧭 Region id order saved: {meta_path}")
 
-print(f"📊 Noise ceiling distribution plot saved to: {fig_path}")
 
-# Save data
-nc_save_path = output_dir / f"{subject}_noise_ceiling_per_{unit}.pkl"
-with open(nc_save_path, "wb") as f:
-    pickle.dump(noise_ceiling, f)
-
-print(f"💾 Noise ceiling saved to: {nc_save_path}")
+if __name__ == "__main__":
+    main()

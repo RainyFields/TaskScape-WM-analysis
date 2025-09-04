@@ -26,9 +26,9 @@ Example
 -------
 python glm_analysis.py \
   --subj sub-01 \
-  --tasks ctxdm  \
+  --tasks 1back  \
   --include_types encoding delay \
-  --out_root /project/def-pbellec/xuan/fmri_dataset_project/data \
+  --out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay \
   --overwrite
 """
 from __future__ import annotations
@@ -394,7 +394,7 @@ def main():
                 # ------------- Fit GLM with AR(1) -------------
                 betas_full, XtX_inv, sigma2, dof, resid = fit_glm_with_ar1(X, Yf)
                 print(f"shape of design matrix X: {X.shape} (T_kept x K)")
-                print(f"shape of betas_full: {betas_full.shape} (P x K_task)")
+                print(f"shape of betas_full: {betas_full.shape} (P x K)")
                 print(f"shape of timeseries data Yf: {Yf.shape} (T_kept x P)")
 
                 # Indices for task columns (last K_task)
@@ -415,9 +415,12 @@ def main():
                 # Full design matrix CSV
                 pd.DataFrame(X, columns=design_col_names).to_csv(design_matrix_csv, index=False)
 
-                # HDF5
+                # HDF5  (ONLY THE BLOCK BELOW IS MODIFIED TO ALSO SAVE FULL BETAS)
                 with h5py.File(h5_file, "w") as h5f:
-                    # Core outputs
+                    # --- NEW: save full betas for ALL regressors (P x K) ---
+                    h5f.create_dataset("betas_full", data=betas_full.astype(np.float32))  # (P x K)
+
+                    # Core outputs (kept as in your original code)
                     h5f.create_dataset("betas", data=betas_task.astype(np.float32))        # (P x K_task)
                     h5f.create_dataset("all_regressors_shape", data=np.array(X.shape, dtype=np.int32))
                     # Stats
@@ -429,7 +432,7 @@ def main():
                     str_dtype = h5py.string_dtype(encoding="utf-8")
                     h5f.create_dataset("design_col_names", data=np.array(design_col_names, dtype=object), dtype=str_dtype)
 
-                    # Metadata
+                    # Metadata (unchanged, + one helpful provenance attribute)
                     h5f.attrs.create("task_regressor_names", np.array(trial_names, dtype=str_dtype), dtype=str_dtype)
                     h5f.attrs["regressor_level"] = "trial"
                     h5f.attrs["task_col_start"] = task_col_start
@@ -439,6 +442,8 @@ def main():
                     h5f.attrs["tmask_dropped"] = tmask
                     h5f.attrs["high_pass_sec"] = args.high_pass_sec
                     h5f.attrs["order_in_X"] = "[confounds, drifts+intercept, task(trials)]"
+                    # --- NEW: estimator provenance (so downstream knows WLS/AR1 vs OLS) ---
+                    h5f.attrs["estimator"] = "WLS_AR1"
 
                 print(f"[🎯] Saved betas + full design to {h5_file}")
                 print(f"[🧾] Trial design CSV: {design_csv}")

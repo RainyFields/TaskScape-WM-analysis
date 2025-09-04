@@ -41,19 +41,17 @@ Usage
 -----
 python task_condition_identification.py \
   --subj sub-01 \
-  --glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas \
-  --out_root /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas \
-  --tasks ctxdm interdms nback \
+  --glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas \
+  --out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas \
+  --tasks 1back \
   --correct_only
 """
 from __future__ import annotations
 
-import os
-import re
 import h5py
 import pickle
 from pathlib import Path
-from collections import defaultdict, Counter
+from collections import defaultdict
 import warnings
 
 import numpy as np
@@ -70,16 +68,11 @@ PAIR_SELECTION = "first"  # {'first', 'mean'} — which encoding stimulus beta t
 # -----------------------
 
 def parse_run_tokens(beta_file: Path):
-    """Extract (subj, ses, task, run, base_stem) from a betas filename.
+    """Extract (subj, ses, task_name, run, base_stem) from a betas filename.
     Expects pattern like: sub-01_ses-003_task-ctxdm_run-01_betas.h5
     """
     stem = beta_file.stem  # remove .h5
-    # strip trailing _betas
-    if stem.endswith("_betas"):
-        base = stem[:-6]
-    else:
-        base = stem
-    # tokens are separated by '_'
+    base = stem[:-6] if stem.endswith("_betas") else stem
     parts = base.split('_')
     subj = next((p for p in parts if p.startswith('sub-')), 'sub-unknown')
     ses  = next((p for p in parts if p.startswith('ses-')), 'ses-unknown')
@@ -98,7 +91,8 @@ def determine_task_type(task_name: str):
         return [(1, 2), (2, 3)]
     elif t.startswith("nback") or t.startswith("1back"):
         # default: pairs of consecutive items in a 6-item sequence (adjust if needed)
-        return [(1, 2), (2, 3), (3, 4), (4, 5), (5, 6)]
+        # return [(1, 2), (2, 3), (3, 4), (4, 5), (5, 6)]
+        return [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
     else:
         # sensible default: consecutive pairs (1,2), (2,3)
         return [(1, 2), (2, 3)]
@@ -132,6 +126,7 @@ def build_condition_key(task_name: str, s1_row: pd.Series, s2_row: pd.Series, fe
 
 def group_encoding_betas_within_trial(beta_file: Path, cond_csv: Path, task_name: str, correct_only: bool = False):
     # Load betas (P x K_trials)
+    print("--------group encoding betas--------")
     with h5py.File(beta_file, 'r') as f:
         if 'betas' not in f:
             raise ValueError(f"No 'betas' in {beta_file}")
@@ -139,33 +134,76 @@ def group_encoding_betas_within_trial(beta_file: Path, cond_csv: Path, task_name
 
     # Load design (one row per trial regressor IN ORDER)
     df = pd.read_csv(cond_csv)
-    print(f"shape of df: {df.shape} (rows x columns)")
-    
     df.columns = df.columns.str.strip()
+
+    # --- Canonicalize common column name variants to expected names ---
+    cols_lower = {c.lower(): c for c in df.columns}
+
+    def first_present(*names):
+        for n in names:
+            if n in cols_lower:
+                return cols_lower[n]
+        return None
+
+    rename_map = {}
+
+    # stim_order
+    src = first_present('stim_order', 'stimorder', 'stim-order')
+    if src and src != 'stim_order':
+        rename_map[src] = 'stim_order'
+
+    # location
+    src = first_present('location', 'loc', 'locmod', 'location_label')
+    if src and src != 'location':
+        rename_map[src] = 'location'
+
+    # object  (often 'obj' or 'objmod')
+    src = first_present('object', 'obj', 'objmod', 'object_name', 'objectid')
+    if src and src != 'object':
+        rename_map[src] = 'object'
+
+    # category (often 'ctg' or 'ctgmod')
+    src = first_present('category', 'ctg', 'ctgmod')
+    if src and src != 'category':
+        rename_map[src] = 'category'
+
+    if rename_map:
+        df = df.rename(columns=rename_map)
+
+    # If 'object' still missing but 'category' exists, fall back so keys can be built
+    if 'object' not in df.columns and 'category' in df.columns:
+        df['object'] = df['category']
+
     # Basic sanity
     required_cols = {"trialNumber", "stim_order", "type"}
     missing = required_cols - set(df.columns)
     if missing:
-    
         raise ValueError(f"Design CSV missing columns {missing} in {cond_csv}")
 
-    
-    # if correct_only and 'is_correct' in df.columns:
-    
-    #     df = df[df['is_correct'] != False].copy()
+    # Optional: only correct trials if present
+    if correct_only and 'is_correct' in df.columns:
+        # keep rows where is_correct is True or NaN; drop explicit False / 'false' / 'b'
+        def is_negative(v):
+            if isinstance(v, (bool, np.bool_)):
+                return (v is False) or (v == False)
+            if pd.isna(v):
+                return False
+            sv = str(v).strip().lower()
+            return sv in {"false", "b", "0"}
+        df = df[~df['is_correct'].apply(is_negative)].copy()
 
-    
     # Ensure column index matches betas' columns
     df = df.reset_index(drop=True)
     df['col_index'] = np.arange(len(df), dtype=int)
 
-    
+    # stim_order as numeric for matching
+    df['stim_order'] = pd.to_numeric(df['stim_order'], errors='coerce')
+    df = df.dropna(subset=['stim_order'])
+    df['stim_order'] = df['stim_order'].astype(int)
+
     if betas.shape[1] != len(df):
         warnings.warn(
             f"Betas columns ({betas.shape[1]}) != design rows ({len(df)}). Proceeding but mapping may be off.")
-
-    # Keep only encoding rows
-    df_enc = df[df['type'].astype(str).str.lower() == 'encoding'].copy()
 
     # Group within trial; pick consecutive stimulus pairs by task
     pair_indices_list = determine_task_type(task_name)
@@ -173,8 +211,8 @@ def group_encoding_betas_within_trial(beta_file: Path, cond_csv: Path, task_name
 
     condition_dict: dict[str, list[np.ndarray]] = defaultdict(list)
 
-    g = df_enc.groupby('trialNumber')
-    for trial, trial_df in g:
+    g = df.groupby('trialNumber')
+    for _, trial_df in g:
         for i1, i2 in pair_indices_list:
             r1 = trial_df[trial_df['stim_order'] == i1]
             r2 = trial_df[trial_df['stim_order'] == i2]
@@ -218,22 +256,51 @@ def main():
 
     all_condition_groups: dict[str, list[np.ndarray]] = defaultdict(list)
 
-    # Iterate sessions/runs
     for session_dir in sorted(glm_root.glob("ses-*/")):
         func_dir = session_dir / "func"
+
         if not func_dir.exists():
+            print(f"{func_dir} does not exist; skipping session")
             continue
+
         for beta_file in sorted(func_dir.glob("*_betas.h5")):
             subj_id, ses, task_name, run, base = parse_run_tokens(beta_file)
             if args.tasks and (task_name not in set(args.tasks)):
                 continue
-            cond_csv = beta_file.with_name(f"{base}_design.csv")
+
+            base_clean = base.replace("_nilearn", "")
+
+            # First try without the nilearn suffix
+            cond_csv = beta_file.with_name(f"{base_clean}_design.csv")
+            # print(f"trying csv file name: {cond_csv}")
             if not cond_csv.exists():
-                print(f"⚠️ Missing design CSV for {beta_file.name}; skipping run")
-                continue
+                # print("csv file does not exist; trying alternative")
+                # Then try with the nilearn suffix (still using the stripped base)
+                alt_csv = beta_file.with_name(f"{base_clean}_nilearn_design.csv")
+                # print(f"csv file name: {alt_csv}")
+                if alt_csv.exists():
+                    cond_csv = alt_csv
+                else:
+                    # Finally, fall back to the original base in case it didn't contain '_nilearn'
+                    alt2 = beta_file.with_name(f"{base}_design.csv")
+                    # print(f"csv file name: {alt2}")
+                    if alt2.exists():
+                        cond_csv = alt2
+                    else:
+                        alt3 = beta_file.with_name(f"{base}_nilearn_design.csv")
+                        # print(f"csv file name: {alt3}")
+                        if alt3.exists():
+                            cond_csv = alt3
+                        else:
+                            print(f"⚠️ Missing design CSV for {beta_file.name}; skipping run")
+                            continue
 
             try:
-                condition_betas = group_encoding_betas_within_trial(beta_file, cond_csv, task_name, correct_only=args.correct_only)
+                # print("starting to group encoding betas within trial")
+                condition_betas = group_encoding_betas_within_trial(
+                    beta_file, cond_csv, task_name, correct_only=args.correct_only
+                )
+                # print("end with group encoding betas within trial")
                 for k, v in condition_betas.items():
                     all_condition_groups[k].extend(v)
             except Exception as e:

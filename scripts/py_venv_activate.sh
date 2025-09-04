@@ -14,3 +14,11 @@ source /project/def-pbellec/xuan/nilearn/bin/activate
 
 
 pip install --no-index --upgrade pip
+
+
+# activate claude code
+mkdir -p ~/claude_env
+cd ~/claude_env
+npm init -y
+npm install @anthropic-ai/claude-code
+npx claude
