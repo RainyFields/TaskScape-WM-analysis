@@ -5,6 +5,36 @@ from collections import Counter
 import matplotlib.pyplot as plt
 
 
+def count_dms_task_conditions(df: pd.DataFrame) -> dict:
+    """
+    Count the number of repetitions for each DMS task condition.
+    DMS has 2 stimuli per trial, and conditions are defined by location pairs.
+    
+    Parameters:
+        df (pd.DataFrame): must include columns 'trialNumber', 'stim_order', 'location', 'type'
+    
+    Returns:
+        dict: condition -> number of repetitions
+    """
+    df_enc = df[df["type"] == "encoding"]
+    grouped = df_enc.groupby("trialNumber")
+    condition_counter = Counter()
+    
+    for trial_num, trial_df in grouped:
+        stim1 = trial_df[trial_df["stim_order"] == 1]
+        stim2 = trial_df[trial_df["stim_order"] == 2]
+        
+        if stim1.empty or stim2.empty:
+            continue
+        
+        loc1 = int(stim1.iloc[0]["location"])
+        loc2 = int(stim2.iloc[0]["location"])
+        condition = f"loc{loc1}_loc{loc2}"
+        condition_counter[condition] += 1
+    
+    return dict(condition_counter)
+
+
 def count_interdms_task_conditions(task_name: str, df: pd.DataFrame) -> dict:
     """
     Count the number of repetitions for each task condition based on task name and trial structure.
@@ -174,3 +204,59 @@ for target_task in all_tasks:
     plt.close()
 
     print(f"Plot saved to {fig_path}")
+
+
+# ============================================================
+# DMS Task Condition Counting
+# ============================================================
+print("\n" + "="*60)
+print("Processing DMS task")
+print("="*60)
+
+dms_results = {}
+dms_betas_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas")
+
+# Find all DMS design CSVs for this subject
+dms_design_csvs = list((dms_betas_dir / subject).rglob("*task-dms*_design.csv"))
+print(f"Found {len(dms_design_csvs)} DMS design files for {subject}")
+
+for csv_path in dms_design_csvs:
+    try:
+        df = pd.read_csv(csv_path)
+        df.columns = df.columns.str.strip()
+        condition_counts = count_dms_task_conditions(df)
+        dms_results = merge_and_add(dms_results, condition_counts)
+    except Exception as e:
+        print(f"Error processing {csv_path}: {e}")
+
+print("\nDMS Condition Counts:")
+for condition, count in sorted(dms_results.items()):
+    print(f"  {condition}: {count}")
+
+# Plotting DMS results
+if dms_results:
+    output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/repetition_count/all_stim_pairs")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    total_conditions = len(dms_results)
+    low_count_conditions = sum(1 for count in dms_results.values() if count < 4)
+    low_ratio = low_count_conditions / total_conditions if total_conditions > 0 else 0
+    
+    plt.figure(figsize=(8, 6))
+    conditions = sorted(dms_results.keys())
+    counts = [dms_results[c] for c in conditions]
+    plt.bar(conditions, counts)
+    plt.xticks(rotation=45)
+    plt.ylabel("Repetition Count")
+    plt.xlabel("Task Condition (Location Pairs)")
+    
+    title = f"DMS Trial Repetition Count (below 4: {low_count_conditions}/{total_conditions}, ratio={low_ratio:.2f})"
+    plt.title(title)
+    
+    fig_path = output_dir / f"{subject}_dms_trial_repetition_count.png"
+    plt.tight_layout()
+    plt.savefig(fig_path)
+    plt.close()
+    
+    print(f"\nDMS plot saved to {fig_path}")
+    print(f"Total trials: {sum(dms_results.values())}")

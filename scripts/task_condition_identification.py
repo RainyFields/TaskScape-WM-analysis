@@ -1,31 +1,32 @@
 #!/usr/bin/env python3
-# this script is only for trial-level GLM outputs
+# This script is for **trial-level GLM outputs** and groups betas into task-defined conditions.
 """
 Task-condition identification & grouping for **trial-level** GLM outputs.
 
-This adapts your prior (condition-based) script to the current trial-level
-GLM data layout you generate per run:
-  - HDF5:  <...>/<sub>/<ses>/func/<base>_betas.h5  with dataset `betas` of shape (P x K_trials)
-  - CSV:   sibling <base>_design.csv with one row per trial regressor (in column order),
-           including at least: [trialNumber, stim_order, location, object, category, is_correct, type]
+Data layout per run (your pipeline):
+  - HDF5:  <...>/<sub>/<ses>/func/<base>_betas.h5   with dataset `betas` shape (P x K_trials)
+  - CSV:   sibling <base>_design.csv describing each trial regressor column, including at least:
+           [trialNumber, stim_order, location, object, category, is_correct, type]
 
 What it does
 ------------
-• For each run, it reads the **trial-level** `betas` and the matching design CSV.
-• It selects **encoding** rows, then groups them within a trial according to task-specific
-  consecutive-stimulus pairs (e.g., ctxdm: (1,2), (2,3); interdms: (1,2), (2,3), (3,4); etc.).
-• For each pair, it builds a condition key (e.g., "ctxdm_locL_objA*locR_objB") and appends the
-  voxel beta vector for the **first** stimulus in the pair (keeps behavior compatible with your
-  earlier script; see `PAIR_SELECTION` flag to change to 'mean' if desired).
-• Aggregates across all runs into a dict: {condition_key: [beta_vec, beta_vec, ...]}.
-• Saves the dictionary as a pickle and writes a small repetition-count report + histogram.
+• Reads per-run **trial-level** betas and the matching design CSV.
+• Defines within-trial pairs by task (e.g., ctxdm: (1,1),(2,2),(3,3); interdms: (1,2),(2,3),(3,4), …).
+• Builds a condition key from the **encoding rows** (so keys reflect features during presentation).
+• Stores, by default, the **delay beta that follows the second stimulus (i2)** of each pair.
+  (This is configurable via --target_selection.)
 
-Differences vs old script
--------------------------
-• No `design_tsv` lookup is required anymore; we parse `task` from the filename.
-• We map betas columns to trials directly via the design CSV row order (which matches the
-  order the trial regressors were appended when you built X). This removes the 2*N == K check.
-• Fixed `determine_feature_type` bug and made the task/trial sanity checks softer (warnings only).
+• Aggregates across all runs into: {condition_key: [beta_vec, beta_vec, ...]}.
+• Saves a pickle of that dict + a repetition-count histogram.
+
+CLI knobs
+---------
+--target_selection:
+    - "delay_of_second"  (DEFAULT): use the delay beta that follows the second stimulus (i2)
+    - "encoding_first"             : use the encoding beta of the first stimulus (your previous behavior)
+--pair_selection (only used when target_selection=encoding_first):
+    - "first" (DEFAULT) : store encoding of s1
+    - "mean"            : store mean(encoding s1, encoding s2)
 
 Default paths
 -------------
@@ -37,14 +38,26 @@ Outputs
   <out_root>/grouped_betas/task_relevant_only/<subj>_task_condition_betas.pkl
   <out_root>/results/repetition_count/task_relevant_only/all_consecutive_stim_pairs/<subj>_repetition_distribution.png
 
-Usage
------
+Example
+-------
+# task condition: first stimuli with following delay, pairs of stimuli with delay of second
 python task_condition_identification.py \
   --subj sub-01 \
   --glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas \
   --out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas \
-  --tasks 1back \
-  --correct_only
+  --tasks all \
+  --correct_only \
+  --target_selection delay_of_second
+
+
+python task_condition_identification.py \
+  --subj sub-02 \
+  --glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas \
+  --out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas \
+  --tasks all \
+  --correct_only \
+  --target_selection delay_of_second
+
 """
 from __future__ import annotations
 
@@ -58,14 +71,160 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# -----------------------
-# Config
-# -----------------------
-PAIR_SELECTION = "first"  # {'first', 'mean'} — which encoding stimulus beta to collect per pair
 
 # -----------------------
 # Helpers
 # -----------------------
+
+import re
+from typing import Optional
+
+
+# -----------------------
+# Task universe
+# -----------------------
+ALL_TASKS = [
+    'nback_loc',
+    'nback_ctg',
+    'nback_obj',
+    'dms_loc',
+    'ctxdm_col',
+    'ctxdm_lco',
+    'interdms_loc_ABAB',
+    'interdms_loc_ABBA',
+    'interdms_obj_ABAB',
+    'interdms_obj_ABBA',
+    'interdms_ctg_ABAB',
+    'interdms_ctg_ABBA',
+]
+
+
+_CFNAME_RE = re.compile(
+    r"^sub-(?P<subj>\d+)_ses-(?P<ses>\d{3})_task-(?P<task>[A-Za-z0-9]+)_run-(?P<run>\d{2})_events\.tsv$"
+)
+
+def _digits(s) -> Optional[int]:
+    """Return int from a string or int-like; None if not parseable."""
+    if s is None:
+        return None
+    if isinstance(s, int):
+        return s
+    m = re.search(r"\d+", str(s))
+    return int(m.group()) if m else None
+
+def _normalize_ids(subj_id, ses, run):
+    subj = _digits(subj_id)
+    ses_i = _digits(ses)
+    run_i = _digits(run)
+    # build zero-padded strings
+    subj_str = f"{subj:02d}" if subj is not None else None
+    ses_str  = f"{ses_i:03d}" if ses_i is not None else None
+    run_str  = f"{run_i:02d}" if run_i is not None else None
+    return subj, ses_i, run_i, subj_str, ses_str, run_str
+
+def _strip_block_suffix(block_name: str) -> str:
+    """Turn 'interdms_obj_ABBA_block_2' -> 'interdms_obj_ABBA'."""
+    return re.sub(r"_block_\d+$", "", block_name)
+
+def _parse_converted_name(cf: str):
+    """Extract (subj, ses, task, run) ints/strs from converted_file_name."""
+    m = _CFNAME_RE.match(cf)
+    if not m:
+        return None
+    d = m.groupdict()
+    return {
+        "subj": int(d["subj"]),
+        "ses": int(d["ses"]),
+        "task": d["task"],
+        "run": int(d["run"]),
+    }
+def _canonicalize_design_lookup_df(df: pd.DataFrame) -> pd.DataFrame:
+    """Trim spaces from headers & normalize expected columns for the design *lookup* table."""
+    df = df.copy()
+    # strip header whitespace
+    df.columns = df.columns.str.strip()
+
+    # some files might have weird spacing inside values too
+    for col in df.columns:
+        if pd.api.types.is_string_dtype(df[col]):
+            df[col] = df[col].str.strip()
+
+    # enforce the three columns we expect (after stripping)
+    expected = {"session", "block_file_name", "converted_file_name"}
+    missing = expected - set(df.columns)
+    if missing:
+        raise ValueError(f"Design lookup table is missing expected columns: {missing}. "
+                         f"Found columns: {list(df.columns)}")
+
+    return df
+
+
+def get_detailed_task_name(
+    subj_id,
+    ses,
+    task_name: str,
+    run,
+    design_file_df: pd.DataFrame,
+    *,
+    strict: bool = True,
+) -> str:
+    """
+    Return the detailed task name (e.g., 'ctxdm_col', 'interdms_obj_ABBA', 'nback_loc')
+    for the given (subj_id, ses, task_name, run) by looking it up in design_file_df.
+
+    Matching is done by parsing design_file_df['converted_file_name'] and comparing
+    numeric session/run (with zero-padding handled) and task_name literally.
+
+    If multiple matches are found, the first unique block_file_name is used unless strict=True,
+    in which case a ValueError is raised.
+    """
+    design_file_df = _canonicalize_design_lookup_df(design_file_df)
+    # Normalize inputs and also build the canonical converted filename
+    subj, ses_i, run_i, subj_str, ses_str, run_str = _normalize_ids(subj_id, ses, run)
+    if ses_i is None or run_i is None:
+        raise ValueError("Could not parse numeric session/run from inputs.")
+    task_name = str(task_name)
+
+    # Parse every converted_file_name once (cached in a temporary view)
+
+    parsed = design_file_df["converted_file_name"].map(_parse_converted_name)
+    mask = parsed.notna()
+
+    # Apply filters: session, task, run
+    mask &= parsed.map(lambda d: d["ses"] == ses_i if d else False)
+    mask &= parsed.map(lambda d: d["task"] == task_name if d else False)
+    mask &= parsed.map(lambda d: d["run"] == run_i if d else False)
+
+    candidates = design_file_df.loc[mask, ["block_file_name", "converted_file_name"]]
+
+    if candidates.empty:
+        # DMS runs are not represented in the old design lookup table.
+        # Use a stable detailed task label so DMS can be grouped downstream.
+        if task_name.lower() == "dms":
+            return "dms_loc"
+        # As a fallback, try exact string equality on a canonical name (handles zero padding)
+        canonical = f"sub-{subj_str if subj_str else ''}_ses-{ses_str}_task-{task_name}_run-{run_str}_events.tsv"
+        fallback = design_file_df.loc[
+            design_file_df["converted_file_name"] == canonical,
+            ["block_file_name", "converted_file_name"],
+        ]
+        if fallback.empty:
+            raise LookupError(
+                f"No row found for ses={ses_i}, task='{task_name}', run={run_i}."
+            )
+        candidates = fallback
+
+    # Ensure uniqueness / resolve duplicates
+    unique_blocks = candidates["block_file_name"].drop_duplicates()
+    if len(unique_blocks) > 1 and strict:
+        raise ValueError(
+            "Multiple matching rows found with different block_file_name values:\n"
+            + "\n".join(unique_blocks.tolist())
+        )
+
+    block_name = unique_blocks.iloc[0]
+    return _strip_block_suffix(block_name)
+
 
 def parse_run_tokens(beta_file: Path):
     """Extract (subj, ses, task_name, run, base_stem) from a betas filename.
@@ -83,60 +242,62 @@ def parse_run_tokens(beta_file: Path):
 
 
 def determine_task_type(task_name: str):
-    """Return list of (stim_order_i, stim_order_j) pairs to consider per trial for a task."""
+    """Return list of (stim_order_i, stim_order_j) pairs per trial for a task."""
     t = task_name.lower()
     if t.startswith("interdms"):
-        return [(1, 2), (2, 3), (3, 4)]
+        return [(1, 2), (2, 3), (3, 4), (1,1), (2,2), (3,3), (4,4)]
+        # return [(1,2), (1,1)]
     elif t.startswith("ctxdm"):
-        return [(1, 2), (2, 3)]
+        # self-pairs (1,1), (2,2), (3,3) as in your current setup
+        return [(1, 2), (2, 3), (1,1),(2,2),(3,3),(4,4)]
+        # return [(1,2), (1,1)]
+        # return [(1, 2)]
     elif t.startswith("nback") or t.startswith("1back"):
-        # default: pairs of consecutive items in a 6-item sequence (adjust if needed)
-        # return [(1, 2), (2, 3), (3, 4), (4, 5), (5, 6)]
-        return [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
+        # consecutive items in a 6-item sequence (adjust if your sequence length differs)
+        return [(1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (1,1), (2,2), (3,3), (4,4), (5,5), (6,6)]
+        # return [(1,2), (1,1)]
+        # return [(1, 2)]
+    elif t.startswith("dms"):
+        # Two-item DMS trial: pair relation + per-item self conditions.
+        return [(1, 2), (1, 1), (2, 2)]
     else:
-        # sensible default: consecutive pairs (1,2), (2,3)
-        return [(1, 2), (2, 3)]
+        # sensible default
+        return [(1, 2), (1,1)]
 
 
 def determine_feature_type(task_name: str):
-    """Which features define a condition key for the task.
-    Returns a list subset of {"location", "object"}.
-    """
+    """Which features define a condition key for the task. Subset of {'location','object'}."""
     tn = task_name.lower()
     if ("obj" in tn) or ("ctg" in tn):
         return ["object"]
-    elif ("loc" in tn) or ("location" in tn) or ("ctxdm" in tn):
+    elif ("loc" in tn) or ("location" in tn) or ("ctxdm" in tn) or tn.startswith("dms"):
         return ["location", "object"]
     # fallback
     return ["object"]
 
 
-def build_condition_key(task_name: str, s1_row: pd.Series, s2_row: pd.Series, feature_type: list[str]) -> str:
-    if ("object" in feature_type) and ("location" in feature_type):
-        return f"{task_name}_loc{s1_row['location']}_obj{s1_row['object']}*loc{s2_row['location']}_obj{s2_row['object']}"
-    elif ("object" in feature_type):
-        return f"{task_name}_obj_{s1_row['object']}*obj_{s2_row['object']}"
+def build_condition_key(task_name: str, s1_row: pd.Series, s2_row: pd.Series, feature_type: list[str], condition_type = "two_frames") -> str:
+    if condition_type == "single_frame":
+        if ("object" in feature_type) and ("location" in feature_type):
+            return f"{task_name}_loc{s1_row['location']}_obj{s1_row['object']}"
+        elif ("object" in feature_type):
+            return f"{task_name}_obj_{s1_row['object']}"
+        else:
+            return f"{task_name}_trialsingle"
     else:
-        return f"{task_name}_trialpair"
+        if ("object" in feature_type) and ("location" in feature_type):
+            return (f"{task_name}_loc{s1_row['location']}_obj{s1_row['object']}"
+                    f"*loc{s2_row['location']}_obj{s2_row['object']}")
+        elif ("object" in feature_type):
+            return f"{task_name}_obj_{s1_row['object']}*obj_{s2_row['object']}"
+        else:
+            return f"{task_name}_trialpair"
 
 
-# -----------------------
-# Core grouping logic per run
-# -----------------------
-
-def group_encoding_betas_within_trial(beta_file: Path, cond_csv: Path, task_name: str, correct_only: bool = False):
-    # Load betas (P x K_trials)
-    print("--------group encoding betas--------")
-    with h5py.File(beta_file, 'r') as f:
-        if 'betas' not in f:
-            raise ValueError(f"No 'betas' in {beta_file}")
-        betas = f['betas'][()]
-
-    # Load design (one row per trial regressor IN ORDER)
-    df = pd.read_csv(cond_csv)
+def _canonicalize_design_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """Map possible aliases to canonical names used below."""
+    df = df.copy()
     df.columns = df.columns.str.strip()
-
-    # --- Canonicalize common column name variants to expected names ---
     cols_lower = {c.lower(): c for c in df.columns}
 
     def first_present(*names):
@@ -157,12 +318,12 @@ def group_encoding_betas_within_trial(beta_file: Path, cond_csv: Path, task_name
     if src and src != 'location':
         rename_map[src] = 'location'
 
-    # object  (often 'obj' or 'objmod')
+    # object
     src = first_present('object', 'obj', 'objmod', 'object_name', 'objectid')
     if src and src != 'object':
         rename_map[src] = 'object'
 
-    # category (often 'ctg' or 'ctgmod')
+    # category
     src = first_present('category', 'ctg', 'ctgmod')
     if src and src != 'category':
         rename_map[src] = 'category'
@@ -170,10 +331,36 @@ def group_encoding_betas_within_trial(beta_file: Path, cond_csv: Path, task_name
     if rename_map:
         df = df.rename(columns=rename_map)
 
-    # If 'object' still missing but 'category' exists, fall back so keys can be built
-    if 'object' not in df.columns and 'category' in df.columns:
-        df['object'] = df['category']
+    return df
 
+
+def group_betas_within_trial(
+    beta_file: Path,
+    cond_csv: Path,
+    task_name: str,
+    correct_only: bool,
+    target_selection: str,
+    pair_selection: str,
+):
+    """Group betas into condition buckets per trial.
+
+    target_selection:
+        - "delay_of_second": use delay that follows the second stimulus (i2)
+        - "encoding_first":  use encoding of first stimulus (s1); pair_selection controls 'first' vs 'mean'
+    """
+    # Load betas (P x K_trials)
+    # print(f"reading betas from {beta_file}")
+    with h5py.File(beta_file, 'r') as f:
+        if 'betas' not in f:
+            raise ValueError(f"No 'betas' in {beta_file}")
+        betas = f['betas'][()]
+    print(f"Loaded betas shape: {betas.shape}")
+
+
+    # Load design (one row per trial regressor IN ORDER)
+    df = pd.read_csv(cond_csv)
+    print(f"loaded design with {len(df)} rows from {cond_csv}")
+    df = _canonicalize_design_columns(df)
     # Basic sanity
     required_cols = {"trialNumber", "stim_order", "type"}
     missing = required_cols - set(df.columns)
@@ -181,8 +368,8 @@ def group_encoding_betas_within_trial(beta_file: Path, cond_csv: Path, task_name
         raise ValueError(f"Design CSV missing columns {missing} in {cond_csv}")
 
     # Optional: only correct trials if present
+    print(f"require_correct={correct_only}")
     if correct_only and 'is_correct' in df.columns:
-        # keep rows where is_correct is True or NaN; drop explicit False / 'false' / 'b'
         def is_negative(v):
             if isinstance(v, (bool, np.bool_)):
                 return (v is False) or (v == False)
@@ -192,6 +379,7 @@ def group_encoding_betas_within_trial(beta_file: Path, cond_csv: Path, task_name
             return sv in {"false", "b", "0"}
         df = df[~df['is_correct'].apply(is_negative)].copy()
 
+        print(f"after filtering to correct trials, {len(df)} rows remain")
     # Ensure column index matches betas' columns
     df = df.reset_index(drop=True)
     df['col_index'] = np.arange(len(df), dtype=int)
@@ -201,35 +389,111 @@ def group_encoding_betas_within_trial(beta_file: Path, cond_csv: Path, task_name
     df = df.dropna(subset=['stim_order'])
     df['stim_order'] = df['stim_order'].astype(int)
 
+
     if betas.shape[1] != len(df):
         warnings.warn(
-            f"Betas columns ({betas.shape[1]}) != design rows ({len(df)}). Proceeding but mapping may be off.")
+            f"Betas columns ({betas.shape[1]}) != design rows ({len(df)}). Proceeding but mapping may be off."
+        )
 
-    # Group within trial; pick consecutive stimulus pairs by task
     pair_indices_list = determine_task_type(task_name)
     feature_type = determine_feature_type(task_name)
+    print(f"Determined {len(pair_indices_list)} pair types for task {task_name}: {pair_indices_list}")
+    print(f"Using feature_type={feature_type} for condition keys")
 
     condition_dict: dict[str, list[np.ndarray]] = defaultdict(list)
 
+    print(df.head())
+    # Group within trial
     g = df.groupby('trialNumber')
     for _, trial_df in g:
+        print(f"processing trialNumber={trial_df['trialNumber'].iloc[0]} with {len(trial_df)} rows")
+        # robust phase/type matching
+        types_lower = trial_df['type'].astype(str).str.lower()
+
+        enc_df   = trial_df[types_lower.str.contains('encod', na=False)]
+
+        delay_df = trial_df[types_lower.str.contains('delay',  na=False)]
+        print(f"len of enc_df={len(enc_df)}, delay_df={len(delay_df)}")
+
         for i1, i2 in pair_indices_list:
-            r1 = trial_df[trial_df['stim_order'] == i1]
-            r2 = trial_df[trial_df['stim_order'] == i2]
-            if r1.empty or r2.empty:
+            # Encoding rows to build the key (features from presentation time)
+            r1_enc = enc_df[enc_df['stim_order'] == i1]
+            r2_enc = enc_df[enc_df['stim_order'] == i2]
+
+            if r1_enc.empty or r2_enc.empty:
+                print(f"  skipping pair ({i1},{i2}) due to missing encoding rows")
                 continue
-            s1 = r1.iloc[0]
-            s2 = r2.iloc[0]
-            key = build_condition_key(task_name, s1, s2, feature_type)
 
-            # Select which beta to store for the pair
-            if PAIR_SELECTION == 'mean':
-                b = 0.5 * (betas[:, int(s1['col_index'])] + betas[:, int(s2['col_index'])])
-            else:  # 'first'
-                b = betas[:, int(s1['col_index'])]
-            condition_dict[key].append(b)
+            if i1 != i2: # consider pairs of stimuli
+                s1 = r1_enc.iloc[0]
+                s2 = r2_enc.iloc[0]
+            
+                key = build_condition_key(task_name, s1, s2, feature_type)
+                print(f"  identified condition key: {key}")
+                if target_selection == "delay_of_second":
+                    # Delay row that follows the *second* stimulus (i2)
+                    r2_del = delay_df[delay_df['stim_order'] == i2]
+                    assert len(r2_del) <= 1
+                    if r2_del.empty:
+                        print(f"  skipping pair ({i1},{i2}) due to missing delay row (i2)")
+                        continue
+                    s2d = r2_del.iloc[0]
+                    b = betas[:, int(s2d['col_index'])]
+                    condition_dict[key].append(b)
 
-    return condition_dict
+                elif target_selection == "delay_both":
+                    # Store both delay betas (after i1 and after i2), if present
+                    stored_any = False
+
+                    r1_del = delay_df[delay_df['stim_order'] == i1]
+                    assert len(r1_del) <= 1
+                    if not r1_del.empty:
+                        s1d = r1_del.iloc[0]
+                        b1 = betas[:, int(s1d['col_index'])]
+                        condition_dict[key].append(b1)
+                        stored_any = True
+                    else:
+                        print(f"  missing delay row after i1={i1} for pair ({i1},{i2})")
+
+                    r2_del = delay_df[delay_df['stim_order'] == i2]
+                    assert len(r2_del) <= 1
+                    if not r2_del.empty:
+                        s2d = r2_del.iloc[0]
+                        b2 = betas[:, int(s2d['col_index'])]
+                        condition_dict[key].append(b2)
+                        stored_any = True
+                    else:
+                        print(f"  missing delay row after i2={i2} for pair ({i1},{i2})")
+
+                    if not stored_any:
+                        print(f"  skipping pair ({i1},{i2}) due to missing BOTH delay rows")
+
+                else:
+                    # encoding_first (previous behavior)
+                    if pair_selection == 'mean':
+                        b = 0.5 * (
+                            betas[:, int(s1['col_index'])] +
+                            betas[:, int(s2['col_index'])]
+                        )
+                    else:  # 'first'
+                        b = betas[:, int(s1['col_index'])]
+                    condition_dict[key].append(b)
+            elif i1 == i2:  # consider single stimuli
+                # we take the delay of the stimuli. 
+                s1 = r1_enc.iloc[0]
+                key = build_condition_key(task_name, s1, s1, feature_type, condition_type = "single_frame")
+
+                # Delay row that follows the *second* stimulus (i2)
+                r1_del = delay_df[delay_df['stim_order'] == i1]
+                assert len(r1_del) <= 1
+                if r1_del.empty:
+                    print(f"  skipping single frame condition ({i1}) due to missing delay row (i1)")
+                    continue
+                s1d = r1_del.iloc[0]
+                b = betas[:, int(s1d['col_index'])]
+                condition_dict[key].append(b)
+                
+    return condition_dict # condition_key -> list of beta vectors => need to check where i accumulate repetitions
 
 
 # -----------------------
@@ -238,17 +502,47 @@ def group_encoding_betas_within_trial(beta_file: Path, cond_csv: Path, task_name
 
 def main():
     import argparse
-    ap = argparse.ArgumentParser(description="Group trial-level encoding betas into task-defined conditions")
+    ap = argparse.ArgumentParser(description="Group trial-level betas into task-defined conditions")
     ap.add_argument("--subj", required=True, help="Subject ID, e.g., sub-01")
     ap.add_argument("--glm_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas",
                     help="Root of trial-level GLM outputs (contains <subj>/ses-*/func/*_betas.h5)")
     ap.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas",
                     help="Root for outputs (grouped pickle + histogram)")
-    ap.add_argument("--tasks", nargs="*", default=None, help="Restrict to these tasks (e.g., ctxdm interdms nback)")
-    ap.add_argument("--correct_only", action="store_true", help="Use only correct trials if column present")
+    ap.add_argument("--tasks", nargs="*", default=None,
+                help=("Restrict to these tasks (e.g., ctxdm_obj_ABBA ctxdm_col ...). "
+                      "Use 'all' or leave empty to process all tasks."))
+
+    ap.add_argument("--correct_only", action="store_true",
+                    help="Use only correct trials if column present")
+
+    ap.add_argument("--target_selection",
+                choices=["delay_of_second", "delay_both", "encoding_first"],
+                default="delay_of_second",
+                help="What beta to store for each (i1,i2) pair. Default: delay_of_second.")
+
+    ap.add_argument("--pair_selection",
+                    choices=["first", "mean"],
+                    default="first",
+                    help="Only used when --target_selection=encoding_first. 'first' uses s1, 'mean' averages s1 & s2.")
+
     args = ap.parse_args()
 
     subj = args.subj
+
+    # Determine which tasks to include
+    if not args.tasks or ("all" in {t.lower() for t in args.tasks}):
+        allowed_tasks = set(ALL_TASKS)
+    else:
+        # Validate user-provided tasks against the known set
+        unknown = [t for t in args.tasks if t not in ALL_TASKS and t.lower() != "all"]
+        if unknown:
+            raise SystemExit(f"Unknown task(s): {unknown}\n"
+                            f"Allowed: {ALL_TASKS} or 'all'")
+        allowed_tasks = set(args.tasks)
+
+    
+    # read design_file_df
+    design_file_df = pd.read_csv(f"/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs/{subj}_design_design_with_converted.tsv", sep="\t")
     glm_root = Path(args.glm_root) / subj
 
     if not glm_root.exists():
@@ -258,49 +552,51 @@ def main():
 
     for session_dir in sorted(glm_root.glob("ses-*/")):
         func_dir = session_dir / "func"
-
         if not func_dir.exists():
             print(f"{func_dir} does not exist; skipping session")
             continue
 
         for beta_file in sorted(func_dir.glob("*_betas.h5")):
+            # print(f"Reading {beta_file}")
             subj_id, ses, task_name, run, base = parse_run_tokens(beta_file)
-            if args.tasks and (task_name not in set(args.tasks)):
+            detailed_task_name = get_detailed_task_name(subj_id, ses, task_name, run, design_file_df, strict=True)
+            task_name = detailed_task_name  # use the more specific name
+            # print(f"task_name resolved to: {task_name}")
+            # print(f"set(args.tasks)={set(args.tasks)}")
+            # print(f"what is args.tasks={args.tasks}")
+            # print(f"task_name={task_name}")
+            # print(task_name not in set(args.tasks))
+            # Skip anything not in the allowed set
+            if task_name not in allowed_tasks:
                 continue
 
             base_clean = base.replace("_nilearn", "")
 
-            # First try without the nilearn suffix
+            # prefer design without nilearn suffix; try a few fallbacks
             cond_csv = beta_file.with_name(f"{base_clean}_design.csv")
-            # print(f"trying csv file name: {cond_csv}")
+            # print(f"processing task: {task_name}, run: {run}")
             if not cond_csv.exists():
-                # print("csv file does not exist; trying alternative")
-                # Then try with the nilearn suffix (still using the stripped base)
-                alt_csv = beta_file.with_name(f"{base_clean}_nilearn_design.csv")
-                # print(f"csv file name: {alt_csv}")
-                if alt_csv.exists():
-                    cond_csv = alt_csv
-                else:
-                    # Finally, fall back to the original base in case it didn't contain '_nilearn'
-                    alt2 = beta_file.with_name(f"{base}_design.csv")
-                    # print(f"csv file name: {alt2}")
-                    if alt2.exists():
-                        cond_csv = alt2
-                    else:
-                        alt3 = beta_file.with_name(f"{base}_nilearn_design.csv")
-                        # print(f"csv file name: {alt3}")
-                        if alt3.exists():
-                            cond_csv = alt3
-                        else:
-                            print(f"⚠️ Missing design CSV for {beta_file.name}; skipping run")
-                            continue
+                alt_csvs = [
+                    beta_file.with_name(f"{base_clean}_nilearn_design.csv"),
+                    beta_file.with_name(f"{base}_design.csv"),
+                    beta_file.with_name(f"{base}_nilearn_design.csv"),
+                ]
+                cond_csv = next((p for p in alt_csvs if p.exists()), None)
+                if cond_csv is None:
+                    print(f"⚠️ Missing design CSV for {beta_file.name}; skipping run")
+                    continue
 
             try:
-                # print("starting to group encoding betas within trial")
-                condition_betas = group_encoding_betas_within_trial(
-                    beta_file, cond_csv, task_name, correct_only=args.correct_only
+                print("processing for task:", task_name)
+                condition_betas = group_betas_within_trial(
+                    beta_file=beta_file,
+                    cond_csv=cond_csv,
+                    task_name=task_name,
+                    correct_only=args.correct_only,
+                    target_selection=args.target_selection,
+                    pair_selection=args.pair_selection,
                 )
-                # print("end with group encoding betas within trial")
+                print(f"successfully processed: {task_name}")
                 for k, v in condition_betas.items():
                     all_condition_groups[k].extend(v)
             except Exception as e:
@@ -325,8 +621,18 @@ def main():
         pickle.dump(all_condition_groups, f)
     print(f"\n✅ Grouped betas saved to: {save_path}")
 
+    # --- NEW CODE START ---
+    import json
+    # Save lightweight counts for multi-subject plotting later
+    count_save_path = save_dir / f"{subj}_condition_counts.json"
+    with open(count_save_path, "w") as f:
+        json.dump(counts, f, indent=4)
+    print(f"✅ Condition counts saved to: {count_save_path}")
+    # --- NEW CODE END ---
+
     # Plot repetition distribution
-    output_dir = Path(args.out_root) / "results" / "repetition_count" / "task_relevant_only" / "all_consecutive_stim_pairs"
+    output_dir = (Path(args.out_root) / "results" / "repetition_count" /
+                  "task_relevant_only" / "all_consecutive_stim_pairs")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     repetition_counts = list(counts.values()) or [0]

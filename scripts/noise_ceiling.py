@@ -1,262 +1,385 @@
+#!/usr/bin/env python3
+"""
+Noise ceiling at voxel / region / network levels.
+Two methods:
+  - traditional: split-half correlation across conditions (+ optional SB)
+  - variance_based: participant-variance decomposition (manuscript style)
 
-import pickle
+Examples
+--------
+# Variance-based, correlation units (sqrt), per-network
+python noise_ceiling.py \
+  --method variance_based \
+  --subject sub-01 \
+  --input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-01_task_condition_betas.pkl \
+  --atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+  --network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
+  --unit region --sqrt_to_r 1 --output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/variance_based 
+
+# Traditional split-half (your original)
+python noise_ceiling.py \
+  --method traditional \
+  --subject sub-01 \
+  --input_pickle /path/sub-01_task_condition_betas.pkl \
+  --unit voxel --n_bootstrap 50 --min_reps 4 --apply_spearman_brown 1 --standardize_halves 1 \
+  --output_dir /tmp/nc_trad
+"""
+
+from __future__ import annotations
+import argparse, json, pickle
+from pathlib import Path
+import warnings
+
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
+from scipy.stats import pearsonr
+import nibabel as nib
 
 
-# === Load saved betas dictionary ===
-subject = "sub-01"
-input_path = f"/project/def-pbellec/xuan/fmri_dataset_project/data/betas/grouped_betas/task_relevant_only/{subject}_task_condition_betas.pkl"
-with open(input_path, "rb") as f:
-    condition_betas = pickle.load(f)
+# ---------- helpers ----------
+def colwise_correlation(X, Y):
+    assert X.shape == Y.shape, f"Shape mismatch: {X.shape} vs {Y.shape}"
+    n = X.shape[1]
+    out = np.full(n, np.nan, dtype=np.float32)
+    for i in range(n):
+        x, y = X[:, i], Y[:, i]
+        if np.allclose(x, x[0]) or np.allclose(y, y[0]):
+            continue
+        r, _ = pearsonr(x, y)
+        out[i] = r
+    return out
 
-# === Initialize output dictionary ===
-voxelwise_signal_var = []
-voxelwise_noise_var = []
+def spearman_brown(r, k=2.0):
+    return (k * r) / (1.0 + (k - 1.0) * r)
 
-# === Process all conditions ===
-for condition, betas_list in condition_betas.items():
-    n_reps = len(betas_list)
+def load_glasser_labels(atlas_path: str):
+    lab_img = nib.load(atlas_path)
+    lab = np.asarray(lab_img.get_fdata()).squeeze().reshape(-1).astype(int)
+    region_ids = np.unique(lab)
+    region_ids = region_ids[region_ids > 0]
+    return lab, region_ids
 
-    if n_reps < 2:
-        print(f"⚠️ Skipping {condition} due to insufficient repetitions ({n_reps})")
-        continue
+def make_region_averager(labels_vec: np.ndarray, region_ids: np.ndarray):
+    idxs = [np.where(labels_vec == rid)[0] for rid in region_ids]
+    def avg_by_region(A):
+        out = np.full((A.shape[0], len(region_ids)), np.nan, dtype=np.float32)
+        for j, idx in enumerate(idxs):
+            if idx.size: out[:, j] = np.nanmean(A[:, idx], axis=1)
+        return out
+    return avg_by_region
 
-    betas_array = np.stack(betas_list)  # shape: (n_reps, n_voxels)
-    print("shape of betas_array:", betas_array.shape)
-    # === Z-score across conditions for each repetition (standardize each repetition across images)
-    # Here, "images" are conditions, and standardization is per voxel across conditions
-    # First, transpose to (n_voxels, n_reps) for zscoring per voxel
-    means = np.mean(betas_array, axis=0, keepdims=True)
-    stds = np.std(betas_array, axis=0, ddof=1, keepdims=True)
-    stds[stds == 0] = 1  # Avoid division by zero
-    betas_zscored = (betas_array - means) / stds
+def load_region_to_network_map(assign_path: str, max_region_id: int):
+    txt = Path(assign_path).read_text().strip().splitlines()
+    arr = np.zeros(max_region_id + 1, dtype=int)
+    for i, line in enumerate(txt, start=1):
+        if i <= max_region_id:
+            arr[i] = int(line.strip())
+    return arr
 
-    # === Calculate noise variance per voxel
-    # Variance across repetitions, normalized by (n-1) for unbiased estimate
-    noise_var = np.var(betas_zscored, axis=0, ddof=1)
-    voxelwise_noise_var.append(noise_var)
+def make_network_averager(region_ids: np.ndarray, region_to_net: np.ndarray, n_networks: int = 12):
+    nets = [[] for _ in range(n_networks)]
+    for j, rid in enumerate(region_ids):
+        nid = region_to_net[rid]
+        if 1 <= nid <= n_networks:
+            nets[nid - 1].append(j)
+    def avg_by_network(R):
+        out = np.full((R.shape[0], n_networks), np.nan, dtype=np.float32)
+        for k, cols in enumerate(nets):
+            if cols: out[:, k] = np.nanmean(R[:, cols], axis=1)
+        return out
+    return avg_by_network
 
-    # === Calculate signal variance per voxel
-    # Since standardized variance is 1, signal variance = 1 - noise variance
-    signal_var = 1 - noise_var
-    signal_var[signal_var < 0] = 0  # Half-wave rectification
-    voxelwise_signal_var.append(signal_var)
+def zscore_columns(X, eps=1e-8):
+    mu = np.nanmean(X, axis=0, keepdims=True)
+    sd = np.nanstd(X, axis=0, keepdims=True)
+    return (X - mu) / (sd + eps)
 
-# === Aggregate across all conditions (average) ===
-voxelwise_noise_var = np.array(voxelwise_noise_var)
-voxelwise_signal_var = np.array(voxelwise_signal_var)
+# ---------- variance-based NC (manuscript style) ----------
+def nc_variance_based(condition_betas: dict[str, list[np.ndarray]],
+                      unit_transform=None,
+                      n_participants: int | None = None,
+                      rectify_signal: bool = True,
+                      sqrt_to_r: bool = False):
+    """
+    Treat each condition's repetitions as 'participants'.
+    Returns per-unit NC in variance fraction (0..1), or sqrt space if sqrt_to_r.
+    """
+    # Build a list of conditions with >=2 reps (need variance across reps)
+    valid = [(k, v) for k, v in condition_betas.items() if len(v) >= 2]
+    if not valid:
+        raise SystemExit("Variance-based NC: need at least 2 repetitions per condition.")
 
-mean_signal_var = np.mean(voxelwise_signal_var, axis=0)
-mean_noise_var = np.mean(voxelwise_noise_var, axis=0)
+    # Stack into ragged form: we will compute per-condition stats on the fly.
+    # Also infer feature dim from first vec.
+    first_vec = np.asarray(valid[0][1][0]).reshape(-1)
+    n_features = first_vec.size
 
-# === Calculate ncsnr per voxel ===
-ncsnr = np.sqrt(mean_signal_var) / np.sqrt(mean_noise_var)
+    # A small helper to apply optional unit transforms (region/network)
+    def apply_unit(A_reps):  # A_reps: (n_reps, n_features)
+        if unit_transform is None:
+            return A_reps  # (n_reps, n_units=n_features)
+        return unit_transform(A_reps)  # (n_reps, n_units)
 
-# === Number of repetitions (assuming same for all conditions processed) ===
-n = n_reps
+    # First pass: determine n_units and collect per-condition means/variances
+    # We will accumulate:
+    #  - noise variances per condition and unit: var_across_reps(c, u)
+    #  - participant-mean per condition and unit: mean_over_reps(c, u)
+    noise_var_list = []   # list of arrays (n_units,)
+    cond_mean_list = []   # list of arrays (n_units,)
+    nrep_list = []
 
-# === Calculate noise ceiling per voxel ===
-noise_ceiling = (100 * ncsnr ** 2) / (ncsnr ** 2 + (1 / n))
+    for cond, reps_list in valid:
+        reps = np.stack([np.asarray(x).reshape(-1) for x in reps_list], axis=0)  # (n_reps, n_features)
+        reps = apply_unit(reps)  # (n_reps, n_units)
+        # unbiased var across reps (ddof=1) per unit
+        if reps.shape[0] < 2:
+            continue
+        noise_var = np.nanvar(reps, axis=0, ddof=1)
+        cond_mean = np.nanmean(reps, axis=0)
+        noise_var_list.append(noise_var)
+        cond_mean_list.append(cond_mean)
+        nrep_list.append(reps.shape[0])
 
-# === Save results ===
-output_path = f"/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/things_way/{subject}_voxelwise_noise_ceiling.pkl"
-with open(output_path, "wb") as f:
-    pickle.dump(noise_ceiling, f)
+    if not noise_var_list:
+        raise SystemExit("Variance-based NC: no conditions with >=2 reps after transform.")
 
-print(f"\n✅ Noise ceiling calculation done. Saved to: {output_path}")
+    noise_var_mean = np.nanmean(np.stack(noise_var_list, axis=0), axis=0)  # (n_units,)
+    cond_means = np.stack(cond_mean_list, axis=0)  # (n_conditions, n_units)
+    n_units = cond_means.shape[1]
+    Np = 1
 
-# === Print summary ===
-print(f"Noise ceiling shape: {noise_ceiling.shape}")
-print(f"Mean noise ceiling: {np.nanmean(noise_ceiling):.3f}")
-
-
-# === Plot distribution of noise ceilings ===
-plt.figure(figsize=(8, 5))
-plt.hist(noise_ceiling, bins=50, edgecolor='black')
-plt.xlabel("Noise Ceiling (%)")
-plt.ylabel("Number of Voxels (Log scale)")
-plt.yscale('log')
-plt.xscale('linear')
-plt.title("Distribution of Voxel-wise Noise Ceilings")
-plt.tight_layout()
-
-# Save plot
-plot_path = f"/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/things_way/{subject}_voxelwise_noise_ceiling_distribution.png"
-plt.savefig(plot_path)
-plt.close()
-
-print(f"✅ Saved noise ceiling distribution plot to: {plot_path}")
-
-
-
-###### below is the code with stimulus type as task conditions.
-# import os
-# import glob
-# import h5py
-# import pandas as pd
-# import numpy as np
-# from tqdm import tqdm
-# import nibabel as nib
-# import matplotlib.pyplot as plt
-
-# # ✅ ======== Step 1. File paths ===========
-
-# subj = "sub-03" 
-# data_dir = f"/mnt/tempdata/Project_fMRI_analysis_data/data/sub-03/glm_betas/sub-03/glm_betas_encoding_delay_full_TR_betas/{subj}"
-
-# h5_files = sorted(glob.glob(os.path.join(data_dir, "glmmethod1*.h5")))
-# csv_files = sorted(glob.glob(os.path.join(data_dir, "glmmethod1*.csv")))
-
-# assert len(h5_files) == len(csv_files), "Mismatch between h5 and csv files."
-
-# print(f"Found {len(h5_files)} h5 files and {len(csv_files)} csv files for {subj}.")
-
-# # ✅ ======== Step 2. Load all betas and metadata ===========
-
-# all_betas = []
-# all_stimuli = []
-
-# for h5_file, csv_file in tqdm(zip(h5_files, csv_files), total=len(h5_files)):
-#     with h5py.File(h5_file, 'r') as f:
-#         betas = f['betas'][:]  # shape: (n_voxels, n_regressors), n_voxels = 64984
-
-#     df = pd.read_csv(csv_file)
     
-#     # Check consistency
-#     assert betas.shape[1] == df.shape[0], f"Regressor mismatch in {h5_file}"
-    
-#     all_betas.append(betas)  # list of arrays
-#     all_stimuli.append(df['stimulus'].values)
+    var_across_conditions = np.nanvar(cond_means, axis=0, ddof=1)  # (n_units,)
 
-# # ✅ ======== Step 3. Concatenate across all runs/sessions ===========
+    # Signal variance estimate per unit:
+    # sigma_signal^2 = var(group-avg) - noise_var/Np   (half-wave rectified)
+    sigma_signal2 = var_across_conditions - (noise_var_mean / max(Np, 1))
+    if rectify_signal:
+        sigma_signal2 = np.maximum(sigma_signal2, 0.0)
 
-# # betas: list of (n_voxels, n_regressors) → (n_voxels, n_total_trials)
-# betas_all = np.concatenate(all_betas, axis=1)  # (n_voxels, n_total_trials)
-# stimuli_all = np.concatenate(all_stimuli)      # (n_total_trials,)
+    # Noise ceiling in variance fraction
+    denom = sigma_signal2 + (noise_var_mean / max(Np, 1))
+    with np.errstate(divide='ignore', invalid='ignore'):
+        nc = np.where(denom > 0, sigma_signal2 / denom, np.nan)  # (n_units,)
 
-# print("Combined betas shape:", betas_all.shape) # (64984, 9120)
-# print("Total number of trials:", stimuli_all.shape[0]) # (9120)
+    if sqrt_to_r:
+        # convert to correlation units to compare to Pearson r
+        nc = np.sqrt(np.clip(nc, 0.0, 1.0))
 
-# # ✅ ======== Step 4. Organize betas per stimulus with variable repetitions ===========
+    return nc  # per-unit NC
 
-# # Get unique stimuli and repetition counts
-# unique_stimuli, counts = np.unique(stimuli_all, return_counts=True)
-# print("Number of unique stimuli:", len(unique_stimuli))
+# ---------- traditional NC (your original) ----------
+def nc_traditional(condition_betas: dict[str, list[np.ndarray]],
+                   unit_transform=None,
+                   n_bootstrap: int = 50,
+                   min_reps: int = 4,
+                   rng: np.random.Generator = np.random.default_rng(0),
+                   standardize_halves: bool = False,
+                   apply_spearman_brown_flag: bool = True):
+    boot_nc = []
+    for _ in range(n_bootstrap):
+        half1_rows, half2_rows = [], []
+        for cond, reps_list in condition_betas.items():
+            if len(reps_list) < min_reps:
+                continue
+            reps = np.stack([np.asarray(v).reshape(-1) for v in reps_list], axis=0)  # (n_reps, n_features)
+            if unit_transform is not None:
+                reps = unit_transform(reps)  # (n_reps, n_units)
+            perm = rng.permutation(reps.shape[0])
+            mid = reps.shape[0] // 2
+            A = reps[perm[:mid]].mean(axis=0)
+            B = reps[perm[mid:]].mean(axis=0)
+            if A.size == 0 or B.size == 0:
+                continue
+            half1_rows.append(A)
+            half2_rows.append(B)
+        if not half1_rows:
+            continue
+        H1 = np.stack(half1_rows, axis=0)
+        H2 = np.stack(half2_rows, axis=0)
+        if standardize_halves:
+            H1 = zscore_columns(H1); H2 = zscore_columns(H2)
+        r_cols = colwise_correlation(H1, H2)
+        if apply_spearman_brown_flag:
+            r_cols = np.clip(r_cols, -0.9999, 0.9999)
+            r_cols = spearman_brown(r_cols, k=2.0)
+        boot_nc.append(r_cols)
+    if not boot_nc:
+        raise SystemExit("Traditional NC: no valid splits (not enough data per condition).")
+    return np.nanmean(np.stack(boot_nc, axis=0), axis=0)
 
-# n_voxels = betas_all.shape[0]
-# stimulus_beta_dict = {}
+# ---------- main ----------
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--method", choices=["variance_based", "traditional"], default="variance_based")
+    ap.add_argument("--subject", required=True)
+    ap.add_argument("--input_pickle", required=True, help="Path to {condition: [beta_vec,...]}")
+    ap.add_argument("--output_dir", required=True)
 
-# for stim in unique_stimuli:
-#     inds = np.where(stimuli_all == stim)[0]
-#     if len(inds) >= 2:  # need at least 2 repetitions to calculate variance
-#         stimulus_beta_dict[stim] = betas_all[:, inds].T  # shape: (n_reps, n_voxels)
+    # Shared spatial granularity
+    ap.add_argument("--unit", choices=["voxel", "region", "network"], default="voxel")
+    ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
+    ap.add_argument("--network_assignments_path", help="Region index (line) -> network id (1..12)")
+    ap.add_argument("--network_mapping_json", default="")
 
-# print(f"Number of stimuli with >=2 repetitions:", len(stimulus_beta_dict))
+    # Traditional method knobs
+    ap.add_argument("--n_bootstrap", type=int, default=50)
+    ap.add_argument("--min_reps", type=int, default=4)
+    ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--apply_spearman_brown", type=int, default=1)
+    ap.add_argument("--standardize_halves", type=int, default=0)
 
-# # ✅ ======== Step 5. Calculate noise ceiling per voxel (variable n) ===========
+    # Variance-based method knobs
+    ap.add_argument("--n_participants", type=int, default=None,
+                    help="Effective participant count Np; if omitted, infer from median repetitions.")
+    ap.add_argument("--sqrt_to_r", type=int, default=0,
+                    help="If 1, return sqrt(NC) to express in correlation units (as in manuscript).")
+    ap.add_argument("--rectify_signal", type=int, default=1,
+                    help="Half-wave rectify sigma_signal^2 at 0 (recommended).")
 
-# noise_ceilings = []
+    # Optional: sentence-level split-half SE for variance-based (like SI 5B)
+    ap.add_argument("--nc_se_bootstrap", type=int, default=0,
+                    help="If >0, compute SE by random sentence splits; saves per-iteration NC too.")
 
-# for v in tqdm(range(n_voxels)):
-#     nc_per_stim = []
+    args = ap.parse_args()
+    rng = np.random.default_rng(args.seed)
 
-#     for stim, beta_arr in stimulus_beta_dict.items():
-#         n_reps = beta_arr.shape[0]
-#         if n_reps < 2:
-#             continue  # skip if only 1 repetition, cannot calculate variance
+    # Load grouped betas
+    with open(Path(args.input_pickle), "rb") as f:
+        condition_betas = pickle.load(f)
+    if not isinstance(condition_betas, dict):
+        raise SystemExit("input_pickle must be a dict: {condition_key: [beta_vec, ...]}")
 
-#         # Extract beta values for this voxel and stimulus
-#         beta_vals = beta_arr[:, v]  # (n_reps,)
+    # Infer feature length
+    any_key = next(iter(condition_betas))
+    first_vec = np.asarray(condition_betas[any_key][0]).reshape(-1)
+    n_features = first_vec.size
 
-#         # Z-score across repetitions
-#         beta_z = (beta_vals - np.mean(beta_vals)) / np.std(beta_vals) if np.std(beta_vals) != 0 else np.zeros_like(beta_vals)
+    # Prepare spatial transforms
+    avg_by_region = None
+    avg_by_network = None
+    region_ids = None
+    unit_name = args.unit
+    n_units = n_features
 
-#         # Noise variance: variance across repetitions for this stimulus
-#         var_noise = np.var(beta_z, ddof=1)
-#         print(f"var_noise: {var_noise:.4f} for stimulus '{stim}' with {n_reps} repetitions")
+    if args.unit in ("region", "network"):
+        labels_vec, region_ids = load_glasser_labels(args.atlas_path)
+        if labels_vec.size != n_features:
+            raise SystemExit(f"Atlas feature count ({labels_vec.size}) != beta vector length ({n_features}). "
+                             "Ensure same space and indexing.")
+        avg_by_region = make_region_averager(labels_vec, region_ids)
+        n_units = len(region_ids)
+        unit_name = "region"
 
-#         # Signal variance
-#         signal_var = max(0, 1 - var_noise)
+    if args.unit == "network":
+        if not args.network_assignments_path:
+            raise SystemExit("--network_assignments_path required for unit=network")
+        max_region_id = int(region_ids.max())
+        region_to_net = load_region_to_network_map(args.network_assignments_path, max_region_id)
+        avg_by_network = make_network_averager(region_ids, region_to_net, n_networks=12)
+        unit_name = "network"
+        n_units = 12
+        # optional names
+        if args.network_mapping_json and Path(args.network_mapping_json).exists():
+            with open(args.network_mapping_json, "r") as f:
+                network_name_map = {int(k): v for k, v in json.load(f).items()}
+        else:
+            network_name_map = {
+                1: "primary visual", 2: "secondary visual", 3: "somatomotor", 4: "cingulo-opercular",
+                5: "dorsal attention", 6: "language", 7: "frontparietal", 8: "auditory",
+                9: "default mode", 10: "posterior multimodal", 11: "ventral multimodal", 12: "orbito-affective",
+            }
 
-#         # ncsnr and noise ceiling for this stimulus
-#         if var_noise == 0:
-#             ncsnr = 0
-#         else:
-#             ncsnr = np.sqrt(signal_var) / np.sqrt(var_noise)
+    # Compose a single transform callable for convenience
+    def unit_transform(A_reps):
+        # A_reps: (n_reps, n_features)
+        X = A_reps
+        if avg_by_region is not None:
+            X = avg_by_region(X)  # (n_reps, n_regions)
+        if avg_by_network is not None:
+            X = avg_by_network(X)  # (n_reps, 12)
+        return X
 
-#         nc = (100 * ncsnr ** 2) / (ncsnr ** 2 + (1 / n_reps))
-#         print(f"nc: {nc:.4f} for stimulus '{stim}' with {n_reps} repetitions")
-#         nc_per_stim.append(nc)
+    if args.unit == "voxel":
+        unit_transform_callable = None
+        unit_plot_name = "voxel"
+    else:
+        unit_transform_callable = unit_transform
+        unit_plot_name = unit_name
 
-#     # Average noise ceiling across stimuli for this voxel
-#     if len(nc_per_stim) > 0:
-#         voxel_nc = np.mean(nc_per_stim)
-#     else:
-#         voxel_nc = 0
+    # ----- compute NC -----
+    if args.method == "variance_based":
+        nc = nc_variance_based(
+            condition_betas,
+            unit_transform=unit_transform_callable,
+            n_participants=args.n_participants,
+            rectify_signal=bool(args.rectify_signal),
+            sqrt_to_r=bool(args.sqrt_to_r),
+        )
 
-#     noise_ceilings.append(voxel_nc)
+        # Optional SE via sentence split-halves (like SI 5B)
+        se_vals = None
+        if args.nc_se_bootstrap and args.nc_se_bootstrap > 0:
+            # Build condition means & noise variances once, then split conditions
+            # For simplicity, recompute nc over random halves of conditions.
+            boots = []
+            cond_keys = [k for k, v in condition_betas.items() if len(v) >= 2]
+            for _ in range(args.nc_se_bootstrap):
+                perm = rng.permutation(len(cond_keys))
+                halfA = {cond_keys[i]: condition_betas[cond_keys[i]] for i in perm[:len(perm)//2]}
+                halfB = {cond_keys[i]: condition_betas[cond_keys[i]] for i in perm[len(perm)//2:]}
+                try:
+                    ncA = nc_variance_based(halfA, unit_transform_callable, args.n_participants,
+                                            bool(args.rectify_signal), bool(args.sqrt_to_r))
+                    ncB = nc_variance_based(halfB, unit_transform_callable, args.n_participants,
+                                            bool(args.rectify_signal), bool(args.sqrt_to_r))
+                    # SD across two independent estimates per iteration
+                    boots.append(np.sqrt(((ncA - ncB) ** 2) / (2 - 1)))
+                except SystemExit:
+                    # not enough data in one half — skip
+                    continue
+            if boots:
+                se_vals = np.nanmean(np.stack(boots, axis=0), axis=0)
 
-# noise_ceilings = np.array(noise_ceilings)  # (n_voxels,)
+    else:
+        nc = nc_traditional(
+            condition_betas,
+            unit_transform=unit_transform_callable,
+            n_bootstrap=args.n_bootstrap,
+            min_reps=args.min_reps,
+            rng=rng,
+            standardize_halves=bool(args.standardize_halves),
+            apply_spearman_brown_flag=bool(args.apply_spearman_brown),
+        )
 
-# print("Noise ceiling calculation complete with variable repetitions.")
-# print("Noise ceiling shape:", noise_ceilings.shape)
+        se_vals = None  # not computed here
 
+    # ----- save & plot -----
+    outdir = Path(args.output_dir); outdir.mkdir(parents=True, exist_ok=True)
+    suffix = f"{args.subject}_noise_ceiling_per_{unit_plot_name}_{args.method}"
 
+    # Plot
+    plt.figure(figsize=(10, 6))
+    vals = nc[np.isfinite(nc)]
+    plt.hist(vals, bins=60, edgecolor='black')
+    xlabel = ("Noise ceiling (sqrt variance fraction)" if (args.method=="variance_based" and args.sqrt_to_r)
+              else "Noise ceiling (variance fraction)" if args.method=="variance_based"
+              else "Noise ceiling (Pearson r)")
+    plt.title(f"Noise Ceiling Distribution ({args.subject}, per-{unit_plot_name}, {args.method})")
+    plt.xlabel(xlabel)
+    plt.ylabel(f"Number of {unit_plot_name}s"); plt.grid(True, alpha=0.3); plt.tight_layout()
+    fig_path = outdir / f"{suffix}.png"
+    plt.savefig(fig_path, dpi=300, bbox_inches="tight"); plt.close()
 
+    # Save NC
+    nc_path = outdir / f"{suffix}.pkl"
+    with open(nc_path, "wb") as f:
+        pickle.dump({"nc": nc, "se": se_vals}, f)
 
-# # ✅ ======== Step 5.5. Plot distribution of noise ceilings ===========
+    print(f"📊 Plot saved: {fig_path}")
+    print(f"💾 Noise ceiling saved: {nc_path}")
+    if se_vals is not None:
+        print("Included per-unit SE (sentence split-halves).")
 
-# plt.figure(figsize=(8,5))
-# plt.hist(noise_ceilings, bins=100, color='skyblue', edgecolor='k')
-# plt.xlabel('Noise ceiling (%)')
-# plt.ylabel('Number of voxels')
-# plt.title(f'Distribution of noise ceilings for {subj}')
-# plt.grid(True)
-
-# # Show mean and median
-# mean_nc = np.mean(noise_ceilings)
-# median_nc = np.median(noise_ceilings)
-# plt.axvline(mean_nc, color='r', linestyle='dashed', linewidth=1.5, label=f"Mean: {mean_nc:.2f}%")
-# plt.axvline(median_nc, color='g', linestyle='dashed', linewidth=1.5, label=f"Median: {median_nc:.2f}%")
-# plt.legend()
-
-# plt.tight_layout()
-
-# # ✅ Save figure
-# output_fig_dir = "/home/xiaoxuan/projects/Project_fMRI_flatmaps/results"
-# os.makedirs(output_fig_dir, exist_ok=True)  # Create directory if not exists
-
-# fig_path = os.path.join(output_fig_dir, f"{subj}_noise_ceiling_distribution.png")
-# plt.savefig(fig_path, dpi=300)
-# print(f"✅ Saved figure to {fig_path}")
-
-
-
-
-
-
-
-# # # ✅ ======== Step 6. Save output for TkSurfer visualization ===========
-
-# # # Split into left and right hemispheres (assuming standard fs_LR ordering)
-# # nc_lh = noise_ceilings[:32492]
-# # nc_rh = noise_ceilings[32492:]
-
-# # # Cast to float32
-# # nc_lh = nc_lh.astype(np.float32)
-# # nc_rh = nc_rh.astype(np.float32)
-
-# # # Create GIFTI images for each hemisphere
-# # gii_lh = nib.gifti.GiftiImage(darrays=[nib.gifti.GiftiDataArray(nc_lh)])
-# # gii_rh = nib.gifti.GiftiImage(darrays=[nib.gifti.GiftiDataArray(nc_rh)])
-
-# # # Save
-# # output_dir = f'/mnt/tempdata/xiaoxuan/Project_fmri_flatmap/freesurfer_data/{subj}'
-# # os.makedirs(output_dir, exist_ok=True)
-
-# # nib.save(gii_lh, os.path.join(output_dir, 'lh.nc.func.gii'))
-# # nib.save(gii_rh, os.path.join(output_dir, 'rh.nc.func.gii'))
-
-# # print(f"Saved GIFTI files to {output_dir}")
+if __name__ == "__main__":
+    main()

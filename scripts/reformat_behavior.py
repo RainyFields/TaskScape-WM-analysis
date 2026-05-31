@@ -1,6 +1,3 @@
-# do not consider dmsloc for now since it only contains locmod
-
-
 # this function reformats the behavior data from the 1-back task into a specific format. it takes dataframe as input. 
 # for each row within each run, I want to reformat the data into the following format:
 # columns: trialNumber, stim_order, loc/ctg/objmod, type[encoding, delay], is_correct, onset_time, offset_time. 
@@ -151,6 +148,75 @@ def reformat_interdms_behavior(df, tr=1.49):
     return new_df
 
 
+def reformat_dms_behavior(df, tr=1.49):
+    """
+    Reformat DMS (delayed match-to-sample) task behavioral data into long-format 
+    with encoding and delay phases.
+
+    DMS task has 2 stimuli per trial. Only location is task-relevant.
+    
+    Parameters:
+    - df: pandas DataFrame. One row per trial.
+    - tr: float. Repetition time for computing delay offset time.
+
+    Returns:
+    - new_df: pandas DataFrame with columns:
+      ['trialNumber', 'stim_order', 'locmod', 'ctgmod', 'objmod', 'type',
+       'is_correct', 'onset_time', 'offset_time']
+    """
+    output_rows = []
+    df.columns = df.columns.str.strip()
+    df = df.apply(lambda x: x.str.replace(" ", "") if x.dtype == "object" else x)
+
+    for _, row in df.iterrows():
+        trial_number = row.get("TrialNumber", None)
+        assert trial_number is not None, "TrialNumber column is required in the input DataFrame"
+
+        for i in range(2):  # DMS has 2 stimuli
+            stim_order = i + 1
+            locmod = row[f'loc{stim_order}']
+            objmod = row[f'objmod{stim_order}']
+            ctgmod = 0  # DMS doesn't have category, set to 0
+            onset = row[f'stimulus_{i}_onset']
+            offset = row[f'stimulus_{i}_offset']
+
+            # Encoding row
+            output_rows.append({
+                'trialNumber': trial_number,
+                'stim_order': stim_order,
+                'locmod': locmod,
+                'ctgmod': ctgmod,
+                'objmod': objmod,
+                'type': 'encoding',
+                'is_correct': None,
+                'onset_time': onset,
+                'offset_time': offset
+            })
+
+            # Delay row - only the second stimulus has response
+            if stim_order < 2:
+                is_correct = None
+            else:
+                # action is True for match, False for non-match
+                # response_1 is 'x' for match, 'b' for non-match
+                is_correct = row.get('action') == MAP.get(row.get('response_1', None), None)
+
+            output_rows.append({
+                'trialNumber': trial_number,
+                'stim_order': stim_order,
+                'locmod': locmod,
+                'ctgmod': ctgmod,
+                'objmod': objmod,
+                'type': 'delay',
+                'is_correct': is_correct,
+                'onset_time': offset,
+                'offset_time': offset + 2 * tr
+            })
+
+    new_df = pd.DataFrame(output_rows)
+    return new_df
+
+
 def reformat_1back_behavior(df, tr=1.49):
     """
     Reformat 1-back task behavioral data into long-format with encoding and delay phases.
@@ -225,7 +291,7 @@ subjects = ['01', '02', '03', '05', '06']
 
 sessions = [f"{i:03}" for i in range(1, 17)]
 
-task_name = "ctxdm"  # change to "interdms" or "ctxdm" as needed
+task_name = "dms"  # change to "interdms", "ctxdm", "1back", or "dms" as needed
 for sub in subjects:
     for ses in sessions:
         func_dir = root_path / f"sub-{sub}" / f"ses-{ses}" / "func"
@@ -276,6 +342,22 @@ for sub in subjects:
                     print(f"[Warning] Unexpected number of trials in {file_path}: {len(data)}")    
                 else:
                     reformatted_data = reformat_ctxdm_behavior(data)
+                    
+                    # Preserve sub/ses/func hierarchy in target path
+                    relative_path = file_path.relative_to(root_path)
+                    target_file_path = target_path / relative_path
+                    
+                    # Create the target directory if needed
+                    target_file_path.parent.mkdir(parents=True, exist_ok=True)
+                    
+                    # Save reformatted data
+                    reformatted_data.to_csv(target_file_path, sep='\t', index=False)
+                    print(f"Reformatted data saved to: {target_file_path}")
+            elif task_name == "dms":
+                if len(data) != 16:  # DMS has 16 trials per run
+                    print(f"[Warning] Unexpected number of trials in {file_path}: {len(data)}")    
+                else:
+                    reformatted_data = reformat_dms_behavior(data)
                     
                     # Preserve sub/ses/func hierarchy in target path
                     relative_path = file_path.relative_to(root_path)

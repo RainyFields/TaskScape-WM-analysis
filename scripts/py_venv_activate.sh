@@ -22,3 +22,7 @@ cd ~/claude_env
 npm init -y
 npm install @anthropic-ai/claude-code
 npx claude
+
+
+# activate datalad environment
+source /project/def-pbellec/shared/venvs/datalad/bin/activate
