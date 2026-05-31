@@ -1,0 +1,12 @@
+{
+  "level": "task",
+  "subject": "sub-03",
+  "unit": "voxel",
+  "n_labels": 11,
+  "n_within_samples": 1100,
+  "n_between_samples": 11000,
+  "within_mean": 0.441938579082489,
+  "between_mean": 0.044603217393159866,
+  "t_statistic": 103.34464744979802,
+  "p_value": 0.0
+}

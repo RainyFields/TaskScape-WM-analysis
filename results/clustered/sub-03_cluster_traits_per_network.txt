@@ -1,0 +1,339 @@
+Subject: sub-03 | unit: network
+
+Cluster token enrichment (top):
+
+- Cluster 1 (n=2):
+            obj3  lift=+2.15  p_cluster=1.00  p_global=0.32
+             lco  lift=+2.12  p_cluster=0.50  p_global=0.16
+            abab  lift=+1.06  p_cluster=0.50  p_global=0.24
+            loc1  lift=+0.84  p_cluster=1.00  p_global=0.54
+            loc0  lift=+0.81  p_cluster=1.00  p_global=0.55
+           ctxdm  lift=+0.62  p_cluster=0.50  p_global=0.31
+            obj0  lift=+0.60  p_cluster=0.50  p_global=0.31
+             loc  lift=+0.10  p_cluster=0.50  p_global=0.45
+- Cluster 2 (n=12):
+            abab  lift=+0.72  p_cluster=0.42  p_global=0.24
+            obj2  lift=+0.61  p_cluster=0.50  p_global=0.31
+             lco  lift=+0.56  p_cluster=0.25  p_global=0.16
+        interdms  lift=+0.38  p_cluster=0.67  p_global=0.48
+            obj0  lift=+0.33  p_cluster=0.42  p_global=0.31
+             loc  lift=+0.29  p_cluster=0.58  p_global=0.45
+            loc0  lift=+0.20  p_cluster=0.67  p_global=0.55
+            obj3  lift=+0.05  p_cluster=0.33  p_global=0.32
+- Cluster 3 (n=6):
+             lco  lift=+2.12  p_cluster=0.50  p_global=0.16
+           ctxdm  lift=+1.70  p_cluster=0.83  p_global=0.31
+             col  lift=+1.24  p_cluster=0.33  p_global=0.15
+            obj3  lift=+1.10  p_cluster=0.67  p_global=0.32
+            obj0  lift=+0.60  p_cluster=0.50  p_global=0.31
+            loc0  lift=+0.51  p_cluster=0.83  p_global=0.55
+            obj1  lift=+0.02  p_cluster=0.33  p_global=0.33
+            abba  lift=-0.31  p_cluster=0.17  p_global=0.24
+- Cluster 4 (n=9):
+             col  lift=+1.99  p_cluster=0.44  p_global=0.15
+           ctxdm  lift=+0.80  p_cluster=0.56  p_global=0.31
+            obj2  lift=+0.79  p_cluster=0.56  p_global=0.31
+            loc0  lift=+0.61  p_cluster=0.89  p_global=0.55
+            obj0  lift=+0.42  p_cluster=0.44  p_global=0.31
+            obj3  lift=+0.40  p_cluster=0.44  p_global=0.32
+           nback  lift=+0.08  p_cluster=0.22  p_global=0.21
+            obj1  lift=+0.02  p_cluster=0.33  p_global=0.33
+- Cluster 5 (n=1):
+             col  lift=+5.72  p_cluster=1.00  p_global=0.15
+           ctxdm  lift=+2.24  p_cluster=1.00  p_global=0.31
+            obj2  lift=+2.21  p_cluster=1.00  p_global=0.31
+            obj1  lift=+2.06  p_cluster=1.00  p_global=0.33
+            loc1  lift=+0.84  p_cluster=1.00  p_global=0.54
+- Cluster 6 (n=31):
+             col  lift=+1.60  p_cluster=0.39  p_global=0.15
+           ctxdm  lift=+1.19  p_cluster=0.68  p_global=0.31
+             lco  lift=+0.81  p_cluster=0.29  p_global=0.16
+            loc0  lift=+0.40  p_cluster=0.77  p_global=0.55
+            obj1  lift=+0.38  p_cluster=0.45  p_global=0.33
+            loc1  lift=+0.36  p_cluster=0.74  p_global=0.54
+            obj2  lift=+0.35  p_cluster=0.42  p_global=0.31
+            obj0  lift=+0.34  p_cluster=0.42  p_global=0.31
+- Cluster 7 (n=2):
+             col  lift=+2.36  p_cluster=0.50  p_global=0.15
+            abba  lift=+1.06  p_cluster=0.50  p_global=0.24
+            loc0  lift=+0.81  p_cluster=1.00  p_global=0.55
+           ctxdm  lift=+0.62  p_cluster=0.50  p_global=0.31
+            obj2  lift=+0.61  p_cluster=0.50  p_global=0.31
+            obj0  lift=+0.60  p_cluster=0.50  p_global=0.31
+            obj3  lift=+0.57  p_cluster=0.50  p_global=0.32
+            obj1  lift=+0.53  p_cluster=0.50  p_global=0.33
+- Cluster 8 (n=11):
+            obj1  lift=+1.23  p_cluster=0.73  p_global=0.33
+             col  lift=+0.83  p_cluster=0.27  p_global=0.15
+            obj2  lift=+0.75  p_cluster=0.55  p_global=0.31
+            abab  lift=+0.50  p_cluster=0.36  p_global=0.24
+            loc0  lift=+0.48  p_cluster=0.82  p_global=0.55
+             loc  lift=+0.40  p_cluster=0.64  p_global=0.45
+            loc1  lift=+0.34  p_cluster=0.73  p_global=0.54
+           ctxdm  lift=+0.18  p_cluster=0.36  p_global=0.31
+- Cluster 9 (n=8):
+             col  lift=+1.52  p_cluster=0.38  p_global=0.15
+           ctxdm  lift=+1.02  p_cluster=0.62  p_global=0.31
+            obj2  lift=+1.01  p_cluster=0.62  p_global=0.31
+            loc1  lift=+0.61  p_cluster=0.88  p_global=0.54
+            obj3  lift=+0.57  p_cluster=0.50  p_global=0.32
+             lco  lift=+0.56  p_cluster=0.25  p_global=0.16
+            loc0  lift=+0.36  p_cluster=0.75  p_global=0.55
+            abab  lift=+0.03  p_cluster=0.25  p_global=0.24
+- Cluster 10 (n=4):
+             lco  lift=+3.69  p_cluster=0.75  p_global=0.16
+           ctxdm  lift=+1.43  p_cluster=0.75  p_global=0.31
+            loc1  lift=+0.84  p_cluster=1.00  p_global=0.54
+            obj0  lift=+0.60  p_cluster=0.50  p_global=0.31
+            obj3  lift=+0.57  p_cluster=0.50  p_global=0.32
+            obj1  lift=+0.53  p_cluster=0.50  p_global=0.33
+            loc0  lift=+0.36  p_cluster=0.75  p_global=0.55
+            abba  lift=+0.03  p_cluster=0.25  p_global=0.24
+- Cluster 11 (n=2):
+            obj2  lift=+2.21  p_cluster=1.00  p_global=0.31
+             lco  lift=+2.12  p_cluster=0.50  p_global=0.16
+            abab  lift=+1.06  p_cluster=0.50  p_global=0.24
+            loc0  lift=+0.81  p_cluster=1.00  p_global=0.55
+           ctxdm  lift=+0.62  p_cluster=0.50  p_global=0.31
+            obj0  lift=+0.60  p_cluster=0.50  p_global=0.31
+            obj1  lift=+0.53  p_cluster=0.50  p_global=0.33
+             loc  lift=+0.10  p_cluster=0.50  p_global=0.45
+- Cluster 12 (n=2):
+            abba  lift=+3.13  p_cluster=1.00  p_global=0.24
+            obj2  lift=+2.21  p_cluster=1.00  p_global=0.31
+             loc  lift=+1.21  p_cluster=1.00  p_global=0.45
+        interdms  lift=+1.06  p_cluster=1.00  p_global=0.48
+            loc1  lift=+0.84  p_cluster=1.00  p_global=0.54
+            obj3  lift=+0.57  p_cluster=0.50  p_global=0.32
+            loc0  lift=-0.10  p_cluster=0.50  p_global=0.55
+- Cluster 13 (n=2):
+             lco  lift=+2.12  p_cluster=0.50  p_global=0.16
+           nback  lift=+1.42  p_cluster=0.50  p_global=0.21
+             obj  lift=+1.10  p_cluster=0.50  p_global=0.24
+           ctxdm  lift=+0.62  p_cluster=0.50  p_global=0.31
+            obj2  lift=+0.61  p_cluster=0.50  p_global=0.31
+            obj1  lift=+0.53  p_cluster=0.50  p_global=0.33
+            loc1  lift=-0.08  p_cluster=0.50  p_global=0.54
+            loc0  lift=-0.10  p_cluster=0.50  p_global=0.55
+- Cluster 14 (n=2):
+             col  lift=+2.36  p_cluster=0.50  p_global=0.15
+           nback  lift=+1.42  p_cluster=0.50  p_global=0.21
+            loc1  lift=+0.84  p_cluster=1.00  p_global=0.54
+           ctxdm  lift=+0.62  p_cluster=0.50  p_global=0.31
+            obj2  lift=+0.61  p_cluster=0.50  p_global=0.31
+            obj0  lift=+0.60  p_cluster=0.50  p_global=0.31
+            obj3  lift=+0.57  p_cluster=0.50  p_global=0.32
+            obj1  lift=+0.53  p_cluster=0.50  p_global=0.33
+- Cluster 15 (n=2):
+             col  lift=+5.72  p_cluster=1.00  p_global=0.15
+           ctxdm  lift=+2.24  p_cluster=1.00  p_global=0.31
+            loc1  lift=+0.84  p_cluster=1.00  p_global=0.54
+            obj2  lift=+0.61  p_cluster=0.50  p_global=0.31
+            obj0  lift=+0.60  p_cluster=0.50  p_global=0.31
+            obj3  lift=+0.57  p_cluster=0.50  p_global=0.32
+- Cluster 16 (n=3):
+             ctg  lift=+1.83  p_cluster=0.33  p_global=0.12
+             obj  lift=+1.80  p_cluster=0.67  p_global=0.24
+           nback  lift=+0.61  p_cluster=0.33  p_global=0.21
+        interdms  lift=+0.38  p_cluster=0.67  p_global=0.48
+            abab  lift=+0.38  p_cluster=0.33  p_global=0.24
+            abba  lift=+0.38  p_cluster=0.33  p_global=0.24
+            obj3  lift=+0.05  p_cluster=0.33  p_global=0.32
+             loc  lift=-0.26  p_cluster=0.33  p_global=0.45
+- Cluster 17 (n=12):
+            abba  lift=+1.06  p_cluster=0.50  p_global=0.24
+            obj3  lift=+0.57  p_cluster=0.50  p_global=0.32
+             ctg  lift=+0.42  p_cluster=0.17  p_global=0.12
+             obj  lift=+0.40  p_cluster=0.33  p_global=0.24
+        interdms  lift=+0.38  p_cluster=0.67  p_global=0.48
+             lco  lift=+0.04  p_cluster=0.17  p_global=0.16
+             loc  lift=-0.08  p_cluster=0.42  p_global=0.45
+           ctxdm  lift=-0.19  p_cluster=0.25  p_global=0.31
+- Cluster 18 (n=14):
+            obj1  lift=+0.53  p_cluster=0.50  p_global=0.33
+            obj0  lift=+0.37  p_cluster=0.43  p_global=0.31
+             lco  lift=+0.34  p_cluster=0.21  p_global=0.16
+             loc  lift=+0.26  p_cluster=0.57  p_global=0.45
+            loc1  lift=+0.18  p_cluster=0.64  p_global=0.54
+            loc0  lift=+0.16  p_cluster=0.64  p_global=0.55
+           ctxdm  lift=+0.16  p_cluster=0.36  p_global=0.31
+           nback  lift=+0.04  p_cluster=0.21  p_global=0.21
+- Cluster 19 (n=6):
+             lco  lift=+2.12  p_cluster=0.50  p_global=0.16
+           ctxdm  lift=+0.62  p_cluster=0.50  p_global=0.31
+            obj1  lift=+0.53  p_cluster=0.50  p_global=0.33
+             ctg  lift=+0.42  p_cluster=0.17  p_global=0.12
+            abba  lift=+0.38  p_cluster=0.33  p_global=0.24
+            obj2  lift=+0.07  p_cluster=0.33  p_global=0.31
+            obj3  lift=+0.05  p_cluster=0.33  p_global=0.32
+            loc0  lift=-0.10  p_cluster=0.50  p_global=0.55
+- Cluster 20 (n=13):
+             ctg  lift=+1.61  p_cluster=0.31  p_global=0.12
+             lco  lift=+1.40  p_cluster=0.38  p_global=0.16
+           ctxdm  lift=+0.74  p_cluster=0.54  p_global=0.31
+             obj  lift=+0.62  p_cluster=0.38  p_global=0.24
+            obj2  lift=+0.24  p_cluster=0.38  p_global=0.31
+           nback  lift=+0.12  p_cluster=0.23  p_global=0.21
+             col  lift=+0.03  p_cluster=0.15  p_global=0.15
+            loc1  lift=-0.15  p_cluster=0.46  p_global=0.54
+- Cluster 21 (n=3):
+             ctg  lift=+1.83  p_cluster=0.33  p_global=0.12
+            abab  lift=+1.75  p_cluster=0.67  p_global=0.24
+        interdms  lift=+1.06  p_cluster=1.00  p_global=0.48
+             loc  lift=+0.47  p_cluster=0.67  p_global=0.45
+             obj  lift=+0.40  p_cluster=0.33  p_global=0.24
+            abba  lift=+0.38  p_cluster=0.33  p_global=0.24
+            loc0  lift=+0.20  p_cluster=0.67  p_global=0.55
+            obj0  lift=+0.06  p_cluster=0.33  p_global=0.31
+- Cluster 22 (n=133):
+           nback  lift=+0.71  p_cluster=0.35  p_global=0.21
+             obj  lift=+0.55  p_cluster=0.37  p_global=0.24
+            abab  lift=+0.40  p_cluster=0.34  p_global=0.24
+             loc  lift=+0.23  p_cluster=0.56  p_global=0.45
+        interdms  lift=+0.18  p_cluster=0.57  p_global=0.48
+             ctg  lift=+0.15  p_cluster=0.14  p_global=0.12
+            abba  lift=-0.04  p_cluster=0.23  p_global=0.24
+            obj2  lift=-0.13  p_cluster=0.27  p_global=0.31
+- Cluster 23 (n=6):
+           nback  lift=+0.61  p_cluster=0.33  p_global=0.21
+            obj0  lift=+0.60  p_cluster=0.50  p_global=0.31
+             obj  lift=+0.40  p_cluster=0.33  p_global=0.24
+            abba  lift=+0.38  p_cluster=0.33  p_global=0.24
+            loc0  lift=+0.20  p_cluster=0.67  p_global=0.55
+             col  lift=+0.12  p_cluster=0.17  p_global=0.15
+             loc  lift=+0.10  p_cluster=0.50  p_global=0.45
+            obj2  lift=+0.07  p_cluster=0.33  p_global=0.31
+- Cluster 24 (n=31):
+            abab  lift=+0.86  p_cluster=0.45  p_global=0.24
+             loc  lift=+0.42  p_cluster=0.65  p_global=0.45
+            obj3  lift=+0.32  p_cluster=0.42  p_global=0.32
+        interdms  lift=+0.27  p_cluster=0.61  p_global=0.48
+            obj2  lift=+0.14  p_cluster=0.35  p_global=0.31
+             ctg  lift=+0.10  p_cluster=0.13  p_global=0.12
+            loc1  lift=+0.07  p_cluster=0.58  p_global=0.54
+            loc0  lift=-0.01  p_cluster=0.55  p_global=0.55
+- Cluster 25 (n=3):
+             col  lift=+1.24  p_cluster=0.33  p_global=0.15
+           ctxdm  lift=+1.16  p_cluster=0.67  p_global=0.31
+            obj0  lift=+1.13  p_cluster=0.67  p_global=0.31
+             lco  lift=+1.08  p_cluster=0.33  p_global=0.16
+            loc0  lift=+0.81  p_cluster=1.00  p_global=0.55
+           nback  lift=+0.61  p_cluster=0.33  p_global=0.21
+            obj3  lift=+0.05  p_cluster=0.33  p_global=0.32
+            obj1  lift=+0.02  p_cluster=0.33  p_global=0.33
+- Cluster 26 (n=2):
+             ctg  lift=+7.49  p_cluster=1.00  p_global=0.12
+             obj  lift=+3.21  p_cluster=1.00  p_global=0.24
+            abab  lift=+3.13  p_cluster=1.00  p_global=0.24
+        interdms  lift=+1.06  p_cluster=1.00  p_global=0.48
+- Cluster 27 (n=2):
+             col  lift=+2.36  p_cluster=0.50  p_global=0.15
+           nback  lift=+1.42  p_cluster=0.50  p_global=0.21
+             obj  lift=+1.10  p_cluster=0.50  p_global=0.24
+           ctxdm  lift=+0.62  p_cluster=0.50  p_global=0.31
+            obj0  lift=+0.60  p_cluster=0.50  p_global=0.31
+            obj1  lift=+0.53  p_cluster=0.50  p_global=0.33
+            loc0  lift=-0.10  p_cluster=0.50  p_global=0.55
+- Cluster 28 (n=3):
+             col  lift=+1.24  p_cluster=0.33  p_global=0.15
+            obj2  lift=+1.14  p_cluster=0.67  p_global=0.31
+            obj0  lift=+1.13  p_cluster=0.67  p_global=0.31
+            obj1  lift=+1.04  p_cluster=0.67  p_global=0.33
+            loc0  lift=+0.81  p_cluster=1.00  p_global=0.55
+             loc  lift=+0.47  p_cluster=0.67  p_global=0.45
+        interdms  lift=+0.38  p_cluster=0.67  p_global=0.48
+            abba  lift=+0.38  p_cluster=0.33  p_global=0.24
+- Cluster 29 (n=17):
+            abba  lift=+0.94  p_cluster=0.47  p_global=0.24
+             loc  lift=+0.56  p_cluster=0.71  p_global=0.45
+            obj0  lift=+0.50  p_cluster=0.47  p_global=0.31
+            loc1  lift=+0.40  p_cluster=0.76  p_global=0.54
+            obj1  lift=+0.26  p_cluster=0.41  p_global=0.33
+        interdms  lift=+0.21  p_cluster=0.59  p_global=0.48
+           nback  lift=+0.14  p_cluster=0.24  p_global=0.21
+            obj2  lift=+0.13  p_cluster=0.35  p_global=0.31
+- Cluster 30 (n=2):
+             ctg  lift=+3.25  p_cluster=0.50  p_global=0.12
+             lco  lift=+2.12  p_cluster=0.50  p_global=0.16
+             obj  lift=+1.10  p_cluster=0.50  p_global=0.24
+            abba  lift=+1.06  p_cluster=0.50  p_global=0.24
+           ctxdm  lift=+0.62  p_cluster=0.50  p_global=0.31
+            obj0  lift=+0.60  p_cluster=0.50  p_global=0.31
+            obj1  lift=+0.53  p_cluster=0.50  p_global=0.33
+        interdms  lift=+0.03  p_cluster=0.50  p_global=0.48
+- Cluster 31 (n=21):
+             col  lift=+1.56  p_cluster=0.38  p_global=0.15
+           ctxdm  lift=+0.70  p_cluster=0.52  p_global=0.31
+            obj3  lift=+0.50  p_cluster=0.48  p_global=0.32
+            obj0  lift=+0.37  p_cluster=0.43  p_global=0.31
+            loc1  lift=+0.22  p_cluster=0.67  p_global=0.54
+             ctg  lift=+0.21  p_cluster=0.14  p_global=0.12
+            loc0  lift=+0.03  p_cluster=0.57  p_global=0.55
+             obj  lift=+0.00  p_cluster=0.24  p_global=0.24
+- Cluster 32 (n=6):
+             col  lift=+1.24  p_cluster=0.33  p_global=0.15
+           ctxdm  lift=+1.16  p_cluster=0.67  p_global=0.31
+             lco  lift=+1.08  p_cluster=0.33  p_global=0.16
+            obj3  lift=+0.57  p_cluster=0.50  p_global=0.32
+            loc1  lift=+0.53  p_cluster=0.83  p_global=0.54
+            loc0  lift=+0.20  p_cluster=0.67  p_global=0.55
+            obj2  lift=+0.07  p_cluster=0.33  p_global=0.31
+            obj0  lift=+0.06  p_cluster=0.33  p_global=0.31
+- Cluster 33 (n=23):
+            abba  lift=+0.79  p_cluster=0.43  p_global=0.24
+             col  lift=+0.75  p_cluster=0.26  p_global=0.15
+            obj1  lift=+0.73  p_cluster=0.57  p_global=0.33
+           ctxdm  lift=+0.41  p_cluster=0.43  p_global=0.31
+            obj3  lift=+0.37  p_cluster=0.43  p_global=0.32
+            loc1  lift=+0.28  p_cluster=0.70  p_global=0.54
+            loc0  lift=+0.18  p_cluster=0.65  p_global=0.55
+            obj0  lift=+0.11  p_cluster=0.35  p_global=0.31
+- Cluster 34 (n=41):
+             ctg  lift=+0.86  p_cluster=0.22  p_global=0.12
+             obj  lift=+0.64  p_cluster=0.39  p_global=0.24
+            abba  lift=+0.41  p_cluster=0.34  p_global=0.24
+            obj0  lift=+0.32  p_cluster=0.41  p_global=0.31
+        interdms  lift=+0.16  p_cluster=0.56  p_global=0.48
+           nback  lift=+0.06  p_cluster=0.22  p_global=0.21
+            obj1  lift=+0.05  p_cluster=0.34  p_global=0.33
+            loc0  lift=-0.07  p_cluster=0.51  p_global=0.55
+- Cluster 35 (n=4):
+             lco  lift=+2.12  p_cluster=0.50  p_global=0.16
+           ctxdm  lift=+1.43  p_cluster=0.75  p_global=0.31
+             ctg  lift=+1.12  p_cluster=0.25  p_global=0.12
+             col  lift=+0.68  p_cluster=0.25  p_global=0.15
+            obj2  lift=+0.61  p_cluster=0.50  p_global=0.31
+            obj1  lift=+0.53  p_cluster=0.50  p_global=0.33
+            loc1  lift=+0.38  p_cluster=0.75  p_global=0.54
+             obj  lift=+0.05  p_cluster=0.25  p_global=0.24
+- Cluster 36 (n=2):
+             ctg  lift=+7.49  p_cluster=1.00  p_global=0.12
+           nback  lift=+3.84  p_cluster=1.00  p_global=0.21
+             obj  lift=+3.21  p_cluster=1.00  p_global=0.24
+- Cluster 37 (n=1):
+             lco  lift=+5.25  p_cluster=1.00  p_global=0.16
+           ctxdm  lift=+2.24  p_cluster=1.00  p_global=0.31
+            obj3  lift=+2.15  p_cluster=1.00  p_global=0.32
+            obj1  lift=+2.06  p_cluster=1.00  p_global=0.33
+            loc1  lift=+0.84  p_cluster=1.00  p_global=0.54
+- Cluster 38 (n=3):
+            abab  lift=+1.75  p_cluster=0.67  p_global=0.24
+            obj2  lift=+1.14  p_cluster=0.67  p_global=0.31
+             lco  lift=+1.08  p_cluster=0.33  p_global=0.16
+            loc1  lift=+0.84  p_cluster=1.00  p_global=0.54
+             loc  lift=+0.47  p_cluster=0.67  p_global=0.45
+        interdms  lift=+0.38  p_cluster=0.67  p_global=0.48
+            loc0  lift=+0.20  p_cluster=0.67  p_global=0.55
+           ctxdm  lift=+0.08  p_cluster=0.33  p_global=0.31
+- Cluster 39 (n=1):
+             lco  lift=+5.25  p_cluster=1.00  p_global=0.16
+           ctxdm  lift=+2.24  p_cluster=1.00  p_global=0.31
+            obj2  lift=+2.21  p_cluster=1.00  p_global=0.31
+            obj1  lift=+2.06  p_cluster=1.00  p_global=0.33
+            loc0  lift=+0.81  p_cluster=1.00  p_global=0.55
+- Cluster 40 (n=2):
+             lco  lift=+5.25  p_cluster=1.00  p_global=0.16
+           ctxdm  lift=+2.24  p_cluster=1.00  p_global=0.31
+            loc0  lift=+0.81  p_cluster=1.00  p_global=0.55
+            obj2  lift=+0.61  p_cluster=0.50  p_global=0.31
+            obj3  lift=+0.57  p_cluster=0.50  p_global=0.32

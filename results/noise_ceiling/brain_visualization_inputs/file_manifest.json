@@ -1,0 +1,32 @@
+{
+  "sub-01": {
+    "region_positive": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-01_task_region_positive_only.npy",
+    "region_signed": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-01_task_region_signed.npy",
+    "network_positive": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-01_task_network_positive_only.npy",
+    "network_signed": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-01_task_network_signed.npy"
+  },
+  "sub-02": {
+    "region_positive": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-02_task_region_positive_only.npy",
+    "region_signed": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-02_task_region_signed.npy",
+    "network_positive": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-02_task_network_positive_only.npy",
+    "network_signed": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-02_task_network_signed.npy"
+  },
+  "sub-03": {
+    "region_positive": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-03_task_region_positive_only.npy",
+    "region_signed": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-03_task_region_signed.npy",
+    "network_positive": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-03_task_network_positive_only.npy",
+    "network_signed": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-03_task_network_signed.npy"
+  },
+  "sub-05": {
+    "region_positive": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-05_task_region_positive_only.npy",
+    "region_signed": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-05_task_region_signed.npy",
+    "network_positive": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-05_task_network_positive_only.npy",
+    "network_signed": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-05_task_network_signed.npy"
+  },
+  "sub-06": {
+    "region_positive": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-06_task_region_positive_only.npy",
+    "region_signed": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-06_task_region_signed.npy",
+    "network_positive": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-06_task_network_positive_only.npy",
+    "network_signed": "/project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/brain_visualization_inputs/sub-06_task_network_signed.npy"
+  }
+}

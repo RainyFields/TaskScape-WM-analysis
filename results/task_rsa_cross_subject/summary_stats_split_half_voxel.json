@@ -1,0 +1,13 @@
+{
+  "unit": "voxel",
+  "subjects": [
+    "sub-01",
+    "sub-02",
+    "sub-03",
+    "sub-05",
+    "sub-06"
+  ],
+  "n_common_tasks": 11,
+  "within_mean": 0.9432926246789372,
+  "cross_mean": 0.22297730117287695
+}

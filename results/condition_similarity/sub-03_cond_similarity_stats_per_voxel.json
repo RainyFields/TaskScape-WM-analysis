@@ -1,0 +1,19 @@
+{
+  "subject": "sub-03",
+  "unit": "voxel",
+  "n_conditions": 457,
+  "n_bootstrap": 10,
+  "zscore_within_vectors": true,
+  "spearman_brown_on_diag": false,
+  "within_mean": 0.03678853668526748,
+  "across_mean": 0.00872295801026362,
+  "mean_diff_within_minus_across": 0.028065578675003866,
+  "bootstrap_p_two_sided": 0.0,
+  "bootstrap_diff_CI95": [
+    0.025615409787675215,
+    0.03119013618360716
+  ],
+  "within_n": 4570,
+  "across_n": 2083920,
+  "notes": "Correlation across units; diagonal entries compare the two split halves of the same condition."
+}

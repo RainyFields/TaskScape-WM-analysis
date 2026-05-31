@@ -1,0 +1,12 @@
+{
+  "level": "condition",
+  "subject": "sub-03",
+  "unit": "voxel",
+  "n_labels": 479,
+  "n_within_samples": 47900,
+  "n_between_samples": 22896200,
+  "within_mean": 0.04023250937461853,
+  "between_mean": 0.009132460691034794,
+  "t_statistic": 77.14877639587475,
+  "p_value": 0.0
+}

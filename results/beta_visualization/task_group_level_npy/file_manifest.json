@@ -1,0 +1,52 @@
+{
+  "sub-01": {
+    "dms_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-01/sub-01_taskgroup-dms_beta_region.npy",
+    "dms_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-01/sub-01_taskgroup-dms_beta_network.npy",
+    "1back_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-01/sub-01_taskgroup-1back_beta_region.npy",
+    "1back_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-01/sub-01_taskgroup-1back_beta_network.npy",
+    "interdms_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-01/sub-01_taskgroup-interdms_beta_region.npy",
+    "interdms_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-01/sub-01_taskgroup-interdms_beta_network.npy",
+    "ctxdm_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-01/sub-01_taskgroup-ctxdm_beta_region.npy",
+    "ctxdm_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-01/sub-01_taskgroup-ctxdm_beta_network.npy"
+  },
+  "sub-02": {
+    "dms_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-02/sub-02_taskgroup-dms_beta_region.npy",
+    "dms_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-02/sub-02_taskgroup-dms_beta_network.npy",
+    "1back_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-02/sub-02_taskgroup-1back_beta_region.npy",
+    "1back_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-02/sub-02_taskgroup-1back_beta_network.npy",
+    "interdms_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-02/sub-02_taskgroup-interdms_beta_region.npy",
+    "interdms_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-02/sub-02_taskgroup-interdms_beta_network.npy",
+    "ctxdm_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-02/sub-02_taskgroup-ctxdm_beta_region.npy",
+    "ctxdm_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-02/sub-02_taskgroup-ctxdm_beta_network.npy"
+  },
+  "sub-03": {
+    "dms_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-03/sub-03_taskgroup-dms_beta_region.npy",
+    "dms_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-03/sub-03_taskgroup-dms_beta_network.npy",
+    "1back_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-03/sub-03_taskgroup-1back_beta_region.npy",
+    "1back_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-03/sub-03_taskgroup-1back_beta_network.npy",
+    "interdms_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-03/sub-03_taskgroup-interdms_beta_region.npy",
+    "interdms_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-03/sub-03_taskgroup-interdms_beta_network.npy",
+    "ctxdm_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-03/sub-03_taskgroup-ctxdm_beta_region.npy",
+    "ctxdm_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-03/sub-03_taskgroup-ctxdm_beta_network.npy"
+  },
+  "sub-05": {
+    "dms_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-05/sub-05_taskgroup-dms_beta_region.npy",
+    "dms_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-05/sub-05_taskgroup-dms_beta_network.npy",
+    "1back_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-05/sub-05_taskgroup-1back_beta_region.npy",
+    "1back_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-05/sub-05_taskgroup-1back_beta_network.npy",
+    "interdms_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-05/sub-05_taskgroup-interdms_beta_region.npy",
+    "interdms_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-05/sub-05_taskgroup-interdms_beta_network.npy",
+    "ctxdm_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-05/sub-05_taskgroup-ctxdm_beta_region.npy",
+    "ctxdm_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-05/sub-05_taskgroup-ctxdm_beta_network.npy"
+  },
+  "sub-06": {
+    "dms_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-06/sub-06_taskgroup-dms_beta_region.npy",
+    "dms_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-06/sub-06_taskgroup-dms_beta_network.npy",
+    "1back_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-06/sub-06_taskgroup-1back_beta_region.npy",
+    "1back_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-06/sub-06_taskgroup-1back_beta_network.npy",
+    "interdms_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-06/sub-06_taskgroup-interdms_beta_region.npy",
+    "interdms_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-06/sub-06_taskgroup-interdms_beta_network.npy",
+    "ctxdm_region": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-06/sub-06_taskgroup-ctxdm_beta_region.npy",
+    "ctxdm_network": "/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy/sub-06/sub-06_taskgroup-ctxdm_beta_network.npy"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "subjects": [
+    "sub-01",
+    "sub-02",
+    "sub-03",
+    "sub-05",
+    "sub-06"
+  ],
+  "unit": "network",
+  "mean_within_inconsistency": 1.1102230246251565e-16,
+  "mean_cross_inconsistency": 1.1102230246251565e-16,
+  "n_cross_pairs": 10
+}

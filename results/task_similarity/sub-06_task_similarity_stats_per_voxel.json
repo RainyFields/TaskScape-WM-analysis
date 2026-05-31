@@ -1,0 +1,33 @@
+{
+  "subject": "sub-06",
+  "unit": "voxel",
+  "n_units": 64984,
+  "n_tasks": 11,
+  "task_names": [
+    "nback_loc",
+    "nback_ctg",
+    "nback_obj",
+    "ctxdm_col",
+    "ctxdm_lco",
+    "interdms_loc_ABAB",
+    "interdms_loc_ABBA",
+    "interdms_obj_ABAB",
+    "interdms_obj_ABBA",
+    "interdms_ctg_ABAB",
+    "interdms_ctg_ABBA"
+  ],
+  "n_bootstrap": 10,
+  "zscore_within_units": true,
+  "within_mean": 0.5384607315063477,
+  "between_mean": 0.0711633563041687,
+  "mean_diff_within_minus_between": 0.46729737520217896,
+  "t_statistic": 39.22817855298815,
+  "p_value_two_sided": 3.1153699921265394e-70,
+  "bootstrap_diff_CI95": [
+    0.45364233404397963,
+    0.4970321498811245
+  ],
+  "within_n_samples": 110,
+  "between_n_samples": 1100,
+  "method_note": "Split-Half Cross-Correlation: Diagonal is reliability (<1), Off-diagonal is split-half similarity."
+}

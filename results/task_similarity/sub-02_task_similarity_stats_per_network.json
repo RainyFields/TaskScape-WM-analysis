@@ -1,0 +1,33 @@
+{
+  "subject": "sub-02",
+  "unit": "network",
+  "n_units": 12,
+  "n_tasks": 11,
+  "task_names": [
+    "nback_loc",
+    "nback_ctg",
+    "nback_obj",
+    "ctxdm_col",
+    "ctxdm_lco",
+    "interdms_loc_ABAB",
+    "interdms_loc_ABBA",
+    "interdms_obj_ABAB",
+    "interdms_obj_ABBA",
+    "interdms_ctg_ABAB",
+    "interdms_ctg_ABBA"
+  ],
+  "n_bootstrap": 10,
+  "zscore_within_units": true,
+  "within_mean": 0.6881721615791321,
+  "between_mean": 0.177908793091774,
+  "mean_diff_within_minus_between": 0.5102633684873581,
+  "t_statistic": 17.199402886262973,
+  "p_value_two_sided": 4.980222333903264e-36,
+  "bootstrap_diff_CI95": [
+    0.4444015100598335,
+    0.6082586780190468
+  ],
+  "within_n_samples": 110,
+  "between_n_samples": 1100,
+  "method_note": "Split-Half Cross-Correlation: Diagonal is reliability (<1), Off-diagonal is split-half similarity."
+}

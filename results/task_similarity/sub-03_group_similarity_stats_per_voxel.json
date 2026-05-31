@@ -1,0 +1,12 @@
+{
+  "level": "group",
+  "subject": "sub-03",
+  "unit": "voxel",
+  "n_labels": 3,
+  "n_within_samples": 300,
+  "n_between_samples": 600,
+  "within_mean": 0.5146229267120361,
+  "between_mean": 0.10161237418651581,
+  "t_statistic": 38.826476145176144,
+  "p_value": 1.6945761697798666e-160
+}

@@ -1,0 +1,32 @@
+{
+  "subjects": [
+    "sub-01",
+    "sub-02",
+    "sub-03",
+    "sub-05",
+    "sub-06"
+  ],
+  "unit": "network",
+  "n_bootstrap": 10,
+  "n_common_tasks": 11,
+  "common_tasks": [
+    "ctxdm_col",
+    "ctxdm_lco",
+    "interdms_ctg_ABAB",
+    "interdms_ctg_ABBA",
+    "interdms_loc_ABAB",
+    "interdms_loc_ABBA",
+    "interdms_obj_ABAB",
+    "interdms_obj_ABBA",
+    "nback_ctg",
+    "nback_loc",
+    "nback_obj"
+  ],
+  "within_mean": 0.6705564856529236,
+  "within_std": 0.14320039749145508,
+  "within_n": 225,
+  "cross_mean": 0.07000833749771118,
+  "cross_std": 0.1518986076116562,
+  "cross_n": 1000,
+  "notes": "Similarities are Pearson correlations between vectorized upper triangles of RSA (task\u00d7task) matrices. Within-subject uses pairs of bootstrap RSAs from the same subject; cross-subject uses bootstrap RSAs from different subjects."
+}

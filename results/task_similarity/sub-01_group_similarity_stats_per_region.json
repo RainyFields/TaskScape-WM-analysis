@@ -1,0 +1,11 @@
+{
+  "level": "group",
+  "subject": "sub-01",
+  "unit": "region",
+  "n_labels": 3,
+  "n_within_samples": 300,
+  "within_mean": 0.6184326410293579,
+  "between_mean": 0.26376840472221375,
+  "t_statistic": 43.19748124482225,
+  "p_value": 2.03788438537076e-200
+}

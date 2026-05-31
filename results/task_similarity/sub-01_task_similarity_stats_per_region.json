@@ -1,0 +1,11 @@
+{
+  "level": "task",
+  "subject": "sub-01",
+  "unit": "region",
+  "n_labels": 11,
+  "n_within_samples": 1100,
+  "within_mean": 0.5154187679290771,
+  "between_mean": 0.09487005323171616,
+  "t_statistic": 113.99480172145778,
+  "p_value": 0.0
+}

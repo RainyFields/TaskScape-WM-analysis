@@ -1,0 +1,15 @@
+{
+  "fisher_z": false,
+  "include_diag": false,
+  "use_full_matrix": false,
+  "n_on": 57510,
+  "n_off": 56016,
+  "on_mean": 0.05606858250367198,
+  "on_std": 0.0701629702738868,
+  "off_mean": -0.014231332542924269,
+  "off_std": 0.07213153178082078,
+  "welch_t_stat": 166.40108111617198,
+  "welch_t_pvalue": 0.0,
+  "mannwhitney_u_stat": 2441135826.0,
+  "mannwhitney_u_pvalue": 0.0
+}

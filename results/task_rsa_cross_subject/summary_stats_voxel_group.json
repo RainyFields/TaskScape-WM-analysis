@@ -1,0 +1,14 @@
+{
+  "unit": "voxel",
+  "level": "group",
+  "subjects": [
+    "sub-01",
+    "sub-02",
+    "sub-03",
+    "sub-05",
+    "sub-06"
+  ],
+  "n_common_items": 3,
+  "within_mean": 0.9948473418009073,
+  "cross_mean": 0.6894748736302951
+}

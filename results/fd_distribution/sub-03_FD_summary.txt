@@ -1,0 +1,20 @@
+Overall mean FD: 0.0565 mm
+Overall median FD: 0.0401 mm
+Number of frames with FD > 0.5mm: 89 (0.43%)
+
+Runs with any frame FD > 1.0 mm:
+ses-001_task-ctxdm_run-2: 1 frames exceed threshold at indices [np.int64(163)]
+ses-002_task-ctxdm_run-2: 1 frames exceed threshold at indices [np.int64(88)]
+ses-003_task-1back_run-1: 1 frames exceed threshold at indices [np.int64(156)]
+ses-006_task-1back_run-1: 1 frames exceed threshold at indices [np.int64(83)]
+ses-007_task-interdms_run-1: 1 frames exceed threshold at indices [np.int64(138)]
+ses-008_task-1back_run-1: 2 frames exceed threshold at indices [np.int64(137), np.int64(138)]
+ses-008_task-interdms_run-3: 3 frames exceed threshold at indices [np.int64(29), np.int64(30), np.int64(95)]
+ses-010_task-1back_run-1: 1 frames exceed threshold at indices [np.int64(145)]
+ses-010_task-interdms_run-2: 1 frames exceed threshold at indices [np.int64(167)]
+ses-010_task-interdms_run-3: 1 frames exceed threshold at indices [np.int64(19)]
+ses-012_task-ctxdm_run-1: 1 frames exceed threshold at indices [np.int64(77)]
+ses-012_task-interdms_run-3: 2 frames exceed threshold at indices [np.int64(81), np.int64(82)]
+ses-014_task-1back_run-1: 1 frames exceed threshold at indices [np.int64(186)]
+ses-015_task-ctxdm_run-1: 2 frames exceed threshold at indices [np.int64(97), np.int64(98)]
+ses-016_task-ctxdm_run-2: 1 frames exceed threshold at indices [np.int64(36)]

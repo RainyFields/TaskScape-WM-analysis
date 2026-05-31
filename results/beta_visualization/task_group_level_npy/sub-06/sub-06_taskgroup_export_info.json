@@ -1,0 +1,24 @@
+{
+  "subject": "sub-06",
+  "taskgroup_order": [
+    "dms",
+    "1back",
+    "interdms",
+    "ctxdm"
+  ],
+  "n_repetitions_per_group": {
+    "dms": 768,
+    "1back": 1478,
+    "interdms": 5092,
+    "ctxdm": 2926
+  },
+  "availability": {
+    "dms": true,
+    "1back": true,
+    "interdms": true,
+    "ctxdm": true
+  },
+  "region_n": 360,
+  "network_n": 12,
+  "note": "Groups with no data are saved as all-NaN arrays."
+}

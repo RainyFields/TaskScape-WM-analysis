@@ -1,0 +1,11 @@
+{
+  "level": "group",
+  "subject": "sub-03",
+  "unit": "network",
+  "n_labels": 3,
+  "n_within_samples": 300,
+  "within_mean": 0.7682777047157288,
+  "between_mean": 0.1279408186674118,
+  "t_statistic": 26.38782632519236,
+  "p_value": 5.596767275454861e-114
+}

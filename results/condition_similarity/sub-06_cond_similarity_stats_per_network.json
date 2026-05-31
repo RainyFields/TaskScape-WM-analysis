@@ -1,0 +1,19 @@
+{
+  "subject": "sub-06",
+  "unit": "network",
+  "n_conditions": 450,
+  "n_bootstrap": 10,
+  "zscore_within_vectors": true,
+  "spearman_brown_on_diag": false,
+  "within_mean": 0.06967814151953644,
+  "across_mean": 0.03157237539002795,
+  "mean_diff_within_minus_across": 0.038105766129508487,
+  "bootstrap_p_two_sided": 0.0,
+  "bootstrap_diff_CI95": [
+    0.03076118257911936,
+    0.045401698788252946
+  ],
+  "within_n": 4500,
+  "across_n": 2020500,
+  "notes": "Correlation across units; diagonal entries compare the two split halves of the same condition."
+}

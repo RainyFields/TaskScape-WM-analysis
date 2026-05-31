@@ -1,0 +1,14 @@
+{
+  "unit": "network",
+  "level": "task",
+  "subjects": [
+    "sub-01",
+    "sub-02",
+    "sub-03",
+    "sub-05",
+    "sub-06"
+  ],
+  "n_common_items": 11,
+  "within_mean": 0.9344564208112613,
+  "cross_mean": 0.13356004442295671
+}

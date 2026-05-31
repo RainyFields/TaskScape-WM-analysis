@@ -1,0 +1,11 @@
+{
+  "level": "condition",
+  "subject": "sub-03",
+  "unit": "network",
+  "n_labels": 479,
+  "n_within_samples": 47900,
+  "within_mean": 0.10797200351953506,
+  "between_mean": 0.01585901901125908,
+  "t_statistic": 50.96024643495871,
+  "p_value": 0.0
+}

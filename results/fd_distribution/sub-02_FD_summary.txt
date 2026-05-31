@@ -1,0 +1,9 @@
+Overall mean FD: 0.1676 mm
+Overall median FD: 0.1418 mm
+Number of frames with FD > 0.5mm: 346 (1.65%)
+
+Runs with any frame FD > 1.0 mm:
+ses-003_task-ctxdm_run-1: 2 frames exceed threshold at indices [np.int64(100), np.int64(179)]
+ses-007_task-1back_run-1: 1 frames exceed threshold at indices [np.int64(185)]
+ses-010_task-1back_run-1: 1 frames exceed threshold at indices [np.int64(7)]
+ses-013_task-ctxdm_run-2: 1 frames exceed threshold at indices [np.int64(181)]

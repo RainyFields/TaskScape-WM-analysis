@@ -1,0 +1,28 @@
+{
+  "unit": "network",
+  "subjects": [
+    "sub-01",
+    "sub-02",
+    "sub-03",
+    "sub-05",
+    "sub-06"
+  ],
+  "n_common_tasks": 11,
+  "common_tasks": [
+    "ctxdm_col",
+    "ctxdm_lco",
+    "interdms_ctg_ABAB",
+    "interdms_ctg_ABBA",
+    "interdms_loc_ABAB",
+    "interdms_loc_ABBA",
+    "interdms_obj_ABAB",
+    "interdms_obj_ABBA",
+    "nback_ctg",
+    "nback_loc",
+    "nback_obj"
+  ],
+  "method": "Split-Half Matrices -> Off-Diagonal Vectorization -> Pearson Corr",
+  "within_mean": 0.9344564208112613,
+  "cross_mean": 0.13356004442295671,
+  "n_boot": 10
+}

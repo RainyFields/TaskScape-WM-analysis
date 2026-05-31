@@ -1,0 +1,33 @@
+{
+  "subject": "sub-02",
+  "unit": "region",
+  "n_units": 360,
+  "n_tasks": 11,
+  "task_names": [
+    "nback_loc",
+    "nback_ctg",
+    "nback_obj",
+    "ctxdm_col",
+    "ctxdm_lco",
+    "interdms_loc_ABAB",
+    "interdms_loc_ABBA",
+    "interdms_obj_ABAB",
+    "interdms_obj_ABBA",
+    "interdms_ctg_ABAB",
+    "interdms_ctg_ABBA"
+  ],
+  "n_bootstrap": 10,
+  "zscore_within_units": true,
+  "within_mean": 0.6439686417579651,
+  "between_mean": 0.18349045515060425,
+  "mean_diff_within_minus_between": 0.46047818660736084,
+  "t_statistic": 26.29542114115671,
+  "p_value_two_sided": 8.094581823980974e-53,
+  "bootstrap_diff_CI95": [
+    0.42938582599163055,
+    0.4847382828593254
+  ],
+  "within_n_samples": 110,
+  "between_n_samples": 1100,
+  "method_note": "Split-Half Cross-Correlation: Diagonal is reliability (<1), Off-diagonal is split-half similarity."
+}

@@ -1,0 +1,12 @@
+{
+  "level": "condition",
+  "subject": "sub-03",
+  "unit": "region",
+  "n_labels": 479,
+  "n_within_samples": 47900,
+  "n_between_samples": 22896200,
+  "within_mean": 0.08052729070186615,
+  "between_mean": 0.02297632396221161,
+  "t_statistic": 80.54820858499093,
+  "p_value": 0.0
+}

@@ -1,0 +1,11 @@
+{
+  "level": "task",
+  "subject": "sub-03",
+  "unit": "network",
+  "n_labels": 11,
+  "n_within_samples": 1100,
+  "within_mean": 0.6399973630905151,
+  "between_mean": 0.07771729677915573,
+  "t_statistic": 66.6518260904426,
+  "p_value": 0.0
+}

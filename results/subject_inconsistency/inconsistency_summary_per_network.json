@@ -1,0 +1,14 @@
+{
+  "subjects": [
+    "sub-01",
+    "sub-02",
+    "sub-03",
+    "sub-05",
+    "sub-06"
+  ],
+  "unit": "network",
+  "n_bootstrap": 1000,
+  "mean_within": 3.11972669919669e-17,
+  "mean_cross": 3.11972669919669e-17,
+  "n_cross_pairs": 10
+}
