@@ -19,6 +19,12 @@ What it does
 • Aggregates across all runs into: {condition_key: [beta_vec, beta_vec, ...]}.
 • Saves a pickle of that dict + a repetition-count histogram.
 
+WARNING (2026-09): the same physical delay beta is stored under BOTH a pair key (delay-of-second for
+pair (k-1,k)) and a single-frame key (k,k). Any analysis that pools condition keys per task must
+deduplicate. For task-level analyses prefer scripts/build_clean_delay_betas.py (one record per
+physical beta, with provenance). The beta-column mapping bug (col_index re-numbered after the
+correct-only filter) was fixed in 2026-09; pickles produced before that date are mis-indexed.
+
 CLI knobs
 ---------
 --target_selection:
@@ -367,6 +373,21 @@ def group_betas_within_trial(
     if missing:
         raise ValueError(f"Design CSV missing columns {missing} in {cond_csv}")
 
+    # GLM beta column index = position in the UNFILTERED design CSV (glm_analysis.py writes one row per
+    # task regressor, sorted by trial_index). It must be fixed BEFORE any row filtering; re-numbering after
+    # filtering (the previous behaviour) shifted every row after the first dropped one onto the wrong column.
+    if betas.shape[1] != len(df):
+        raise ValueError(
+            f"Betas columns ({betas.shape[1]}) != unfiltered design rows ({len(df)}) for {beta_file.name}; "
+            "cannot map trials to beta columns."
+        )
+    if 'trial_index' in df.columns:
+        df['col_index'] = df['trial_index'].astype(int)
+        if not np.array_equal(df['col_index'].values, np.arange(len(df))):
+            raise ValueError(f"trial_index is not 0..K-1 in {cond_csv}")
+    else:
+        df['col_index'] = np.arange(len(df), dtype=int)
+
     # Optional: only correct trials if present
     print(f"require_correct={correct_only}")
     if correct_only and 'is_correct' in df.columns:
@@ -380,20 +401,13 @@ def group_betas_within_trial(
         df = df[~df['is_correct'].apply(is_negative)].copy()
 
         print(f"after filtering to correct trials, {len(df)} rows remain")
-    # Ensure column index matches betas' columns
+    # NOTE: col_index (set above, before filtering) is preserved through the filter on purpose.
     df = df.reset_index(drop=True)
-    df['col_index'] = np.arange(len(df), dtype=int)
 
     # stim_order as numeric for matching
     df['stim_order'] = pd.to_numeric(df['stim_order'], errors='coerce')
     df = df.dropna(subset=['stim_order'])
     df['stim_order'] = df['stim_order'].astype(int)
-
-
-    if betas.shape[1] != len(df):
-        warnings.warn(
-            f"Betas columns ({betas.shape[1]}) != design rows ({len(df)}). Proceeding but mapping may be off."
-        )
 
     pair_indices_list = determine_task_type(task_name)
     feature_type = determine_feature_type(task_name)

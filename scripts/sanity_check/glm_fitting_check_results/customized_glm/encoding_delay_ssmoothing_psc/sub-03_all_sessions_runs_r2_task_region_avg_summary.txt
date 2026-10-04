@@ -1,0 +1,13 @@
+subject: sub-03
+metric: r2_task
+n_runs_used: 2
+h5_root: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
+atlas: /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii
+surface_source: fsaverage6
+task_counts:
+  ctxdm: 1
+  interdms: 1
+region_mean: 0.484195
+region_std: 0.076914
+region_min: 0.268698
+region_max: 0.639976

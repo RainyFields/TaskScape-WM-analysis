@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Cross-subject RSA using Split-Half Correlation Matrices.
+Within- vs Cross-subject RSA (hybrid estimator).
+
+- Within-subject (reliability ceiling): split-half bootstraps. Independent
+  halves are required to avoid the circularity of correlating a subject's
+  pattern with itself.
+- Cross-subject: full-trial RSA vectors. Subjects are statistically
+  independent, so no split is needed; using all trials minimizes per-subject
+  measurement noise and avoids attenuating the cross-subject correlation.
+
 Supports: Voxel, Region, Network levels.
 Supports Analysis Levels: Condition (raw), Task (11 groups), Broad Group (3 groups).
 
@@ -292,7 +300,15 @@ def main():
     # MAIN LOOP: Compute RSA
     # -----------------------------------------------------------
     print("\n--- Phase 2: Computing RSA Matrices ---")
+    # Split-half bootstrap vectors per subject -> used ONLY for the
+    # within-subject reliability ceiling (independent halves are required to
+    # avoid circularity when correlating a subject with itself).
     subj_rsa_vectors = {}
+    # Full-trial RSA vector per subject -> used for the cross-subject
+    # comparison. Subjects are statistically independent, so no split is
+    # needed; using all trials minimizes per-subject measurement noise and
+    # avoids attenuating the cross-subject correlation.
+    subj_full_vectors = {}
 
     for subj in args.subjects:
         pkl_path = Path(args.input_root) / f"{subj}_task_condition_betas.pkl"
@@ -340,10 +356,25 @@ def main():
         
         del data_raw, subject_task_matrices
 
-        # Calculate Split-Half
+        # Order matters! (rows of every RSA matrix follow final_task_list)
+        task_arrays = [final_tasks[t] for t in final_task_list]
+
+        # --- Full-trial RSA vector (all trials) -> cross-subject comparison ---
+        M_full = np.full((T, n_units), np.nan, dtype=np.float32)
+        for i, R in enumerate(task_arrays):
+            M_full[i] = np.nanmean(R, axis=0)
+        if not np.isnan(M_full).any():
+            if args.zscore_within_units:
+                M_full = zscore_rows(M_full)
+            R_full = corr_matrix_rowwise(M_full, M_full)
+            R_full = 0.5 * (R_full + R_full.T)
+            subj_full_vectors[subj] = vectorize_upper_triangle(R_full)
+        else:
+            print(f"  -> Warning: NaN in full-trial pattern for {subj}; "
+                  f"excluded from cross-subject analysis.")
+
+        # --- Split-half bootstraps -> within-subject reliability ceiling ---
         vectors = []
-        task_arrays = [final_tasks[t] for t in final_task_list] # Order matters!
-        
         for b in range(args.n_bootstrap):
             M1 = np.full((T, n_units), np.nan, dtype=np.float32)
             M2 = np.full((T, n_units), np.nan, dtype=np.float32)
@@ -381,8 +412,11 @@ def main():
         del final_tasks, task_arrays, vectors
         gc.collect()
 
-    if not subj_rsa_vectors:
+    if not subj_rsa_vectors and not subj_full_vectors:
         sys.exit("No valid subjects processed.")
+    if len(subj_full_vectors) < 2:
+        print("Warning: fewer than 2 subjects have full-trial vectors; "
+              "cross-subject comparison will be empty.")
 
     # -----------------------------------------------------------
     # STATISTICAL ANALYSIS
@@ -390,33 +424,36 @@ def main():
     print("\nRunning Similarity Analysis...")
     within_corrs = []
     cross_corrs = []
-    subjects = sorted(list(subj_rsa_vectors.keys()))
-    
-    # Within-Subject
-    for subj in subjects:
+
+    # Within-Subject reliability ceiling: correlate split-half bootstrap
+    # vectors within each subject (independent halves -> no circularity).
+    within_subjects = sorted(list(subj_rsa_vectors.keys()))
+    for subj in within_subjects:
         vecs = subj_rsa_vectors[subj]
         nb = vecs.shape[0]
         for i in range(nb):
             for j in range(i+1, nb):
                 r = np.corrcoef(vecs[i], vecs[j])[0,1]
                 if np.isfinite(r): within_corrs.append(r)
-                    
-    # Cross-Subject
-    for i, s1 in enumerate(subjects):
-        for j in range(i+1, len(subjects)):
-            s2 = subjects[j]
-            vecs1 = subj_rsa_vectors[s1]
-            vecs2 = subj_rsa_vectors[s2]
-            for v1 in vecs1:
-                for v2 in vecs2:
-                    r = np.corrcoef(v1, v2)[0,1]
-                    if np.isfinite(r): cross_corrs.append(r)
+
+    # Cross-Subject: correlate full-trial RSA vectors across subject pairs
+    # (one value per pair; subjects are independent so all trials are used).
+    cross_subjects = sorted(list(subj_full_vectors.keys()))
+    for i, s1 in enumerate(cross_subjects):
+        for j in range(i+1, len(cross_subjects)):
+            s2 = cross_subjects[j]
+            r = np.corrcoef(subj_full_vectors[s1], subj_full_vectors[s2])[0,1]
+            if np.isfinite(r): cross_corrs.append(r)
 
     within_corrs = np.array(within_corrs)
     cross_corrs = np.array(cross_corrs)
-    
-    print(f"Within Mean={np.nanmean(within_corrs):.3f}")
-    print(f"Cross Mean ={np.nanmean(cross_corrs):.3f}")
+
+    subjects = sorted(set(within_subjects) | set(cross_subjects))
+
+    print(f"Within Mean={np.nanmean(within_corrs):.3f} "
+          f"(n={within_corrs.size}, split-half reliability)")
+    print(f"Cross Mean ={np.nanmean(cross_corrs):.3f} "
+          f"(n={cross_corrs.size}, full-trial pairs)")
 
     # Save Arrays
     f_suffix = f"{args.unit}_{args.level}"
@@ -432,7 +469,7 @@ def main():
     plt.figure(figsize=(8, 7)) 
     
     box = plt.boxplot([within_corrs, cross_corrs], 
-                      labels=["Within-Subject", "Cross-Subject"], 
+                      labels=["Within-Subject\n(split-half ceiling)", "Cross-Subject\n(full trials)"], 
                       showmeans=True, 
                       patch_artist=True,
                       medianprops=dict(linewidth=2.5, color='black'),
@@ -446,7 +483,8 @@ def main():
 
     plt.ylabel(f"RSA Similarity (r)")
     plt.ylim(0, 1.1)
-    plt.title(f"RSA Consistency ({args.unit.upper()} | {args.level.upper()})\n(Split-Half Matrices)")
+    plt.title(f"RSA Consistency ({args.unit.upper()} | {args.level.upper()})\n"
+              f"(Within: split-half | Cross: full trials)")
     
     plt.grid(True, alpha=0.3, linewidth=1.5)
     plt.tight_layout()
@@ -467,8 +505,13 @@ def main():
         "level": args.level,
         "subjects": subjects,
         "n_common_items": T,
-        "within_mean": float(np.nanmean(within_corrs)),
-        "cross_mean": float(np.nanmean(cross_corrs))
+        "method": "hybrid (within=split-half reliability, cross=full-trial patterns)",
+        "within_subjects": within_subjects,
+        "cross_subjects": cross_subjects,
+        "n_within_pairs": int(within_corrs.size),
+        "n_cross_pairs": int(cross_corrs.size),
+        "within_mean": float(np.nanmean(within_corrs)) if within_corrs.size else None,
+        "cross_mean": float(np.nanmean(cross_corrs)) if cross_corrs.size else None
     }
     with open(outdir / f"summary_stats_{f_suffix}.json", "w") as f:
         json.dump(stats, f, indent=2)

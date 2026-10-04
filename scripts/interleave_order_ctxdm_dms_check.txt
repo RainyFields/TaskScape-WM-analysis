@@ -1,0 +1,6 @@
+=== ctxdm ===
+First 8: ['trial001_item01_encoding', 'trial001_item01_delay', 'trial001_item02_encoding', 'trial001_item02_delay', 'trial001_item03_encoding', 'trial001_item03_delay', 'trial002_item01_encoding', 'trial002_item01_delay']
+
+=== dms ===
+First 8: ['trial001_item01_encoding', 'trial001_item01_delay', 'trial001_item02_encoding', 'trial001_item02_delay', 'trial002_item01_encoding', 'trial002_item01_delay', 'trial002_item02_encoding', 'trial002_item02_delay']
+

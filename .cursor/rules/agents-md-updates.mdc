@@ -1,0 +1,36 @@
+---
+description: Suggest AGENTS.md updates after milestone-level work
+alwaysApply: true
+---
+
+# AGENTS.md maintenance
+
+Read `AGENTS.md` at the project root for paths, pipeline, env, and project status.
+
+## When to suggest an update
+
+At the **end** of work that qualifies as a milestone, offer once:
+
+> "Want me to update the Project status section in AGENTS.md?"
+
+Qualifying milestones:
+- New or changed pipeline stage (GLM, smoothing, resampling, figure export)
+- New default script, output path, or data layout
+- Environment / SLURM / venv change
+- Analysis milestone completed (e.g. sanity check passed, batch job finished)
+- New gotcha worth recording for future agents
+
+Do **not** offer after trivial edits, one-off debugging, or routine script tweaks.
+
+## How to update (only if user agrees)
+
+1. Edit **Project status** first: Completed, Active / in progress, Known gotchas.
+2. Set **Last updated** to today's date.
+3. Touch other sections (paths, pipeline, conventions) only if they changed.
+4. Keep edits concise — status bullets, not session transcripts.
+
+## Do not
+
+- Auto-update AGENTS.md without user confirmation.
+- Rewrite stable sections (env setup, SLURM template) unless they are wrong.
+- Commit AGENTS.md unless the user asks.

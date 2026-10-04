@@ -1,0 +1,3 @@
+Total task columns: 128
+Duplicate names: 0
+First 8: ['trial001_item01_encoding', 'trial001_item01_delay', 'trial001_item02_encoding', 'trial001_item02_delay', 'trial001_item03_encoding', 'trial001_item03_delay', 'trial001_item04_encoding', 'trial001_item04_delay']

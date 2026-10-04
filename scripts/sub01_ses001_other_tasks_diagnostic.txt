@@ -1,0 +1,66 @@
+
+=== sub-01_ses-001_task-1back_run-01_events.tsv ===
+Shape: (108, 9)
+Type value counts:
+type
+encoding    54
+delay       54
+Name: count, dtype: int64
+Unique trialNumbers: 9
+Rows per trialNumber×type:
+6    18
+Name: count, dtype: int64
+First 8 rows:
+   onset_time  offset_time      type  trialNumber
+0    6.003910     7.484565  encoding            1
+1    7.484565    10.464565     delay            1
+2    7.987578     9.486661  encoding            1
+3    9.486661    12.466661     delay            1
+4   13.451046    14.950834  encoding            1
+5   14.950834    17.930834     delay            1
+6   18.935251    20.420998  encoding            1
+7   20.420998    23.400998     delay            1
+
+=== sub-01_ses-001_task-ctxdm_run-01_events.tsv ===
+Shape: (120, 9)
+Type value counts:
+type
+encoding    60
+delay       60
+Name: count, dtype: int64
+Unique trialNumbers: 20
+Rows per trialNumber×type:
+3    40
+Name: count, dtype: int64
+First 8 rows:
+   onset_time  offset_time      type  trialNumber
+0    6.001337     7.486533  encoding            1
+1    7.486533    10.466533     delay            1
+2    7.982919     9.485204  encoding            1
+3    9.485204    12.465204     delay            1
+4   13.453812    14.949942  encoding            1
+5   14.949942    17.929942     delay            1
+6   18.934130    20.417790  encoding            2
+7   20.417790    23.397790     delay            2
+
+=== sub-01_ses-001_task-dms_run-01_events.tsv ===
+Shape: (64, 9)
+Type value counts:
+type
+encoding    32
+delay       32
+Name: count, dtype: int64
+Unique trialNumbers: 16
+Rows per trialNumber×type:
+2    32
+Name: count, dtype: int64
+First 8 rows:
+   onset_time  offset_time      type  trialNumber
+0    6.001904     7.484138  encoding            1
+1    7.484138    10.464138     delay            1
+2   11.467976    12.951282  encoding            1
+3   12.951282    15.931283     delay            1
+4   16.935230    18.417734  encoding            2
+5   18.417734    21.397734     delay            2
+6   22.401169    23.899857  encoding            2
+7   23.899857    26.879857     delay            2

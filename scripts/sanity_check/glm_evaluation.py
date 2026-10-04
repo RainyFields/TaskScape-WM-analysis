@@ -46,7 +46,6 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from figure_style.figure_utils import (
-    add_panel_labels,
     apply_clean_spines,
     get_figsize,
     get_palette,
@@ -57,6 +56,11 @@ from figure_style.figure_utils import (
 # Load shared publication style (figures4papers-compatible).
 _STYLE_PATH = _PROJECT_ROOT / "figure_style" / "nature_style.mplstyle"
 plt.style.use(str(_STYLE_PATH))
+
+A4_WIDTH_MM = 210.0
+PRED_FIG_WIDTH_MM = 150.0 * 0.8 * 0.75   # 90 mm
+PRED_FIG_HEIGHT_MM = 69.0 * 0.8 * 0.75   # 41.4 mm
+DIST_FIG_WIDTH_MM = A4_WIDTH_MM * 0.5 * 0.8  # half A4 width scaled to 80%
 
 # -----------------------
 # CLI
@@ -91,13 +95,22 @@ def get_args():
                    choices=["nature", "pnas", "cell", "science", "plos", "neuron", "jneurosci"],
                    help="Journal preset for publication figure sizing.")
     p.add_argument("--pred_span", default="double", choices=["single", "1.5", "double"],
-                   help="Column span for the 3x2 prediction panel figure.")
+                   help="Column span fallback when --pred_full_width_mm is not set.")
     p.add_argument("--dist_span", default="single", choices=["single", "1.5", "double"],
-                   help="Column span for the adjusted-R² distribution figure.")
-    p.add_argument("--pred_full_width_mm", type=float, default=None,
-                   help="Optional explicit total width (mm) for pred-vs-actual 3x2 figure (e.g., 190 for near full A4 width).")
-    p.add_argument("--pred_panel_hw_ratio", type=float, default=0.5,
-                   help="Per-panel height/width ratio for pred-vs-actual grid. 0.5 means 2:4 (height:width).")
+                   help="Column span fallback when --dist_full_width_mm is not set.")
+    p.add_argument("--pred_full_width_mm", type=float, default=PRED_FIG_WIDTH_MM,
+                   help="Total width (mm) for pred-vs-actual figure (default: 90 mm).")
+    p.add_argument("--pred_full_height_mm", type=float, default=PRED_FIG_HEIGHT_MM,
+                   help="Total height (mm) for pred-vs-actual figure (default: 41.4 mm).")
+    p.add_argument("--pred_panel_hw_ratio", type=float, default=(1.0 / 6.0),
+                   help="Per-panel height/width ratio when --pred_full_height_mm is not set (default: 1:6).")
+    p.add_argument("--dist_full_width_mm", type=float, default=DIST_FIG_WIDTH_MM,
+                   help="Total width (mm) for adjusted-R² distribution figure (default: 84 mm = 80% of half A4).")
+    p.add_argument("--dist_hw_ratio", type=float, default=(2.0 / 3.0),
+                   help="Figure height/width ratio for adjusted-R² distribution (default: 2:3).")
+    p.add_argument("--pred_vertex_r2_rank", default="high_med_low",
+                   choices=["low", "high", "high_med_low"],
+                   help="PSC paper vertex selection: all low/high, or one high+medium+low task R² (default).")
     return p.parse_args()
 
 # -----------------------
@@ -392,6 +405,54 @@ def plot_beta_distribution(betas_task, outdir, subj, task, ses, run_used):
     return out
 
 
+def select_paper_vertices_by_task_adj_r2(
+    r2_task_adj_all: np.ndarray,
+    sampled_vertices: np.ndarray,
+    n: int = 4,
+    rank: str = "low",
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return local/global indices for n vertices ranked by adjusted task R²."""
+    task_adj_sampled = r2_task_adj_all[sampled_vertices]
+    finite_local = np.where(np.isfinite(task_adj_sampled))[0]
+    if finite_local.size > 0:
+        ascending = np.argsort(task_adj_sampled[finite_local])
+        if rank == "high":
+            pick = finite_local[ascending[::-1][: min(n, finite_local.size)]]
+        else:
+            pick = finite_local[ascending[: min(n, finite_local.size)]]
+    else:
+        pick = np.arange(min(n, len(sampled_vertices)))
+    sel_local = np.array(pick, dtype=int)
+    return sel_local, sampled_vertices[sel_local]
+
+
+def select_paper_vertices_high_med_low_task_adj_r2(
+    r2_task_adj_all: np.ndarray,
+    sampled_vertices: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return one high-, medium-, and low-adjusted-task-R² vertex (top to bottom)."""
+    task_adj_sampled = r2_task_adj_all[sampled_vertices]
+    finite_local = np.where(np.isfinite(task_adj_sampled))[0]
+    if finite_local.size == 0:
+        sel_local = np.arange(min(3, len(sampled_vertices)), dtype=int)
+        return sel_local, sampled_vertices[sel_local]
+
+    ascending = np.argsort(task_adj_sampled[finite_local])
+    sorted_local = finite_local[ascending]
+    low_local = int(sorted_local[0])
+    high_local = int(sorted_local[-1])
+    med_local = int(sorted_local[len(sorted_local) // 2])
+
+    seen: set[int] = set()
+    pick: list[int] = []
+    for loc in (high_local, med_local, low_local):
+        if loc not in seen:
+            seen.add(loc)
+            pick.append(loc)
+    sel_local = np.array(pick, dtype=int)
+    return sel_local, sampled_vertices[sel_local]
+
+
 def plot_predictions_vs_actual_paper(
     Y_true,
     Y_pred,
@@ -407,25 +468,34 @@ def plot_predictions_vs_actual_paper(
     run_used,
     journal="nature",
     span="double",
-    full_width_mm=None,
-    panel_hw_ratio=0.5,
+    full_width_mm=PRED_FIG_WIDTH_MM,
+    full_height_mm=PRED_FIG_HEIGHT_MM,
+    panel_hw_ratio=(1.0 / 6.0),
+    rank_tag="highMedLowTaskAdjR2",
 ):
-    """3x2 publication-style panel for six sampled vertices."""
+    """Publication-style vertical panel for sampled vertices (PSC over TR)."""
+    n_rows = max(len(selected_local), 1)
+    n_cols = 1
     gap_w_mm = 1.5
-    gap_h_mm = 4.5
+    gap_h_mm = 1.5
     if full_width_mm is None:
-        figsize, panel_w_mm, panel_h_mm = get_figsize(journal, span, n_cols=2, n_rows=3)
+        figsize, panel_w_mm, panel_h_mm = get_figsize(journal, span, n_cols=n_cols, n_rows=n_rows)
     else:
-        panel_w_mm = (float(full_width_mm) - gap_w_mm) / 2.0
-        panel_h_mm = panel_w_mm * float(panel_hw_ratio)
-        total_h_mm = 3.0 * panel_h_mm + 2.0 * gap_h_mm
-        figsize = (mm_to_inches(float(full_width_mm)), mm_to_inches(total_h_mm))
-    fig, axes = plt.subplots(3, 2, figsize=figsize, sharex=True)
-    axes_flat = axes.ravel()
+        panel_w_mm = float(full_width_mm)
+        if full_height_mm is not None:
+            total_h_mm = float(full_height_mm)
+            panel_h_mm = (total_h_mm - (n_rows - 1) * gap_h_mm) / float(n_rows)
+        else:
+            panel_h_mm = panel_w_mm * float(panel_hw_ratio)
+            total_h_mm = n_rows * panel_h_mm + (n_rows - 1) * gap_h_mm
+        figsize = (mm_to_inches(panel_w_mm), mm_to_inches(total_h_mm))
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=figsize, sharex=True)
+    if n_rows == 1:
+        axes_flat = [axes]
+    else:
+        axes_flat = list(axes.ravel())
 
-    palette = get_palette("vigil")
-    c_actual = palette[2]
-    c_pred = palette[0]
+    c_actual, c_pred = get_palette("fpgm_foreground_background")
     t = np.arange(Y_true.shape[0])
 
     for i, ax in enumerate(axes_flat):
@@ -440,24 +510,23 @@ def plot_predictions_vs_actual_paper(
             f"V{gid} | full={r2_full_adj_sel[i]:.3f}, task={r2_task_adj_sel[i]:.3f}, noise={r2_noise_adj_sel[i]:.3f}"
         )
         ax.set_ylabel("PSC (%)")
-        if i >= 4:
+        if i == n_rows - 1:
             ax.set_xlabel("Time (TR)")
         apply_clean_spines(ax)
         if i == 0:
             ax.legend(loc="best")
 
-    add_panel_labels(axes_flat[: min(6, len(selected_local))], x=-0.06, y=1.02)
     fig.subplots_adjust(
-        left=0.06,
+        left=0.08,
         right=0.995,
         top=0.985,
-        bottom=0.07,
-        wspace=max(0.08, gap_w_mm / panel_w_mm),
+        bottom=0.08,
+        wspace=max(0.05, gap_w_mm / panel_w_mm),
         hspace=max(0.08, gap_h_mm / panel_h_mm),
     )
     out_base = (
         Path(outdir)
-        / f"{subj}_{ses}_task-{task}_{run_used}_pred_vs_actual_sampled6_adjR2_paper"
+        / f"{subj}_{ses}_task-{task}_{run_used}_pred_vs_actual_sampled{len(selected_local)}_{rank_tag}_paper"
     )
     save_figure(fig, out_base, formats=("svg", "pdf"))
     plt.close(fig)
@@ -469,38 +538,37 @@ def plot_adjusted_r2_distribution_paper(
     r2_noise_adj,
     r2_task_adj,
     outdir,
-    subj,
-    task,
-    ses,
-    run_used,
+    out_stem,
+    title="Adjusted R2 distributions",
     journal="nature",
     span="single",
+    full_width_mm=DIST_FIG_WIDTH_MM,
+    hw_ratio=(2.0 / 3.0),
+    xlim=(-0.5, 1.0),
 ):
-    """Single-column publication-style adjusted R² distribution plot."""
-    figsize, panel_w_mm, panel_h_mm = get_figsize(journal, span, n_cols=1, n_rows=1)
+    """Single-panel publication-style adjusted R² distribution plot."""
+    if full_width_mm is None:
+        figsize, panel_w_mm, panel_h_mm = get_figsize(journal, span, n_cols=1, n_rows=1)
+    else:
+        panel_w_mm = float(full_width_mm)
+        panel_h_mm = panel_w_mm * float(hw_ratio)
+        figsize = (mm_to_inches(panel_w_mm), mm_to_inches(panel_h_mm))
     fig, ax = plt.subplots(1, 1, figsize=figsize)
-    palette = get_palette("vigil")
-    c_task = palette[0]
-    c_noise = palette[1]
-    c_full = palette[2]
+    c_task, c_noise, c_full = get_palette("vigil")
 
     bins = 80
     ax.hist(r2_full_adj, bins=bins, density=True, alpha=0.45, color=c_full, label="R2 full adj")
     ax.hist(r2_noise_adj, bins=bins, density=True, alpha=0.45, color=c_noise, label="R2 noise adj")
     ax.hist(r2_task_adj, bins=bins, density=True, alpha=0.45, color=c_task, label="R2 task adj")
+    if xlim is not None:
+        ax.set_xlim(*xlim)
     ax.set_xlabel("Adjusted R2")
     ax.set_ylabel("Density")
-    ax.set_title("Adjusted R2 distributions")
+    ax.set_title(title)
     ax.legend(loc="best")
     apply_clean_spines(ax)
-    fig.subplots_adjust(
-        wspace=max(0.05, 1.5 / panel_w_mm),
-        hspace=max(0.05, 1.5 / panel_h_mm),
-    )
-    out_base = (
-        Path(outdir)
-        / f"{subj}_{ses}_task-{task}_{run_used}_adjusted_r2_distribution_paper"
-    )
+    fig.subplots_adjust(left=0.14, right=0.98, top=0.92, bottom=0.16)
+    out_base = Path(outdir) / out_stem
     save_figure(fig, out_base, formats=("svg", "pdf"))
     plt.close(fig)
     return out_base
@@ -809,16 +877,20 @@ def main():
         r2_noise_adj_all = glm["r2_noise_adj"].astype(np.float32)
         r2_task_adj_all = glm["r2_task_adj"].astype(np.float32)
 
-        # Select six sampled vertices (highest adjusted task R² among sampled set).
-        task_adj_sampled = r2_task_adj_all[sampled_vertices]
-        finite_local = np.where(np.isfinite(task_adj_sampled))[0]
-        if finite_local.size > 0:
-            order = np.argsort(task_adj_sampled[finite_local])[::-1]
-            top_local = finite_local[order[: min(6, finite_local.size)]]
+        if args.pred_vertex_r2_rank == "high_med_low":
+            sel_local, sel_global = select_paper_vertices_high_med_low_task_adj_r2(
+                r2_task_adj_all,
+                sampled_vertices,
+            )
+            rank_tag = "highMedLowTaskAdjR2"
         else:
-            top_local = np.arange(min(6, len(sampled_vertices)))
-        sel_local = np.array(top_local, dtype=int)
-        sel_global = sampled_vertices[sel_local]
+            sel_local, sel_global = select_paper_vertices_by_task_adj_r2(
+                r2_task_adj_all,
+                sampled_vertices,
+                n=4,
+                rank=args.pred_vertex_r2_rank,
+            )
+            rank_tag = f"{args.pred_vertex_r2_rank}TaskAdjR2"
 
         pred_paper_base = plot_predictions_vs_actual_paper(
             Y,
@@ -836,7 +908,9 @@ def main():
             journal=args.journal,
             span=args.pred_span,
             full_width_mm=args.pred_full_width_mm,
+            full_height_mm=args.pred_full_height_mm,
             panel_hw_ratio=args.pred_panel_hw_ratio,
+            rank_tag=rank_tag,
         )
 
         nz = nonzero
@@ -845,12 +919,11 @@ def main():
             r2_noise_adj=r2_noise_adj_all[nz][np.isfinite(r2_noise_adj_all[nz])],
             r2_task_adj=r2_task_adj_all[nz][np.isfinite(r2_task_adj_all[nz])],
             outdir=outdir,
-            subj=args.subj,
-            task=args.task,
-            ses=args.ses,
-            run_used=run_used,
+            out_stem=f"{args.subj}_{args.ses}_task-{args.task}_{run_used}_adjusted_r2_distribution_paper",
             journal=args.journal,
             span=args.dist_span,
+            full_width_mm=args.dist_full_width_mm,
+            hw_ratio=args.dist_hw_ratio,
         )
 
         print("Publication-style figures:")

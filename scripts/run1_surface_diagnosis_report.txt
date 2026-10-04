@@ -1,0 +1,15 @@
+=== Surface fetch status ===
+nilearn surfaces ready: True
+nilearn surface source: fsaverage6_fallback
+nilearn fsLR32k note: 'mesh' should be one of ('fsaverage3', 'fsaverage4', 'fsaverage5', 'fsaverage6', 'fsaverage7', 'fsaverage'); 'fsLR32k' was provided
+
+=== Saved figures ===
+/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_histogram.png | exists=True
+/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_surface.png | exists=True
+/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_task_adj_surface_both_views.png | exists=True
+
+=== Part 2: Task column diagnosis ===
+Total task columns: 128
+First 10: ['trial001_encoding', 'trial001_encoding.1', 'trial001_encoding.2', 'trial001_encoding.3', 'trial001_delay', 'trial001_delay.1', 'trial001_delay.2', 'trial001_delay.3', 'trial002_encoding', 'trial002_encoding.1']
+Last 10: ['trial015_delay.2', 'trial015_delay.3', 'trial016_encoding', 'trial016_encoding.1', 'trial016_encoding.2', 'trial016_encoding.3', 'trial016_delay', 'trial016_delay.1', 'trial016_delay.2', 'trial016_delay.3']
+Unique trial numbers: ['trial001', 'trial002', 'trial003', 'trial004', 'trial005', 'trial006', 'trial007', 'trial008', 'trial009', 'trial010', 'trial011', 'trial012', 'trial013', 'trial014', 'trial015', 'trial016']

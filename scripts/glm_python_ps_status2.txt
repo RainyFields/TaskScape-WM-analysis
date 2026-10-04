@@ -1,0 +1,2 @@
+    PID     ELAPSED %CPU %MEM CMD
+ 279370       14:30  444  0.1 python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --estimator wls_ar1 --out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay --save_yhat --save_resid --overwrite

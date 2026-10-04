@@ -1,0 +1,24 @@
+keys
+betas
+betas_full
+design_col_names
+design_matrix
+psc_baseline_mean
+r2_full
+r2_full_adj
+r2_noise
+r2_noise_adj
+r2_task
+r2_task_adj
+resid
+valid_mask
+yhat
+attrs
+T_kept: 207
+K_full: 155
+K_noise: 27
+K_task: 128
+adj_r2_note: R2_adj = 1 - (1-R2)*(T-1)/(T-K-1); r2_task_adj = r2_full_adj - r2_noise_adj
+means
+mean_r2_task: 0.5791841149330139
+mean_r2_task_adj: 0.2863289713859558

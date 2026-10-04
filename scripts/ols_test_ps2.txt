@@ -1,0 +1,3 @@
+exists=True
+    PID     ELAPSED %CPU %MEM STAT CMD
+3147811       05:20  0.0  0.0 I    python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --runs run-1 --estimator ols --out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay_ols_test --save_yhat --overwrite

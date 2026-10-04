@@ -19,6 +19,24 @@ MAP = {"x": True,
         None: None,
         "--": None,}
 
+
+def _score_1back_response(action, response):
+    """Return True/False when scorable, else None for missing/no-response trials."""
+    if response is None or (isinstance(response, float) and pd.isna(response)):
+        return None
+    resp = str(response).strip()
+    if resp == "" or resp == "--":
+        return None
+    mapped = MAP.get(resp, None)
+    if mapped is None:
+        return None
+    action_val = action
+    if action_val == "True":
+        action_val = True
+    elif action_val == "False":
+        action_val = False
+    return action_val == mapped
+
 def reformat_ctxdm_behavior(df, tr=1.49):
     """
     Reformat ctxdm task behavioral data into long-format with encoding and delay phases.
@@ -263,10 +281,10 @@ def reformat_1back_behavior(df, tr=1.49):
             if i == 0:
                 is_correct = None  # no previous response to compare to
             else:
-                # print(f"row response: {row.get(f'response_{i}')}, action: {row[f'action{i+1}']}")
-                is_correct = row[f'action{i+1}'] == MAP[row.get(f'response_{i}', None)]
-                # print(f"inspection of delay frame {i}: action{i+1}={row[f'action{i+1}']}, response_{i}={MAP[row.get(f'response_{i}', None)]}, is_correct={is_correct}")
-                assert is_correct is not None, f"response_{i} column is required for correctness check"
+                is_correct = _score_1back_response(
+                    row.get(f'action{i+1}'),
+                    row.get(f'response_{i}', None),
+                )
             
             output_rows.append({
                 'trialNumber': trial_number,

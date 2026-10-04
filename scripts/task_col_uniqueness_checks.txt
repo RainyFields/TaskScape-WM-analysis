@@ -1,0 +1,24 @@
+=== interdms ===
+Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-1_design_matrix.csv
+Total task columns: 128
+Duplicate names: 0
+First 8: ['trial001_item01_encoding', 'trial001_item02_encoding', 'trial001_item03_encoding', 'trial001_item04_encoding', 'trial001_item01_delay', 'trial001_item02_delay', 'trial001_item03_delay', 'trial001_item04_delay']
+
+=== ctxdm ===
+Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-ctxdm_run-1_design_matrix.csv
+Total task columns: 120
+Duplicate names: 0
+First 8: ['trial001_item01_encoding', 'trial001_item02_encoding', 'trial001_item03_encoding', 'trial001_item01_delay', 'trial001_item02_delay', 'trial001_item03_delay', 'trial002_item01_encoding', 'trial002_item02_encoding']
+
+=== dms ===
+Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-dms_run-1_design_matrix.csv
+Total task columns: 64
+Duplicate names: 0
+First 8: ['trial001_item01_encoding', 'trial001_item02_encoding', 'trial001_item01_delay', 'trial001_item02_delay', 'trial002_item01_encoding', 'trial002_item02_encoding', 'trial002_item01_delay', 'trial002_item02_delay']
+
+=== 1back ===
+Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-1back_run-1_design_matrix.csv
+Total task columns: 108
+Duplicate names: 0
+First 8: ['trial001_item01_encoding', 'trial001_item02_encoding', 'trial001_item03_encoding', 'trial001_item04_encoding', 'trial001_item05_encoding', 'trial001_item06_encoding', 'trial001_item01_delay', 'trial001_item02_delay']
+

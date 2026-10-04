@@ -1,0 +1,67 @@
+fetch_surf_fsaverage signature: (mesh='fsaverage5', data_dir=None)
+load_fsaverage signature: (mesh='fsaverage5', data_dir=None)
+load_fsaverage_data signature: (mesh='fsaverage5', mesh_type='pial', data_type='sulcal', data_dir=None)
+
+fetch_surf_fsaverage doc first lines:
+Download a Freesurfer fsaverage surface.
+
+    File names are subject to change and only attribute names
+    are guaranteed to be stable across nilearn versions.
+    See :footcite:t:`Fischl1999`.
+
+    See :func:`~nilearn.datasets.load_fsaverage` and
+    :func:`~nilearn.datasets.load_fsaverage_data`
+    to access fsaverage data as :obj:`~nilearn.surface.SurfaceImage`.
+
+    Parameters
+    ----------
+    mesh : :obj:`str`, default='fsaverage5'
+        Which :term:`mesh` to fetch.
+        Should be one of the following values:
+        
+    
+        - ``"fsaverage3"``: the low-resolution fsaverage3 mesh (642 nodes)
+        - ``"fsaverage4"``: the low-resolution fsaverage4 mesh (2562 nodes)
+        - ``"fsaverage5"``: the low-resolution fsaverage5 mesh (10242 nodes)
+        - ``"fsaverage6"``: the medium-resolution fsaverage6 mesh (40962 nodes)
+        - ``"fsaverage7"``: same as `"fsaverage"`
+        - ``"fsaverage"``: the high-resolution fsaverage mesh (163842 nodes)
+    
+        .. note::
+    
+            The high-resolution fsaverage will result in more computation
+            time and memory usage
+    
+
+
+load_fsaverage doc first lines:
+Load fsaverage for both hemispheres as PolyMesh objects.
+
+    .. versionadded:: 0.11.0
+
+    Parameters
+    ----------
+    mesh : :obj:`str`, default='fsaverage5'
+        Which :term:`mesh` to fetch.
+        Should be one of the following values:
+        
+    
+        - ``"fsaverage3"``: the low-resolution fsaverage3 mesh (642 nodes)
+        - ``"fsaverage4"``: the low-resolution fsaverage4 mesh (2562 nodes)
+        - ``"fsaverage5"``: the low-resolution fsaverage5 mesh (10242 nodes)
+        - ``"fsaverage6"``: the medium-resolution fsaverage6 mesh (40962 nodes)
+        - ``"fsaverage7"``: same as `"fsaverage"`
+        - ``"fsaverage"``: the high-resolution fsaverage mesh (163842 nodes)
+    
+        .. note::
+    
+            The high-resolution fsaverage will result in more computation
+            time and memory usage
+    
+
+    
+    data_dir : :obj:`pathlib.Path` or :obj:`str` or None, optional
+        Path where data should be downloaded.
+        By default, files are downloaded in a ``nilearn_data`` folder
+        in the home directory of the user.
+        See also ``nilearn.datasets.utils.get_data_dirs``.
