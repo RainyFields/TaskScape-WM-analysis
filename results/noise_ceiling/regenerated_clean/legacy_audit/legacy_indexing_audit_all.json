@@ -1,0 +1,11 @@
+{
+  "n_stored_records":50518.0,
+  "n_unique_physical_delay_betas_intended":3072.0,
+  "n_duplicate_records":47446.0,
+  "frac_duplicate_records":0.9391899917,
+  "n_wrong_column":19657.0,
+  "frac_wrong_column":0.3891088325,
+  "n_encoding_column":11644.0,
+  "frac_encoding_column":0.2304921018,
+  "n_other_trial_column":5525.0
+}

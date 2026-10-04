@@ -1,0 +1,21 @@
+{
+  "subject": "sub-05",
+  "aggregation": "task",
+  "unit": "network",
+  "apply_vertex_mask": true,
+  "apply_spearman_brown": true,
+  "n_bootstrap": 50,
+  "n_total_units": 12,
+  "n_valid_units": 12,
+  "n_nan_units": 0,
+  "n_negative": 2,
+  "n_positive": 10,
+  "ratio_negative": 0.16666666666666666,
+  "ratio_positive": 0.8333333333333334,
+  "positive_only_saved": true,
+  "mean_nc": 0.3251003623008728,
+  "median_nc": 0.43030300736427307,
+  "std_nc": 0.3465815782546997,
+  "min_nc": -0.4983043968677521,
+  "max_nc": 0.7371386885643005
+}

@@ -1,0 +1,150 @@
+{
+  "subject": "sub-03",
+  "aggregation": "task",
+  "unit": "network",
+  "stats": {
+    "subject": "sub-03",
+    "aggregation": "task",
+    "unit": "network",
+    "apply_vertex_mask": true,
+    "apply_spearman_brown": true,
+    "n_bootstrap": 50,
+    "n_total_units": 12,
+    "n_valid_units": 12,
+    "n_nan_units": 0,
+    "n_negative": 0,
+    "n_positive": 12,
+    "ratio_negative": 0.0,
+    "ratio_positive": 1.0,
+    "positive_only_saved": true,
+    "mean_nc": 0.6457772850990295,
+    "median_nc": 0.6667561531066895,
+    "std_nc": 0.14750628173351288,
+    "min_nc": 0.2932691276073456,
+    "max_nc": 0.8384472727775574,
+    "networks": [
+      {
+        "network_id": 1,
+        "name": "Net-1",
+        "noise_ceiling": 0.8384472727775574
+      },
+      {
+        "network_id": 2,
+        "name": "Net-2",
+        "noise_ceiling": 0.739546537399292
+      },
+      {
+        "network_id": 3,
+        "name": "Net-3",
+        "noise_ceiling": 0.6355854272842407
+      },
+      {
+        "network_id": 4,
+        "name": "Net-4",
+        "noise_ceiling": 0.2932691276073456
+      },
+      {
+        "network_id": 5,
+        "name": "Net-5",
+        "noise_ceiling": 0.7514435648918152
+      },
+      {
+        "network_id": 6,
+        "name": "Net-6",
+        "noise_ceiling": 0.7886333465576172
+      },
+      {
+        "network_id": 7,
+        "name": "Net-7",
+        "noise_ceiling": 0.5526096224784851
+      },
+      {
+        "network_id": 8,
+        "name": "Net-8",
+        "noise_ceiling": 0.6619921326637268
+      },
+      {
+        "network_id": 9,
+        "name": "Net-9",
+        "noise_ceiling": 0.775600790977478
+      },
+      {
+        "network_id": 10,
+        "name": "Net-10",
+        "noise_ceiling": 0.6715202331542969
+      },
+      {
+        "network_id": 11,
+        "name": "Net-11",
+        "noise_ceiling": 0.5459774136543274
+      },
+      {
+        "network_id": 12,
+        "name": "Net-12",
+        "noise_ceiling": 0.49470198154449463
+      }
+    ]
+  },
+  "networks": [
+    {
+      "network_id": 1,
+      "name": "Net-1",
+      "noise_ceiling": 0.8384472727775574
+    },
+    {
+      "network_id": 2,
+      "name": "Net-2",
+      "noise_ceiling": 0.739546537399292
+    },
+    {
+      "network_id": 3,
+      "name": "Net-3",
+      "noise_ceiling": 0.6355854272842407
+    },
+    {
+      "network_id": 4,
+      "name": "Net-4",
+      "noise_ceiling": 0.2932691276073456
+    },
+    {
+      "network_id": 5,
+      "name": "Net-5",
+      "noise_ceiling": 0.7514435648918152
+    },
+    {
+      "network_id": 6,
+      "name": "Net-6",
+      "noise_ceiling": 0.7886333465576172
+    },
+    {
+      "network_id": 7,
+      "name": "Net-7",
+      "noise_ceiling": 0.5526096224784851
+    },
+    {
+      "network_id": 8,
+      "name": "Net-8",
+      "noise_ceiling": 0.6619921326637268
+    },
+    {
+      "network_id": 9,
+      "name": "Net-9",
+      "noise_ceiling": 0.775600790977478
+    },
+    {
+      "network_id": 10,
+      "name": "Net-10",
+      "noise_ceiling": 0.6715202331542969
+    },
+    {
+      "network_id": 11,
+      "name": "Net-11",
+      "noise_ceiling": 0.5459774136543274
+    },
+    {
+      "network_id": 12,
+      "name": "Net-12",
+      "noise_ceiling": 0.49470198154449463
+    }
+  ]
+}

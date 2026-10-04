@@ -1,0 +1,13 @@
+subject,task_variant,n_runs,n_unique_delay_betas,n_trial_level_correct,n_extreme_p95_gt_100,n_legacy_multiplicity_2,half_floor,odd
+sub-03,ctxdm_col,16,868,684,15,548,434,False
+sub-03,ctxdm_lco,16,908,804,16,588,454,False
+sub-03,dms_loc,16,511,510,0,255,255,True
+sub-03,interdms_ctg_ABAB,5,305,284,1,225,152,True
+sub-03,interdms_ctg_ABBA,5,289,236,1,209,144,True
+sub-03,interdms_loc_ABAB,14,894,892,5,670,447,False
+sub-03,interdms_loc_ABBA,14,863,828,9,639,431,True
+sub-03,interdms_obj_ABAB,5,309,280,0,229,154,True
+sub-03,interdms_obj_ABBA,5,317,308,5,237,158,True
+sub-03,nback_ctg,2,108,108,1,90,54,False
+sub-03,nback_loc,12,644,624,2,536,322,False
+sub-03,nback_obj,2,82,54,1,64,41,False

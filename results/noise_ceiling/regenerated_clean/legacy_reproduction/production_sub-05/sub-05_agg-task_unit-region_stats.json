@@ -1,0 +1,21 @@
+{
+  "subject": "sub-05",
+  "aggregation": "task",
+  "unit": "region",
+  "apply_vertex_mask": true,
+  "apply_spearman_brown": true,
+  "n_bootstrap": 50,
+  "n_total_units": 360,
+  "n_valid_units": 360,
+  "n_nan_units": 0,
+  "n_negative": 132,
+  "n_positive": 228,
+  "ratio_negative": 0.36666666666666664,
+  "ratio_positive": 0.6333333333333333,
+  "positive_only_saved": true,
+  "mean_nc": 0.0725022554397583,
+  "median_nc": 0.21743007004261017,
+  "std_nc": 0.6029055714607239,
+  "min_nc": -1.0,
+  "max_nc": 0.9270897507667542
+}

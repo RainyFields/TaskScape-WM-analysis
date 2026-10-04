@@ -1,0 +1,50 @@
+{
+  "journal": "nature",
+  "span": "double",
+  "figsize_in": [
+    7.204724409448819,
+    4.960629921259843
+  ],
+  "panel_width_mm": 36.6,
+  "panel_height_mm": 42.0,
+  "histogram_bins": [
+    0.0,
+    0.05,
+    0.1,
+    0.15000000000000002,
+    0.2,
+    0.25,
+    0.30000000000000004,
+    0.35000000000000003,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6000000000000001,
+    0.65,
+    0.7000000000000001,
+    0.75,
+    0.8,
+    0.8500000000000001,
+    0.9,
+    0.9500000000000001,
+    1.0
+  ],
+  "color_scale_nc": [
+    0,
+    1
+  ],
+  "cmap": [
+    "#F7F7F7",
+    "#9BC8FA",
+    "#3775BA",
+    "#0F4D92",
+    "#0c2458"
+  ],
+  "histogram_annotation": "median, mean, and count of exact zeros",
+  "brain_view": "left and right lateral views in each map cell; zeros remain on the [0, 1] scale",
+  "primary_variant": "estimates/primary",
+  "seed": 20260926,
+  "n_iter": 50,
+  "png_dpi": 600
+}

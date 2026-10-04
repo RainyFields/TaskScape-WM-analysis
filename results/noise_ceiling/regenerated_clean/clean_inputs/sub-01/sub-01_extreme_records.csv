@@ -1,0 +1,12 @@
+record_id,session,run,bold_task,task_variant,trial_number,stim_order,trial_index,abs_beta_p50,abs_beta_p95,abs_beta_max,argmax_vertex,source_beta_file
+256,ses-001,run-01,interdms,interdms_ctg_ABBA,16,1,121,33.89089,120.39259,1114.5624,53505,data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-1_betas.h5
+539,ses-002,run-02,ctxdm,ctxdm_lco,16,1,91,43.69518,182.19867,1420.1562,53536,data/encoding_delay/trial_level_betas/sub-01/ses-002/func/sub-01_ses-002_task-ctxdm_run-2_betas.h5
+767,ses-002,run-03,interdms,interdms_ctg_ABAB,15,1,113,26.257582,103.15689,1234.156,53662,data/encoding_delay/trial_level_betas/sub-01/ses-002/func/sub-01_ses-002_task-interdms_run-3_betas.h5
+903,ses-003,run-02,ctxdm,ctxdm_lco,8,1,43,29.005127,120.90846,1151.9816,53533,data/encoding_delay/trial_level_betas/sub-01/ses-003/func/sub-01_ses-003_task-ctxdm_run-2_betas.h5
+1070,ses-003,run-02,interdms,interdms_loc_ABBA,10,1,73,31.147797,128.98665,1338.352,53639,data/encoding_delay/trial_level_betas/sub-01/ses-003/func/sub-01_ses-003_task-interdms_run-2_betas.h5
+3393,ses-010,run-01,1back,nback_loc,3,1,25,30.774525,131.629,465114.94,14842,data/encoding_delay/trial_level_betas/sub-01/ses-010/func/sub-01_ses-010_task-1back_run-1_betas.h5
+3469,ses-010,run-01,ctxdm,ctxdm_col,14,1,79,29.472694,107.46429,1169.79,53587,data/encoding_delay/trial_level_betas/sub-01/ses-010/func/sub-01_ses-010_task-ctxdm_run-1_betas.h5
+3694,ses-010,run-02,interdms,interdms_loc_ABAB,16,1,121,33.559174,134.06503,1583.3079,53563,data/encoding_delay/trial_level_betas/sub-01/ses-010/func/sub-01_ses-010_task-interdms_run-2_betas.h5
+5829,ses-016,run-02,ctxdm,ctxdm_col,19,1,109,112.888916,453.26422,4356.9434,53386,data/encoding_delay/trial_level_betas/sub-01/ses-016/func/sub-01_ses-016_task-ctxdm_run-2_betas.h5
+5830,ses-016,run-02,ctxdm,ctxdm_col,19,2,111,51.2847,205.2927,1977.2891,21122,data/encoding_delay/trial_level_betas/sub-01/ses-016/func/sub-01_ses-016_task-ctxdm_run-2_betas.h5
+5831,ses-016,run-02,ctxdm,ctxdm_col,20,1,115,32.181725,125.6003,1346.3182,53588,data/encoding_delay/trial_level_betas/sub-01/ses-016/func/sub-01_ses-016_task-ctxdm_run-2_betas.h5

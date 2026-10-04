@@ -1,0 +1,13 @@
+subject,task_variant,n_records_used,n_unique_physical,half_A_size_min,half_A_size_max,half_B_size_min,half_B_size_max,odd_count
+sub-02,dms_loc,512,512,256,256,256,256,False
+sub-02,nback_loc,642,642,321,321,321,321,False
+sub-02,nback_ctg,108,108,54,54,54,54,False
+sub-02,nback_obj,108,108,54,54,54,54,False
+sub-02,ctxdm_col,708,708,354,354,354,354,False
+sub-02,ctxdm_lco,828,828,414,414,414,414,False
+sub-02,interdms_loc_ABAB,888,888,444,444,444,444,False
+sub-02,interdms_loc_ABBA,868,868,434,434,434,434,False
+sub-02,interdms_obj_ABAB,316,316,158,158,158,158,False
+sub-02,interdms_obj_ABBA,320,320,160,160,160,160,False
+sub-02,interdms_ctg_ABAB,320,320,160,160,160,160,False
+sub-02,interdms_ctg_ABBA,316,316,158,158,158,158,False
