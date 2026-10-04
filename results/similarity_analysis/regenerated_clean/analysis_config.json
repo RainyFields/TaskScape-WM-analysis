@@ -1,0 +1,67 @@
+{
+  "base_seed": 20260926,
+  "n_splits": 50,
+  "split_seed": "SeedSequence([BASE_SEED, split, subject_index, task_index]) (task_index+100 for family-pooled)",
+  "session_scale_seed": 20260933,
+  "spatial_shuffle_seed": 20260937,
+  "task_shuffle_seed": 20260939,
+  "task_shuffle_permutation": [
+    6,
+    8,
+    1,
+    11,
+    5,
+    10,
+    2,
+    4,
+    3,
+    0,
+    9,
+    7
+  ],
+  "extreme_psc_record_p95_threshold": 100.0,
+  "baseline_floor": 1.0,
+  "n_vertices_excluded_robust": 3202,
+  "n_valid_vertices": 58396,
+  "affine_max_abs_dr": 7.450580596923828e-07,
+  "subjects": [
+    "sub-01",
+    "sub-02",
+    "sub-03",
+    "sub-05",
+    "sub-06"
+  ],
+  "tasks": [
+    "dms_loc",
+    "nback_loc",
+    "nback_ctg",
+    "nback_obj",
+    "interdms_loc_ABAB",
+    "interdms_loc_ABBA",
+    "interdms_ctg_ABAB",
+    "interdms_ctg_ABBA",
+    "interdms_obj_ABAB",
+    "interdms_obj_ABBA",
+    "ctxdm_lco",
+    "ctxdm_col"
+  ],
+  "families": [
+    "DMS",
+    "1-Back",
+    "InterDMS",
+    "CTXDM"
+  ],
+  "variants": [
+    "clean_verified",
+    "clean_lookup",
+    "clean_exclude_inconsistent",
+    "clean_behaviour_relabel",
+    "fixed_with_duplicates",
+    "legacy_pickle",
+    "clean_verified_familypooled",
+    "clean_verified_sessionscale",
+    "clean_verified_robust_psc"
+  ],
+  "network_aggregation": "unweighted mean of the 360 region means (production convention)",
+  "z_score": "per subject map, across units, ddof=0, +1e-8"
+}

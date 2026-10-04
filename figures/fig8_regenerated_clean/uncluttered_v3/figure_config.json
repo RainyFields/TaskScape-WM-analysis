@@ -1,0 +1,59 @@
+{
+  "variant": "clean_verified",
+  "includegraphics": "native canvas; optional width=\\textwidth would scale down",
+  "figure_width_mm": 364.0,
+  "textwidth_mm": 183.0,
+  "row_gap_mm": 16.0,
+  "pdf_mediabox_mm": [
+    366.95591666666667,
+    295.99995833333327
+  ],
+  "scale_on_page": 1.0,
+  "scale_if_textwidth": 0.4986975047638556,
+  "figsize_in": [
+    14.330708661417324,
+    11.653543307086615
+  ],
+  "fonts_drawn_pt": {
+    "title": 15.5,
+    "ylabel": 14.5,
+    "tick": 12.0,
+    "legend_title": 13.0,
+    "legend": 11.5,
+    "panel": 16.5,
+    "family_group": 12.0,
+    "sequence": 11.5
+  },
+  "fonts_effective_pt": {
+    "title": 15.5,
+    "ylabel": 14.5,
+    "tick": 12.0,
+    "legend_title": 13.0,
+    "legend": 11.5,
+    "panel": 16.5,
+    "family_group": 12.0,
+    "sequence": 11.5
+  },
+  "smallest_effective_pt": 11.5,
+  "ylim": {
+    "vertex": [
+      -0.8863860579147935,
+      1.12
+    ],
+    "region": [
+      -0.4712714666813612,
+      1.12
+    ],
+    "network": [
+      -0.5447148626446724,
+      1.12
+    ]
+  },
+  "n_negative": 48,
+  "family_colors": {
+    "DMS": "#377EB8",
+    "1-Back": "#FFD21F",
+    "InterDMS": "#A04A9B",
+    "CTXDM": "#4899A5"
+  }
+}

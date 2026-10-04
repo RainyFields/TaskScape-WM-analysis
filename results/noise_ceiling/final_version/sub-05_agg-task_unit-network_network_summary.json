@@ -12,76 +12,76 @@
     "n_total_units": 12,
     "n_valid_units": 12,
     "n_nan_units": 0,
-    "n_negative": 7,
-    "n_positive": 5,
-    "ratio_negative": 0.5833333333333334,
-    "ratio_positive": 0.4166666666666667,
+    "n_negative": 1,
+    "n_positive": 11,
+    "ratio_negative": 0.08333333333333333,
+    "ratio_positive": 0.9166666666666666,
     "positive_only_saved": true,
-    "mean_nc": -0.3098526895046234,
-    "median_nc": -0.13566067814826965,
-    "std_nc": 0.5574755072593689,
-    "min_nc": -1.0,
-    "max_nc": 0.40688416361808777,
+    "mean_nc": 0.511250376701355,
+    "median_nc": 0.5781400203704834,
+    "std_nc": 0.32441288232803345,
+    "min_nc": -0.267843633890152,
+    "max_nc": 0.8774509429931641,
     "networks": [
       {
         "network_id": 1,
         "name": "Net-1",
-        "noise_ceiling": -0.08449973165988922
+        "noise_ceiling": 0.4412720203399658
       },
       {
         "network_id": 2,
         "name": "Net-2",
-        "noise_ceiling": -0.18682163953781128
+        "noise_ceiling": 0.6600726246833801
       },
       {
         "network_id": 3,
         "name": "Net-3",
-        "noise_ceiling": 0.003729666816070676
+        "noise_ceiling": 0.8115226030349731
       },
       {
         "network_id": 4,
         "name": "Net-4",
-        "noise_ceiling": -1.0
+        "noise_ceiling": 0.3555360436439514
       },
       {
         "network_id": 5,
         "name": "Net-5",
-        "noise_ceiling": 0.095627062022686
+        "noise_ceiling": 0.8774509429931641
       },
       {
         "network_id": 6,
         "name": "Net-6",
-        "noise_ceiling": -0.6669098734855652
+        "noise_ceiling": 0.5429399013519287
       },
       {
         "network_id": 7,
         "name": "Net-7",
-        "noise_ceiling": -1.0
+        "noise_ceiling": 0.5699377655982971
       },
       {
         "network_id": 8,
         "name": "Net-8",
-        "noise_ceiling": 0.3045711815357208
+        "noise_ceiling": 0.8597889542579651
       },
       {
         "network_id": 9,
         "name": "Net-9",
-        "noise_ceiling": -0.9855634570121765
+        "noise_ceiling": -0.267843633890152
       },
       {
         "network_id": 10,
         "name": "Net-10",
-        "noise_ceiling": -1.0
+        "noise_ceiling": 0.5863422155380249
       },
       {
         "network_id": 11,
         "name": "Net-11",
-        "noise_ceiling": 0.394750714302063
+        "noise_ceiling": 0.035817380994558334
       },
       {
         "network_id": 12,
         "name": "Net-12",
-        "noise_ceiling": 0.40688416361808777
+        "noise_ceiling": 0.662168025970459
       }
     ]
   },
@@ -89,62 +89,62 @@
     {
       "network_id": 1,
       "name": "Net-1",
-      "noise_ceiling": -0.08449973165988922
+      "noise_ceiling": 0.4412720203399658
     },
     {
       "network_id": 2,
       "name": "Net-2",
-      "noise_ceiling": -0.18682163953781128
+      "noise_ceiling": 0.6600726246833801
     },
     {
       "network_id": 3,
       "name": "Net-3",
-      "noise_ceiling": 0.003729666816070676
+      "noise_ceiling": 0.8115226030349731
     },
     {
       "network_id": 4,
       "name": "Net-4",
-      "noise_ceiling": -1.0
+      "noise_ceiling": 0.3555360436439514
     },
     {
       "network_id": 5,
       "name": "Net-5",
-      "noise_ceiling": 0.095627062022686
+      "noise_ceiling": 0.8774509429931641
     },
     {
       "network_id": 6,
       "name": "Net-6",
-      "noise_ceiling": -0.6669098734855652
+      "noise_ceiling": 0.5429399013519287
     },
     {
       "network_id": 7,
       "name": "Net-7",
-      "noise_ceiling": -1.0
+      "noise_ceiling": 0.5699377655982971
     },
     {
       "network_id": 8,
       "name": "Net-8",
-      "noise_ceiling": 0.3045711815357208
+      "noise_ceiling": 0.8597889542579651
     },
     {
       "network_id": 9,
       "name": "Net-9",
-      "noise_ceiling": -0.9855634570121765
+      "noise_ceiling": -0.267843633890152
     },
     {
       "network_id": 10,
       "name": "Net-10",
-      "noise_ceiling": -1.0
+      "noise_ceiling": 0.5863422155380249
     },
     {
       "network_id": 11,
       "name": "Net-11",
-      "noise_ceiling": 0.394750714302063
+      "noise_ceiling": 0.035817380994558334
     },
     {
       "network_id": 12,
       "name": "Net-12",
-      "noise_ceiling": 0.40688416361808777
+      "noise_ceiling": 0.662168025970459
     }
   ]
 }

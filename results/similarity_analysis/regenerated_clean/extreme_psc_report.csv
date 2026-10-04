@@ -1,0 +1,6 @@
+subject,n_records,n_extreme_records,frac_extreme_records,n_vertices_low_baseline,median_vertex_min_baseline,vertex_max_abs_beta,vertex_max_abs_p50,runs_with_most_extreme_records
+sub-01,6034,11,0.002,2246,9099.8935546875,465114.9375,139.6444091796875,ses-016/run-02:3; ses-003/run-02:2; ses-010/run-01:2; ses-001/run-01:1; ses-002/run-02:1
+sub-02,6227,1,0.0,1687,9023.853515625,255870.234375,81.06826782226562,ses-013/run-02:1; ses-001/run-01:0; ses-001/run-03:0; ses-001/run-02:0; ses-002/run-02:0
+sub-03,6098,56,0.009,33,9039.97265625,4797.107421875,239.12908935546875,ses-005/run-01:5; ses-013/run-02:4; ses-014/run-02:4; ses-007/run-01:4; ses-012/run-01:4
+sub-05,5368,59,0.011,163,7059.451171875,281105.84375,1108.0291748046875,ses-012/run-03:10; ses-016/run-03:7; ses-005/run-01:5; ses-010/run-01:4; ses-002/run-02:3
+sub-06,6036,35,0.006,0,8896.83984375,2145.038818359375,179.6544189453125,ses-014/run-01:3; ses-007/run-03:3; ses-001/run-02:2; ses-001/run-03:2; ses-009/run-01:2

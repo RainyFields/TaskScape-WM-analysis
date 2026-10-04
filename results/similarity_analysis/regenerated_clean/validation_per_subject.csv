@@ -1,0 +1,6 @@
+subject,n_runs,n_glm_columns,n_delay_rows,retained,excluded_incorrect,legacy_records,duplicates_removed,runs_relabelled,runs_unresolved,vectors_checked,wrong_column,const_masked_vertices,abs_beta_p99_9,abs_beta_max,records_absbeta_gt100,cifti_axis_sha1
+sub-01,112,12736,6368,6034,334,10260,4226,0,0,6034,0,0,172.6,465114.9,3641,5da42bc458
+sub-02,112,12736,6368,6227,141,10646,4419,0,0,6227,0,0,117.03,255870.2,3166,5da42bc458
+sub-03,112,12736,6368,6098,270,10388,4290,0,0,6098,0,0,173.24,4797.1,3129,5da42bc458
+sub-05,110,12544,6272,5368,904,8960,3592,0,0,5368,0,0,240.65,281105.8,2840,5da42bc458
+sub-06,112,12736,6368,6036,332,10264,4228,2,0,6036,0,0,158.13,2145.0,3174,5da42bc458

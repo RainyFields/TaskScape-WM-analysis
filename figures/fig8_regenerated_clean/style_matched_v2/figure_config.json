@@ -1,0 +1,69 @@
+{
+  "variant": "clean_verified",
+  "figsize_in": [
+    7.5,
+    9.3
+  ],
+  "ylim": [
+    -0.8914035977974535,
+    1.05
+  ],
+  "n_subject_level_points": 360,
+  "n_negative": 48,
+  "tasks": [
+    "dms_loc",
+    "nback_loc",
+    "nback_ctg",
+    "nback_obj",
+    "interdms_loc_ABAB",
+    "interdms_loc_ABBA",
+    "interdms_ctg_ABAB",
+    "interdms_ctg_ABBA",
+    "interdms_obj_ABAB",
+    "interdms_obj_ABBA",
+    "ctxdm_lco",
+    "ctxdm_col"
+  ],
+  "subjects": [
+    "sub-01",
+    "sub-02",
+    "sub-03",
+    "sub-05",
+    "sub-06"
+  ],
+  "family_colors": {
+    "DMS": "#377EB8",
+    "1-Back": "#FFD21F",
+    "InterDMS": "#A04A9B",
+    "CTXDM": "#4899A5"
+  },
+  "across_face": "#D0D0D0",
+  "fonts": {
+    "font.family": "sans-serif",
+    "font.sans-serif": [
+      "Arial",
+      "Helvetica",
+      "DejaVu Sans"
+    ],
+    "font.size": 13,
+    "axes.titlesize": 16,
+    "axes.labelsize": 15,
+    "xtick.labelsize": 12,
+    "ytick.labelsize": 13,
+    "legend.fontsize": 12.5,
+    "legend.title_fontsize": 14,
+    "axes.linewidth": 1.4,
+    "xtick.major.width": 1.2,
+    "ytick.major.width": 1.2,
+    "xtick.major.size": 4.5,
+    "ytick.major.size": 4.5,
+    "xtick.direction": "out",
+    "ytick.direction": "out",
+    "pdf.fonttype": 42,
+    "ps.fonttype": 42,
+    "savefig.dpi": 600,
+    "savefig.facecolor": "white",
+    "savefig.edgecolor": "white",
+    "savefig.transparent": false
+  }
+}

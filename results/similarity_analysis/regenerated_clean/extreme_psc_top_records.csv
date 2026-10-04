@@ -1,0 +1,101 @@
+subject,session,run,task_variant,trial_number,stim_order,record_id,abs_beta_max,abs_beta_p95,abs_beta_p50,argmax_vertex,argmax_vertex_min_psc_baseline,likely_origin
+sub-01,ses-010,run-01,nback_loc,3,1,3393,465114.94,131.629,30.774525,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,3,2,3394,161609.81,48.89482,11.512907,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,7,1,3417,143324.72,50.33772,12.543392,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-005,run-01,nback_ctg,7,1,1565,115296.82,49.466255,10.10883,61052,0.08375784754753113,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,7,2,3418,92802.836,25.81654,6.568963,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,8,1,3423,88366.96,42.441372,10.192909,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,2,5,3391,81116.97,9.339098,2.5674398,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-005,run-01,nback_ctg,8,1,1568,73145.01,63.96979,13.093516,61052,0.08375784754753113,near-zero PSC baseline at vertex
+sub-01,ses-005,run-01,nback_ctg,9,1,1573,71882.766,59.21069,11.366952,61052,0.08375784754753113,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,1,1,3381,67865.59,47.928917,11.251289,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,6,1,3411,66381.0,47.657032,11.210068,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,2,1,3387,45489.94,51.576004,12.353991,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,3,4,3396,39685.547,10.991848,2.6686308,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-011,run-01,nback_ctg,2,1,3767,39375.395,50.37687,12.520626,61180,-24.90700340270996,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,1,2,3382,37896.94,23.944057,5.499197,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,2,6,3392,36707.703,8.524366,2.1423707,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-011,run-01,nback_ctg,3,1,3773,34932.133,49.30256,12.01646,61180,-24.90700340270996,near-zero PSC baseline at vertex
+sub-01,ses-010,run-01,nback_loc,2,2,3388,34311.777,11.493238,2.7639956,14842,-0.0003824713930953294,near-zero PSC baseline at vertex
+sub-01,ses-005,run-01,nback_ctg,2,1,1539,31556.508,52.622112,10.383416,37850,0.0009516249992884696,near-zero PSC baseline at vertex
+sub-01,ses-005,run-01,nback_ctg,3,1,1545,30881.75,49.80065,9.671139,61052,0.08375784754753113,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,2,1,3505,255870.23,88.41188,16.23619,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,3,1,3511,102982.54,58.56504,11.867308,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,8,1,3541,102146.94,54.616226,9.991299,39130,4.902673026663251e-05,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,1,2,3500,91124.78,36.60307,6.7822304,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,7,2,3536,85854.12,29.651857,6.37961,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,4,3,3519,82249.125,16.285465,2.956184,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,1,1,3499,79650.06,76.31766,13.7532425,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,2,5,3509,78913.21,12.742311,2.491767,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,9,2,3548,72514.4,26.186525,5.6785374,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,6,1,3529,66389.625,56.301983,10.560963,39130,4.902673026663251e-05,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,2,2,3506,64052.945,19.813793,3.426093,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,1,6,3504,60307.42,24.288279,4.4558315,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,7,4,3538,60168.63,14.390825,2.497665,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,9,1,3547,58855.695,58.749115,11.941811,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,5,2,3524,58816.707,15.4735775,3.0013282,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,7,1,3535,54639.145,58.556137,12.688288,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,1,3,3501,52238.754,18.451609,2.8079157,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,5,1,3523,49367.09,54.87807,11.150041,39130,4.902673026663251e-05,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,6,6,3534,48152.55,12.224281,2.5382638,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-02,ses-010,run-01,nback_loc,2,3,3507,44647.043,13.4763,2.3300667,5595,-1.2153142279203166e-06,near-zero PSC baseline at vertex
+sub-03,ses-009,run-01,nback_loc,9,1,3088,4797.1074,221.75456,61.19283,12449,5.323326110839844,trial-level noise / spike (baseline normal)
+sub-03,ses-005,run-01,ctxdm_lco,19,1,1628,4342.6562,572.83777,142.70215,53555,568.6342163085938,trial-level noise / spike (baseline normal)
+sub-03,ses-010,run-01,nback_loc,8,1,3466,4037.8032,335.02936,94.09813,22068,-0.00013141121598891914,near-zero PSC baseline at vertex
+sub-03,ses-014,run-02,ctxdm_col,14,1,5090,3925.3396,252.61165,65.71245,20942,335.8665466308594,trial-level noise / spike (baseline normal)
+sub-03,ses-007,run-01,nback_loc,9,1,2322,3737.2305,43.902737,12.042664,12356,0.8300167322158813,near-zero PSC baseline at vertex
+sub-03,ses-016,run-01,ctxdm_lco,11,1,5791,3651.5083,139.45541,43.662426,22068,-0.00013141121598891914,near-zero PSC baseline at vertex
+sub-03,ses-010,run-03,interdms_loc_ABBA,2,1,3753,3396.828,142.197,43.34098,22208,32.836334228515625,trial-level noise / spike (baseline normal)
+sub-03,ses-012,run-01,ctxdm_col,9,1,4256,3149.7063,314.30994,85.56783,21715,9.743003845214844,trial-level noise / spike (baseline normal)
+sub-03,ses-013,run-02,interdms_loc_ABBA,9,1,4850,3068.3945,270.12244,74.15268,53480,820.6334838867188,trial-level noise / spike (baseline normal)
+sub-03,ses-002,run-02,ctxdm_lco,10,1,484,2728.8787,273.5069,78.1897,21064,669.913818359375,trial-level noise / spike (baseline normal)
+sub-03,ses-012,run-03,interdms_obj_ABBA,7,1,4531,2300.2986,277.91754,79.36479,53634,589.611083984375,trial-level noise / spike (baseline normal)
+sub-03,ses-009,run-01,nback_loc,9,2,3089,2137.8972,83.33598,22.694431,38504,5.344571113586426,trial-level noise / spike (baseline normal)
+sub-03,ses-016,run-01,ctxdm_lco,4,1,5771,2112.886,173.61432,44.94912,21819,13.150516510009766,trial-level noise / spike (baseline normal)
+sub-03,ses-012,run-01,ctxdm_col,19,1,4285,2018.7853,129.1782,33.15605,22016,97.06137084960938,trial-level noise / spike (baseline normal)
+sub-03,ses-005,run-01,ctxdm_lco,19,2,1629,1995.0531,265.80045,66.38751,53555,568.6342163085938,trial-level noise / spike (baseline normal)
+sub-03,ses-004,run-01,ctxdm_lco,19,1,1239,1948.4275,268.44797,71.9512,53662,763.6138916015625,trial-level noise / spike (baseline normal)
+sub-03,ses-005,run-02,ctxdm_lco,17,1,1680,1922.0364,194.44069,55.139915,53825,831.4661254882812,trial-level noise / spike (baseline normal)
+sub-03,ses-012,run-01,ctxdm_col,16,1,4276,1909.8329,47.472263,12.172747,21716,15.480902671813965,trial-level noise / spike (baseline normal)
+sub-03,ses-005,run-01,interdms_obj_ABBA,11,1,1762,1814.8048,174.23076,46.949844,19847,878.7324829101562,trial-level noise / spike (baseline normal)
+sub-03,ses-016,run-02,interdms_loc_ABBA,6,1,5991,1797.4773,49.899334,12.550982,22164,0.10687512159347534,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,6,1,893,281105.84,39.755352,9.889049,3532,-5.027742008678615e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,ctxdm_lco,8,1,922,74156.17,141.52428,39.28016,36084,0.0015267557464540005,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,2,1,887,73905.5,55.907013,14.932924,3532,-5.027742008678615e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,5,1,892,34417.07,47.48386,13.265403,3532,-5.027742008678615e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,9,1,899,27677.219,41.65795,11.224865,3532,-5.027742008678615e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,8,1,897,24612.828,79.42251,24.213665,36027,4.261396679794416e-05,near-zero PSC baseline at vertex
+sub-05,ses-016,run-03,interdms_ctg_ABAB,16,1,5364,23891.479,3777.7175,1079.8799,22033,950.4905395507812,trial-level noise / spike (baseline normal)
+sub-05,ses-004,run-01,nback_loc,1,6,886,21849.03,12.935,3.576388,3532,-5.027742008678615e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,ctxdm_lco,10,1,928,17778.35,57.268955,15.892063,36084,0.0015267557464540005,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,ctxdm_lco,5,1,913,16800.58,53.986294,14.666943,36084,0.0015267557464540005,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,3,1,888,16579.96,38.373512,10.114377,3532,-5.027742008678615e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,1,1,885,13174.701,47.063454,12.153927,3532,-5.027742008678615e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,7,6,896,13067.492,17.031597,5.2068233,3532,-5.027742008678615e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,4,1,890,11904.829,36.28267,9.8850765,3532,-5.027742008678615e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,ctxdm_lco,11,1,931,11151.334,106.45061,28.072823,12404,0.013451824896037579,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,ctxdm_lco,13,1,937,10941.766,54.385002,15.033895,36084,0.0015267557464540005,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,7,1,895,9358.144,42.489635,10.985849,36027,4.261396679794416e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,ctxdm_lco,15,1,943,8735.138,45.48835,11.59482,36084,0.0015267557464540005,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,nback_loc,4,6,891,8520.12,13.275444,3.8060358,3532,-5.027742008678615e-05,near-zero PSC baseline at vertex
+sub-05,ses-004,run-01,ctxdm_lco,10,2,929,8511.462,31.464207,8.833984,36084,0.0015267557464540005,near-zero PSC baseline at vertex
+sub-06,ses-004,run-01,ctxdm_lco,17,1,1273,2145.0388,358.89423,98.92029,22303,817.8583984375,trial-level noise / spike (baseline normal)
+sub-06,ses-007,run-03,interdms_loc_ABAB,5,1,2646,1914.7927,306.24615,85.96353,63567,8938.7998046875,trial-level noise / spike (baseline normal)
+sub-06,ses-010,run-02,ctxdm_lco,2,1,3539,1659.8416,198.22173,52.42665,22378,866.0587158203125,trial-level noise / spike (baseline normal)
+sub-06,ses-011,run-02,interdms_loc_ABAB,1,1,4081,1615.4608,126.04181,35.935272,54436,825.061767578125,trial-level noise / spike (baseline normal)
+sub-06,ses-016,run-02,ctxdm_col,9,1,5844,1560.7611,194.10658,52.94201,54753,741.6021728515625,trial-level noise / spike (baseline normal)
+sub-06,ses-009,run-01,ctxdm_col,4,1,3108,1380.964,215.59145,57.871887,54751,764.9632568359375,trial-level noise / spike (baseline normal)
+sub-06,ses-001,run-02,ctxdm_lco,20,1,164,1336.3748,205.76756,57.343506,54755,805.66455078125,trial-level noise / spike (baseline normal)
+sub-06,ses-003,run-02,ctxdm_lco,19,1,942,1322.237,179.98099,48.792664,21094,860.2137451171875,trial-level noise / spike (baseline normal)
+sub-06,ses-015,run-01,ctxdm_col,8,1,5392,1320.609,208.43636,57.114773,54437,802.8032836914062,trial-level noise / spike (baseline normal)
+sub-06,ses-010,run-02,ctxdm_lco,17,1,3581,1289.4939,169.64145,46.081177,54337,876.9090576171875,trial-level noise / spike (baseline normal)
+sub-06,ses-013,run-02,ctxdm_lco,8,1,4726,1253.4652,110.25928,30.440853,53559,1079.180908203125,trial-level noise / spike (baseline normal)
+sub-06,ses-005,run-03,interdms_loc_ABAB,2,1,1884,1218.0856,173.05879,48.949806,54485,802.4080810546875,trial-level noise / spike (baseline normal)
+sub-06,ses-007,run-02,interdms_loc_ABBA,2,1,2578,1198.7842,153.57059,42.50563,22341,811.5443725585938,trial-level noise / spike (baseline normal)
+sub-06,ses-005,run-01,ctxdm_lco,11,1,1637,1163.7986,158.08987,43.325314,53635,778.70751953125,trial-level noise / spike (baseline normal)
+sub-06,ses-001,run-02,ctxdm_lco,19,1,161,1148.2091,155.97069,44.567215,54436,825.061767578125,trial-level noise / spike (baseline normal)
+sub-06,ses-011,run-01,interdms_loc_ABBA,7,1,4041,1127.5787,100.69297,29.150131,53586,954.9420776367188,trial-level noise / spike (baseline normal)
+sub-06,ses-014,run-03,interdms_loc_ABBA,12,1,5298,1104.2544,128.91602,36.432495,21063,840.6507568359375,trial-level noise / spike (baseline normal)
+sub-06,ses-014,run-01,ctxdm_lco,10,1,5020,1093.9089,110.69064,28.788551,54382,1044.9046630859375,trial-level noise / spike (baseline normal)
+sub-06,ses-007,run-03,interdms_loc_ABAB,1,1,2638,1093.1161,149.96034,40.36532,63567,8938.7998046875,trial-level noise / spike (baseline normal)
+sub-06,ses-009,run-01,interdms_obj_ABAB,15,1,3296,1085.9579,138.77563,37.769478,54626,780.2490234375,trial-level noise / spike (baseline normal)

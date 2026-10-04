@@ -1,0 +1,361 @@
+spatial_resolution,task,task_family,subject,comparison,r,n_pairs,task_label,axis_label,variant,aggregation
+network,ctxdm_col,CTXDM,sub-01,within,-0.272454542890191,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+network,ctxdm_col,CTXDM,sub-02,within,0.5227835932001471,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+network,ctxdm_col,CTXDM,sub-03,within,0.3271521148830652,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+network,ctxdm_col,CTXDM,sub-05,within,-0.4313838443160057,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+network,ctxdm_col,CTXDM,sub-06,within,0.6948881608247757,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+network,ctxdm_lco,CTXDM,sub-01,within,-0.0906671964097768,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+network,ctxdm_lco,CTXDM,sub-02,within,0.3877615873888135,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+network,ctxdm_lco,CTXDM,sub-03,within,0.7046862971782685,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+network,ctxdm_lco,CTXDM,sub-05,within,-0.1325931884907186,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+network,ctxdm_lco,CTXDM,sub-06,within,0.5672191961109638,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+network,dms_loc,DMS,sub-01,within,0.8953019714355469,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+network,dms_loc,DMS,sub-02,within,0.978834946155548,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+network,dms_loc,DMS,sub-03,within,0.9673264217376708,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+network,dms_loc,DMS,sub-05,within,0.7844685220718384,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+network,dms_loc,DMS,sub-06,within,0.985253884792328,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_ctg_ABAB,InterDMS,sub-01,within,0.2830481914710253,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_ctg_ABAB,InterDMS,sub-02,within,0.6545499047636986,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_ctg_ABAB,InterDMS,sub-03,within,0.3814208601787686,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_ctg_ABAB,InterDMS,sub-05,within,0.1380359346419573,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_ctg_ABAB,InterDMS,sub-06,within,0.582953272908926,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_ctg_ABBA,InterDMS,sub-01,within,0.2304823438078165,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_ctg_ABBA,InterDMS,sub-02,within,0.5782509886636399,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_ctg_ABBA,InterDMS,sub-03,within,0.5336089248210192,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_ctg_ABBA,InterDMS,sub-05,within,-0.0178625904535874,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_ctg_ABBA,InterDMS,sub-06,within,0.7836589300632477,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_loc_ABAB,InterDMS,sub-01,within,0.2452243157289922,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_loc_ABAB,InterDMS,sub-02,within,0.8443621826171875,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_loc_ABAB,InterDMS,sub-03,within,0.7628997159004212,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_loc_ABAB,InterDMS,sub-05,within,0.4031016124039888,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_loc_ABAB,InterDMS,sub-06,within,0.7310531198978424,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_loc_ABBA,InterDMS,sub-01,within,0.2340861220471561,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_loc_ABBA,InterDMS,sub-02,within,0.8650070679187775,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_loc_ABBA,InterDMS,sub-03,within,0.795052547454834,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_loc_ABBA,InterDMS,sub-05,within,0.4629143182002008,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_loc_ABBA,InterDMS,sub-06,within,0.6446014192700386,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_obj_ABAB,InterDMS,sub-01,within,0.220329920835793,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_obj_ABAB,InterDMS,sub-02,within,0.8085574698448181,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_obj_ABAB,InterDMS,sub-03,within,0.6229283875226974,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_obj_ABAB,InterDMS,sub-05,within,0.2200858640205115,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_obj_ABAB,InterDMS,sub-06,within,0.7493354359269142,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_obj_ABBA,InterDMS,sub-01,within,0.1385801030695438,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_obj_ABBA,InterDMS,sub-02,within,0.5061002476885915,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_obj_ABBA,InterDMS,sub-03,within,0.2374354333616793,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_obj_ABBA,InterDMS,sub-05,within,-0.3860876594204455,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,interdms_obj_ABBA,InterDMS,sub-06,within,0.7978323709964752,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_ctg,1-Back,sub-01,within,0.2078658238239586,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_ctg,1-Back,sub-02,within,0.5294017335050739,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_ctg,1-Back,sub-03,within,0.2428526878450065,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_ctg,1-Back,sub-05,within,0.0649464690964669,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_ctg,1-Back,sub-06,within,0.5547626894712449,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_loc,1-Back,sub-01,within,0.406039812862873,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_loc,1-Back,sub-02,within,0.7585261323582381,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_loc,1-Back,sub-03,within,0.8102335202693939,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_loc,1-Back,sub-05,within,0.2359381328430027,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_loc,1-Back,sub-06,within,0.8470126211643219,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_obj,1-Back,sub-01,within,0.1118810935877263,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_obj,1-Back,sub-02,within,0.453432937306352,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_obj,1-Back,sub-03,within,0.0078779266029596,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_obj,1-Back,sub-05,within,0.1607368852593936,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+network,nback_obj,1-Back,sub-06,within,0.6285714709758758,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,ctxdm_col,CTXDM,sub-01,within,0.023425717530772,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+region,ctxdm_col,CTXDM,sub-02,within,0.2344898033514618,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+region,ctxdm_col,CTXDM,sub-03,within,0.2290525257587433,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+region,ctxdm_col,CTXDM,sub-05,within,0.0591681798081845,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+region,ctxdm_col,CTXDM,sub-06,within,0.3349513976275921,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+region,ctxdm_lco,CTXDM,sub-01,within,0.0913751639705151,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+region,ctxdm_lco,CTXDM,sub-02,within,0.3129136011004448,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+region,ctxdm_lco,CTXDM,sub-03,within,0.2322907935082912,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+region,ctxdm_lco,CTXDM,sub-05,within,-0.0681403220817446,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+region,ctxdm_lco,CTXDM,sub-06,within,0.533092999458313,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+region,dms_loc,DMS,sub-01,within,0.818761385679245,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+region,dms_loc,DMS,sub-02,within,0.9323892378807068,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+region,dms_loc,DMS,sub-03,within,0.928536193370819,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+region,dms_loc,DMS,sub-05,within,0.8096288704872131,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+region,dms_loc,DMS,sub-06,within,0.9603020799160004,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_ctg_ABAB,InterDMS,sub-01,within,0.1306562048825435,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_ctg_ABAB,InterDMS,sub-02,within,0.1719050407782197,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_ctg_ABAB,InterDMS,sub-03,within,0.3795139715075493,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_ctg_ABAB,InterDMS,sub-05,within,0.1435628475714475,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_ctg_ABAB,InterDMS,sub-06,within,0.3599865388870239,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_ctg_ABBA,InterDMS,sub-01,within,0.2509894346818327,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_ctg_ABBA,InterDMS,sub-02,within,0.3507552716135979,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_ctg_ABBA,InterDMS,sub-03,within,0.3281597366929054,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_ctg_ABBA,InterDMS,sub-05,within,0.0593449843116104,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_ctg_ABBA,InterDMS,sub-06,within,0.5664874729514122,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_loc_ABAB,InterDMS,sub-01,within,0.2130282282084226,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_loc_ABAB,InterDMS,sub-02,within,0.6994893729686738,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_loc_ABAB,InterDMS,sub-03,within,0.4622714310884476,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_loc_ABAB,InterDMS,sub-05,within,0.254004483204335,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_loc_ABAB,InterDMS,sub-06,within,0.4904604125022888,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_loc_ABBA,InterDMS,sub-01,within,0.1218369970610365,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_loc_ABBA,InterDMS,sub-02,within,0.5340291303396225,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_loc_ABBA,InterDMS,sub-03,within,0.4037017023563385,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_loc_ABBA,InterDMS,sub-05,within,0.3058221275359392,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_loc_ABBA,InterDMS,sub-06,within,0.5245815730094909,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_obj_ABAB,InterDMS,sub-01,within,0.4306024146080017,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_obj_ABAB,InterDMS,sub-02,within,0.4920821607112884,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_obj_ABAB,InterDMS,sub-03,within,0.4189599305391311,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_obj_ABAB,InterDMS,sub-05,within,0.1977075449563562,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_obj_ABAB,InterDMS,sub-06,within,0.4896307981014252,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_obj_ABBA,InterDMS,sub-01,within,0.305976461302489,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_obj_ABBA,InterDMS,sub-02,within,0.3435294806957245,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_obj_ABBA,InterDMS,sub-03,within,0.2120410153269767,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_obj_ABBA,InterDMS,sub-05,within,-0.3652289817482233,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,interdms_obj_ABBA,InterDMS,sub-06,within,0.5601074922084809,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_ctg,1-Back,sub-01,within,0.1244040303304791,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_ctg,1-Back,sub-02,within,0.2866977626085281,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_ctg,1-Back,sub-03,within,0.4756622704863548,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_ctg,1-Back,sub-05,within,-0.0719583637919277,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_ctg,1-Back,sub-06,within,0.3551015362143516,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_loc,1-Back,sub-01,within,-0.1826445124857127,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_loc,1-Back,sub-02,within,0.8584859186410904,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_loc,1-Back,sub-03,within,0.5672442799806595,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_loc,1-Back,sub-05,within,0.2428286639228463,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_loc,1-Back,sub-06,within,0.7322937250137329,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_obj,1-Back,sub-01,within,-0.1541115462966263,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_obj,1-Back,sub-02,within,0.2081047656200826,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_obj,1-Back,sub-03,within,0.0101527929026633,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_obj,1-Back,sub-05,within,0.2897508854046464,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+region,nback_obj,1-Back,sub-06,within,0.5155344974249602,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,ctxdm_col,CTXDM,sub-01,within,-0.0306269094673916,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,ctxdm_col,CTXDM,sub-02,within,0.1016415650956332,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,ctxdm_col,CTXDM,sub-03,within,0.0371831099269911,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,ctxdm_col,CTXDM,sub-05,within,-0.0055327362183015,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,ctxdm_col,CTXDM,sub-06,within,0.2231696301698684,,CTXDM CIL,CIL,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,ctxdm_lco,CTXDM,sub-01,within,0.0571013333392329,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,ctxdm_lco,CTXDM,sub-02,within,0.2033463866263628,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,ctxdm_lco,CTXDM,sub-03,within,-0.033695474085398,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,ctxdm_lco,CTXDM,sub-05,within,0.1349745074287057,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,ctxdm_lco,CTXDM,sub-06,within,0.3395649713277817,,CTXDM LCI,LCI,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,dms_loc,DMS,sub-01,within,0.7587328135967255,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,dms_loc,DMS,sub-02,within,0.8882009172439576,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,dms_loc,DMS,sub-03,within,0.8542612814903259,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,dms_loc,DMS,sub-05,within,0.7585364890098572,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,dms_loc,DMS,sub-06,within,0.9225346362590788,,DMS,DMS,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_ctg_ABAB,InterDMS,sub-01,within,0.1266788417845964,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_ctg_ABAB,InterDMS,sub-02,within,0.1476984962169081,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_ctg_ABAB,InterDMS,sub-03,within,0.2322006443142891,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_ctg_ABAB,InterDMS,sub-05,within,0.0649884383380413,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_ctg_ABAB,InterDMS,sub-06,within,0.2694373166561126,,InterDMS category ABAB,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_ctg_ABBA,InterDMS,sub-01,within,0.0631835211929865,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_ctg_ABBA,InterDMS,sub-02,within,0.1355220528898644,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_ctg_ABBA,InterDMS,sub-03,within,0.1592615972505882,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_ctg_ABBA,InterDMS,sub-05,within,-0.0444082695618271,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_ctg_ABBA,InterDMS,sub-06,within,0.4435464382171631,,InterDMS category ABBA,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_loc_ABAB,InterDMS,sub-01,within,0.1280250206030905,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_loc_ABAB,InterDMS,sub-02,within,0.5441042882204056,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_loc_ABAB,InterDMS,sub-03,within,0.2033749797195196,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_loc_ABAB,InterDMS,sub-05,within,0.0758467726013623,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_loc_ABAB,InterDMS,sub-06,within,0.3514414313435554,,InterDMS location ABAB,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_loc_ABBA,InterDMS,sub-01,within,0.1234461475349962,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_loc_ABBA,InterDMS,sub-02,within,0.3857862603664398,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_loc_ABBA,InterDMS,sub-03,within,0.1940722922980785,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_loc_ABBA,InterDMS,sub-05,within,0.2052355378866195,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_loc_ABBA,InterDMS,sub-06,within,0.3971090674400329,,InterDMS location ABBA,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_obj_ABAB,InterDMS,sub-01,within,0.3638081055879593,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_obj_ABAB,InterDMS,sub-02,within,0.3898234164714813,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_obj_ABAB,InterDMS,sub-03,within,0.1901350076496601,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_obj_ABAB,InterDMS,sub-05,within,0.1643987696431577,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_obj_ABAB,InterDMS,sub-06,within,0.3156031170487404,,InterDMS identity ABAB,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_obj_ABBA,InterDMS,sub-01,within,0.2625557525455951,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_obj_ABBA,InterDMS,sub-02,within,0.3014437964558601,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_obj_ABBA,InterDMS,sub-03,within,-0.0051407247548922,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_obj_ABBA,InterDMS,sub-05,within,-0.2922738810908049,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,interdms_obj_ABBA,InterDMS,sub-06,within,0.3799180126190185,,InterDMS identity ABBA,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_ctg,1-Back,sub-01,within,-0.2861740830913186,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_ctg,1-Back,sub-02,within,0.236055341809988,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_ctg,1-Back,sub-03,within,0.3505462750792503,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_ctg,1-Back,sub-05,within,-0.116544934224803,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_ctg,1-Back,sub-06,within,0.3100386139191687,,1-Back category,ctg,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_loc,1-Back,sub-01,within,-0.7523919324204326,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_loc,1-Back,sub-02,within,0.7930066342651844,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_loc,1-Back,sub-03,within,0.3080344712734222,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_loc,1-Back,sub-05,within,0.0564996063150465,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_loc,1-Back,sub-06,within,0.5596124160289765,,1-Back location,loc,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_obj,1-Back,sub-01,within,-0.0308262607513461,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_obj,1-Back,sub-02,within,0.2909933564811945,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_obj,1-Back,sub-03,within,0.0541409358149394,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_obj,1-Back,sub-05,within,0.2488387853652238,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,nback_obj,1-Back,sub-06,within,0.5084783962368965,,1-Back identity,id,clean_verified,mean of 50 random split-half diagonals for this subject
+vertex,dms_loc,DMS,sub-01,across,-0.034676661915145804,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,dms_loc,DMS,sub-02,across,0.05366807969287037,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,dms_loc,DMS,sub-03,across,0.08651813699398188,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,dms_loc,DMS,sub-05,across,-0.013812958104535925,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,dms_loc,DMS,sub-06,across,0.049200005549937476,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_loc,1-Back,sub-01,across,0.0031589703968984504,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_loc,1-Back,sub-02,across,-1.8330886096024242e-05,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_loc,1-Back,sub-03,across,0.03502024974775845,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_loc,1-Back,sub-05,across,0.0087406950590957,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_loc,1-Back,sub-06,across,0.026644277343875724,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_ctg,1-Back,sub-01,across,0.0030642306724621322,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_ctg,1-Back,sub-02,across,-0.0042456712620333,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_ctg,1-Back,sub-03,across,0.0094602750823833,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_ctg,1-Back,sub-05,across,-0.0026680564477283,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_ctg,1-Back,sub-06,across,0.006088818442658534,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_obj,1-Back,sub-01,across,0.0014184055221994748,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_obj,1-Back,sub-02,across,0.010075737222505276,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_obj,1-Back,sub-03,across,0.0044275862388895,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_obj,1-Back,sub-05,across,-0.0102189350727712,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,nback_obj,1-Back,sub-06,across,0.016083313439812598,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_loc_ABAB,InterDMS,sub-01,across,0.0491976571141276,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_loc_ABAB,InterDMS,sub-02,across,0.03880911648448088,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_loc_ABAB,InterDMS,sub-03,across,0.0262994242296554,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_loc_ABAB,InterDMS,sub-05,across,0.02521581199776845,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_loc_ABAB,InterDMS,sub-06,across,0.06599367220886049,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_loc_ABBA,InterDMS,sub-01,across,0.013511717219371298,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_loc_ABBA,InterDMS,sub-02,across,0.035252037481404826,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_loc_ABBA,InterDMS,sub-03,across,0.029666632873704628,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_loc_ABBA,InterDMS,sub-05,across,0.027847196840448275,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_loc_ABBA,InterDMS,sub-06,across,0.05761008857283737,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_ctg_ABAB,InterDMS,sub-01,across,0.0051365107443416495,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_ctg_ABAB,InterDMS,sub-02,across,0.016925062821537724,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_ctg_ABAB,InterDMS,sub-03,across,0.0230630107127945,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_ctg_ABAB,InterDMS,sub-05,across,-0.011106569902622074,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_ctg_ABAB,InterDMS,sub-06,across,0.00927573339664375,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_ctg_ABBA,InterDMS,sub-01,across,0.015208652504079451,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_ctg_ABBA,InterDMS,sub-02,across,0.0331609332497464,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_ctg_ABBA,InterDMS,sub-03,across,0.04317445524269713,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_ctg_ABBA,InterDMS,sub-05,across,0.01677496649383097,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_ctg_ABBA,InterDMS,sub-06,across,0.039148886623151996,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_obj_ABAB,InterDMS,sub-01,across,0.020052413971861825,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_obj_ABAB,InterDMS,sub-02,across,0.0077720540895825484,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_obj_ABAB,InterDMS,sub-03,across,0.021211737788398726,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_obj_ABAB,InterDMS,sub-05,across,0.015294634611345824,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_obj_ABAB,InterDMS,sub-06,across,0.04197997791692613,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_obj_ABBA,InterDMS,sub-01,across,-0.0024389248003717752,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_obj_ABBA,InterDMS,sub-02,across,0.009482228255656025,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_obj_ABBA,InterDMS,sub-03,across,0.01260382605833,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_obj_ABBA,InterDMS,sub-05,across,0.009183087585552075,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,interdms_obj_ABBA,InterDMS,sub-06,across,0.026404539564391524,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,ctxdm_lco,CTXDM,sub-01,across,0.012789886847895074,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,ctxdm_lco,CTXDM,sub-02,across,0.019649045839323625,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,ctxdm_lco,CTXDM,sub-03,across,0.0055408648503362,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,ctxdm_lco,CTXDM,sub-05,across,0.02216625522589305,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,ctxdm_lco,CTXDM,sub-06,across,0.021377792799612452,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,ctxdm_col,CTXDM,sub-01,across,0.01893068920122455,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,ctxdm_col,CTXDM,sub-02,across,0.031326965487096424,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,ctxdm_col,CTXDM,sub-03,across,0.017202415935171276,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,ctxdm_col,CTXDM,sub-05,across,-0.003690582684066575,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+vertex,ctxdm_col,CTXDM,sub-06,across,0.025173604771262025,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,dms_loc,DMS,sub-01,across,-0.15610401129350063,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,dms_loc,DMS,sub-02,across,0.06198059719055893,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,dms_loc,DMS,sub-03,across,0.13541198208928107,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,dms_loc,DMS,sub-05,across,-0.08169365743175147,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,dms_loc,DMS,sub-06,across,0.08251737087965011,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_loc,1-Back,sub-01,across,0.0558506872633006,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_loc,1-Back,sub-02,across,0.019036131191533003,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_loc,1-Back,sub-03,across,0.1473109457641839,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_loc,1-Back,sub-05,across,0.08463494395022275,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_loc,1-Back,sub-06,across,0.14079356282949443,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_ctg,1-Back,sub-01,across,0.008157192189246425,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_ctg,1-Back,sub-02,across,-0.0007356614549644497,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_ctg,1-Back,sub-03,across,0.01711367966840045,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_ctg,1-Back,sub-05,across,0.0069979257241357,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_ctg,1-Back,sub-06,across,0.041347654074197625,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_obj,1-Back,sub-01,across,0.02158236670307813,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_obj,1-Back,sub-02,across,-0.011145867027808,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_obj,1-Back,sub-03,across,0.029296006739605175,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_obj,1-Back,sub-05,across,-0.01909137596259825,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,nback_obj,1-Back,sub-06,across,0.027666355824330798,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_loc_ABAB,InterDMS,sub-01,across,0.10789351614657783,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_loc_ABAB,InterDMS,sub-02,across,0.0781231107888743,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_loc_ABAB,InterDMS,sub-03,across,0.08614247167482968,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_loc_ABAB,InterDMS,sub-05,across,0.033272867384366675,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_loc_ABAB,InterDMS,sub-06,across,0.1292615097528323,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_loc_ABBA,InterDMS,sub-01,across,0.0015264950203709247,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_loc_ABBA,InterDMS,sub-02,across,0.053408690497744826,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_loc_ABBA,InterDMS,sub-03,across,0.07629236815380862,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_loc_ABBA,InterDMS,sub-05,across,0.020463015118148173,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_loc_ABBA,InterDMS,sub-06,across,0.0423230703582521,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_ctg_ABAB,InterDMS,sub-01,across,-0.0042861752194585006,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_ctg_ABAB,InterDMS,sub-02,across,0.0501268499303842,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_ctg_ABAB,InterDMS,sub-03,across,0.0605233579617925,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_ctg_ABAB,InterDMS,sub-05,across,-0.03577689414378255,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_ctg_ABAB,InterDMS,sub-06,across,0.024315016533946604,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_ctg_ABBA,InterDMS,sub-01,across,0.0288181958417408,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_ctg_ABBA,InterDMS,sub-02,across,0.07475310557172629,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_ctg_ABBA,InterDMS,sub-03,across,0.11113546046195547,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_ctg_ABBA,InterDMS,sub-05,across,0.026381305326940475,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_ctg_ABBA,InterDMS,sub-06,across,0.0944360055355355,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_obj_ABAB,InterDMS,sub-01,across,0.019732341405469898,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_obj_ABAB,InterDMS,sub-02,across,-0.011962920036166877,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_obj_ABAB,InterDMS,sub-03,across,0.042782510933466245,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_obj_ABAB,InterDMS,sub-05,across,0.016583246770314874,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_obj_ABAB,InterDMS,sub-06,across,0.05127716209972276,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_obj_ABBA,InterDMS,sub-01,across,0.035902064395049824,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_obj_ABBA,InterDMS,sub-02,across,0.030015103770419924,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_obj_ABBA,InterDMS,sub-03,across,0.054013297120109174,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_obj_ABBA,InterDMS,sub-05,across,0.02350686211837453,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,interdms_obj_ABBA,InterDMS,sub-06,across,0.0607315997932164,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,ctxdm_lco,CTXDM,sub-01,across,-0.019537730765296125,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,ctxdm_lco,CTXDM,sub-02,across,9.57046472467235e-05,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,ctxdm_lco,CTXDM,sub-03,across,0.00027678649057635146,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,ctxdm_lco,CTXDM,sub-05,across,0.046741235991939876,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,ctxdm_lco,CTXDM,sub-06,across,0.05478141103638332,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,ctxdm_col,CTXDM,sub-01,across,0.05872388294199477,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,ctxdm_col,CTXDM,sub-02,across,0.0950964369671419,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,ctxdm_col,CTXDM,sub-03,across,0.0907478998787701,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,ctxdm_col,CTXDM,sub-05,across,-0.0138674093293957,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+region,ctxdm_col,CTXDM,sub-06,across,0.10817585584241898,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,dms_loc,DMS,sub-01,across,-0.3722029033303261,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,dms_loc,DMS,sub-02,across,0.21293121732771397,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,dms_loc,DMS,sub-03,across,0.23191712468862535,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,dms_loc,DMS,sub-05,across,-0.26781881734728813,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,dms_loc,DMS,sub-06,across,0.20575686104595664,4.0,DMS,DMS,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_loc,1-Back,sub-01,across,0.3447605210961774,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_loc,1-Back,sub-02,across,0.19076298853848125,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_loc,1-Back,sub-03,across,0.47603327430784703,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_loc,1-Back,sub-05,across,0.3093692052178085,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_loc,1-Back,sub-06,across,0.45519711665809154,4.0,1-Back location,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_ctg,1-Back,sub-01,across,0.24228710933588443,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_ctg,1-Back,sub-02,across,0.20251286431215698,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_ctg,1-Back,sub-03,across,0.09691869061440228,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_ctg,1-Back,sub-05,across,0.06579358429182317,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_ctg,1-Back,sub-06,across,0.28262456665281205,4.0,1-Back category,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_obj,1-Back,sub-01,across,0.1131829989608377,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_obj,1-Back,sub-02,across,0.1800142070930451,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_obj,1-Back,sub-03,across,0.10516297060996294,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_obj,1-Back,sub-05,across,-0.009633618555963026,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,nback_obj,1-Back,sub-06,across,0.24731549028307198,4.0,1-Back identity,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_loc_ABAB,InterDMS,sub-01,across,0.4255655094794929,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_loc_ABAB,InterDMS,sub-02,across,0.45505365618504584,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_loc_ABAB,InterDMS,sub-03,across,0.3264223557058722,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_loc_ABAB,InterDMS,sub-05,across,0.17060841789469122,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_loc_ABAB,InterDMS,sub-06,across,0.5158270238526165,4.0,InterDMS location ABAB,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_loc_ABBA,InterDMS,sub-01,across,-0.19798509102314707,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_loc_ABBA,InterDMS,sub-02,across,0.37924288804642853,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_loc_ABBA,InterDMS,sub-03,across,0.3241261303285137,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_loc_ABBA,InterDMS,sub-05,across,0.093037436096929,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_loc_ABBA,InterDMS,sub-06,across,0.36137546248734,4.0,InterDMS location ABBA,loc,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_ctg_ABAB,InterDMS,sub-01,across,0.10311615531332789,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_ctg_ABAB,InterDMS,sub-02,across,0.18166251859627663,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_ctg_ABAB,InterDMS,sub-03,across,0.11210852078162131,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_ctg_ABAB,InterDMS,sub-05,across,-0.1981192610505968,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_ctg_ABAB,InterDMS,sub-06,across,0.11327829597517848,4.0,InterDMS category ABAB,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_ctg_ABBA,InterDMS,sub-01,across,0.26839878100901843,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_ctg_ABBA,InterDMS,sub-02,across,0.2975891805626452,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_ctg_ABBA,InterDMS,sub-03,across,0.2832411431148648,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_ctg_ABBA,InterDMS,sub-05,across,-0.12196040699258445,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_ctg_ABBA,InterDMS,sub-06,across,0.3877234857529402,4.0,InterDMS category ABBA,ctg,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_obj_ABAB,InterDMS,sub-01,across,0.18730341069400308,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_obj_ABAB,InterDMS,sub-02,across,0.13947404660284518,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_obj_ABAB,InterDMS,sub-03,across,0.14065876803360877,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_obj_ABAB,InterDMS,sub-05,across,-0.19388052745722237,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_obj_ABAB,InterDMS,sub-06,across,0.21038770267739892,4.0,InterDMS identity ABAB,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_obj_ABBA,InterDMS,sub-01,across,0.16585453268140554,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_obj_ABBA,InterDMS,sub-02,across,0.1298171898233704,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_obj_ABBA,InterDMS,sub-03,across,0.2046485693659633,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_obj_ABBA,InterDMS,sub-05,across,-0.10181864926824344,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,interdms_obj_ABBA,InterDMS,sub-06,across,0.2362398585863411,4.0,InterDMS identity ABBA,id,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,ctxdm_lco,CTXDM,sub-01,across,0.09972687386907633,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,ctxdm_lco,CTXDM,sub-02,across,0.11599273328669368,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,ctxdm_lco,CTXDM,sub-03,across,0.06777427540160708,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,ctxdm_lco,CTXDM,sub-05,across,0.09243790310807523,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,ctxdm_lco,CTXDM,sub-06,across,0.13288920197635887,4.0,CTXDM LCI,LCI,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,ctxdm_col,CTXDM,sub-01,across,0.16725588126108046,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,ctxdm_col,CTXDM,sub-02,across,0.17703002245165406,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,ctxdm_col,CTXDM,sub-03,across,0.20107499895617362,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,ctxdm_col,CTXDM,sub-05,across,0.07823457979597148,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)
+network,ctxdm_col,CTXDM,sub-06,across,0.34326990570873017,4.0,CTXDM CIL,CIL,clean_verified,mean of 4 pair estimates that include this subject (pairs already mean of 50 random split-half iterations)

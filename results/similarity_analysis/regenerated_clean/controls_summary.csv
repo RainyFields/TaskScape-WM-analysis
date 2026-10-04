@@ -1,0 +1,121 @@
+control,spatial_resolution,task_family,within_mean,across_mean,note
+baseline_primary,vertex,1-Back,0.1686871748067594,0.007135437699994023,"clean_verified, unmodified"
+baseline_primary,vertex,CTXDM,0.10271263841434847,0.017046693827374837,"clean_verified, unmodified"
+baseline_primary,vertex,DMS,0.836453227519989,0.028179320443421602,"clean_verified, unmodified"
+baseline_primary,vertex,InterDMS,0.20922740824961997,0.02405701906501781,"clean_verified, unmodified"
+baseline_primary,vertex,all,0.06529269587122448,-0.004015885339858868,pair sub-01-sub-02 (task-averaged)
+baseline_primary,vertex,all,0.06529269587122448,0.006419214390092141,pair sub-01-sub-03 (task-averaged)
+baseline_primary,vertex,all,0.06529269587122448,0.012893414549471344,pair sub-01-sub-05 (task-averaged)
+baseline_primary,vertex,all,0.06529269587122448,0.019821105559943437,pair sub-01-sub-06 (task-averaged)
+baseline_primary,region,1-Back,0.2838364470650752,0.037920969831757245,"clean_verified, unmodified"
+baseline_primary,region,CTXDM,0.19826198600325734,0.04212340737017803,"clean_verified, unmodified"
+baseline_primary,region,DMS,0.889923553466797,0.00842245628684759,"clean_verified, unmodified"
+baseline_primary,region,InterDMS,0.32786650929514627,0.04605715370221878,"clean_verified, unmodified"
+baseline_primary,region,all,0.1811916649560832,-0.03194163179936974,pair sub-01-sub-02 (task-averaged)
+baseline_primary,region,all,0.1811916649560832,0.022141353803842013,pair sub-01-sub-03 (task-averaged)
+baseline_primary,region,all,0.1811916649560832,0.037576391154434535,pair sub-01-sub-05 (task-averaged)
+baseline_primary,region,all,0.1811916649560832,0.02497682838395121,pair sub-01-sub-06 (task-averaged)
+baseline_primary,network,1-Back,0.40133866246479255,0.22015346462776264,"clean_verified, unmodified"
+baseline_primary,network,CTXDM,0.22773921774793415,0.14756863758154215,"clean_verified, unmodified"
+baseline_primary,network,DMS,0.9222371492385865,0.002116696476936325,"clean_verified, unmodified"
+baseline_primary,network,InterDMS,0.46838489187175103,0.17996657012853148,"clean_verified, unmodified"
+baseline_primary,network,all,0.21747649661420532,0.13706065689679237,pair sub-01-sub-02 (task-averaged)
+baseline_primary,network,all,0.21747649661420532,0.12218993358003595,pair sub-01-sub-03 (task-averaged)
+baseline_primary,network,all,0.21747649661420532,0.022565443196023494,pair sub-01-sub-05 (task-averaged)
+baseline_primary,network,all,0.21747649661420532,0.23393855944275857,pair sub-01-sub-06 (task-averaged)
+spatial_shuffle_sub01,vertex,1-Back,0.1686871748067594,0.006294682337953418,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,vertex,CTXDM,0.10271263841434847,0.010882894452795881,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,vertex,DMS,0.836453227519989,0.04212311787608632,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,vertex,InterDMS,0.20922740824961997,0.01700157458438965,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,vertex,all,0.06529269587122448,-7.805565219314148e-06,pair sub-01-sub-02 (task-averaged)
+spatial_shuffle_sub01,vertex,all,0.06529269587122448,-0.0007699360615333718,pair sub-01-sub-03 (task-averaged)
+spatial_shuffle_sub01,vertex,all,0.06529269587122448,0.000281802438973197,pair sub-01-sub-05 (task-averaged)
+spatial_shuffle_sub01,vertex,all,0.06529269587122448,-0.0004184902245591123,pair sub-01-sub-06 (task-averaged)
+spatial_shuffle_sub01,region,1-Back,0.2396671781638482,0.027014797822358865,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,region,CTXDM,0.17950271079281813,0.037552227670210415,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,region,DMS,0.8663047261238098,0.06808557875826955,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,region,InterDMS,0.3120574637244378,0.02696374932323427,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,region,all,0.0609835575011675,-0.005178533194169479,pair sub-01-sub-02 (task-averaged)
+spatial_shuffle_sub01,region,all,0.0609835575011675,-0.012407909565081357,pair sub-01-sub-03 (task-averaged)
+spatial_shuffle_sub01,region,all,0.0609835575011675,-0.003958965626079588,pair sub-01-sub-05 (task-averaged)
+spatial_shuffle_sub01,region,all,0.0609835575011675,-0.006333466097324464,pair sub-01-sub-06 (task-averaged)
+spatial_shuffle_sub01,network,1-Back,0.3141742489824537,0.11573180498896789,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,network,CTXDM,0.27398461061529816,0.027326484303921466,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,network,DMS,0.8981675744652747,0.09941447576135398,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,network,InterDMS,0.44839548793132417,0.0823718660279022,"sub-01 vertex order permuted (seed BASE+11); within(sub-01) unchanged, across(sub-01,*) expected ~0"
+spatial_shuffle_sub01,network,all,0.08705630781080496,-0.12181263615454856,pair sub-01-sub-02 (task-averaged)
+spatial_shuffle_sub01,network,all,0.08705630781080496,-0.14467465318196143,pair sub-01-sub-03 (task-averaged)
+spatial_shuffle_sub01,network,all,0.08705630781080496,0.0009599354595411549,pair sub-01-sub-05 (task-averaged)
+spatial_shuffle_sub01,network,all,0.08705630781080496,-0.08706782866657402,pair sub-01-sub-06 (task-averaged)
+task_shuffle_sub01,vertex,1-Back,0.2120326108043082,0.010767660428818394,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,vertex,CTXDM,0.13263912340102252,0.014259977706824429,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,vertex,DMS,0.7100424331575632,0.04766525739128701,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,vertex,InterDMS,0.1986476609823585,0.020657387950030776,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,vertex,all,0.06529269587122448,0.0019880916550755502,pair sub-01-sub-02 (task-averaged)
+task_shuffle_sub01,vertex,all,0.06529269587122448,0.012745956815682196,pair sub-01-sub-03 (task-averaged)
+task_shuffle_sub01,vertex,all,0.06529269587122448,0.0006310661878524117,pair sub-01-sub-05 (task-averaged)
+task_shuffle_sub01,vertex,all,0.06529269587122448,0.02342888967046747,pair sub-01-sub-06 (task-averaged)
+task_shuffle_sub01,region,1-Back,0.31608549027206995,0.03629515009264772,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,region,CTXDM,0.2424784874515608,0.05226662029442378,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,region,DMS,0.7523025173074566,0.07443483582790941,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,region,InterDMS,0.3199399932354378,0.04534623389931706,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,region,all,0.1811916649560832,-0.005507903407560661,pair sub-01-sub-02 (task-averaged)
+task_shuffle_sub01,region,all,0.1811916649560832,0.03685364829337535,pair sub-01-sub-03 (task-averaged)
+task_shuffle_sub01,region,all,0.1811916649560832,0.02415771232258218,pair sub-01-sub-05 (task-averaged)
+task_shuffle_sub01,region,all,0.1811916649560832,0.06154600713013981,pair sub-01-sub-06 (task-averaged)
+task_shuffle_sub01,network,1-Back,0.376547226500387,0.19300001254367335,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,network,CTXDM,0.30095763636566697,0.17883326474390926,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,network,DMS,0.7997863932456821,0.25317315031029286,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,network,InterDMS,0.4767829296468602,0.17598766245770578,"sub-01 task labels deranged [6, 8, 1, 11, 5, 10, 2, 4, 3, 0, 9, 7] (seed BASE+13); within unchanged, across tests task specificity"
+task_shuffle_sub01,network,all,0.21747649661420532,0.1594289439637214,pair sub-01-sub-02 (task-averaged)
+task_shuffle_sub01,network,all,0.21747649661420532,0.2484992246640225,pair sub-01-sub-03 (task-averaged)
+task_shuffle_sub01,network,all,0.21747649661420532,0.009143440100985268,pair sub-01-sub-05 (task-averaged)
+task_shuffle_sub01,network,all,0.21747649661420532,0.27222623928760487,pair sub-01-sub-06 (task-averaged)
+clone_sub01_as_sub02,vertex,1-Back,0.00939066755212844,0.04190072742127813,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,vertex,CTXDM,0.07486128562933299,0.06167019143403741,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,vertex,DMS,0.8105596067905425,0.08769704783894121,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,vertex,InterDMS,0.18133804420389543,0.08102826936677836,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,vertex,all,0.06529269587122448,0.5385027296468615,pair sub-01-sub-02 (task-averaged)
+clone_sub01_as_sub02,vertex,all,0.06529269587122448,0.006419214390092141,pair sub-01-sub-03 (task-averaged)
+clone_sub01_as_sub02,vertex,all,0.06529269587122448,0.012893414549471344,pair sub-01-sub-05 (task-averaged)
+clone_sub01_as_sub02,vertex,all,0.06529269587122448,0.019821105559943437,pair sub-01-sub-06 (task-averaged)
+clone_sub01_as_sub02,region,1-Back,0.1794604153769712,0.09469046423219456,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,region,CTXDM,0.1550017337081954,0.08134307108307257,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,region,DMS,0.8671979830265044,0.04140951322764158,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,region,InterDMS,0.2899098187497196,0.10535384287655081,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,region,all,0.1811916649560832,0.5877093172756335,pair sub-01-sub-02 (task-averaged)
+clone_sub01_as_sub02,region,all,0.1811916649560832,0.022141353803842013,pair sub-01-sub-03 (task-averaged)
+clone_sub01_as_sub02,region,all,0.1811916649560832,0.037576391154434535,pair sub-01-sub-05 (task-averaged)
+clone_sub01_as_sub02,region,all,0.1811916649560832,0.02497682838395121,pair sub-01-sub-06 (task-averaged)
+clone_sub01_as_sub02,network,1-Back,0.3336337242717855,0.27617244463600216,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,network,CTXDM,0.1003725257590413,0.1657107467921451,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,network,DMS,0.9055305542945862,-0.1067353920340538,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,network,InterDMS,0.37154899638720473,0.17424150507726396,"sub-02 := sub-01 with split i+1; across(sub-01,sub-02) expected ~ within(sub-01)"
+clone_sub01_as_sub02,network,all,0.21747649661420532,0.5670487519384672,pair sub-01-sub-02 (task-averaged)
+clone_sub01_as_sub02,network,all,0.21747649661420532,0.12218993358003595,pair sub-01-sub-03 (task-averaged)
+clone_sub01_as_sub02,network,all,0.21747649661420532,0.022565443196023494,pair sub-01-sub-05 (task-averaged)
+clone_sub01_as_sub02,network,all,0.21747649661420532,0.23393855944275857,pair sub-01-sub-06 (task-averaged)
+affine_sub03,vertex,1-Back,0.16868717531634805,0.007135437727332221,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,vertex,CTXDM,0.10271263837337029,0.01704669387364993,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,vertex,DMS,0.8364532315731049,0.028179321009665727,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,vertex,InterDMS,0.20922740865101996,0.02405701915215468,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,vertex,all,0.06529269587122448,-0.004015885339858868,pair sub-01-sub-02 (task-averaged)
+affine_sub03,vertex,all,0.06529269587122448,0.0064192144675568365,pair sub-01-sub-03 (task-averaged)
+affine_sub03,vertex,all,0.06529269587122448,0.012893414549471344,pair sub-01-sub-05 (task-averaged)
+affine_sub03,vertex,all,0.06529269587122448,0.019821105559943437,pair sub-01-sub-06 (task-averaged)
+affine_sub03,region,1-Back,0.28383644843722383,0.03792097109773507,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,region,CTXDM,0.19826198849547655,0.042123408972052856,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,region,DMS,0.8899235601425171,0.008422455899417392,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,region,InterDMS,0.32786651261655303,0.04605715430362034,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,region,all,0.1811916649560832,-0.03194163179936974,pair sub-01-sub-02 (task-averaged)
+affine_sub03,region,all,0.1811916649560832,0.022141351402970025,pair sub-01-sub-03 (task-averaged)
+affine_sub03,region,all,0.1811916649560832,0.037576391154434535,pair sub-01-sub-05 (task-averaged)
+affine_sub03,region,all,0.1811916649560832,0.02497682838395121,pair sub-01-sub-06 (task-averaged)
+affine_sub03,network,1-Back,0.4013386629583935,0.22015347604205213,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,network,CTXDM,0.22773923247214406,0.1475686183050275,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,network,DMS,0.922237164258957,0.002116697788238503,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,network,InterDMS,0.4683849069380667,0.17996657319351408,sub-03 maps * 3.7 + 12; all correlations must be unchanged
+affine_sub03,network,all,0.21747649661420532,0.13706065689679237,pair sub-01-sub-02 (task-averaged)
+affine_sub03,network,all,0.21747649661420532,0.12218994851845007,pair sub-01-sub-03 (task-averaged)
+affine_sub03,network,all,0.21747649661420532,0.022565443196023494,pair sub-01-sub-05 (task-averaged)
+affine_sub03,network,all,0.21747649661420532,0.23393855944275857,pair sub-01-sub-06 (task-averaged)

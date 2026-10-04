@@ -1,0 +1,61 @@
+spatial_resolution,variant,variant_label,task_family,within_mean,across_mean
+vertex,legacy_pickle,"Original pickles (mis-indexed, duplicated)",DMS,0.8784807991981506,0.0396731193773448
+vertex,legacy_pickle,"Original pickles (mis-indexed, duplicated)",1-Back,0.5418373291439688,0.0030529036865627
+vertex,legacy_pickle,"Original pickles (mis-indexed, duplicated)",InterDMS,0.5261482019064326,0.0066660699084944
+vertex,legacy_pickle,"Original pickles (mis-indexed, duplicated)",CTXDM,0.3857470277175307,0.0110772327889571
+vertex,fixed_with_duplicates,"Fixed indexing, duplicates kept",DMS,0.8886481595039367,0.032987229887396
+vertex,fixed_with_duplicates,"Fixed indexing, duplicates kept",1-Back,0.4785215993815412,0.0069607241726092
+vertex,fixed_with_duplicates,"Fixed indexing, duplicates kept",InterDMS,0.5471456011906072,0.0177813110948773
+vertex,fixed_with_duplicates,"Fixed indexing, duplicates kept",CTXDM,0.4244365008100867,0.0199550492402049
+vertex,clean_lookup,Fixed + de-duplicated (lookup labels),DMS,0.836453227519989,0.0281793204434216
+vertex,clean_lookup,Fixed + de-duplicated (lookup labels),1-Back,0.1729227945702926,0.0074462642258913
+vertex,clean_lookup,Fixed + de-duplicated (lookup labels),InterDMS,0.2081473696325653,0.0241003281961408
+vertex,clean_lookup,Fixed + de-duplicated (lookup labels),CTXDM,0.1027126384143484,0.0170466938273748
+vertex,clean_verified,Final (block-file-verified labels),DMS,0.836453227519989,0.0281793204434216
+vertex,clean_verified,Final (block-file-verified labels),1-Back,0.1686871748067594,0.007135437699994
+vertex,clean_verified,Final (block-file-verified labels),InterDMS,0.2092274082496199,0.0240570190650178
+vertex,clean_verified,Final (block-file-verified labels),CTXDM,0.1027126384143484,0.0170466938273748
+vertex,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),DMS,0.7486195994,0.040976416120000005
+vertex,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),1-Back,0.4507594998,0.0018405573171666665
+vertex,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),InterDMS,0.3126426212466667,0.0026917426157100004
+vertex,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),CTXDM,0.107975497,-0.0006702675642599999
+region,legacy_pickle,"Original pickles (mis-indexed, duplicated)",DMS,0.9107271509170533,0.0575758039858192
+region,legacy_pickle,"Original pickles (mis-indexed, duplicated)",1-Back,0.587499958469222,0.0013808603145104
+region,legacy_pickle,"Original pickles (mis-indexed, duplicated)",InterDMS,0.5822270680516958,-0.0023405900263848
+region,legacy_pickle,"Original pickles (mis-indexed, duplicated)",CTXDM,0.4361508442908525,0.0234674070295877
+region,fixed_with_duplicates,"Fixed indexing, duplicates kept",DMS,0.9265672101974488,0.0213511668890714
+region,fixed_with_duplicates,"Fixed indexing, duplicates kept",1-Back,0.5860524765582134,0.0344201827316234
+region,fixed_with_duplicates,"Fixed indexing, duplicates kept",InterDMS,0.6284470357687678,0.0174961630008571
+region,fixed_with_duplicates,"Fixed indexing, duplicates kept",CTXDM,0.5015372347757221,0.0198532989299856
+region,clean_lookup,Fixed + de-duplicated (lookup labels),DMS,0.889923553466797,0.0084224562868475
+region,clean_lookup,Fixed + de-duplicated (lookup labels),1-Back,0.2885981712241967,0.0377652213390295
+region,clean_lookup,Fixed + de-duplicated (lookup labels),InterDMS,0.327998187404514,0.0467181429542931
+region,clean_lookup,Fixed + de-duplicated (lookup labels),CTXDM,0.1982619860032573,0.042123407370178
+region,clean_verified,Final (block-file-verified labels),DMS,0.889923553466797,0.0084224562868475
+region,clean_verified,Final (block-file-verified labels),1-Back,0.2838364470650752,0.0379209698317572
+region,clean_verified,Final (block-file-verified labels),InterDMS,0.3278665092951462,0.0460571537022187
+region,clean_verified,Final (block-file-verified labels),CTXDM,0.1982619860032573,0.042123407370178
+region,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),DMS,0.9121906486,0.057132052360000005
+region,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),1-Back,0.6050106328,0.0009964189770666672
+region,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),InterDMS,0.5765367263333333,-0.0019483712644166665
+region,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),CTXDM,0.43586983069999996,0.0229432248618
+network,legacy_pickle,"Original pickles (mis-indexed, duplicated)",DMS,0.9190229429006576,0.1331647478789091
+network,legacy_pickle,"Original pickles (mis-indexed, duplicated)",1-Back,0.5598832484818995,0.0132954627402747
+network,legacy_pickle,"Original pickles (mis-indexed, duplicated)",InterDMS,0.584158345142845,0.0089381906445293
+network,legacy_pickle,"Original pickles (mis-indexed, duplicated)",CTXDM,0.3673212936650961,0.1018057365249842
+network,fixed_with_duplicates,"Fixed indexing, duplicates kept",DMS,0.95313547372818,0.0359989975392818
+network,fixed_with_duplicates,"Fixed indexing, duplicates kept",1-Back,0.5653294704483706,0.2020855592335574
+network,fixed_with_duplicates,"Fixed indexing, duplicates kept",InterDMS,0.6913669228802125,0.1103614049356741
+network,fixed_with_duplicates,"Fixed indexing, duplicates kept",CTXDM,0.5075653233816848,0.0681605920607689
+network,clean_lookup,Fixed + de-duplicated (lookup labels),DMS,0.9222371492385864,0.0021166964769363
+network,clean_lookup,Fixed + de-duplicated (lookup labels),1-Back,0.4063391596271346,0.2206029565169786
+network,clean_lookup,Fixed + de-duplicated (lookup labels),InterDMS,0.4676205595673527,0.1788588101542555
+network,clean_lookup,Fixed + de-duplicated (lookup labels),CTXDM,0.2277392177479341,0.1475686375815421
+network,clean_verified,Final (block-file-verified labels),DMS,0.9222371492385864,0.0021166964769363
+network,clean_verified,Final (block-file-verified labels),1-Back,0.4013386624647925,0.2201534646277626
+network,clean_verified,Final (block-file-verified labels),InterDMS,0.468384891871751,0.1799665701285314
+network,clean_verified,Final (block-file-verified labels),CTXDM,0.2277392177479341,0.1475686375815421
+network,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),DMS,0.9230137032000001,0.13230992608
+network,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),1-Back,0.5614056060666667,0.018155383954666666
+network,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),InterDMS,0.5897412513,0.005247032004933334
+network,production_csv,published production CSV (task-level mean; vertex capped at 300 trials),CTXDM,0.36018846865,0.095607052069
