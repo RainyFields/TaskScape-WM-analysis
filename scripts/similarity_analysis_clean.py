@@ -30,9 +30,10 @@ import argparse, json, pickle, sys, time
 from pathlib import Path
 import numpy as np, pandas as pd, h5py, nibabel as nib
 
-PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
-sys.path.insert(0, str(PROJECT / "scripts")); sys.path.insert(0, str(PROJECT / "scripts/figure_making"))
+_SCRIPTS = Path(__file__).resolve().parent
+sys.path.insert(0, str(_SCRIPTS)); sys.path.insert(0, str(_SCRIPTS / "figure_making"))
 from utils import load_valid_vertex_mask, apply_mask_to_betas_dict
+from config import paths  # TaskScape-WM inputs only; rejects the legacy tree
 import plot_per_task_within_across_subj_similarity as prod   # production grouping (legacy variant only)
 
 SUBJECTS = ["sub-01", "sub-02", "sub-03", "sub-05", "sub-06"]
@@ -52,8 +53,15 @@ BASELINE_FLOOR = 1.0        # vertex excluded (robust variant) if its PSC baseli
 # 1.0 (not 1000): a floor of 1000 emptied Glasser parcels (job 21874759). Near-zero baselines are the
 # PSC-undefined case; typical valid baselines are several thousand.
 RESOLUTIONS = ["vertex", "region", "network"]
-CLEAN = PROJECT / "data/encoding_delay/clean_delay_betas"
-PKL_DIR = PROJECT / "data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only"
+CLEAN: Path = None       # set in main(): --clean_dir (default <dataset>/derivatives/glm-clean-delay/<sub>/)
+PKL_DIR: Path | None = None  # legacy_pickle variant only when --legacy_pickle_dir is given (invalid published input;
+                             # not part of the TaskScape-WM dataset -> skipped by default)
+
+
+def clean_file(subj: str, name: str) -> Path:
+    # dataset layout keeps one folder per subject; a flat directory (build_clean_delay_betas --out_dir) also works
+    p = CLEAN / subj / f"{subj}_{name}"
+    return p if p.exists() else CLEAN / f"{subj}_{name}"
 
 
 def split_rng(split, subj_idx, task_idx):
@@ -76,12 +84,12 @@ def half_maps(X, w, split, subj_idx, task_idx):
 def stage_halves(args):
     subj = args.subj; si = SUBJECTS.index(subj)
     work = Path(args.work_dir); work.mkdir(parents=True, exist_ok=True)
-    mask = load_valid_vertex_mask(PROJECT / "data/valid_vertex_mask.npy")
+    mask = load_valid_vertex_mask(paths.valid_vertex_mask())
     t0 = time.time()
-    prov = pd.read_csv(CLEAN / f"{subj}_provenance.csv")
+    prov = pd.read_csv(clean_file(subj, "provenance.csv"))
     ret = prov[prov.retained].reset_index(drop=True)
     assert (ret.record_id.values == np.arange(len(ret))).all()
-    with h5py.File(CLEAN / f"{subj}_delay_betas.h5", "r") as f:
+    with h5py.File(clean_file(subj, "delay_betas.h5"), "r") as f:
         X = f["betas"][()][:, mask]
     print(f"[{subj}] clean betas {X.shape} loaded in {time.time()-t0:.0f}s")
     labs = pd.read_csv(args.labels); labs = labs[labs.subject == subj]
@@ -135,6 +143,9 @@ def stage_halves(args):
     del X
 
     # legacy production pickle -> production grouping code (mis-indexed + duplicated, as published)
+    if PKL_DIR is None:
+        print(f"[{subj}] legacy_pickle variant skipped (no --legacy_pickle_dir; invalid input not in TaskScape-WM)")
+        return
     with open(PKL_DIR / f"{subj}_task_condition_betas.pkl", "rb") as f:
         raw = pickle.load(f)
     raw = apply_mask_to_betas_dict(raw, mask)
@@ -160,8 +171,8 @@ def pearson_rows(A, B):
 class Aggregator:
     """vertex (masked) -> 360 region means -> 12 network means (unweighted mean of regions, as in production)."""
     def __init__(self, mask, vertex_keep=None):
-        lab = np.asarray(nib.load(str(PROJECT / "data/Glasser_LR_Dense64k.dlabel.nii")).get_fdata()).reshape(-1).astype(int)[mask]
-        net = np.loadtxt(PROJECT / "data/cortex_parcel_network_assignments.txt").astype(int)
+        lab = np.asarray(nib.load(str(paths.glasser_dlabel())).get_fdata()).reshape(-1).astype(int)[mask]
+        net = np.loadtxt(paths.parcel_networks()).astype(int)
         keep = np.ones(lab.size, bool) if vertex_keep is None else vertex_keep
         self.keep = keep
         self.region_ids = np.arange(1, 361)
@@ -249,11 +260,14 @@ def summarise(within, across):
 def stage_similarity(args):
     work = Path(args.work_dir); out = Path(args.out_dir); out.mkdir(parents=True, exist_ok=True)
     (out / "matrices").mkdir(exist_ok=True)
-    mask = load_valid_vertex_mask(PROJECT / "data/valid_vertex_mask.npy")
+    mask = load_valid_vertex_mask(paths.valid_vertex_mask())
     agg = Aggregator(mask)
     t0 = time.time()
     variants = ["clean_verified", "clean_lookup", "clean_exclude_inconsistent", "clean_behaviour_relabel", "fixed_with_duplicates",
                 "legacy_pickle", "clean_verified_familypooled", "clean_verified_sessionscale"]
+    if not all((work / f"halves_legacy_pickle_{s}.npz").exists() for s in SUBJECTS):
+        variants.remove("legacy_pickle")
+        print("[similarity] legacy_pickle variant omitted (halves not built; legacy pickles are not a TaskScape-WM input)")
     W, A, ntr = [], [], []
     halves_primary = None
     for v in variants:
@@ -330,7 +344,7 @@ def stage_similarity(args):
     #    of any subject (PSC ill-defined when the mean signal is near zero). Nothing is winsorized; the primary variant is untouched.
     ext_rows, summ_rows = [], []; bad_union = np.zeros(int(mask.sum()), bool)
     for s in SUBJECTS:
-        q = np.load(CLEAN / f"{s}_vertex_qc.npz"); vmax = q["vertex_max_abs"][mask]; vbase = q["vertex_min_baseline"][mask]
+        q = np.load(clean_file(s, "vertex_qc.npz")); vmax = q["vertex_max_abs"][mask]; vbase = q["vertex_min_baseline"][mask]
         rq = pd.read_csv(out / "qc" / f"{s}_record_qc.csv")
         bad = vbase < BASELINE_FLOOR; bad_union |= bad
         top = rq.sort_values("abs_beta_max", ascending=False).head(20)
@@ -377,10 +391,22 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--stage", choices=["halves", "similarity"], required=True)
     ap.add_argument("--subj")
-    ap.add_argument("--work_dir", default="/scratch/xuan/fig8_clean/halves")
-    ap.add_argument("--out_dir", default=str(PROJECT / "results/similarity_analysis/regenerated_clean"))
-    ap.add_argument("--labels", default=str(PROJECT / "results/similarity_analysis/regenerated_clean/run_labels_verified.csv"))
+    ap.add_argument("--dataset_root", default=None)
+    ap.add_argument("--output_root", default=None)
+    ap.add_argument("--clean_dir", default=None, help="default: <dataset>/derivatives/glm-clean-delay")
+    ap.add_argument("--legacy_pickle_dir", default=None, help="optional; the invalid published pickles (comparison only)")
+    ap.add_argument("--work_dir", default=None, help="default: <output_root>/fig8_clean/halves")
+    ap.add_argument("--out_dir", default=None, help="default: <output_root>/similarity_analysis/regenerated_clean")
+    ap.add_argument("--labels", default=str(paths.REPO_ROOT / "results/similarity_analysis/regenerated_clean/run_labels_verified.csv"))
     args = ap.parse_args()
+    global CLEAN, PKL_DIR
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard(f"similarity_analysis_clean_{args.stage}_{args.subj or 'all'}")
+    CLEAN = paths.require_not_legacy(Path(args.clean_dir or paths.clean_delay_dir()), "--clean_dir")
+    PKL_DIR = Path(args.legacy_pickle_dir) if args.legacy_pickle_dir else None
+    args.work_dir = str(paths.require_not_legacy(args.work_dir or paths.output_dir("fig8_clean", "halves"), "--work_dir"))
+    args.out_dir = str(paths.require_not_legacy(args.out_dir or paths.output_dir("similarity_analysis", "regenerated_clean"), "--out_dir"))
+    paths.require_not_legacy(args.labels, "--labels")
     if args.stage == "halves":
         stage_halves(args)
     else:

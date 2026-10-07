@@ -25,12 +25,12 @@ import argparse, re, sys
 from pathlib import Path
 import numpy as np, pandas as pd
 
-PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
-RAW = Path("/project/def-pbellec/xuan/cneuromod.multfs.fmriprep/sourcedata/cneuromod.multfs.raw")
-STIM = Path("/project/def-pbellec/xuan/task_stimuli/data/multfs")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from config import paths  # TaskScape-WM inputs only; rejects the legacy tree
+STIM = paths.TASK_STIMULI   # EXTERNAL stimulus repository (revision recorded in config.paths)
 BLOCKDIR = STIM / "updated_cond_file/blockfiles"
 SUBJECTS = ["sub-01", "sub-02", "sub-03", "sub-05", "sub-06"]
-sys.path.insert(0, str(PROJECT / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import task_condition_identification as tci
 
 TASK_RE = re.compile(r"sub-(\d+)_ses-(\d+)_task-(\w+?)_run-(\d+)_events\.tsv$")
@@ -118,16 +118,21 @@ def runner_design_label(subj, ses, task, run):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out_dir", required=True)
+    ap.add_argument("--dataset_root", default=None)
+    ap.add_argument("--output_root", default=None)
     args = ap.parse_args()
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard("verify_run_labels_from_blockfiles")
     out = Path(args.out_dir); out.mkdir(parents=True, exist_ok=True)
 
     blocks = load_blockfiles()
     print(f"{len(blocks)} block files loaded")
     rows = []
     for subj in SUBJECTS:
-        lookup = pd.read_csv(PROJECT / f"data/study_designs/{subj}_design_design_with_converted.tsv", sep="\t")
-        glm_runs = {p.name.replace("_betas.h5", "") for p in (PROJECT / "data/encoding_delay/trial_level_betas" / subj).glob("ses-*/func/*_betas.h5")}
-        for ev in sorted(RAW.glob(f"{subj}/ses-*/func/*_events.tsv")):
+        lookup = pd.read_csv(paths.study_designs_dir() / f"{subj}_design_design_with_converted.tsv", sep="\t")
+        glm_runs = {p.name.replace("_betas.h5", "") for p in (paths.glm_dir() / subj).glob("ses-*/func/*_betas.h5")}
+        # original raw events (verbatim copies in the dataset), sorted by path as RAW.glob(...) was
+        for ev in sorted(paths.raw_events_files(subj), key=lambda p: (p.parent.parent.name, p.name)):
             m = TASK_RE.search(ev.name)
             if not m or "__dup" in ev.name:
                 continue
@@ -157,7 +162,7 @@ def main():
             # second-best to detect ambiguity
             beh_label, beh_acc = behaviour_label(df, task)
             lookup_acc = behaviour_agreement(df, lookup_label) if lookup_label in (beh_label or "",) or task in ("interdms", "1back") else np.nan
-            in_glm = f"{subj}_ses-{ses}_task-{task}_run-{int(run)}" in glm_runs
+            in_glm = f"{subj}_ses-{ses}_task-{task}_run-{int(run):02d}" in glm_runs   # dataset zero-pads run labels
             rows.append(dict(
                 subject=subj, session=f"ses-{ses}", run=f"run-{int(run):02d}", bold_task=task, in_glm_outputs=in_glm,
                 n_trials_events=len(df), lookup_label=lookup_label, runner_design_label=runner_design_label(subj, ses, task, run),

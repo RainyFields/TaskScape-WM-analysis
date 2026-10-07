@@ -34,12 +34,12 @@ import argparse, hashlib, json, sys, time
 from pathlib import Path
 import numpy as np, pandas as pd, h5py, nibabel as nib
 
-PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
-sys.path.insert(0, str(PROJECT / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parent)); sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import task_condition_identification as tci
-
-BETA_ROOT = PROJECT / "data/encoding_delay/trial_level_betas"
-FMRI_ROOT = PROJECT / "data/glasser_resampled"
+from config import paths  # TaskScape-WM inputs only; rejects the legacy tree
+# Inputs (TaskScape-WM): derivatives/glm/<sub>/<ses>/func/<stem>_run-NN_{betas.h5,trials.tsv};
+# derivatives/taskscape-surface/... desc-sm4 CIFTI (header only); atlas valid_vertex_mask.npy.
+# Legacy equivalents: trial_level_betas/*_run-N_{betas.h5,design.csv}; glasser_resampled/*_bold_sm4.dtseries.nii.
 N_GRAYORDINATES = 64984
 
 TASK_FAMILY = {"dms_loc": "DMS", "nback_loc": "1-Back", "nback_ctg": "1-Back", "nback_obj": "1-Back",
@@ -66,12 +66,13 @@ def axis_signature(dtseries_path: Path) -> str:
 
 
 def find_dtseries(subj, ses, bold_task, run_int):
-    cands = list((FMRI_ROOT / subj / ses).glob(f"{subj}_{ses}_task-{bold_task}_run-*_space-Glasser64k_bold_sm4.dtseries.nii"))
-    for c in cands:
-        r = c.name.split("_run-")[1].split("_")[0]
-        if int(r) == run_int:
-            return c
-    return None
+    c = paths.surface_bold(subj, ses, bold_task, run_int, smoothed=True)
+    return c if c.exists() else None
+
+
+def read_trials(path: Path) -> pd.DataFrame:
+    # trials.tsv is the lossless TSV export of the GLM design CSV (validated value-identical; NaN written as n/a)
+    return pd.read_csv(path, sep="\t", na_values="n/a", float_precision="round_trip")
 
 
 def main():
@@ -79,11 +80,17 @@ def main():
     ap.add_argument("--subj", required=True)
     ap.add_argument("--labels", required=True, help="run_labels_verified.csv from verify_run_labels_from_blockfiles.py")
     ap.add_argument("--out_dir", required=True)
-    ap.add_argument("--beta_root", default=str(BETA_ROOT))
+    ap.add_argument("--beta_root", default=None, help="default: <dataset>/derivatives/glm")
+    ap.add_argument("--dataset_root", default=None)
+    ap.add_argument("--output_root", default=None)
     args = ap.parse_args()
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard(f"build_clean_delay_betas_{args.subj}")
     subj = args.subj
-    out = Path(args.out_dir); out.mkdir(parents=True, exist_ok=True)
-    beta_root = Path(args.beta_root)
+    out = paths.require_not_legacy(Path(args.out_dir), "--out_dir"); out.mkdir(parents=True, exist_ok=True)
+    beta_root = paths.require_not_legacy(Path(args.beta_root or paths.glm_dir()), "--beta_root")
+    DS = paths.dataset_root()
+    paths.require_not_legacy(args.labels, "--labels")
 
     labels = pd.read_csv(args.labels)
     labels = labels[labels.subject == subj].set_index(["session", "bold_task", "run"])
@@ -99,14 +106,14 @@ def main():
     for h5_path in sorted((beta_root / subj).glob("ses-*/func/*_betas.h5")):
         subj_id, ses, bold_task, run, base = tci.parse_run_tokens(h5_path)
         run_int = int(run.split("-")[1])
-        design_csv = h5_path.with_name(f"{base}_design.csv")
+        design_csv = h5_path.with_name(f"{base}_trials.tsv")
         if not design_csv.exists():
             raise FileNotFoundError(design_csv)
         lab = labels.loc[(ses, bold_task, f"run-{run_int:02d}")]
         if isinstance(lab, pd.DataFrame):
             raise ValueError(f"multiple label rows for {subj} {ses} run-{run_int:02d}")
 
-        df = pd.read_csv(design_csv)
+        df = read_trials(design_csv)
         df = tci._canonicalize_design_columns(df)
         with h5py.File(h5_path, "r") as f:
             B = f["betas"][()]                                   # (P, K) float32
@@ -171,8 +178,8 @@ def main():
                     location=getattr(r, "location", None), object=getattr(r, "object", None), category=getattr(r, "category", None),
                     onset_time=getattr(r, "onset_time", None), offset_time=getattr(r, "offset_time", None),
                     condition_single_key=single_key, condition_pair_key=pair_key, legacy_multiplicity=mult,
-                    source_beta_file=str(h5_path.relative_to(PROJECT)), source_design_file=str(design_csv.relative_to(PROJECT)),
-                    source_events_file=f"data/reformated_behavior/{subj}/{ses}/func/{subj}_{ses}_task-{bold_task}_run-{run_int:02d}_events.tsv",
+                    source_beta_file=str(h5_path.relative_to(DS)), source_design_file=str(design_csv.relative_to(DS)),
+                    source_events_file=f"sourcedata/behavior-reformatted/{subj}/{ses}/func/{subj}_{ses}_task-{bold_task}_run-{run_int:02d}_events.tsv",
                 )
                 if retained:
                     vec = B[:, col]
@@ -231,9 +238,9 @@ def main():
     with h5py.File(h5_out, "r") as fo:
         stored = fo["betas"]
         for src, grp in ret.groupby("source_beta_file"):
-            with h5py.File(PROJECT / src, "r") as fs:
+            with h5py.File(DS / src, "r") as fs:
                 Bsrc = fs["betas"][()]
-            dsrc = pd.read_csv(PROJECT / grp.source_design_file.iloc[0]); dsrc.columns = dsrc.columns.str.strip()
+            dsrc = read_trials(DS / grp.source_design_file.iloc[0]); dsrc.columns = dsrc.columns.str.strip()
             for r in grp.itertuples():
                 v = stored[int(r.record_id)]
                 ok = np.array_equal(v, Bsrc[:, int(r.trial_index)]) and ("delay" in str(dsrc.iloc[int(r.trial_index)]["type"]).lower())
@@ -252,7 +259,7 @@ def main():
     per_task.to_csv(out / f"{subj}_counts_per_task.csv", index=False)
     pd.DataFrame(run_summaries).to_csv(out / f"{subj}_counts_per_run.csv", index=False)
 
-    mask = np.load(PROJECT / "data/valid_vertex_mask.npy")
+    mask = np.load(paths.valid_vertex_mask())
     rec_max = np.abs(betas[:, mask]).max(1)
     validation = dict(
         subject=subj, n_runs=len(run_summaries), n_glm_columns_total=n_glm_columns_total,

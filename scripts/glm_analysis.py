@@ -19,6 +19,10 @@ from nilearn.glm.first_level import make_first_level_design_matrix, spm_hrf
 from sklearn.linear_model import LinearRegression
 
 from utils import glm_confounds_construction, load_valid_vertex_mask
+from config import paths  # utils puts the repo root on sys.path
+
+# TaskScape-WM layout: <root>/<sub>/<ses>/func/<stem>_space-fsLR_den-32k_desc-sm4_bold.dtseries.nii
+SURF_SUFFIX = f"_{paths.SURFACE_SPACE}_desc-sm4_bold.dtseries.nii"
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -34,13 +38,12 @@ def get_args():
     p.add_argument("--sessions", nargs="+", default=None)
     p.add_argument("--runs", nargs="+", default=None)
     p.add_argument("--include_types", nargs="+", default=["encoding", "delay"])
-    p.add_argument(
-        "--fmri_root",
-        default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled",
-    )
-    p.add_argument("--conf_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
-    p.add_argument("--events_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
-    p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data")
+    p.add_argument("--dataset_root", default=None, help="TaskScape-WM root (default: config.paths / $TASKSCAPE_DATASET_ROOT)")
+    p.add_argument("--output_root", default=None, help="analysis output root (default: config.paths / $TASKSCAPE_OUTPUT_ROOT)")
+    p.add_argument("--fmri_root", default=None, help="default: <dataset>/derivatives/taskscape-surface")
+    p.add_argument("--conf_root", default=None, help="default: <dataset>/derivatives/fmriprep")
+    p.add_argument("--events_root", default=None, help="default: <dataset>/sourcedata/behavior-reformatted")
+    p.add_argument("--out_root", default=None, help="default: <output_root>/encoding_delay")
     p.add_argument("--high_pass_sec", type=float, default=128.0)
     p.add_argument("--psc_eps", type=float, default=1e-8)
     p.add_argument("--overwrite", action="store_true")
@@ -58,7 +61,14 @@ def get_args():
         action="store_true",
         help="Generate brain surface R2 plots via nilearn (slow). Default: off.",
     )
-    return p.parse_args()
+    a = p.parse_args()
+    paths.configure(a.dataset_root, a.output_root)
+    paths.install_legacy_guard("glm_analysis")
+    a.fmri_root = str(paths.require_not_legacy(a.fmri_root or paths.surface_dir(), "--fmri_root"))
+    a.conf_root = str(paths.require_not_legacy(a.conf_root or paths.fmriprep_dir(), "--conf_root"))
+    a.events_root = str(paths.require_not_legacy(a.events_root or paths.reformatted_events_dir(), "--events_root"))
+    a.out_root = str(paths.require_not_legacy(a.out_root or paths.output_dir("encoding_delay"), "--out_root"))
+    return a
 
 
 def default_output_root(out_root_base: Path, correct_only: bool, subj: str) -> Path:
@@ -71,10 +81,10 @@ def discover_sessions(fmri_root_dir: Path):
 
 
 def discover_runs_from_timeseries(subj: str, ses: str, task: str, fmri_root_dir: Path):
-    pat = f"{subj}_{ses}_task-{task}_*_space-Glasser64k_bold_sm4.dtseries.nii"
-    files = sorted((fmri_root_dir / ses).glob(pat))
+    pat = f"{subj}_{ses}_task-{task}_*{SURF_SUFFIX}"
+    files = sorted((fmri_root_dir / ses / "func").glob(pat))
     run_pattern = re.compile(
-        rf"{re.escape(subj)}_{re.escape(ses)}_task-{re.escape(task)}_(.+?)_space-Glasser64k_bold_sm4\.dtseries\.nii"
+        rf"{re.escape(subj)}_{re.escape(ses)}_task-{re.escape(task)}_(.+?){re.escape(SURF_SUFFIX)}"
     )
     runs = []
     for f in files:
@@ -681,7 +691,7 @@ def main():
     confounds_root_dir = Path(args.conf_root) / subj
     events_root_dir = Path(args.events_root) / subj
     output_dir = default_output_root(Path(args.out_root), correct_only, subj)
-    sanity_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity") / subj
+    sanity_root = paths.output_dir("glm_sanity") / subj
 
     global_valid_mask = load_valid_vertex_mask().astype(bool)
     nilearn_surface_ready = False
@@ -716,7 +726,7 @@ def main():
             for run_label in runs:
                 aliases = run_aliases(run_label)
                 ts_candidates = [
-                    fmri_root_dir / ses / f"{subj}_{ses}_task-{task_name}_{rl}_space-Glasser64k_bold_sm4.dtseries.nii"
+                    fmri_root_dir / ses / "func" / f"{subj}_{ses}_task-{task_name}_{rl}{SURF_SUFFIX}"
                     for rl in aliases
                 ]
                 ev_candidates = [

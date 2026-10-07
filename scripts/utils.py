@@ -1,12 +1,17 @@
 import re
+import sys
 import numpy as np
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from config import paths  # noqa: E402  central TaskScape-WM paths (rejects the legacy tree)
 
 # ============================================================================
 # VALID VERTEX MASK UTILITIES
 # ============================================================================
 # Default path to the valid vertex mask
-DEFAULT_MASK_PATH = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy")
+# (TaskScape-WM: derivatives/taskscape-surface/atlas/valid_vertex_mask.npy; resolved lazily via config.paths)
+DEFAULT_MASK_PATH = None
 
 _cached_mask = None  # Cache the mask to avoid repeated disk reads
 
@@ -26,9 +31,9 @@ def load_valid_vertex_mask(mask_path: str | Path = None) -> np.ndarray:
     global _cached_mask
     
     if mask_path is None:
-        mask_path = DEFAULT_MASK_PATH
+        mask_path = paths.valid_vertex_mask()
     else:
-        mask_path = Path(mask_path)
+        mask_path = paths.require_not_legacy(Path(mask_path), "mask_path")
     
     # Use cached mask if available
     if _cached_mask is not None:

@@ -13,7 +13,8 @@ import argparse, hashlib, json, sys
 from pathlib import Path
 import numpy as np, pandas as pd, h5py, nibabel as nib
 
-PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from config import paths  # TaskScape-WM inputs only; rejects the legacy tree
 SUBJECTS = ["sub-01", "sub-02", "sub-03", "sub-05", "sub-06"]
 EXPECTED_VARIANTS = ["dms_loc", "nback_loc", "nback_ctg", "nback_obj", "ctxdm_lco", "ctxdm_col",
                      "interdms_loc_ABAB", "interdms_loc_ABBA", "interdms_ctg_ABAB", "interdms_ctg_ABBA",
@@ -29,7 +30,7 @@ def md_table(df):
 
 
 def atlas_axis_sha1():
-    img = nib.load(str(PROJECT / "data/Glasser_LR_Dense64k.dlabel.nii"))
+    img = nib.load(str(paths.glasser_dlabel()))
     ax = img.header.get_axis(1)
     h = hashlib.sha1(); h.update(np.asarray(ax.vertex).astype(np.int64).tobytes()); h.update("|".join(ax.name).encode())
     h.update(json.dumps(dict(ax.nvertices), sort_keys=True).encode())
@@ -38,15 +39,20 @@ def atlas_axis_sha1():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--data_dir", default=str(PROJECT / "data/encoding_delay/clean_delay_betas"))
+    ap.add_argument("--data_dir", default=None, help="default: <dataset>/derivatives/glm-clean-delay (per-subject folders) or a flat dir")
     ap.add_argument("--out_dir", required=True)
+    ap.add_argument("--dataset_root", default=None)
+    ap.add_argument("--output_root", default=None)
     args = ap.parse_args()
-    data = Path(args.data_dir); out = Path(args.out_dir); out.mkdir(parents=True, exist_ok=True)
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard("validate_clean_delay_betas")
+    data = paths.require_not_legacy(Path(args.data_dir or paths.clean_delay_dir()), "--data_dir")
+    out = paths.require_not_legacy(Path(args.out_dir), "--out_dir"); out.mkdir(parents=True, exist_ok=True)
     failures = []
 
     atlas_sha, labels = atlas_axis_sha1()
-    mask = np.load(PROJECT / "data/valid_vertex_mask.npy")
-    net = np.loadtxt(PROJECT / "data/cortex_parcel_network_assignments.txt").astype(int)
+    mask = np.load(paths.valid_vertex_mask())
+    net = np.loadtxt(paths.parcel_networks()).astype(int)
     parcel_counts = {p: int(((labels == p) & mask).sum()) for p in range(1, 361)}
     empty_parcels = [p for p, n in parcel_counts.items() if n == 0]
     if empty_parcels:
@@ -57,13 +63,13 @@ def main():
 
     rows, subj_summ = [], []
     for subj in SUBJECTS:
-        vj = data / f"{subj}_validation.json"
+        vj = ((data / subj) if (data / subj).is_dir() else data) / f"{subj}_validation.json"
         if not vj.exists():
             failures.append(f"{subj}: validation.json missing (builder failed?)"); continue
         v = json.loads(vj.read_text())
-        prov = pd.read_csv(data / f"{subj}_provenance.csv")
-        cnt = pd.read_csv(data / f"{subj}_counts_per_task.csv")
-        with h5py.File(data / f"{subj}_delay_betas.h5", "r") as f:
+        prov = pd.read_csv(((data / subj) if (data / subj).is_dir() else data) / f"{subj}_provenance.csv")
+        cnt = pd.read_csv(((data / subj) if (data / subj).is_dir() else data) / f"{subj}_counts_per_task.csv")
+        with h5py.File(((data / subj) if (data / subj).is_dir() else data) / f"{subj}_delay_betas.h5", "r") as f:
             n_rec, P = f["betas"].shape; sha = f.attrs["cifti_axis_sha1"]
             sample = f["betas"][:64]
         if sha != atlas_sha:

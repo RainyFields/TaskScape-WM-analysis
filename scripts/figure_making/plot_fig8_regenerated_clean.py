@@ -27,7 +27,10 @@ from figure_utils import get_figsize, save_figure, apply_clean_spines, add_panel
 plt.style.use("/project/def-pbellec/xuan/figure_style/nature_style.mplstyle")
 plt.rcParams["savefig.dpi"] = 600
 
-PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import paths  # outputs under OUTPUT_ROOT; never reads the legacy tree
+# EXTERNAL style dependency: /project/def-pbellec/xuan/figure_style (separate repo; not legacy, not dataset)
+REPO = paths.REPO_ROOT    # tracked published reference tables (results/similarity_analysis/with_dms) live in this repo
 FAMILIES = ["DMS", "1-Back", "InterDMS", "CTXDM"]
 RES = [("vertex", "Vertices (58,396)"), ("region", "Glasser regions (360)"), ("network", "Cole–Anticevic networks (12)")]
 SUBJ = ["sub-01", "sub-02", "sub-03", "sub-05", "sub-06"]
@@ -179,7 +182,7 @@ def fig_variants(fam, out, variants, names, fname, prod_ref=None, title=None):
 def production_reference():
     rows = []
     for res, key in PROD.items():
-        p = PROJECT / f"results/similarity_analysis/with_dms/similarity_bootstrap_results_task_{key}.csv"
+        p = REPO / f"results/similarity_analysis/with_dms/similarity_bootstrap_results_task_{key}.csv"
         if not p.exists():
             continue
         d = pd.read_csv(p); d["task_family"] = d.Task.map(fam_of)
@@ -218,16 +221,23 @@ def fig_task_level(task, out):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--results", default=str(PROJECT / "results/similarity_analysis/regenerated_clean"))
-    ap.add_argument("--out", default=str(PROJECT / "figures/fig8_regenerated_clean"))
+    ap.add_argument("--results", default=None, help="default: <output_root>/similarity_analysis/regenerated_clean")
+    ap.add_argument("--out", default=None, help="default: <output_root>/figures/fig8_regenerated_clean")
+    ap.add_argument("--dataset_root", default=None)
+    ap.add_argument("--output_root", default=None)
     args = ap.parse_args()
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard("plot_fig8_regenerated_clean")
+    args.results = str(paths.require_not_legacy(args.results or paths.output_dir("similarity_analysis", "regenerated_clean"), "--results"))
+    args.out = str(paths.require_not_legacy(args.out or paths.output_dir("figures", "fig8_regenerated_clean"), "--out"))
     results = Path(args.results); out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     task = pd.read_csv(results / "summary_task_level.csv"); fam = pd.read_csv(results / "summary_family_level.csv")
     fig_main(task, fam, out)
     fig_matrices(results, task, out)
-    fig_variants(fam, out, ["legacy_pickle", "fixed_with_duplicates", "clean_lookup", "clean_verified"],
-                 ["Original pickles (mis-indexed, duplicated)", "Fixed indexing, duplicates kept", "Fixed + de-duplicated (lookup labels)", "Final (block-file-verified labels)"],
-                 "figS_audit_variants", prod_ref=production_reference())
+    aud = [(v, n) for v, n in zip(["legacy_pickle", "fixed_with_duplicates", "clean_lookup", "clean_verified"],
+                                  ["Original pickles (mis-indexed, duplicated)", "Fixed indexing, duplicates kept", "Fixed + de-duplicated (lookup labels)", "Final (block-file-verified labels)"])
+           if v in set(fam.variant.unique())]   # legacy_pickle is absent when the invalid pickles are not supplied
+    fig_variants(fam, out, [v for v, _ in aud], [n for _, n in aud], "figS_audit_variants", prod_ref=production_reference())
     sens_v = ["clean_verified", "clean_exclude_inconsistent", "clean_behaviour_relabel", "clean_verified_robust_psc", "clean_verified_sessionscale"]
     sens_n = ["Primary (clean, verified labels)", "Exclude behaviour-inconsistent runs", "Relabel by behaviour (sensitivity)", "Exclude extreme-PSC vertices", "Random per-session scaling"]
     have = set(fam.variant.unique())
