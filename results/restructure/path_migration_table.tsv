@@ -1,0 +1,409 @@
+file	line	class	review	detail
+config/__init__.py		migrated	reviewed	
+config/paths.py		migrated (legacy path only in guard constants or comments)	reviewed	3 remaining mentions (comments/docstrings only)
+scripts/accuracy_level.py	133	input	auto (pending review)	root_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
+scripts/accuracy_level.py	154	historical	auto (pending review)	# if str(file_path) != "/project/def-pbellec/xuan/fmri_dataset_project/data/behavior/sub-06/ses-016/func/sub-06_ses-016_task-interdms_run-02_events.tsv":
+scripts/accuracy_level.py	186	input	auto (pending review)	results_csv_path = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/results/{task_name}_accuracy_results.csv")
+scripts/accuracy_plot.py	11	input	auto (pending review)	data_dir = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/results/{task_name}_accuracy_results.csv")
+scripts/accuracy_plot.py	26	output	auto (pending review)	save_path = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/results/performance/{task_name}_accuracy_boxplot.png")
+scripts/accuracy_sanity.py	13	historical	auto (pending review)	# source_root = Path("/project/def-pbellec/xuan/cneuromod.multfs.fmriprep/sourcedata/cneuromod.multfs.raw")
+scripts/accuracy_sanity.py	14	historical	auto (pending review)	# destination_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
+scripts/accuracy_sanity.py	48	historical	auto (pending review)	# design_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
+scripts/accuracy_sanity.py	96	input	auto (pending review)	behavior_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
+scripts/accuracy_sanity.py	97	input	auto (pending review)	design_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
+scripts/aggregate_subject_beta_activation_vertex.py	40	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas"
+scripts/aggregate_subject_beta_activation_vertex.py	47	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
+scripts/aggregate_subject_r2_vertex_maps.py	23	input	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
+scripts/aggregate_subject_r2_vertex_maps.py	28	input	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/r2_averaged_glasser64k/encoding_delay_ssmoothing_psc",
+scripts/backup_data_to_dropbox.sh	2	historical	auto (pending review)	# Back up fmri_dataset_project/data/ to Dropbox via rclone.
+scripts/backup_data_to_dropbox.sh	21	obsolete-candidate	auto (pending review)	REMOTE_PATH="${RCLONE_REMOTE_PATH:-fmri_dataset_project_backup/data}"
+scripts/backup_data_to_dropbox.sh	22	obsolete-candidate	auto (pending review)	SOURCE="/project/def-pbellec/xuan/fmri_dataset_project/data"
+scripts/backup_data_to_dropbox.sh	23	obsolete-candidate	auto (pending review)	LOG_DIR="/project/def-pbellec/xuan/fmri_dataset_project/logs"
+scripts/build_bids_release.py	44	input	auto (pending review)	PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
+scripts/build_bids_release.py	46	historical	auto (pending review)	"/project/def-pbellec/xuan/cneuromod.multfs.fmriprep/"
+scripts/build_bids_release.py	47	historical	auto (pending review)	"sourcedata/cneuromod.multfs.raw"
+scripts/build_bids_release.py	49	input	auto (pending review)	FMRIPREP_ROOT = Path("/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
+scripts/build_clean_delay_betas.py		migrated	reviewed	
+scripts/check_beta_consistency.py	16	input	auto (pending review)	BASE = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func")
+scripts/check_beta_consistency.py	17	input	auto (pending review)	MASK_PATH = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy")
+scripts/check_beta_consistency.py	18	output	auto (pending review)	OUT_FIG = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/beta_consistency.png")
+scripts/check_beta_consistency_output.txt	54	obsolete-candidate	auto (pending review)	Saved figure: /project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/beta_consistency.png
+scripts/cifti_resample.sh	4	obsolete-candidate	auto (pending review)	basedir="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep"
+scripts/cifti_resample.sh	5	obsolete-candidate	auto (pending review)	glasser_template="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii"
+scripts/cifti_resample.sh	12	obsolete-candidate	auto (pending review)	targetdir="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled/${subj}/ses-${session_id}"
+scripts/clean_encoding_delay_betas.py	34	input	auto (pending review)	PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
+scripts/comprehensive_glm_assessment.py	7	input	auto (pending review)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
+scripts/comprehensive_glm_assessment.py	278	input	auto (pending review)	original_file = "/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-ctxdm_run-01_betas.h5"
+scripts/condition_level_activity_cross_subj_corr.py	60	input	auto (pending review)	RESULT_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/task_level_avg_activity")
+scripts/condition_level_activity_cross_subj_corr.py	61	output	auto (pending review)	OUT_BASE = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/cross_subject_similarity")
+scripts/condition_level_visualization.py	118	input	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only")
+scripts/condition_level_visualization.py	121	input	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/results/task_level_avg_activity")
+scripts/condition_level_visualization.py	124	input	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
+scripts/condition_level_visualization.py	127	input	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt")
+scripts/condition_wise_correlation.py	25	input	auto (pending review)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-03_task_condition_betas
+scripts/condition_wise_correlation.py	26	input	auto (pending review)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/condition_wise_correlation.py	27	input	auto (pending review)	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
+scripts/condition_wise_correlation.py	28	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity \
+scripts/condition_wise_correlation.py	135	input	auto (pending review)	ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
+scripts/condition_wise_correlation.py	147	input	auto (pending review)	ap.add_argument("--vertex_mask_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy",
+scripts/create_nilearn_result.py	7	input	auto (pending review)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
+scripts/create_nilearn_result.py	28	input	auto (pending review)	fmri_root_dir = Path('/project/def-pbellec/xuan/cneuromod.multfs.fmriprep') / subj
+scripts/create_nilearn_result.py	29	input	auto (pending review)	confounds_root_dir = Path('/project/def-pbellec/xuan/cneuromod.multfs.fmriprep') / subj
+scripts/create_nilearn_result.py	30	input	auto (pending review)	events_root_dir = Path('/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior') / subj
+scripts/create_nilearn_result.py	31	output	auto (pending review)	output_dir = Path('/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data/trial_level_betas') / subj
+scripts/datalad_sync.sh	4	obsolete-candidate	auto (pending review)	datalad install --reckless ephemeral -s ria+file:///project/rrg-pbellec/ria-rorqual#~cneuromod.multfs.fmriprep@dev
+scripts/datalad_sync.sh	5	obsolete-candidate	auto (pending review)	cd cneuromod.multfs.fmriprep
+scripts/datalad_sync.sh	7	obsolete-candidate	auto (pending review)	datalad get -n --reckless ephemeral sourcedata/cneuromod.multfs.raw/
+scripts/evaluate_nilearn_glm.py	23	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/nilearn_evaluation
+scripts/evaluate_nilearn_glm.py	56	input	auto (pending review)	default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep",
+scripts/evaluate_nilearn_glm.py	59	input	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/results/nilearn_evaluation",
+scripts/events_diag_shell_log.txt	7617	obsolete-candidate	auto (pending review)	+ builtin export PWD=/lustre09/project/6002071/xuan/fmri_dataset_project/scripts
+scripts/events_diag_shell_log.txt	7618	obsolete-candidate	auto (pending review)	+ PWD=/lustre09/project/6002071/xuan/fmri_dataset_project/scripts
+scripts/events_diag_shell_log.txt	7620	obsolete-candidate	auto (pending review)	+ builtin eval 'python - <<'\''PY'\'' > /project/def-pbellec/xuan/fmri_dataset_project/scripts/events_run1_diagnostic_output.txt
+scripts/events_diag_shell_log.txt	7623	obsolete-candidate	auto (pending review)	ev_path = "/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-1_events.tsv"
+scripts/events_diag_shell_log.txt	7654	obsolete-candidate	auto (pending review)	FileNotFoundError: [Errno 2] No such file or directory: '/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior/sub-01/ses-001/func/sub-01_ses-
+scripts/events_diag_shell_log.txt	7665	obsolete-candidate	auto (pending review)	+ _emit /lustre09/project/6002071/xuan/fmri_dataset_project/scripts
+scripts/events_diag_shell_log.txt	7667	historical	auto (pending review)	' /lustre09/project/6002071/xuan/fmri_dataset_project/scripts
+scripts/events_diag_shell_log.txt	7803	obsolete-candidate	auto (pending review)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
+scripts/events_diag_shell_log.txt	7813	obsolete-candidate	auto (pending review)	declare -x SCRATCH="/scratch/xuan"
+scripts/events_diag_shell_log.txt	8007	obsolete-candidate	auto (pending review)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
+scripts/events_diag_shell_log.txt	8017	obsolete-candidate	auto (pending review)	declare -x SCRATCH="/scratch/xuan"
+scripts/events_diag_shell_log.txt	8211	obsolete-candidate	auto (pending review)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
+scripts/events_diag_shell_log.txt	8221	obsolete-candidate	auto (pending review)	declare -x SCRATCH="/scratch/xuan"
+scripts/events_diag_shell_log.txt	8416	obsolete-candidate	auto (pending review)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
+scripts/events_diag_shell_log.txt	8426	obsolete-candidate	auto (pending review)	declare -x SCRATCH="/scratch/xuan"
+scripts/export_beta_activation_session_maps.py	45	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas"
+scripts/export_beta_activation_session_maps.py	48	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
+scripts/export_beta_activation_session_maps.py	52	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
+scripts/export_taskgroup_beta_npy.py	21	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
+scripts/export_taskgroup_beta_npy.py	24	input	auto (pending review)	ATLAS_PATH = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
+scripts/export_taskgroup_beta_npy.py	26	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt"
+scripts/export_taskgroup_beta_npy.py	29	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy"
+scripts/fd_distribution.py	8	input	auto (pending review)	data_root = '/project/def-pbellec/xuan/cneuromod.multfs.fmriprep'
+scripts/fd_distribution.py	9	output	auto (pending review)	save_root = '/project/def-pbellec/xuan/fmri_dataset_project/results/fd_distribution'
+scripts/figure_making/investigate_r2_one_voxels.py	66	input	auto (pending review)	DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/data")
+scripts/figure_making/investigate_r2_one_voxels.py	69	output	auto (pending review)	OUTPUT_DIR = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/results/r2_investigation")
+scripts/figure_making/plot_accuracy.py	33	input	auto (pending review)	results_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results")
+scripts/figure_making/plot_accuracy.py	34	input	auto (pending review)	design_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
+scripts/figure_making/plot_accuracy.py	140	output	auto (pending review)	save_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/behavioral_performance/")
+scripts/figure_making/plot_behavioral_performance.py	4	input	auto (pending review)	Reads from existing CSV results in /project/def-pbellec/xuan/fmri_dataset_project/results/
+scripts/figure_making/plot_behavioral_performance.py	52	input	auto (pending review)	results_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results")
+scripts/figure_making/plot_behavioral_performance.py	53	input	auto (pending review)	figure_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/behavioral_performance")
+scripts/figure_making/plot_behavioral_performance.py	55	input	auto (pending review)	design_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
+scripts/figure_making/plot_fd_distribution.py	17	input	auto (pending review)	data_root = Path("/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
+scripts/figure_making/plot_fd_distribution.py	18	output	auto (pending review)	save_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/fd_distribution")
+scripts/figure_making/plot_fig8_regenerated_clean.py		migrated	reviewed	
+scripts/figure_making/plot_fig8_style_matched_v2.py	32	input	auto (pending review)	PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
+scripts/figure_making/plot_fig8_uncluttered_v3.py	34	input	auto (pending review)	PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
+scripts/figure_making/plot_glm_sanity_check.py	62	input	auto (pending review)	DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/data")
+scripts/figure_making/plot_glm_sanity_check.py	65	output	auto (pending review)	OUTPUT_DIR = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/results/glm_sanity_figures")
+scripts/figure_making/plot_per_task_within_across_subj_similarity.py	778	input	auto (pending review)	ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
+scripts/figure_making/plot_per_task_within_across_subj_similarity.py	784	input	auto (pending review)	ap.add_argument("--vertex_mask_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy",
+scripts/figure_making/plot_repetition_distribution.py	49	input	auto (pending review)	data_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only")
+scripts/figure_making/plot_repetition_distribution.py	52	output	auto (pending review)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/task_condition_repetition/")
+scripts/figure_making/plot_response_rate.py	21	input	auto (pending review)	root_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
+scripts/figure_making/plot_response_rate.py	22	input	auto (pending review)	results_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results")
+scripts/figure_making/plot_response_rate.py	23	input	auto (pending review)	figure_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/behavioral_performance/")
+scripts/figure_making/plot_sankey.py	31	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
+scripts/figure_making/plot_sankey.py	35	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/sankey"
+scripts/figure_making/plot_task_condition_count.py	22	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
+scripts/figure_making/plot_task_condition_count.py	26	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/"
+scripts/generate_valid_vertex_mask.py	25	input	auto (pending review)	DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/data")
+scripts/glm_analysis.py		migrated	reviewed	
+scripts/glm_analysis_condition_based.py	56	input	auto (pending review)	p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled")
+scripts/glm_analysis_condition_based.py	57	input	auto (pending review)	p.add_argument("--conf_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
+scripts/glm_analysis_condition_based.py	58	input	auto (pending review)	p.add_argument("--events_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
+scripts/glm_analysis_condition_based.py	59	output	auto (pending review)	p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data")
+scripts/glm_analysis_nilearn.py	11	output	auto (pending review)	- out_root is expected to be: /project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data
+scripts/glm_analysis_nilearn.py	28	input	auto (pending review)	--fmri_root /project/def-pbellec/xuan/cneuromod.multfs.fmriprep \
+scripts/glm_analysis_nilearn.py	29	input	auto (pending review)	--conf_root /project/def-pbellec/xuan/cneuromod.multfs.fmriprep \
+scripts/glm_analysis_nilearn.py	30	input	auto (pending review)	--events_root /project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior \
+scripts/glm_analysis_nilearn.py	31	output	auto (pending review)	--out_root /project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data \
+scripts/glm_analysis_nilearn.py	62	input	auto (pending review)	p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
+scripts/glm_analysis_nilearn.py	63	input	auto (pending review)	p.add_argument("--conf_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
+scripts/glm_analysis_nilearn.py	64	input	auto (pending review)	p.add_argument("--events_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
+scripts/glm_analysis_nilearn.py	65	output	auto (pending review)	p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data",
+scripts/glm_analysis_regularized.py	37	output	auto (pending review)	--out_root /project/def-pbellec/xuan/fmri_dataset_project/data \
+scripts/glm_analysis_regularized.py	70	input	auto (pending review)	p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled")
+scripts/glm_analysis_regularized.py	71	input	auto (pending review)	p.add_argument("--conf_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
+scripts/glm_analysis_regularized.py	72	input	auto (pending review)	p.add_argument("--events_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
+scripts/glm_analysis_regularized.py	73	output	auto (pending review)	p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data")
+scripts/glm_output.log	2	input	auto (pending review)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/run_single_session.py", line 242, in <module>
+scripts/glm_output.log	4	input	auto (pending review)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/glm_analysis_nilearn.py", line 271, in evaluate_glm_performance
+scripts/glm_output.log	8	input	auto (pending review)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/run_single_session.py", line 242, in <module>
+scripts/glm_output.log	10	input	auto (pending review)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/glm_analysis_nilearn.py", line 271, in evaluate_glm_performance
+scripts/glm_per_task_concat.py	70	input	auto (pending review)	p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled")
+scripts/glm_per_task_concat.py	71	input	auto (pending review)	p.add_argument("--conf_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
+scripts/glm_per_task_concat.py	72	input	auto (pending review)	p.add_argument("--events_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
+scripts/glm_per_task_concat.py	73	input	auto (pending review)	p.add_argument("--designs_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
+scripts/glm_per_task_concat.py	74	output	auto (pending review)	p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data")
+scripts/glm_ps_children.txt	3	obsolete-candidate	auto (pending review)	279341       09:25  0.0  0.0 /home/xuan/.cursor-server/bin/224838f96445be37e3db643a163a817c15b36060/resources/helpers/cursorsandbox --sandbox-policy-cwd /projec
+scripts/glm_ps_children.txt	4	obsolete-candidate	auto (pending review)	279370       09:25  436  0.2 python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --estimator wls_ar1 --out_root /project/def-pbellec/xuan/f
+scripts/glm_ps_status.txt	2	obsolete-candidate	auto (pending review)	279218       09:14  0.0  0.0 /bin/bash -O extglob -c snap=$(command cat <&3) && builtin shopt -s extglob && builtin eval -- "$snap" && { builtin set +u 2>/dev/n
+scripts/glm_python_ps_status.txt	2	obsolete-candidate	auto (pending review)	279370       11:52  425  0.1 python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --estimator wls_ar1 --out_root /project/def-pbellec/xuan/f
+scripts/glm_python_ps_status2.txt	2	obsolete-candidate	auto (pending review)	279370       14:30  444  0.1 python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --estimator wls_ar1 --out_root /project/def-pbellec/xuan/f
+scripts/hierarchical_clustering_chunk_analysis.py	19	input	auto (pending review)	--matrix_npy /project/def-pbellec/xuan/fmri_dataset_project/results/clustered/sub-03_reordered_matrix_per_network.npy \
+scripts/hierarchical_clustering_chunk_analysis.py	20	input	auto (pending review)	--cluster_csv /project/def-pbellec/xuan/fmri_dataset_project/results/clustered/sub-03_cluster_assignments_per_network.csv \
+scripts/hierarchical_clustering_chunk_analysis.py	21	output	auto (pending review)	--out_prefix /project/def-pbellec/xuan/fmri_dataset_project/results/clustered/sub-03_network_blocks
+scripts/hierarchical_clustering_conditions.py	23	input	auto (pending review)	--matrix_npy /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-06_cond_similarity_mean_matrix_per_network.npy \
+scripts/hierarchical_clustering_conditions.py	24	input	auto (pending review)	--cond_json  /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-06_cond_names_per_network.json \
+scripts/hierarchical_clustering_conditions.py	25	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/clustered \
+scripts/nilearn_quality.log	18	input	auto (pending review)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/nilearn_quality_assessment.py", line 701, in <module>
+scripts/nilearn_quality.log	20	input	auto (pending review)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/nilearn_quality_assessment.py", line 660, in main
+scripts/nilearn_quality.log	22	input	auto (pending review)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/nilearn_quality_assessment.py", line 123, in compute_r_squared_map
+scripts/nilearn_quality_assessment.py	8	input	auto (pending review)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
+scripts/nilearn_quality_assessment.py	42	input	auto (pending review)	fmri_root = Path('/project/def-pbellec/xuan/cneuromod.multfs.fmriprep') / self.subj
+scripts/nilearn_quality_assessment.py	43	input	auto (pending review)	events_root = Path('/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior') / self.subj
+scripts/nilearn_quality_assessment.py	672	output	auto (pending review)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/nilearn_quality_assessment")
+scripts/noise_ceiling.py	14	input	auto (pending review)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-01_task_condition_betas
+scripts/noise_ceiling.py	15	input	auto (pending review)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/noise_ceiling.py	16	input	auto (pending review)	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
+scripts/noise_ceiling.py	17	output	auto (pending review)	--unit region --sqrt_to_r 1 --output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/variance_based
+scripts/noise_ceiling.py	221	input	auto (pending review)	ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
+scripts/noise_ceiling_final_version.py	9	input	auto (pending review)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-01_task_condition_betas
+scripts/noise_ceiling_final_version.py	10	input	auto (pending review)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/noise_ceiling_final_version.py	11	input	auto (pending review)	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
+scripts/noise_ceiling_final_version.py	12	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/traditional_way/task_level \
+scripts/noise_ceiling_final_version.py	28	input	auto (pending review)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-01_task_condition_betas
+scripts/noise_ceiling_final_version.py	29	input	auto (pending review)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/noise_ceiling_final_version.py	30	input	auto (pending review)	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
+scripts/noise_ceiling_final_version.py	31	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/final_version \
+scripts/noise_ceiling_final_version.py	239	input	auto (pending review)	ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
+scripts/noise_ceiling_final_version.py	248	input	auto (pending review)	ap.add_argument("--vertex_mask_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy",
+scripts/noise_ceiling_tradition.py	7	input	auto (pending review)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-06_task_condition_betas
+scripts/noise_ceiling_tradition.py	8	input	auto (pending review)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/noise_ceiling_tradition.py	9	input	auto (pending review)	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
+scripts/noise_ceiling_tradition.py	10	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/traditional_way \
+scripts/noise_ceiling_tradition.py	164	input	auto (pending review)	ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii",
+scripts/ols_pid_check.txt	5	obsolete-candidate	auto (pending review)	3110029       14:11  0.0  0.0 Sl   /home/xuan/.cursor-server/bin/224838f96445be37e3db643a163a817c15b36060/resources/helpers/cursorsandbox --sandbox-policy-cwd /
+scripts/ols_pid_check.txt	6	obsolete-candidate	auto (pending review)	3110051       14:11  0.0  0.0 I    python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --runs run-1 --estimator ols --out_root /project/def
+scripts/ols_test_ps2.txt	3	obsolete-candidate	auto (pending review)	3147811       05:20  0.0  0.0 I    python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --runs run-1 --estimator ols --out_root /project/def
+scripts/plot_taskwise_similarity_distribution.py	19	input	auto (pending review)	--matrix_npy /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-03_cond_similarity_mean_matrix_per_network.npy \
+scripts/plot_taskwise_similarity_distribution.py	20	input	auto (pending review)	--cond_json  /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-03_cond_names_per_network.json \
+scripts/plot_taskwise_similarity_distribution.py	21	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/taskwise_similarity/ \
+scripts/quick_glm_evaluation.py	7	input	auto (pending review)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
+scripts/quick_glm_evaluation.py	215	input	auto (pending review)	original_file = f"/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01/ses-001/func/{base_name}_betas.h5"
+scripts/quick_glm_evaluation.py	216	input	auto (pending review)	nilearn_file = f"/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data/trial_level_betas/sub-01/ses-001/func/{base_name}_nilearn_betas.h5"
+scripts/quick_nilearn_evaluation.py	7	input	auto (pending review)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
+scripts/quick_nilearn_evaluation.py	35	input	auto (pending review)	fmri_root = Path('/project/def-pbellec/xuan/cneuromod.multfs.fmriprep') / subj
+scripts/quick_nilearn_evaluation.py	36	input	auto (pending review)	events_root = Path('/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior') / subj
+scripts/quick_nilearn_evaluation.py	291	output	auto (pending review)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results")
+scripts/reformat_behavior.py	305	input	auto (pending review)	root_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
+scripts/reformat_behavior.py	306	input	auto (pending review)	target_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
+scripts/region_level_task_correlation.py	20	input	auto (pending review)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-03_task_condition_betas
+scripts/region_level_task_correlation.py	21	input	auto (pending review)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/region_level_task_correlation.py	22	input	auto (pending review)	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
+scripts/region_level_task_correlation.py	23	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/task_condition_similarity \
+scripts/region_level_task_correlation_task_level.py	23	input	auto (pending review)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-03_task_condition_betas
+scripts/region_level_task_correlation_task_level.py	24	input	auto (pending review)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/region_level_task_correlation_task_level.py	25	input	auto (pending review)	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
+scripts/region_level_task_correlation_task_level.py	26	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/task_similarity/network_level \
+scripts/region_wise_correlation.py	48	input	auto (pending review)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-03_task_condition_betas
+scripts/region_wise_correlation.py	49	input	auto (pending review)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/region_wise_correlation.py	50	input	auto (pending review)	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
+scripts/region_wise_correlation.py	53	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/task_rsa
+scripts/remove_padded_run_duplicates.py	37	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas"
+scripts/remove_padded_run_duplicates.py	49	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas"
+scripts/remove_padded_run_duplicates.py	73	input	auto (pending review)	legacy_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas")
+scripts/repetition_count.py	109	input	auto (pending review)	betas_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/betas")
+scripts/repetition_count.py	110	input	auto (pending review)	metadata_path = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs/{subject}_design_design_with_converted.tsv")
+scripts/repetition_count.py	161	input	auto (pending review)	events_path = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/data/betas/{subject}/{ses_str}/func/{events_name[:-10]}design.csv")
+scripts/repetition_count.py	182	output	auto (pending review)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/repetition_count/all_stim_pairs")
+scripts/repetition_count.py	217	input	auto (pending review)	dms_betas_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas")
+scripts/repetition_count.py	238	output	auto (pending review)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/repetition_count/all_stim_pairs")
+scripts/repro/compare_fidelity.py		migrated	reviewed	
+scripts/repro/fallback_audit.py		migrated (legacy path only in guard constants or comments)	reviewed	1 remaining mentions (comments/docstrings only)
+scripts/repro/submit_fidelity.sh		migrated	reviewed	
+scripts/run1_adjusted_output.txt	7617	obsolete-candidate	auto (pending review)	+ builtin export PWD=/lustre09/project/6002071/xuan/fmri_dataset_project/scripts
+scripts/run1_adjusted_output.txt	7618	obsolete-candidate	auto (pending review)	+ PWD=/lustre09/project/6002071/xuan/fmri_dataset_project/scripts
+scripts/run1_adjusted_output.txt	7620	obsolete-candidate	auto (pending review)	+ builtin eval 'source /project/def-pbellec/xuan/nilearn/bin/activate && set -x && python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --ru
+scripts/run1_adjusted_output.txt	7652	obsolete-candidate	auto (pending review)	++ python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --runs run-1 --estimator ols --out_root /project/def-pbellec/xuan/fmri_dataset_proje
+scripts/run1_adjusted_output.txt	7658	obsolete-candidate	auto (pending review)	[save] h5: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-1_betas.h5
+scripts/run1_adjusted_output.txt	7659	obsolete-candidate	auto (pending review)	[save] design: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-1_desig
+scripts/run1_adjusted_output.txt	7660	obsolete-candidate	auto (pending review)	[save] design_matrix: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-
+scripts/run1_adjusted_output.txt	7661	obsolete-candidate	auto (pending review)	[save] sanity_r2_hist: /project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_histogram.png
+scripts/run1_adjusted_output.txt	7662	obsolete-candidate	auto (pending review)	[save] sanity_examples: /project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/example_vertices.png
+scripts/run1_adjusted_output.txt	7663	obsolete-candidate	auto (pending review)	[save] sanity_corr: /project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/design_matrix_correlation.png
+scripts/run1_adjusted_output.txt	7664	obsolete-candidate	auto (pending review)	[save] sanity_vif: /project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/vif_task_regressors.png
+scripts/run1_adjusted_output.txt	7679	obsolete-candidate	auto (pending review)	+ _emit /lustre09/project/6002071/xuan/fmri_dataset_project/scripts
+scripts/run1_adjusted_output.txt	7681	historical	auto (pending review)	' /lustre09/project/6002071/xuan/fmri_dataset_project/scripts
+scripts/run1_adjusted_output.txt	7817	obsolete-candidate	auto (pending review)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
+scripts/run1_adjusted_output.txt	7827	obsolete-candidate	auto (pending review)	declare -x SCRATCH="/scratch/xuan"
+scripts/run1_adjusted_output.txt	8021	obsolete-candidate	auto (pending review)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
+scripts/run1_adjusted_output.txt	8031	obsolete-candidate	auto (pending review)	declare -x SCRATCH="/scratch/xuan"
+scripts/run1_adjusted_output.txt	8225	obsolete-candidate	auto (pending review)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
+scripts/run1_adjusted_output.txt	8235	obsolete-candidate	auto (pending review)	declare -x SCRATCH="/scratch/xuan"
+scripts/run1_adjusted_output.txt	8430	obsolete-candidate	auto (pending review)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
+scripts/run1_adjusted_output.txt	8440	obsolete-candidate	auto (pending review)	declare -x SCRATCH="/scratch/xuan"
+scripts/run1_surface_diagnosis_report.txt	7	obsolete-candidate	auto (pending review)	/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_histogram.png | exists=True
+scripts/run1_surface_diagnosis_report.txt	8	obsolete-candidate	auto (pending review)	/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_surface.png | exists=True
+scripts/run1_surface_diagnosis_report.txt	9	obsolete-candidate	auto (pending review)	/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_task_adj_surface_both_views.png | exists=True
+scripts/run_glm_nilearn_permutations.sh	21	obsolete-candidate	auto (pending review)	SCRIPT_DIR="/project/def-pbellec/xuan/fmri_dataset_project/scripts"
+scripts/run_glm_nilearn_permutations.sh	25	obsolete-candidate	auto (pending review)	FMRI_ROOT="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep"
+scripts/run_glm_nilearn_permutations.sh	26	obsolete-candidate	auto (pending review)	CONF_ROOT="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep"
+scripts/run_glm_nilearn_permutations.sh	27	obsolete-candidate	auto (pending review)	EVENTS_ROOT="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior"
+scripts/run_glm_nilearn_permutations.sh	28	obsolete-candidate	auto (pending review)	OUT_ROOT="/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data"
+scripts/run_glm_nilearn_permutations.sh	29	obsolete-candidate	auto (pending review)	EVAL_OUT="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/nilearn_glm"
+scripts/run_glm_permutations.sh	32	obsolete-candidate	auto (pending review)	cd /project/def-pbellec/xuan/fmri_dataset_project/scripts
+scripts/run_glm_permutations.sh	42	obsolete-candidate	auto (pending review)	mkdir -p "/project/def-pbellec/xuan/fmri_dataset_project/data/${root}"
+scripts/run_glm_permutations.sh	52	obsolete-candidate	auto (pending review)	outdir="/project/def-pbellec/xuan/fmri_dataset_project/data/${output_root}"
+scripts/run_nilearn_analysis.py	101	input	auto (pending review)	data_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data/trial_level_betas")
+scripts/run_nilearn_analysis.py	169	output	auto (pending review)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data")
+scripts/run_nilearn_analysis.py	173	input	auto (pending review)	eval_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/nilearn_evaluation")
+scripts/run_single_session.py	7	input	auto (pending review)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
+scripts/run_single_session.py	22	input	auto (pending review)	fmri_root='/project/def-pbellec/xuan/cneuromod.multfs.fmriprep',
+scripts/run_single_session.py	23	input	auto (pending review)	conf_root='/project/def-pbellec/xuan/cneuromod.multfs.fmriprep',
+scripts/run_single_session.py	24	input	auto (pending review)	events_root='/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior',
+scripts/run_single_session.py	25	output	auto (pending review)	out_root='/project/def-pbellec/xuan/fmri_dataset_project/data',
+scripts/sanity_all_processed.py	13	input	auto (pending review)	design_file_path = f"/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs/{subject}_design_design_with_converted.tsv"
+scripts/sanity_all_processed.py	31	input	auto (pending review)	betas_root = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/data/betas/{subject}")
+scripts/sanity_check/beta_contrast_vis.py	13	obsolete-candidate	auto (pending review)	data_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/betas")
+scripts/sanity_check/beta_contrast_vis.py	14	obsolete-candidate	auto (pending review)	glasser_atlas_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
+scripts/sanity_check/beta_contrast_vis.py	15	obsolete-candidate	auto (pending review)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/sanity_check")
+scripts/sanity_check/beta_contrast_vis_condition_level.py	2	historical	auto (pending review)	#     --folder /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas \
+scripts/sanity_check/beta_contrast_vis_condition_level.py	3	historical	auto (pending review)	#     --stats_output /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/stats \
+scripts/sanity_check/beta_contrast_vis_condition_level.py	5	historical	auto (pending review)	#     --output_csv /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/stats/summary.csv
+scripts/sanity_check/beta_contrast_vis_per_task_concat.py	33	obsolete-candidate	auto (pending review)	p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data",
+scripts/sanity_check/beta_contrast_vis_per_task_concat.py	35	obsolete-candidate	auto (pending review)	p.add_argument("--results_root", default="/project/def-pbellec/xuan/fmri_dataset_project/results",
+scripts/sanity_check/beta_contrast_vis_per_task_concat.py	37	obsolete-candidate	auto (pending review)	p.add_argument("--designs_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs",
+scripts/sanity_check/beta_contrast_vis_per_task_concat.py	41	obsolete-candidate	auto (pending review)	p.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
+scripts/sanity_check/beta_contrast_vis_roi_condition_level.py	19	obsolete-candidate	auto (pending review)	--folder /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas \
+scripts/sanity_check/beta_contrast_vis_roi_condition_level.py	20	obsolete-candidate	auto (pending review)	--roi_output /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/roi_stats \
+scripts/sanity_check/beta_contrast_vis_roi_condition_level.py	21	obsolete-candidate	auto (pending review)	--atlas /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/sanity_check/beta_contrast_vis_roi_condition_level.py	23	obsolete-candidate	auto (pending review)	--output_csv /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/roi_stats/summary_enc_minus_delay.csv
+scripts/sanity_check/beta_contrast_vis_roi_trial_level.py	32	obsolete-candidate	auto (pending review)	--folder      /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01 \
+scripts/sanity_check/beta_contrast_vis_roi_trial_level.py	33	obsolete-candidate	auto (pending review)	--atlas       /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/sanity_check/beta_contrast_vis_roi_trial_level.py	34	obsolete-candidate	auto (pending review)	--roi_output  /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/roi_stats \
+scripts/sanity_check/beta_contrast_vis_roi_trial_level.py	37	obsolete-candidate	auto (pending review)	--output_csv  /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/roi_stats/sub-01/summary_enc_vs_delay.csv
+scripts/sanity_check/beta_contrast_vis_task_aggregated_condition_level.py	35	obsolete-candidate	auto (pending review)	--roi_stats_root /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/roi_stats \
+scripts/sanity_check/beta_contrast_vis_task_aggregated_condition_level.py	36	obsolete-candidate	auto (pending review)	--out_root       /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/task_level_roi_stats \
+scripts/sanity_check/beta_contrast_vis_task_aggregated_condition_level.py	38	obsolete-candidate	auto (pending review)	--output_csv     /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/task_level_roi_stats/summary_enc_minus_delay.csv
+scripts/sanity_check/beta_contrast_vis_task_aggregated_trial_level.py	33	obsolete-candidate	auto (pending review)	--glm_root   /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas \
+scripts/sanity_check/beta_contrast_vis_task_aggregated_trial_level.py	34	obsolete-candidate	auto (pending review)	--atlas      /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/sanity_check/beta_contrast_vis_task_aggregated_trial_level.py	35	obsolete-candidate	auto (pending review)	--out_root   /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/task_level_roi_stats \
+scripts/sanity_check/beta_contrast_vis_task_aggregated_trial_level.py	39	obsolete-candidate	auto (pending review)	--output_csv /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/task_level_roi_stats/summary_enc_vs_delay_1back.csv
+scripts/sanity_check/beta_contrast_vis_trial_level.py	38	obsolete-candidate	auto (pending review)	--folder /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01 \
+scripts/sanity_check/beta_contrast_vis_trial_level.py	39	obsolete-candidate	auto (pending review)	--stats_output /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/stats/sub-01 \
+scripts/sanity_check/beta_contrast_vis_trial_level.py	41	obsolete-candidate	auto (pending review)	--p_thresh 0.05 --output_csv /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/stats/sub-01/summary_enc_vs_delay.csv \
+scripts/sanity_check/beta_contrast_vis_trial_level.py	42	obsolete-candidate	auto (pending review)	--atlas /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/sanity_check/beta_contrast_vis_trial_level.py	43	obsolete-candidate	auto (pending review)	--roi_output /project/def-pbellec/xuan/fmri_dataset_project/data//trial_level_betas/roi_stats/sub-01 --roi_method ivw --tail two-sided
+scripts/sanity_check/compare_ground_truth_vs_fitted_betas.py	34	obsolete-candidate	auto (pending review)	SYNTHETIC_DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/synthetic_data")
+scripts/sanity_check/debug_parcel_loading.py	14	obsolete-candidate	auto (pending review)	fmri_file = "/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled/sub-01/ses-001/sub-01_ses-001_task-ctxdm_run-1_space-Glasser64k_bold.dtseries
+scripts/sanity_check/debug_synthetic_vs_glm_design.py	18	obsolete-candidate	auto (pending review)	SYNTHETIC_DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/synthetic_data")
+scripts/sanity_check/design_matrix_vis.py	19	obsolete-candidate	auto (pending review)	/project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-ctxdm_run-01_betas.h5
+scripts/sanity_check/design_matrix_vis.py	23	obsolete-candidate	auto (pending review)	/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01 --recursive
+scripts/sanity_check/design_matrix_vis.py	27	obsolete-candidate	auto (pending review)	/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-ctxdm_run-01_design_matrix.csv --title "sub-01_ses
+scripts/sanity_check/glm_evaluation.py	24	obsolete-candidate	auto (pending review)	--glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_decoding/trial_level_betas  \
+scripts/sanity_check/glm_evaluation.py	25	obsolete-candidate	auto (pending review)	--fmri_root /project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled  \
+scripts/sanity_check/glm_evaluation.py	26	obsolete-candidate	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_decoding \
+scripts/sanity_check/glm_evaluation.py	76	obsolete-candidate	auto (pending review)	p.add_argument("--glm_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas")
+scripts/sanity_check/glm_evaluation.py	77	obsolete-candidate	auto (pending review)	p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled")
+scripts/sanity_check/glm_evaluation.py	78	obsolete-candidate	auto (pending review)	p.add_argument("--output_dir", default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm")
+scripts/sanity_check/glm_evaluation_nilearn.py	14	obsolete-candidate	auto (pending review)	--glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data/trial_level_betas \
+scripts/sanity_check/glm_evaluation_nilearn.py	15	obsolete-candidate	auto (pending review)	--fmri_root /project/def-pbellec/xuan/cneuromod.multfs.fmriprep \
+scripts/sanity_check/glm_evaluation_nilearn.py	16	obsolete-candidate	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/nilearn_glm \
+scripts/sanity_check/glm_evaluation_noise_ceiling.py	3	historical	auto (pending review)	# /project/def-pbellec/xuan/fmri_dataset_project/scripts/task_condition_identification.py
+scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_full_region_avg_summary.txt	6	obsolete-candidate	auto (pending review)	h5_root: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
+scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_full_region_avg_summary.txt	7	obsolete-candidate	auto (pending review)	atlas: /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii
+scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_task_adj_region_avg_summary.txt	4	obsolete-candidate	auto (pending review)	h5_root: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
+scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_task_adj_region_avg_summary.txt	5	obsolete-candidate	auto (pending review)	atlas: /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii
+scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_task_region_avg_summary.txt	4	obsolete-candidate	auto (pending review)	h5_root: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
+scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_task_region_avg_summary.txt	5	obsolete-candidate	auto (pending review)	atlas: /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii
+scripts/sanity_check/make_synthetic_glm_dataset.py	30	obsolete-candidate	auto (pending review)	ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/synthetic_data")
+scripts/sanity_check/plot_adjusted_r2_distribution_all_tasks.py	45	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
+scripts/sanity_check/plot_adjusted_r2_distribution_all_tasks.py	50	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc",
+scripts/sanity_check/plot_subject_region_average_r2.py	26	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
+scripts/sanity_check/plot_subject_region_average_r2.py	31	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii",
+scripts/sanity_check/plot_subject_region_average_r2.py	48	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc",
+scripts/sanity_check/plot_unadjusted_r2_distribution_all_tasks.py	59	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
+scripts/sanity_check/plot_unadjusted_r2_distribution_all_tasks.py	65	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/"
+scripts/sanity_check/raw_data_snr_analysis.py	20	obsolete-candidate	auto (pending review)	--fmriprep_root /project/def-pbellec/xuan/cneuromod.multfs.fmriprep \
+scripts/sanity_check/raw_data_snr_analysis.py	21	obsolete-candidate	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/raw_data_snr
+scripts/sanity_check/raw_data_snr_analysis.py	42	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep",
+scripts/sanity_check/raw_data_snr_analysis.py	45	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/raw_data_snr",
+scripts/sanity_check/vertex_level_analysis.py	36	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled",
+scripts/sanity_check/vertex_level_analysis.py	39	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check",
+scripts/sanity_check/visualize_raw_timeseries.py	17	obsolete-candidate	auto (pending review)	--fmri_root /project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled
+scripts/sanity_check/visualize_raw_timeseries.py	38	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled",
+scripts/sanity_check/visualize_raw_timeseries.py	41	obsolete-candidate	auto (pending review)	default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check",
+scripts/session_consistency_dms.py	224	input	auto (pending review)	betas_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas")
+scripts/session_consistency_dms.py	225	input	auto (pending review)	atlas_path = "/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii"
+scripts/session_consistency_dms.py	226	output	auto (pending review)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/session_consistency")
+scripts/similarity_analysis_clean.py		migrated	reviewed	
+scripts/smooth_glasser_sm4.sh	6	obsolete-candidate	auto (pending review)	BASEDIR="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled"
+scripts/smooth_glasser_sm4.sh	7	obsolete-candidate	auto (pending review)	FIGDIR="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled/smoothing_verification"
+scripts/smooth_glasser_sm4.sh	8	obsolete-candidate	auto (pending review)	LEFT_SURF="/project/def-pbellec/xuan/fmri_dataset_project/data/fsLR_32k_midthickness/tpl-fsLR_hemi-L_den-32k_midthickness.surf.gii"
+scripts/smooth_glasser_sm4.sh	9	obsolete-candidate	auto (pending review)	RIGHT_SURF="/project/def-pbellec/xuan/fmri_dataset_project/data/fsLR_32k_midthickness/tpl-fsLR_hemi-R_den-32k_midthickness.surf.gii"
+scripts/smooth_glasser_sm4.sh	10	obsolete-candidate	auto (pending review)	VERIFY_SCRIPT="/project/def-pbellec/xuan/fmri_dataset_project/scripts/verify_smoothing.py"
+scripts/smooth_glasser_sm4_array.sh	8	historical	auto (pending review)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/smooth_sm4_%A_%a.log
+scripts/smooth_glasser_sm4_array.sh	9	historical	auto (pending review)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/smooth_sm4_%A_%a.err
+scripts/smooth_glasser_sm4_array.sh	18	obsolete-candidate	auto (pending review)	BASEDIR="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled"
+scripts/smooth_glasser_sm4_array.sh	19	obsolete-candidate	auto (pending review)	LEFT_SURF="/project/def-pbellec/xuan/fmri_dataset_project/data/fsLR_32k_midthickness/tpl-fsLR_hemi-L_den-32k_midthickness.surf.gii"
+scripts/smooth_glasser_sm4_array.sh	20	obsolete-candidate	auto (pending review)	RIGHT_SURF="/project/def-pbellec/xuan/fmri_dataset_project/data/fsLR_32k_midthickness/tpl-fsLR_hemi-R_den-32k_midthickness.surf.gii"
+scripts/split_half_consistency_dms.py	265	input	auto (pending review)	betas_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas")
+scripts/split_half_consistency_dms.py	266	input	auto (pending review)	atlas_path = "/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii"
+scripts/split_half_consistency_dms.py	267	output	auto (pending review)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/split_half_consistency")
+scripts/subject_within_vs_cross_similarity.py	26	input	auto (pending review)	--input_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only \
+scripts/subject_within_vs_cross_similarity.py	27	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/task_rsa_cross_subject \
+scripts/subject_within_vs_cross_similarity.py	30	input	auto (pending review)	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
+scripts/subject_within_vs_cross_similarity.py	31	input	auto (pending review)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii
+scripts/subject_within_vs_cross_similarity.py	184	input	auto (pending review)	ap.add_argument("--vertex_mask_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy",
+scripts/submit_aggregate_subject_r2.sh	22	obsolete-candidate	auto (pending review)	cd /project/def-pbellec/xuan/fmri_dataset_project/scripts
+scripts/submit_aggregate_subject_r2.sh	25	obsolete-candidate	auto (pending review)	OUT_ROOT="/project/def-pbellec/xuan/fmri_dataset_project/data/r2_averaged_glasser64k"
+scripts/submit_build_bids_release.sh	8	historical	auto (pending review)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%A_%a.log
+scripts/submit_build_bids_release.sh	9	historical	auto (pending review)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%A_%a.err
+scripts/submit_build_bids_release.sh	27	obsolete-candidate	auto (pending review)	python /project/def-pbellec/xuan/fmri_dataset_project/scripts/build_bids_release.py \
+scripts/submit_glm_array.sh	8	historical	auto (pending review)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/glm_%A_%a.log
+scripts/submit_glm_array.sh	9	historical	auto (pending review)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/glm_%A_%a.err
+scripts/submit_glm_array.sh	25	obsolete-candidate	auto (pending review)	python /project/def-pbellec/xuan/fmri_dataset_project/scripts/glm_analysis.py \
+scripts/submit_glm_array.sh	29	obsolete-candidate	auto (pending review)	--fmri_root /project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled \
+scripts/submit_glm_array.sh	30	obsolete-candidate	auto (pending review)	--out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay \
+scripts/submit_glm_clean_regenerate.sh	8	historical	auto (pending review)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/glm_clean_%A_%a.log
+scripts/submit_glm_clean_regenerate.sh	9	historical	auto (pending review)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/glm_clean_%A_%a.err
+scripts/submit_glm_clean_regenerate.sh	29	obsolete-candidate	auto (pending review)	python /project/def-pbellec/xuan/fmri_dataset_project/scripts/glm_analysis.py \
+scripts/submit_glm_clean_regenerate.sh	33	obsolete-candidate	auto (pending review)	--fmri_root /project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled \
+scripts/submit_glm_clean_regenerate.sh	34	obsolete-candidate	auto (pending review)	--out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay \
+scripts/submit_regenerate_grouped_betas.sh	8	historical	auto (pending review)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/group_betas_%A_%a.log
+scripts/submit_regenerate_grouped_betas.sh	9	historical	auto (pending review)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/group_betas_%A_%a.err
+scripts/submit_regenerate_grouped_betas.sh	24	obsolete-candidate	auto (pending review)	GLM_ROOT=/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
+scripts/submit_regenerate_grouped_betas.sh	26	obsolete-candidate	auto (pending review)	python /project/def-pbellec/xuan/fmri_dataset_project/scripts/task_condition_identification.py \
+scripts/submit_smooth_sm4_array.sh	4	obsolete-candidate	auto (pending review)	mkdir -p /project/def-pbellec/xuan/fmri_dataset_project/logs
+scripts/submit_smooth_sm4_array.sh	5	obsolete-candidate	auto (pending review)	sbatch /project/def-pbellec/xuan/fmri_dataset_project/scripts/smooth_glasser_sm4_array.sh
+scripts/submit_tar_release.sh	8	historical	auto (pending review)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%A_%a.log
+scripts/submit_tar_release.sh	9	historical	auto (pending review)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%A_%a.err
+scripts/summarize_condition_correlations.py	23	input	auto (pending review)	--matrix_npy /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-06_cond_similarity_mean_matrix_per_network.npy \
+scripts/summarize_condition_correlations.py	24	input	auto (pending review)	--cond_json  /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-06_cond_names_per_network.json \
+scripts/summarize_condition_correlations.py	25	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/clustered \
+scripts/sync_betas_to_shared.sh	7	historical	auto (pending review)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%j.log
+scripts/sync_betas_to_shared.sh	8	historical	auto (pending review)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%j.err
+scripts/sync_betas_to_shared.sh	13	obsolete-candidate	auto (pending review)	SRC=/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
+scripts/task_col_uniqueness_checks.txt	2	obsolete-candidate	auto (pending review)	Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-1_design_matrix.
+scripts/task_col_uniqueness_checks.txt	8	obsolete-candidate	auto (pending review)	Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-ctxdm_run-1_design_matrix.csv
+scripts/task_col_uniqueness_checks.txt	14	obsolete-candidate	auto (pending review)	Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-dms_run-1_design_matrix.csv
+scripts/task_col_uniqueness_checks.txt	20	obsolete-candidate	auto (pending review)	Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-1back_run-1_design_matrix.csv
+scripts/task_condition_identification.py	39	input	auto (pending review)	--glm_root   /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas
+scripts/task_condition_identification.py	40	output	auto (pending review)	--out_root   /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas
+scripts/task_condition_identification.py	52	input	auto (pending review)	--glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas \
+scripts/task_condition_identification.py	53	output	auto (pending review)	--out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas \
+scripts/task_condition_identification.py	61	input	auto (pending review)	--glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas \
+scripts/task_condition_identification.py	62	output	auto (pending review)	--out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas \
+scripts/task_condition_identification.py	521	input	auto (pending review)	ap.add_argument("--glm_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas",
+scripts/task_condition_identification.py	523	output	auto (pending review)	ap.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas",
+scripts/task_condition_identification.py	559	input	auto (pending review)	design_file_df = pd.read_csv(f"/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs/{subj}_design_design_with_converted.tsv", sep="\t")
+scripts/task_condition_repetition_check_raw_data.py	27	input	auto (pending review)	base_dir = "/project/def-pbellec/xuan/cneuromod.multfs.fmriprep/sourcedata/cneuromod.multfs.raw/sub-03"
+scripts/task_similarity_across_units.py	31	input	auto (pending review)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-03_task_condition_betas
+scripts/task_similarity_across_units.py	32	input	auto (pending review)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
+scripts/task_similarity_across_units.py	34	output	auto (pending review)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/task_similarity \
+scripts/task_similarity_across_units.py	36	input	auto (pending review)	/project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt
+scripts/task_similarity_across_units.py	394	input	auto (pending review)	ap.add_argument("--vertex_mask_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy",
+scripts/test_single_run.py	7	input	auto (pending review)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
+scripts/test_single_run.py	22	input	auto (pending review)	fmri_root='/project/def-pbellec/xuan/cneuromod.multfs.fmriprep',
+scripts/test_single_run.py	23	input	auto (pending review)	conf_root='/project/def-pbellec/xuan/cneuromod.multfs.fmriprep',
+scripts/test_single_run.py	24	input	auto (pending review)	events_root='/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior',
+scripts/test_single_run.py	25	output	auto (pending review)	out_root='/project/def-pbellec/xuan/fmri_dataset_project/data',
+scripts/update_dms_reformatted_mods.py	16	input	auto (pending review)	ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
+scripts/utils.py		migrated	reviewed	
+scripts/validate_clean_delay_betas.py		migrated	reviewed	
+scripts/verify_encoding_delay_beta_compliance.py	18	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas"
+scripts/verify_run_labels_from_blockfiles.py		migrated (legacy path only in guard constants or comments)	reviewed	1 remaining mentions (comments/docstrings only)
+scripts/verify_smoothing.py	15	historical	auto (pending review)	"/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii"
