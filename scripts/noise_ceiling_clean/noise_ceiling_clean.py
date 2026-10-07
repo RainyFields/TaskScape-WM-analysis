@@ -28,6 +28,9 @@ from pathlib import Path
 
 import nibabel as nib
 import numpy as np
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import paths  # noqa: E402  TaskScape-WM inputs only; rejects the legacy tree
 import pandas as pd
 
 TASK_VARIANTS = [
@@ -133,9 +136,15 @@ def main():
                     help="DIAGNOSTIC: re-introduce the legacy duplicate multiplicity (delay after item>1 stored twice)")
     ap.add_argument("--exclude_records_csv", default="", help="CSV with a record_id column to exclude")
     ap.add_argument("--min_per_variant", type=int, default=2)
-    ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
+    ap.add_argument("--atlas_path", default=None, help="default: <dataset>/derivatives/taskscape-surface/atlas/Glasser_LR_Dense64k.dlabel.nii")
+    ap.add_argument("--dataset_root", default=None)
+    ap.add_argument("--output_root", default=None)
     ap.add_argument("--variant_name", default="")
     args = ap.parse_args()
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard(f"noise_ceiling_clean_{args.subj}_{args.variant_name}")
+    args.atlas_path = str(paths.require_not_legacy(args.atlas_path or paths.glasser_dlabel(), "--atlas_path"))
+    paths.require_not_legacy(args.input_dir, "--input_dir"); paths.require_not_legacy(args.out_dir, "--out_dir")
 
     t0 = time.time()
     subj = args.subj

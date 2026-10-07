@@ -20,17 +20,18 @@ import nibabel as nib
 import numpy as np
 import pandas as pd
 
-PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import paths  # TaskScape-WM inputs only; rejects the legacy tree
 N_VERTICES = 64984
 N_REGIONS = 360
 EXTREME_P95 = 100.0  # same record-level rule as similarity_analysis_clean.EXTREME_PSC
 
 
 def load_averagers(mask: np.ndarray):
-    lab = np.asarray(nib.load(str(PROJECT / "data/Glasser_LR_Dense64k.dlabel.nii")).get_fdata()).reshape(-1).astype(int)
+    lab = np.asarray(nib.load(str(paths.glasser_dlabel())).get_fdata()).reshape(-1).astype(int)
     if lab.size != N_VERTICES:
         raise SystemExit(f"atlas size {lab.size}")
-    net = np.loadtxt(PROJECT / "data/cortex_parcel_network_assignments.txt").astype(int)
+    net = np.loadtxt(paths.parcel_networks()).astype(int)
     if net.size != N_REGIONS:
         raise SystemExit("network assignment length != 360")
     valid = np.where(mask)[0]
@@ -51,12 +52,16 @@ def load_averagers(mask: np.ndarray):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--subj", required=True)
-    ap.add_argument("--clean_dir", default=str(PROJECT / "data/encoding_delay/clean_delay_betas"))
+    ap.add_argument("--clean_dir", default=None, help="default: <dataset>/derivatives/glm-clean-delay/<subj>")
     ap.add_argument("--out_dir", required=True)
     ap.add_argument("--chunk", type=int, default=256)
+    ap.add_argument("--dataset_root", default=None)
+    ap.add_argument("--output_root", default=None)
     args = ap.parse_args()
-
-    clean = Path(args.clean_dir)
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard(f"prepare_nc_bundle_{args.subj}")
+    paths.require_not_legacy(args.out_dir, "--out_dir")
+    clean = paths.require_not_legacy(Path(args.clean_dir) if args.clean_dir else paths.clean_delay_dir() / args.subj, "--clean_dir")
     out = Path(args.out_dir)
     out.mkdir(parents=True, exist_ok=True)
     val = json.loads((clean / f"{args.subj}_validation.json").read_text())
@@ -84,7 +89,7 @@ def main():
     bad_trials = set(map(tuple, prov_all.loc[~prov_all.retained, trial_key].drop_duplicates().to_numpy()))
     ret["retain_trial_level"] = [tuple(r) not in bad_trials for r in ret[trial_key].to_numpy()]
 
-    mask = np.load(PROJECT / "data/valid_vertex_mask.npy").astype(bool)
+    mask = np.load(paths.valid_vertex_mask()).astype(bool)
     if mask.size != N_VERTICES:
         raise SystemExit("mask size")
     valid, W, Wn, net = load_averagers(mask)
