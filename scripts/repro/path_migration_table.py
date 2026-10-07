@@ -9,7 +9,10 @@ file migrated in the taskscape-migration branches (now free of legacy references
   historical          comment, docstring or usage example (auto-classified; annotate, leave)
   obsolete-candidate  shell/SLURM helper or one-off diagnostic (auto-classified; candidate for scripts/legacy/)
 
-`review` is "reviewed" only for the migrated set; everything else is "auto (pending review)".
+`review` is "reviewed" for the migrated set and "reviewed (proposed: <disposition>)" for files listed in
+results/restructure/path_migration_review.tsv (per-file review of 2026-10-07: migrate / migrate-blocked-invalid-input /
+superseded-by / historical / obsolete; proposals only, no file has been moved or deleted). Files in neither set are
+"auto (pending review)".
 Usage: python scripts/repro/path_migration_table.py [--base spatial_smoothed]
 """
 import argparse, re, subprocess
@@ -36,6 +39,13 @@ def main():
     files = subprocess.run(["git", "-C", str(REPO), "ls-files", "scripts", "config"], capture_output=True, text=True, check=True).stdout.split()
     changed = set(subprocess.run(["git", "-C", str(REPO), "diff", "--name-only", f"{a.base}...HEAD", "--", "scripts", "config"],
                                  capture_output=True, text=True, check=True).stdout.split())
+    review = {}
+    rev_path = REPO / "results/restructure/path_migration_review.tsv"
+    if rev_path.is_file():
+        import csv
+        with open(rev_path, newline="") as fh:
+            for r in csv.DictReader(fh, delimiter="\t"):
+                review[r["file"]] = r["disposition"] + (f" -> {r['superseded_by']}" if r.get("superseded_by") else "")
     rows = []
     for f in sorted(files):
         p = REPO / f
@@ -51,7 +61,8 @@ def main():
                          "reviewed", f"{len(hits)} remaining mentions (comments/docstrings only)" if hits else ""))
             continue
         for n, l in hits:
-            rows.append((f, str(n), classify(f, l), "auto (pending review)", l.strip()[:160].replace("\t", " ")))
+            status = f"reviewed (proposed: {review[f]})" if f in review else "auto (pending review)"
+            rows.append((f, str(n), classify(f, l), status, l.strip()[:160].replace("\t", " ")))
     out = REPO / "results/restructure"; out.mkdir(parents=True, exist_ok=True)
     with open(out / "path_migration_table.tsv", "w") as fh:
         fh.write("file\tline\tclass\treview\tdetail\n")
@@ -59,7 +70,8 @@ def main():
             fh.write("\t".join(r) + "\n")
     from collections import Counter
     c = Counter(r[2] for r in rows)
-    print(f"{len(rows)} rows; files with legacy references not migrated: {len({r[0] for r in rows if r[3] != 'reviewed'})}; {dict(c)}")
+    print(f"{len(rows)} rows; files with legacy references not migrated: {len({r[0] for r in rows if r[3] != 'reviewed'})}; "
+          f"pending review: {len({r[0] for r in rows if r[3] == 'auto (pending review)'})}; {dict(c)}")
 
 
 if __name__ == "__main__":
