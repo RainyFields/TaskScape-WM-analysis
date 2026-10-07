@@ -13,7 +13,7 @@ set -euo pipefail
 REPO=/project/def-pbellec/xuan/TaskScape-WM-analysis
 RUN=${1:-$REPO/outputs/fidelity_$(date +%F)}
 ACC=def-pbellec
-mkdir -p "$RUN"/{code,reference,logs,out,compare}
+mkdir -p "$RUN"/{code,reference,logs,out,compare,jobs,strace}
 cd "$REPO"
 for br in taskscape-migration taskscape-migration-nc; do
   d=$RUN/code/$br; [ -e "$d" ] && { echo "refusing: $d exists (immutable snapshot)"; exit 1; }
@@ -25,11 +25,14 @@ done
 C=$RUN/code/taskscape-migration; CN=$RUN/code/taskscape-migration-nc; REF=$RUN/reference/pre-migration-2026-10
 REFN=$RUN/reference/pre-migration-2026-10-ncregen; OUT=$RUN/out; CMP=$RUN/compare
 PRE='module load StdEnv/2023 python/3.11.5 scipy-stack/2025a; source /project/def-pbellec/xuan/nilearn/bin/activate; export PYTHONDONTWRITEBYTECODE=1 TASKSCAPE_OUTPUT_ROOT='"$OUT"
-sb() { # name time mem deps cmd...
+sb() { # name time mem deps cmd...   (command runs under strace: every open/openat of the job tree is logged)
   local name=$1 t=$2 m=$3 dep=$4; shift 4
   local d=""; [ -n "$dep" ] && d="--dependency=afterok:$dep"
-  sbatch --parsable -A $ACC -J "fid_$name" -t "$t" -c 4 --mem="$m" $d -o "$RUN/logs/%x_%j.log" -e "$RUN/logs/%x_%j.err" \
-    --wrap "$PRE; set -euo pipefail; $*"
+  printf '#!/bin/bash\nset -euo pipefail\n%s\n' "$*" > "$RUN/jobs/$name.sh"
+  local id
+  id=$(sbatch --parsable -A $ACC -J "fid_$name" -t "$t" -c 4 --mem="$m" $d -o "$RUN/logs/%x_%j.log" -e "$RUN/logs/%x_%j.err" \
+    --wrap "$PRE; set -euo pipefail; strace -f -qq --seccomp-bpf -e trace=open,openat,openat2 -o $RUN/strace/$name.trace bash $RUN/jobs/$name.sh")
+  echo "$id" >> "$RUN/jobs/ids"; echo "$id"   # file, not a variable: sb runs inside $(...)
 }
 SUBJ="sub-01 sub-02 sub-03 sub-05 sub-06"
 
@@ -70,4 +73,8 @@ for s in $SUBJ; do
   J_NC="$J_NC:$j"
 done
 sb nc_compare 00:30:00 8G "${J_NC#:}" python $C/scripts/repro/compare_fidelity.py tables --new $OUT/noise_ceiling/regenerated_clean/estimates/primary --ref $REFN/results/noise_ceiling/regenerated_clean/estimates/primary --out $CMP --name nc_primary >/dev/null
+# 4. Fallback audit over all jobs: strace opens + config.paths audit logs (afterany: report even if a step failed)
+sbatch --parsable -A $ACC -J fid_fallback_audit -t 00:30:00 -c 1 --mem=4G --dependency=afterany:$(paste -sd: "$RUN/jobs/ids") \
+  -o "$RUN/logs/%x_%j.log" -e "$RUN/logs/%x_%j.err" \
+  --wrap "$PRE; python $C/scripts/repro/fallback_audit.py --run $RUN" >/dev/null
 echo "submitted; run dir $RUN"
