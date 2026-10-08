@@ -203,3 +203,50 @@ All 28 jobs `COMPLETED`, exit `0:0`, 4 CPUs each; wall time per step (requested 
 - The clean noise ceiling `sensitivity` variant was not re-run (only `primary`).
 - Scripts outside the migrated core chain still reference legacy paths: see `results/restructure/path_migration_table.tsv`
   and the per-file proposals in `results/restructure/path_migration_review.tsv` (nothing moved or deleted).
+
+## 9. Addendum (2026-10-07, later): smoke tests of the 13 migrated active scripts
+
+Run dir `outputs/smoke_2026-10-07/` (untracked), submitted with `scripts/repro/submit_smoke.sh` (strace per job,
+legacy guard installed, `TASKSCAPE_OUTPUT_ROOT` = run dir). Code: commit `92888b7`. 16 jobs (`22697782`-`22697797`),
+all `COMPLETED 0:0`; stderr contains only numpy `Mean of empty slice` warnings on masked vertices and nilearn
+deprecation warnings.
+
+| script | smoke command (one subject / session) | wall |
+|---|---|---|
+| `accuracy_level.py` | `--task {1back,dms,ctxdm,interdms}` (4 jobs) | 6-14 s |
+| `figure_making/plot_response_rate.py` | (all subjects, behaviour TSVs only) | 13 s |
+| `figure_making/plot_behavioral_performance.py` | after the 5 jobs above | 16 s |
+| `figure_making/plot_accuracy.py` | after the 4 accuracy jobs | 11 s |
+| `export_beta_activation_session_maps.py` | `--subj sub-01` (112 runs, 16 sessions) | 19 s |
+| `aggregate_subject_r2_vertex_maps.py` | `--subj sub-01` (112 runs) | 14 s |
+| `verify_encoding_delay_beta_compliance.py` | `--beta-root <dataset>/derivatives/glm/sub-01/ses-004` (7 runs, 0 failures) | 7 s |
+| `figure_making/plot_fd_distribution.py` | (all subjects, confounds TSVs) | 2 m 57 s |
+| `figure_making/plot_glm_sanity_check.py` | (hard-coded sub-03, first run) | 22 s |
+| `sanity_check/glm_evaluation.py` | `--subj sub-01 --ses ses-004 --task ctxdm --run run-01 --max_vertices 500 --max_vertices_r2 1000 --compute_all_r2 --seed 123` | 53 s |
+| `sanity_check/plot_unadjusted_r2_distribution_all_tasks.py` | `--glm_root <dataset>/derivatives/glm/sub-01/ses-004 --subjects sub-01 --tasks ctxdm` | 37 s |
+| `sanity_check/plot_adjusted_r2_distribution_all_tasks.py` | same | 37 s |
+| `sanity_check/plot_subject_region_average_r2.py` | `--subj sub-01 --metric r2_full` (112 runs) | 3 m 16 s |
+
+Fallback audit over the 16 strace traces (`compare/fallback_audit.json` in the run dir): legacy opens 0, BLOCKED 0,
+dataset opens 3,791, every job opened the dataset. PASS.
+
+Output comparison with pre-migration products (`TaskScape-WM-migration/reports/smoke_2026-10-07/smoke_vs_legacy.{tsv,json}`,
+job `22698071`, run outside the analysis repo because the legacy beta-activation and R2 products live only in the frozen
+legacy data tree): 
+| group | compared | identical | note |
+|---|---|---|---|
+| behaviour CSVs (accuracy x4, response rate x4) vs tracked `results/*.csv` at the tag | 8 | 8 | identical after sorting on (subject, session, task, run); 4 files (ctxdm, interdms = multi-run sessions) differ in row order only, because the legacy script emitted rows in unsorted `glob()` order of a different directory |
+| beta activation export, sub-01 (64 session maps + 4 Level-1 task averages + 2 index arrays) vs legacy `data/encoding_delay/beta_activation_glasser64k` | 70 | 70 | max abs delta 0.0 |
+| R2 aggregation, sub-03 (63 maps) vs legacy `data/r2_averaged_glasser64k` | 63 | 0 | the stored legacy maps are STALE: written 2026-05-28 09:40, before the GLM H5 were regenerated on 2026-05-30 07:16 (max abs delta up to 0.35) |
+| R2 aggregation, sub-03 vs the **pre-migration script** (tag `pre-migration-2026-10`) re-run on the current legacy H5 (job `22699986`, `reports/smoke_2026-10-07/r2_legacy_rerun_vs_smoke.json`) | 63 | 63 | max abs delta 0.0: the migrated script reproduces the legacy code on identical inputs; sub-01 has no legacy maps (legacy ran sub-03 only) |
+
+Scripts whose outputs are figures only (`plot_*`, `glm_evaluation.py`) were checked for successful completion and output
+files, not pixel-compared.
+
+Behaviour-change notes carried over from the migration (documented in each script):
+- `verify_encoding_delay_beta_compliance.py` now writes its report under the output root (the dataset is read-only);
+  the legacy report ships verbatim at `derivatives/glm/provenance/compliance_report.json`.
+- `accuracy_level.py` gained `--task` (default `interdms`, the legacy hard-coded value); `plot_response_rate.py`,
+  `plot_behavioral_performance.py` and `plot_accuracy.py` had their module-level code wrapped in `main()`; figure code unchanged.
+- `plot_glm_sanity_check.py` still overlays the GLM fit on the UNsmoothed surface BOLD (legacy behaviour kept; flagged).
+- `sanity_check/glm_evaluation.py` default `--glm_root` is now `derivatives/glm` (the dataset holds only the encoding+delay GLM).
