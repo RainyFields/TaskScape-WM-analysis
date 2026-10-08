@@ -1,0 +1,974 @@
+{
+  "subject": "sub-05",
+  "source": "encoding_delay trial-level GLM (spatial smoothed 4mm FWHM, PSC)",
+  "h5_root": "/lustre09/project/6002071/xuan/TaskScape-WM/derivatives/glm",
+  "n_vertices": 64984,
+  "metrics": [
+    "r2_full",
+    "r2_task",
+    "r2_noise"
+  ],
+  "n_runs_total": 110,
+  "runs": [
+    {
+      "file": "sub-05_ses-001_task-1back_run-01_betas.h5",
+      "session": "ses-001",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-001_task-ctxdm_run-01_betas.h5",
+      "session": "ses-001",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-001_task-ctxdm_run-02_betas.h5",
+      "session": "ses-001",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-001_task-dms_run-01_betas.h5",
+      "session": "ses-001",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-001_task-interdms_run-01_betas.h5",
+      "session": "ses-001",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-001_task-interdms_run-02_betas.h5",
+      "session": "ses-001",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-001_task-interdms_run-03_betas.h5",
+      "session": "ses-001",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-002_task-1back_run-01_betas.h5",
+      "session": "ses-002",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-002_task-ctxdm_run-01_betas.h5",
+      "session": "ses-002",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-002_task-ctxdm_run-02_betas.h5",
+      "session": "ses-002",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-002_task-dms_run-01_betas.h5",
+      "session": "ses-002",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-002_task-interdms_run-01_betas.h5",
+      "session": "ses-002",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-002_task-interdms_run-02_betas.h5",
+      "session": "ses-002",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-002_task-interdms_run-03_betas.h5",
+      "session": "ses-002",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-003_task-1back_run-01_betas.h5",
+      "session": "ses-003",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-003_task-ctxdm_run-01_betas.h5",
+      "session": "ses-003",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-003_task-ctxdm_run-02_betas.h5",
+      "session": "ses-003",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-003_task-dms_run-01_betas.h5",
+      "session": "ses-003",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-003_task-interdms_run-01_betas.h5",
+      "session": "ses-003",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-003_task-interdms_run-02_betas.h5",
+      "session": "ses-003",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-003_task-interdms_run-03_betas.h5",
+      "session": "ses-003",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-004_task-1back_run-01_betas.h5",
+      "session": "ses-004",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-004_task-ctxdm_run-01_betas.h5",
+      "session": "ses-004",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-004_task-ctxdm_run-02_betas.h5",
+      "session": "ses-004",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-004_task-dms_run-01_betas.h5",
+      "session": "ses-004",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-004_task-interdms_run-01_betas.h5",
+      "session": "ses-004",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-004_task-interdms_run-02_betas.h5",
+      "session": "ses-004",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-004_task-interdms_run-03_betas.h5",
+      "session": "ses-004",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-005_task-1back_run-01_betas.h5",
+      "session": "ses-005",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-005_task-ctxdm_run-01_betas.h5",
+      "session": "ses-005",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-005_task-ctxdm_run-02_betas.h5",
+      "session": "ses-005",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-005_task-dms_run-01_betas.h5",
+      "session": "ses-005",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-005_task-interdms_run-01_betas.h5",
+      "session": "ses-005",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-005_task-interdms_run-02_betas.h5",
+      "session": "ses-005",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-005_task-interdms_run-03_betas.h5",
+      "session": "ses-005",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-006_task-1back_run-01_betas.h5",
+      "session": "ses-006",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-006_task-ctxdm_run-01_betas.h5",
+      "session": "ses-006",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-006_task-ctxdm_run-02_betas.h5",
+      "session": "ses-006",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-006_task-dms_run-01_betas.h5",
+      "session": "ses-006",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-006_task-interdms_run-01_betas.h5",
+      "session": "ses-006",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-006_task-interdms_run-02_betas.h5",
+      "session": "ses-006",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-006_task-interdms_run-03_betas.h5",
+      "session": "ses-006",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-007_task-1back_run-01_betas.h5",
+      "session": "ses-007",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-007_task-ctxdm_run-01_betas.h5",
+      "session": "ses-007",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-007_task-ctxdm_run-02_betas.h5",
+      "session": "ses-007",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-007_task-dms_run-01_betas.h5",
+      "session": "ses-007",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-007_task-interdms_run-01_betas.h5",
+      "session": "ses-007",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-007_task-interdms_run-02_betas.h5",
+      "session": "ses-007",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-007_task-interdms_run-03_betas.h5",
+      "session": "ses-007",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-008_task-1back_run-01_betas.h5",
+      "session": "ses-008",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-008_task-ctxdm_run-01_betas.h5",
+      "session": "ses-008",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-008_task-ctxdm_run-02_betas.h5",
+      "session": "ses-008",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-008_task-dms_run-01_betas.h5",
+      "session": "ses-008",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-008_task-interdms_run-01_betas.h5",
+      "session": "ses-008",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-008_task-interdms_run-02_betas.h5",
+      "session": "ses-008",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-008_task-interdms_run-03_betas.h5",
+      "session": "ses-008",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-009_task-1back_run-01_betas.h5",
+      "session": "ses-009",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-009_task-ctxdm_run-01_betas.h5",
+      "session": "ses-009",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-009_task-ctxdm_run-02_betas.h5",
+      "session": "ses-009",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-009_task-dms_run-01_betas.h5",
+      "session": "ses-009",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-009_task-interdms_run-01_betas.h5",
+      "session": "ses-009",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-009_task-interdms_run-02_betas.h5",
+      "session": "ses-009",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-009_task-interdms_run-03_betas.h5",
+      "session": "ses-009",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-010_task-1back_run-01_betas.h5",
+      "session": "ses-010",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-010_task-ctxdm_run-01_betas.h5",
+      "session": "ses-010",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-010_task-ctxdm_run-02_betas.h5",
+      "session": "ses-010",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-010_task-dms_run-01_betas.h5",
+      "session": "ses-010",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-010_task-interdms_run-01_betas.h5",
+      "session": "ses-010",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-010_task-interdms_run-02_betas.h5",
+      "session": "ses-010",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-010_task-interdms_run-03_betas.h5",
+      "session": "ses-010",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-011_task-1back_run-01_betas.h5",
+      "session": "ses-011",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-011_task-ctxdm_run-01_betas.h5",
+      "session": "ses-011",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-011_task-ctxdm_run-02_betas.h5",
+      "session": "ses-011",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-011_task-dms_run-01_betas.h5",
+      "session": "ses-011",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-011_task-interdms_run-01_betas.h5",
+      "session": "ses-011",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-011_task-interdms_run-02_betas.h5",
+      "session": "ses-011",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-011_task-interdms_run-03_betas.h5",
+      "session": "ses-011",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-012_task-1back_run-01_betas.h5",
+      "session": "ses-012",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-012_task-ctxdm_run-01_betas.h5",
+      "session": "ses-012",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-012_task-ctxdm_run-02_betas.h5",
+      "session": "ses-012",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-012_task-interdms_run-02_betas.h5",
+      "session": "ses-012",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-012_task-interdms_run-03_betas.h5",
+      "session": "ses-012",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-013_task-1back_run-01_betas.h5",
+      "session": "ses-013",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-013_task-ctxdm_run-01_betas.h5",
+      "session": "ses-013",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-013_task-ctxdm_run-02_betas.h5",
+      "session": "ses-013",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-013_task-dms_run-01_betas.h5",
+      "session": "ses-013",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-013_task-interdms_run-01_betas.h5",
+      "session": "ses-013",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-013_task-interdms_run-02_betas.h5",
+      "session": "ses-013",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-013_task-interdms_run-03_betas.h5",
+      "session": "ses-013",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-014_task-1back_run-01_betas.h5",
+      "session": "ses-014",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-014_task-ctxdm_run-01_betas.h5",
+      "session": "ses-014",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-014_task-ctxdm_run-02_betas.h5",
+      "session": "ses-014",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-014_task-dms_run-01_betas.h5",
+      "session": "ses-014",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-014_task-interdms_run-01_betas.h5",
+      "session": "ses-014",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-014_task-interdms_run-02_betas.h5",
+      "session": "ses-014",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-014_task-interdms_run-03_betas.h5",
+      "session": "ses-014",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-015_task-1back_run-01_betas.h5",
+      "session": "ses-015",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-015_task-ctxdm_run-01_betas.h5",
+      "session": "ses-015",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-015_task-ctxdm_run-02_betas.h5",
+      "session": "ses-015",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-015_task-dms_run-01_betas.h5",
+      "session": "ses-015",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-015_task-interdms_run-01_betas.h5",
+      "session": "ses-015",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-015_task-interdms_run-02_betas.h5",
+      "session": "ses-015",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-015_task-interdms_run-03_betas.h5",
+      "session": "ses-015",
+      "task": "interdms",
+      "run": "run-03"
+    },
+    {
+      "file": "sub-05_ses-016_task-1back_run-01_betas.h5",
+      "session": "ses-016",
+      "task": "1back",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-016_task-ctxdm_run-01_betas.h5",
+      "session": "ses-016",
+      "task": "ctxdm",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-016_task-ctxdm_run-02_betas.h5",
+      "session": "ses-016",
+      "task": "ctxdm",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-016_task-dms_run-01_betas.h5",
+      "session": "ses-016",
+      "task": "dms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-016_task-interdms_run-01_betas.h5",
+      "session": "ses-016",
+      "task": "interdms",
+      "run": "run-01"
+    },
+    {
+      "file": "sub-05_ses-016_task-interdms_run-02_betas.h5",
+      "session": "ses-016",
+      "task": "interdms",
+      "run": "run-02"
+    },
+    {
+      "file": "sub-05_ses-016_task-interdms_run-03_betas.h5",
+      "session": "ses-016",
+      "task": "interdms",
+      "run": "run-03"
+    }
+  ],
+  "outputs": {
+    "v1_avg_by_task_across_runs_and_sessions": {
+      "1back": {
+        "r2_full": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-1back_r2_full_vertex_avg.npy",
+          "n_runs": 16
+        },
+        "r2_task": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-1back_r2_task_vertex_avg.npy",
+          "n_runs": 16
+        },
+        "r2_noise": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-1back_r2_noise_vertex_avg.npy",
+          "n_runs": 16
+        }
+      },
+      "ctxdm": {
+        "r2_full": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-ctxdm_r2_full_vertex_avg.npy",
+          "n_runs": 32
+        },
+        "r2_task": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-ctxdm_r2_task_vertex_avg.npy",
+          "n_runs": 32
+        },
+        "r2_noise": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-ctxdm_r2_noise_vertex_avg.npy",
+          "n_runs": 32
+        }
+      },
+      "dms": {
+        "r2_full": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-dms_r2_full_vertex_avg.npy",
+          "n_runs": 15
+        },
+        "r2_task": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-dms_r2_task_vertex_avg.npy",
+          "n_runs": 15
+        },
+        "r2_noise": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-dms_r2_noise_vertex_avg.npy",
+          "n_runs": 15
+        }
+      },
+      "interdms": {
+        "r2_full": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-interdms_r2_full_vertex_avg.npy",
+          "n_runs": 47
+        },
+        "r2_task": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-interdms_r2_task_vertex_avg.npy",
+          "n_runs": 47
+        },
+        "r2_noise": {
+          "path": "v1_avg_by_task_across_runs_and_sessions/sub-05_task-interdms_r2_noise_vertex_avg.npy",
+          "n_runs": 47
+        }
+      }
+    },
+    "v2_avg_global_across_tasks_runs_and_sessions": {
+      "r2_full": {
+        "path": "v2_avg_global_across_tasks_runs_and_sessions/sub-05_r2_full_vertex_avg.npy",
+        "n_runs": 110
+      },
+      "r2_task": {
+        "path": "v2_avg_global_across_tasks_runs_and_sessions/sub-05_r2_task_vertex_avg.npy",
+        "n_runs": 110
+      },
+      "r2_noise": {
+        "path": "v2_avg_global_across_tasks_runs_and_sessions/sub-05_r2_noise_vertex_avg.npy",
+        "n_runs": 110
+      }
+    },
+    "v3_avg_by_session_across_tasks_and_runs": {
+      "ses-001": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-001_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-001_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-001_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-002": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-002_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-002_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-002_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-003": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-003_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-003_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-003_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-004": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-004_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-004_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-004_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-005": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-005_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-005_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-005_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-006": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-006_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-006_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-006_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-007": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-007_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-007_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-007_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-008": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-008_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-008_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-008_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-009": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-009_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-009_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-009_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-010": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-010_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-010_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-010_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-011": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-011_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-011_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-011_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-012": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-012_r2_full_vertex_avg.npy",
+          "n_runs": 5
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-012_r2_task_vertex_avg.npy",
+          "n_runs": 5
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-012_r2_noise_vertex_avg.npy",
+          "n_runs": 5
+        }
+      },
+      "ses-013": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-013_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-013_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-013_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-014": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-014_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-014_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-014_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-015": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-015_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-015_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-015_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      },
+      "ses-016": {
+        "r2_full": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-016_r2_full_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_task": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-016_r2_task_vertex_avg.npy",
+          "n_runs": 7
+        },
+        "r2_noise": {
+          "path": "v3_avg_by_session_across_tasks_and_runs/sub-05_ses-016_r2_noise_vertex_avg.npy",
+          "n_runs": 7
+        }
+      }
+    }
+  }
+}

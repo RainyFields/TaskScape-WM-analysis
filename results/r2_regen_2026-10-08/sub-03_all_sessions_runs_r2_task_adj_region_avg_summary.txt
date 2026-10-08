@@ -1,0 +1,17 @@
+subject: sub-03
+metric: r2_task_adj
+n_runs_used: 112
+n_metric_direct: 112
+n_metric_reconstructed: 0
+h5_root: /project/def-pbellec/xuan/TaskScape-WM/derivatives/glm
+atlas: /project/def-pbellec/xuan/TaskScape-WM/derivatives/taskscape-surface/atlas/Glasser_LR_Dense64k.dlabel.nii
+surface_source: fsaverage6
+task_counts:
+  1back: 16
+  ctxdm: 32
+  dms: 16
+  interdms: 48
+region_mean: 0.256312
+region_std: 0.092308
+region_min: 0.014487
+region_max: 0.497544
