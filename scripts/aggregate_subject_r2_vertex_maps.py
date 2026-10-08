@@ -5,14 +5,22 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
 
 import h5py
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from config import paths  # noqa: E402  TaskScape-WM inputs only; rejects the legacy tree
+
 N_VERTICES = 64984
 R2_METRICS = ("r2_full", "r2_task", "r2_noise")
+# Input (TaskScape-WM): derivatives/glm/<sub>/<ses>/func/*_run-NN_betas.h5 (r2_* datasets; yhat/resid fallback).
+# legacy equivalent: data/encoding_delay/trial_level_betas
+# Output: <output_root>/r2_averaged_glasser64k/encoding_delay_ssmoothing_psc/<sub>/
+# legacy equivalent: data/r2_averaged_glasser64k/encoding_delay_ssmoothing_psc
 
 
 def get_args():
@@ -20,13 +28,14 @@ def get_args():
     p.add_argument("--subj", required=True, help="Subject ID, e.g. sub-03")
     p.add_argument(
         "--h5_root",
-        default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
-        help="Root containing <subj>/<ses>/func/*_betas.h5",
+        default=None,
+        help="Root containing <subj>/<ses>/func/*_betas.h5 (default: <dataset>/derivatives/glm)",
     )
     p.add_argument(
         "--out_root",
-        default="/project/def-pbellec/xuan/fmri_dataset_project/data/r2_averaged_glasser64k/encoding_delay_ssmoothing_psc",
-        help="Output root; files go under <out_root>/<subj>/",
+        default=None,
+        help="Output root; files go under <out_root>/<subj>/ "
+             "(default: <output_root>/r2_averaged_glasser64k/encoding_delay_ssmoothing_psc)",
     )
     p.add_argument(
         "--metrics",
@@ -34,7 +43,15 @@ def get_args():
         default=list(R2_METRICS),
         choices=list(R2_METRICS),
     )
-    return p.parse_args()
+    p.add_argument("--dataset_root", default=None, help="TaskScape-WM root (default: config.paths / $TASKSCAPE_DATASET_ROOT)")
+    p.add_argument("--output_root", default=None, help="analysis output root (default: config.paths / $TASKSCAPE_OUTPUT_ROOT)")
+    a = p.parse_args()
+    paths.configure(a.dataset_root, a.output_root)
+    paths.install_legacy_guard("aggregate_subject_r2_vertex_maps")
+    a.h5_root = str(paths.require_not_legacy(a.h5_root or paths.glm_dir(), "--h5_root"))
+    a.out_root = str(paths.require_not_legacy(
+        a.out_root or paths.output_dir("r2_averaged_glasser64k", "encoding_delay_ssmoothing_psc"), "--out_root"))
+    return a
 
 
 def parse_h5_path(h5_path: Path) -> tuple[str, str, str]:

@@ -15,6 +15,14 @@ from nilearn import datasets, plotting
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import paths  # noqa: E402  TaskScape-WM inputs only; rejects the legacy tree
+
+# Inputs: derivatives/glm/<sub>/<ses>/func/*_betas.h5 (legacy equivalent: data/encoding_delay/trial_level_betas);
+#         derivatives/taskscape-surface/atlas/Glasser_LR_Dense64k.dlabel.nii (legacy equivalent: data/Glasser_LR_Dense64k.dlabel.nii).
+# Output: <output_root>/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc
+#         (legacy equivalent: scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc).
+
 
 def get_args():
     p = argparse.ArgumentParser(
@@ -23,13 +31,13 @@ def get_args():
     p.add_argument("--subj", required=True, help="Subject ID, e.g., sub-03")
     p.add_argument(
         "--h5_root",
-        default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
-        help="Root that contains <subj>/<ses>/func/*_betas.h5",
+        default=None,
+        help="Root that contains <subj>/<ses>/func/*_betas.h5 (default: <dataset>/derivatives/glm)",
     )
     p.add_argument(
         "--atlas_path",
-        default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii",
-        help="Glasser dense label file",
+        default=None,
+        help="Glasser dense label file (default: <dataset>/derivatives/taskscape-surface/atlas/Glasser_LR_Dense64k.dlabel.nii)",
     )
     p.add_argument(
         "--metric",
@@ -45,10 +53,21 @@ def get_args():
     p.add_argument("--span", default="double", choices=["single", "1.5", "double"])
     p.add_argument(
         "--out_dir",
-        default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc",
-        help="Output directory for figure + summaries",
+        default=None,
+        help="Output directory for figure + summaries "
+             "(default: <output_root>/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc)",
     )
-    return p.parse_args()
+    p.add_argument("--dataset_root", default=None, help="TaskScape-WM root (default: config.paths / $TASKSCAPE_DATASET_ROOT)")
+    p.add_argument("--output_root", default=None, help="analysis output root (default: config.paths / $TASKSCAPE_OUTPUT_ROOT)")
+    a = p.parse_args()
+    paths.configure(a.dataset_root, a.output_root)
+    paths.install_legacy_guard("plot_subject_region_average_r2")
+    a.h5_root = str(paths.require_not_legacy(a.h5_root or paths.glm_dir(), "--h5_root"))
+    a.atlas_path = str(paths.require_not_legacy(a.atlas_path or paths.glasser_dlabel(), "--atlas_path"))
+    a.out_dir = str(paths.require_not_legacy(
+        a.out_dir or paths.output_dir("glm_fitting_check_results", "customized_glm", "encoding_delay_ssmoothing_psc"),
+        "--out_dir"))
+    return a
 
 
 def load_figure_style_utils():

@@ -21,11 +21,14 @@ Generates:
 python sanity_check/glm_evaluation.py  \
         --subj sub-01 \
         --task ctxdm --ses ses-001 --run run-01 \
-        --glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_decoding/trial_level_betas  \
-        --fmri_root /project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled  \
-        --output_dir /project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_decoding \
         --max_vertices 1000 --max_vertices_r2 2000 \
         --compute_all_r2 --seed 123
+
+Inputs (TaskScape-WM, via config.paths): derivatives/glm/<sub>/<ses>/func/*_betas.h5 and
+derivatives/taskscape-surface/<sub>/<ses>/func/*_space-fsLR_den-32k[_desc-sm4]_bold.dtseries.nii
+(legacy equivalents: data/trial_level_betas, data/glasser_resampled *_space-Glasser64k_bold[_sm4].dtseries.nii).
+Outputs: <output_root>/glm_fitting_check_results/customized_glm/
+(legacy equivalent: scripts/sanity_check/glm_fitting_check_results/customized_glm).
 """
 
 import argparse
@@ -41,9 +44,11 @@ import nibabel as nib
 from scipy import stats
 from sklearn.metrics import r2_score
 
+# EXTERNAL style dependency: /project/def-pbellec/xuan/figure_style (separate repo; not legacy, not dataset)
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from figure_style.figure_utils import (
     apply_clean_spines,
@@ -52,10 +57,15 @@ from figure_style.figure_utils import (
     mm_to_inches,
     save_figure,
 )
+from config import paths  # noqa: E402  TaskScape-WM inputs only; rejects the legacy tree
 
 # Load shared publication style (figures4papers-compatible).
 _STYLE_PATH = _PROJECT_ROOT / "figure_style" / "nature_style.mplstyle"
 plt.style.use(str(_STYLE_PATH))
+
+# TaskScape-WM surface BOLD suffixes (legacy: _space-Glasser64k_bold_sm4.dtseries.nii / _space-Glasser64k_bold.dtseries.nii)
+_SM4_SUFFIX = f"_{paths.SURFACE_SPACE}_desc-sm4_bold.dtseries.nii"
+_RAW_SUFFIX = f"_{paths.SURFACE_SPACE}_bold.dtseries.nii"
 
 A4_WIDTH_MM = 210.0
 PRED_FIG_WIDTH_MM = 150.0 * 0.8 * 0.75   # 90 mm
@@ -73,9 +83,11 @@ def get_args():
     p.add_argument("--ses", default="ses-001")
     p.add_argument("--run", default="run-01")
     p.add_argument("--tmask", type=int, default=1)
-    p.add_argument("--glm_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas")
-    p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled")
-    p.add_argument("--output_dir", default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm")
+    p.add_argument("--glm_root", default=None, help="default: <dataset>/derivatives/glm")
+    p.add_argument("--fmri_root", default=None, help="default: <dataset>/derivatives/taskscape-surface")
+    p.add_argument("--output_dir", default=None, help="default: <output_root>/glm_fitting_check_results/customized_glm")
+    p.add_argument("--dataset_root", default=None, help="TaskScape-WM root (default: config.paths / $TASKSCAPE_DATASET_ROOT)")
+    p.add_argument("--output_root", default=None, help="analysis output root (default: config.paths / $TASKSCAPE_OUTPUT_ROOT)")
     p.add_argument("--max_vertices", type=int, default=5000,
                    help="Randomly sample up to this many vertices for plots and per-vertex diagnostics.")
     p.add_argument("--seed", type=int, default=0)
@@ -111,7 +123,14 @@ def get_args():
     p.add_argument("--pred_vertex_r2_rank", default="high_med_low",
                    choices=["low", "high", "high_med_low"],
                    help="PSC paper vertex selection: all low/high, or one high+medium+low task R² (default).")
-    return p.parse_args()
+    a = p.parse_args()
+    paths.configure(a.dataset_root, a.output_root)
+    paths.install_legacy_guard("glm_evaluation")
+    a.glm_root = str(paths.require_not_legacy(a.glm_root or paths.glm_dir(), "--glm_root"))
+    a.fmri_root = str(paths.require_not_legacy(a.fmri_root or paths.surface_dir(), "--fmri_root"))
+    a.output_dir = str(paths.require_not_legacy(
+        a.output_dir or paths.output_dir("glm_fitting_check_results", "customized_glm"), "--output_dir"))
+    return a
 
 # -----------------------
 # Path helpers (mirror GLM script behavior)
@@ -142,18 +161,19 @@ def first_existing(paths):
 def resolve_paths(subj, ses, task, run, glm_root, fmri_root):
     """Resolve dtseries and H5 by trying run aliases; fallback to glob; infer run_used."""
     aliases = run_aliases(run)
-    fmri_dir = Path(fmri_root) / subj / ses
+    # TaskScape-WM: <fmri_root>/<sub>/<ses>/func/ (legacy: <fmri_root>/<sub>/<ses>/ without "func")
+    fmri_dir = Path(fmri_root) / subj / ses / "func"
     glm_dir  = Path(glm_root)  / subj / ses / "func"
 
     ts_candidates = []
     for rl in aliases:
-        ts_candidates.append(fmri_dir / f"{subj}_{ses}_task-{task}_{rl}_space-Glasser64k_bold_sm4.dtseries.nii")
-        ts_candidates.append(fmri_dir / f"{subj}_{ses}_task-{task}_{rl}_space-Glasser64k_bold.dtseries.nii")
+        ts_candidates.append(fmri_dir / f"{subj}_{ses}_task-{task}_{rl}{_SM4_SUFFIX}")
+        ts_candidates.append(fmri_dir / f"{subj}_{ses}_task-{task}_{rl}{_RAW_SUFFIX}")
     ts_path = first_existing(ts_candidates)
 
     if ts_path is None:
-        globbed_sm4 = sorted(fmri_dir.glob(f"{subj}_{ses}_task-{task}_*_space-Glasser64k_bold_sm4.dtseries.nii"))
-        globbed_raw = sorted(fmri_dir.glob(f"{subj}_{ses}_task-{task}_*_space-Glasser64k_bold.dtseries.nii"))
+        globbed_sm4 = sorted(fmri_dir.glob(f"{subj}_{ses}_task-{task}_*{_SM4_SUFFIX}"))
+        globbed_raw = sorted(fmri_dir.glob(f"{subj}_{ses}_task-{task}_*{_RAW_SUFFIX}"))
         globbed = globbed_sm4 + globbed_raw
         if not globbed:
             tried = [p.as_posix() for p in ts_candidates]

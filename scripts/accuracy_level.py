@@ -1,10 +1,15 @@
 # evaluate response accuracy based on the target action
+import argparse
+import sys
 import pandas as pd
 import os
 import json
 from pathlib import Path
 import warnings
 warnings.filterwarnings("ignore")
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from config import paths  # noqa: E402  TaskScape-WM inputs only; rejects the legacy tree
 
 
 def evaluate_accuracy_1back(data):
@@ -130,59 +135,80 @@ def evaluate_accuracy_interdms(data):
     return total_correct / total_trials if total_trials > 0 else float('nan')
 
 
-root_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
 subjects = ['01', '02', '03', '05', '06']
 
 sessions = [f"{i:03}" for i in range(1, 17)]
-task_name = "interdms"
 
-# Store results
-results = []
 
-for sub in subjects:
-    for ses in sessions:
-        func_dir = root_path / f"sub-{sub}" / f"ses-{ses}" / "func"
-        if not func_dir.exists():
-            print(f"[Warning] Missing directory: {func_dir}")
-            continue 
-        
-        pattern = f"sub-{sub}_ses-{ses}_task-{task_name}_run-*_events.tsv"
-        matching_files = list(func_dir.glob(pattern))
-        
-        for file_path in matching_files:
-            # print(file_path.type)
-            # if str(file_path) != "/project/def-pbellec/xuan/fmri_dataset_project/data/behavior/sub-06/ses-016/func/sub-06_ses-016_task-interdms_run-02_events.tsv":
-            #     continue
-            # print(f"Processing file: {file_path}")
-            data = pd.read_csv(file_path, sep='\t')
-            if task_name == "1back":
-                if len(data) != 9:  # optional sanity check
-                    print(f"[Warning] Unexpected number of trials in {file_path}: {len(data)}")
-                accuracy = evaluate_accuracy_1back(data)
-            elif task_name == "dms":
-                if len(data) != 16:  # optional sanity check
-                    print(f"[Warning] Unexpected number of trials in {file_path}: {len(data)}")
-                accuracy = evaluate_accuracy_dms(data)
-            elif task_name == "ctxdm":
-                if len(data) != 20:  # optional sanity check
-                    print(f"[Warning] Unexpected number of trials in {file_path}: {len(data)}")
-                accuracy = evaluate_accuracy_ctxdm(data)
-            elif task_name == "interdms":
-                if len(data) != 16:  # optional sanity check
-                    print(f"[Warning] Unexpected number of trials in {file_path}: {len(data)}")
-                accuracy = evaluate_accuracy_interdms(data)
-            print(f"Accuracy for subject: {sub}, session: {ses}: {accuracy:.2f}")
+def get_args():
+    p = argparse.ArgumentParser(description="Per-run behavioural accuracy from the corrected wide-format events.")
+    p.add_argument("--task", default="interdms", choices=["1back", "dms", "ctxdm", "interdms"],
+                   help="BOLD task name (default: interdms, as in the legacy script)")
+    p.add_argument("--dataset_root", default=None, help="TaskScape-WM root (default: config.paths / $TASKSCAPE_DATASET_ROOT)")
+    p.add_argument("--output_root", default=None, help="analysis output root (default: config.paths / $TASKSCAPE_OUTPUT_ROOT)")
+    return p.parse_args()
 
-            results.append({
-                "subject": f"sub-{sub}",
-                "session": f"ses-{ses}",
-                "task": task_name,
-                "run": file_path.name.split("_run-")[1].split("_")[0],  # extract run number
-                "accuracy": accuracy
-            })
 
-# Save as CSV
-results_df = pd.DataFrame(results)
-results_csv_path = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/results/{task_name}_accuracy_results.csv")
-results_df.to_csv(results_csv_path, index=False)
-print(f"\n✅ Accuracy results saved to: {results_csv_path}")
+def main():
+    args = get_args()
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard("accuracy_level")
+    task_name = args.task
+
+    # Input (TaskScape-WM): sourcedata/behavior-corrected/<sub>/<ses>/func/*_events.tsv (wide raw format).
+    # legacy equivalent: data/behavior/<sub>/<ses>/func/*_events.tsv
+    root_path = paths.corrected_behavior_dir()
+    # Output: <output_root>/behavior/{task}_accuracy_results.csv (read back by figure_making/plot_behavioral_performance.py).
+    # legacy equivalent: results/{task}_accuracy_results.csv
+    results_dir = paths.output_dir("behavior")
+
+    # Store results
+    results = []
+
+    for sub in subjects:
+        for ses in sessions:
+            func_dir = root_path / f"sub-{sub}" / f"ses-{ses}" / "func"
+            if not func_dir.exists():
+                print(f"[Warning] Missing directory: {func_dir}")
+                continue
+
+            pattern = f"sub-{sub}_ses-{ses}_task-{task_name}_run-*_events.tsv"
+            matching_files = list(func_dir.glob(pattern))
+
+            for file_path in matching_files:
+                data = pd.read_csv(file_path, sep='\t')
+                if task_name == "1back":
+                    if len(data) != 9:  # optional sanity check
+                        print(f"[Warning] Unexpected number of trials in {file_path}: {len(data)}")
+                    accuracy = evaluate_accuracy_1back(data)
+                elif task_name == "dms":
+                    if len(data) != 16:  # optional sanity check
+                        print(f"[Warning] Unexpected number of trials in {file_path}: {len(data)}")
+                    accuracy = evaluate_accuracy_dms(data)
+                elif task_name == "ctxdm":
+                    if len(data) != 20:  # optional sanity check
+                        print(f"[Warning] Unexpected number of trials in {file_path}: {len(data)}")
+                    accuracy = evaluate_accuracy_ctxdm(data)
+                elif task_name == "interdms":
+                    if len(data) != 16:  # optional sanity check
+                        print(f"[Warning] Unexpected number of trials in {file_path}: {len(data)}")
+                    accuracy = evaluate_accuracy_interdms(data)
+                print(f"Accuracy for subject: {sub}, session: {ses}: {accuracy:.2f}")
+
+                results.append({
+                    "subject": f"sub-{sub}",
+                    "session": f"ses-{ses}",
+                    "task": task_name,
+                    "run": file_path.name.split("_run-")[1].split("_")[0],  # extract run number
+                    "accuracy": accuracy
+                })
+
+    # Save as CSV
+    results_df = pd.DataFrame(results)
+    results_csv_path = results_dir / f"{task_name}_accuracy_results.csv"
+    results_df.to_csv(results_csv_path, index=False)
+    print(f"\n✅ Accuracy results saved to: {results_csv_path}")
+
+
+if __name__ == "__main__":
+    main()

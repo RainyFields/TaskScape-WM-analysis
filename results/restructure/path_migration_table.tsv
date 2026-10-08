@@ -1,39 +1,19 @@
 file	line	class	review	detail
 config/__init__.py		migrated	reviewed	
 config/paths.py		migrated (legacy path only in guard constants or comments)	reviewed	3 remaining mentions (comments/docstrings only)
-scripts/accuracy_level.py	133	input	reviewed (proposed: migrate)	root_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
-scripts/accuracy_level.py	154	historical	reviewed (proposed: migrate)	# if str(file_path) != "/project/def-pbellec/xuan/fmri_dataset_project/data/behavior/sub-06/ses-016/func/sub-06_ses-016_task-interdms_run-02_events.tsv":
-scripts/accuracy_level.py	186	input	reviewed (proposed: migrate)	results_csv_path = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/results/{task_name}_accuracy_results.csv")
-scripts/accuracy_plot.py	11	input	reviewed (proposed: superseded-by -> scripts/figure_making/plot_behavioral_performance.py)	data_dir = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/results/{task_name}_accuracy_results.csv")
-scripts/accuracy_plot.py	26	output	reviewed (proposed: superseded-by -> scripts/figure_making/plot_behavioral_performance.py)	save_path = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/results/performance/{task_name}_accuracy_boxplot.png")
+scripts/accuracy_level.py		migrated	reviewed	
 scripts/accuracy_sanity.py	13	historical	reviewed (proposed: obsolete)	# source_root = Path("/project/def-pbellec/xuan/cneuromod.multfs.fmriprep/sourcedata/cneuromod.multfs.raw")
 scripts/accuracy_sanity.py	14	historical	reviewed (proposed: obsolete)	# destination_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
 scripts/accuracy_sanity.py	48	historical	reviewed (proposed: obsolete)	# design_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
 scripts/accuracy_sanity.py	96	input	reviewed (proposed: obsolete)	behavior_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
 scripts/accuracy_sanity.py	97	input	reviewed (proposed: obsolete)	design_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
-scripts/aggregate_subject_beta_activation_vertex.py	40	historical	reviewed (proposed: superseded-by -> scripts/export_beta_activation_session_maps.py)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas"
-scripts/aggregate_subject_beta_activation_vertex.py	47	historical	reviewed (proposed: superseded-by -> scripts/export_beta_activation_session_maps.py)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
-scripts/aggregate_subject_r2_vertex_maps.py	23	input	reviewed (proposed: migrate)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
-scripts/aggregate_subject_r2_vertex_maps.py	28	input	reviewed (proposed: migrate)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/r2_averaged_glasser64k/encoding_delay_ssmoothing_psc",
-scripts/backup_data_to_dropbox.sh	2	historical	reviewed (proposed: obsolete)	# Back up fmri_dataset_project/data/ to Dropbox via rclone.
-scripts/backup_data_to_dropbox.sh	21	obsolete-candidate	reviewed (proposed: obsolete)	REMOTE_PATH="${RCLONE_REMOTE_PATH:-fmri_dataset_project_backup/data}"
-scripts/backup_data_to_dropbox.sh	22	obsolete-candidate	reviewed (proposed: obsolete)	SOURCE="/project/def-pbellec/xuan/fmri_dataset_project/data"
-scripts/backup_data_to_dropbox.sh	23	obsolete-candidate	reviewed (proposed: obsolete)	LOG_DIR="/project/def-pbellec/xuan/fmri_dataset_project/logs"
+scripts/aggregate_subject_r2_vertex_maps.py		migrated	reviewed	
 scripts/build_bids_release.py	44	input	reviewed (proposed: obsolete)	PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
 scripts/build_bids_release.py	46	historical	reviewed (proposed: obsolete)	"/project/def-pbellec/xuan/cneuromod.multfs.fmriprep/"
 scripts/build_bids_release.py	47	historical	reviewed (proposed: obsolete)	"sourcedata/cneuromod.multfs.raw"
 scripts/build_bids_release.py	49	input	reviewed (proposed: obsolete)	FMRIPREP_ROOT = Path("/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
 scripts/build_clean_delay_betas.py		migrated	reviewed	
-scripts/check_beta_consistency.py	16	input	reviewed (proposed: obsolete)	BASE = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func")
-scripts/check_beta_consistency.py	17	input	reviewed (proposed: obsolete)	MASK_PATH = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy")
-scripts/check_beta_consistency.py	18	output	reviewed (proposed: obsolete)	OUT_FIG = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/beta_consistency.png")
-scripts/check_beta_consistency_output.txt	54	obsolete-candidate	reviewed (proposed: obsolete)	Saved figure: /project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/beta_consistency.png
-scripts/cifti_resample.sh	4	obsolete-candidate	reviewed (proposed: obsolete)	basedir="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep"
-scripts/cifti_resample.sh	5	obsolete-candidate	reviewed (proposed: obsolete)	glasser_template="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii"
-scripts/cifti_resample.sh	12	obsolete-candidate	reviewed (proposed: obsolete)	targetdir="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled/${subj}/ses-${session_id}"
 scripts/clean_encoding_delay_betas.py	34	input	reviewed (proposed: obsolete)	PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
-scripts/comprehensive_glm_assessment.py	7	input	reviewed (proposed: obsolete)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
-scripts/comprehensive_glm_assessment.py	278	input	reviewed (proposed: obsolete)	original_file = "/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-ctxdm_run-01_betas.h5"
 scripts/condition_level_activity_cross_subj_corr.py	60	input	reviewed (proposed: migrate-blocked-invalid-input)	RESULT_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/task_level_avg_activity")
 scripts/condition_level_activity_cross_subj_corr.py	61	output	reviewed (proposed: migrate-blocked-invalid-input)	OUT_BASE = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/cross_subject_similarity")
 scripts/condition_level_visualization.py	118	input	reviewed (proposed: migrate-blocked-invalid-input)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only")
@@ -46,148 +26,109 @@ scripts/condition_wise_correlation.py	27	input	reviewed (proposed: migrate-block
 scripts/condition_wise_correlation.py	28	output	reviewed (proposed: migrate-blocked-invalid-input)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity \
 scripts/condition_wise_correlation.py	135	input	reviewed (proposed: migrate-blocked-invalid-input)	ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
 scripts/condition_wise_correlation.py	147	input	reviewed (proposed: migrate-blocked-invalid-input)	ap.add_argument("--vertex_mask_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy",
-scripts/create_nilearn_result.py	7	input	reviewed (proposed: obsolete)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
-scripts/create_nilearn_result.py	28	input	reviewed (proposed: obsolete)	fmri_root_dir = Path('/project/def-pbellec/xuan/cneuromod.multfs.fmriprep') / subj
-scripts/create_nilearn_result.py	29	input	reviewed (proposed: obsolete)	confounds_root_dir = Path('/project/def-pbellec/xuan/cneuromod.multfs.fmriprep') / subj
-scripts/create_nilearn_result.py	30	input	reviewed (proposed: obsolete)	events_root_dir = Path('/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior') / subj
-scripts/create_nilearn_result.py	31	output	reviewed (proposed: obsolete)	output_dir = Path('/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data/trial_level_betas') / subj
-scripts/datalad_sync.sh	4	obsolete-candidate	reviewed (proposed: obsolete)	datalad install --reckless ephemeral -s ria+file:///project/rrg-pbellec/ria-rorqual#~cneuromod.multfs.fmriprep@dev
-scripts/datalad_sync.sh	5	obsolete-candidate	reviewed (proposed: obsolete)	cd cneuromod.multfs.fmriprep
-scripts/datalad_sync.sh	7	obsolete-candidate	reviewed (proposed: obsolete)	datalad get -n --reckless ephemeral sourcedata/cneuromod.multfs.raw/
-scripts/evaluate_nilearn_glm.py	23	output	reviewed (proposed: obsolete)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/nilearn_evaluation
-scripts/evaluate_nilearn_glm.py	56	input	reviewed (proposed: obsolete)	default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep",
-scripts/evaluate_nilearn_glm.py	59	input	reviewed (proposed: obsolete)	default="/project/def-pbellec/xuan/fmri_dataset_project/results/nilearn_evaluation",
-scripts/events_diag_shell_log.txt	7617	obsolete-candidate	reviewed (proposed: obsolete)	+ builtin export PWD=/lustre09/project/6002071/xuan/fmri_dataset_project/scripts
-scripts/events_diag_shell_log.txt	7618	obsolete-candidate	reviewed (proposed: obsolete)	+ PWD=/lustre09/project/6002071/xuan/fmri_dataset_project/scripts
-scripts/events_diag_shell_log.txt	7620	obsolete-candidate	reviewed (proposed: obsolete)	+ builtin eval 'python - <<'\''PY'\'' > /project/def-pbellec/xuan/fmri_dataset_project/scripts/events_run1_diagnostic_output.txt
-scripts/events_diag_shell_log.txt	7623	obsolete-candidate	reviewed (proposed: obsolete)	ev_path = "/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-1_events.tsv"
-scripts/events_diag_shell_log.txt	7654	obsolete-candidate	reviewed (proposed: obsolete)	FileNotFoundError: [Errno 2] No such file or directory: '/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior/sub-01/ses-001/func/sub-01_ses-
-scripts/events_diag_shell_log.txt	7665	obsolete-candidate	reviewed (proposed: obsolete)	+ _emit /lustre09/project/6002071/xuan/fmri_dataset_project/scripts
-scripts/events_diag_shell_log.txt	7667	historical	reviewed (proposed: obsolete)	' /lustre09/project/6002071/xuan/fmri_dataset_project/scripts
-scripts/events_diag_shell_log.txt	7803	obsolete-candidate	reviewed (proposed: obsolete)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
-scripts/events_diag_shell_log.txt	7813	obsolete-candidate	reviewed (proposed: obsolete)	declare -x SCRATCH="/scratch/xuan"
-scripts/events_diag_shell_log.txt	8007	obsolete-candidate	reviewed (proposed: obsolete)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
-scripts/events_diag_shell_log.txt	8017	obsolete-candidate	reviewed (proposed: obsolete)	declare -x SCRATCH="/scratch/xuan"
-scripts/events_diag_shell_log.txt	8211	obsolete-candidate	reviewed (proposed: obsolete)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
-scripts/events_diag_shell_log.txt	8221	obsolete-candidate	reviewed (proposed: obsolete)	declare -x SCRATCH="/scratch/xuan"
-scripts/events_diag_shell_log.txt	8416	obsolete-candidate	reviewed (proposed: obsolete)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
-scripts/events_diag_shell_log.txt	8426	obsolete-candidate	reviewed (proposed: obsolete)	declare -x SCRATCH="/scratch/xuan"
-scripts/export_beta_activation_session_maps.py	45	historical	reviewed (proposed: migrate)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas"
-scripts/export_beta_activation_session_maps.py	48	historical	reviewed (proposed: migrate)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
-scripts/export_beta_activation_session_maps.py	52	historical	reviewed (proposed: migrate)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
+scripts/encoding_delay_beta_compliance.py		migrated	reviewed	
+scripts/export_beta_activation_session_maps.py		migrated	reviewed	
 scripts/export_taskgroup_beta_npy.py	21	historical	reviewed (proposed: migrate-blocked-invalid-input)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
 scripts/export_taskgroup_beta_npy.py	24	input	reviewed (proposed: migrate-blocked-invalid-input)	ATLAS_PATH = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
 scripts/export_taskgroup_beta_npy.py	26	historical	reviewed (proposed: migrate-blocked-invalid-input)	"/project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt"
 scripts/export_taskgroup_beta_npy.py	29	historical	reviewed (proposed: migrate-blocked-invalid-input)	"/project/def-pbellec/xuan/fmri_dataset_project/results/beta_visualization/task_group_level_npy"
-scripts/fd_distribution.py	8	input	reviewed (proposed: superseded-by -> scripts/figure_making/plot_fd_distribution.py)	data_root = '/project/def-pbellec/xuan/cneuromod.multfs.fmriprep'
-scripts/fd_distribution.py	9	output	reviewed (proposed: superseded-by -> scripts/figure_making/plot_fd_distribution.py)	save_root = '/project/def-pbellec/xuan/fmri_dataset_project/results/fd_distribution'
-scripts/figure_making/investigate_r2_one_voxels.py	66	input	reviewed (proposed: obsolete)	DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/data")
-scripts/figure_making/investigate_r2_one_voxels.py	69	output	reviewed (proposed: obsolete)	OUTPUT_DIR = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/results/r2_investigation")
-scripts/figure_making/plot_accuracy.py	33	input	reviewed (proposed: migrate)	results_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results")
-scripts/figure_making/plot_accuracy.py	34	input	reviewed (proposed: migrate)	design_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
-scripts/figure_making/plot_accuracy.py	140	output	reviewed (proposed: migrate)	save_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/behavioral_performance/")
-scripts/figure_making/plot_behavioral_performance.py	4	input	reviewed (proposed: migrate)	Reads from existing CSV results in /project/def-pbellec/xuan/fmri_dataset_project/results/
-scripts/figure_making/plot_behavioral_performance.py	52	input	reviewed (proposed: migrate)	results_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results")
-scripts/figure_making/plot_behavioral_performance.py	53	input	reviewed (proposed: migrate)	figure_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/behavioral_performance")
-scripts/figure_making/plot_behavioral_performance.py	55	input	reviewed (proposed: migrate)	design_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
-scripts/figure_making/plot_fd_distribution.py	17	input	reviewed (proposed: migrate)	data_root = Path("/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
-scripts/figure_making/plot_fd_distribution.py	18	output	reviewed (proposed: migrate)	save_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/fd_distribution")
+scripts/figure_making/plot_accuracy.py		migrated	reviewed	
+scripts/figure_making/plot_behavioral_performance.py		migrated	reviewed	
+scripts/figure_making/plot_fd_distribution.py		migrated	reviewed	1 remaining mentions (comments/docstrings only)
 scripts/figure_making/plot_fig8_regenerated_clean.py		migrated	reviewed	
 scripts/figure_making/plot_fig8_style_matched_v2.py	32	input	reviewed (proposed: superseded-by -> scripts/figure_making/plot_fig8_regenerated_clean.py)	PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
 scripts/figure_making/plot_fig8_uncluttered_v3.py	34	input	reviewed (proposed: superseded-by -> scripts/figure_making/plot_fig8_regenerated_clean.py)	PROJECT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
-scripts/figure_making/plot_glm_sanity_check.py	62	input	reviewed (proposed: migrate)	DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/data")
-scripts/figure_making/plot_glm_sanity_check.py	65	output	reviewed (proposed: migrate)	OUTPUT_DIR = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/results/glm_sanity_figures")
+scripts/figure_making/plot_glm_sanity_check.py		migrated	reviewed	
 scripts/figure_making/plot_per_task_within_across_subj_similarity.py	778	input	reviewed (proposed: superseded-by -> scripts/similarity_analysis_clean.py + scripts/figure_making/plot_fig8_regenerated_clean.py)	ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
 scripts/figure_making/plot_per_task_within_across_subj_similarity.py	784	input	reviewed (proposed: superseded-by -> scripts/similarity_analysis_clean.py + scripts/figure_making/plot_fig8_regenerated_clean.py)	ap.add_argument("--vertex_mask_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy",
 scripts/figure_making/plot_repetition_distribution.py	49	input	reviewed (proposed: migrate-blocked-invalid-input)	data_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only")
 scripts/figure_making/plot_repetition_distribution.py	52	output	reviewed (proposed: migrate-blocked-invalid-input)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/task_condition_repetition/")
-scripts/figure_making/plot_response_rate.py	21	input	reviewed (proposed: migrate)	root_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
-scripts/figure_making/plot_response_rate.py	22	input	reviewed (proposed: migrate)	results_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results")
-scripts/figure_making/plot_response_rate.py	23	input	reviewed (proposed: migrate)	figure_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/behavioral_performance/")
+scripts/figure_making/plot_response_rate.py		migrated	reviewed	
 scripts/figure_making/plot_sankey.py	31	historical	reviewed (proposed: migrate-blocked-invalid-input)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
 scripts/figure_making/plot_sankey.py	35	historical	reviewed (proposed: migrate-blocked-invalid-input)	"/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/sankey"
 scripts/figure_making/plot_task_condition_count.py	22	historical	reviewed (proposed: migrate-blocked-invalid-input)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
 scripts/figure_making/plot_task_condition_count.py	26	historical	reviewed (proposed: migrate-blocked-invalid-input)	"/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/"
 scripts/generate_valid_vertex_mask.py	25	input	reviewed (proposed: obsolete)	DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/data")
 scripts/glm_analysis.py		migrated	reviewed	
-scripts/glm_analysis_condition_based.py	56	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled")
-scripts/glm_analysis_condition_based.py	57	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--conf_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
-scripts/glm_analysis_condition_based.py	58	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--events_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
-scripts/glm_analysis_condition_based.py	59	output	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data")
-scripts/glm_analysis_nilearn.py	11	output	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	- out_root is expected to be: /project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data
-scripts/glm_analysis_nilearn.py	28	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	--fmri_root /project/def-pbellec/xuan/cneuromod.multfs.fmriprep \
-scripts/glm_analysis_nilearn.py	29	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	--conf_root /project/def-pbellec/xuan/cneuromod.multfs.fmriprep \
-scripts/glm_analysis_nilearn.py	30	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	--events_root /project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior \
-scripts/glm_analysis_nilearn.py	31	output	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	--out_root /project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data \
-scripts/glm_analysis_nilearn.py	62	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
-scripts/glm_analysis_nilearn.py	63	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--conf_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
-scripts/glm_analysis_nilearn.py	64	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--events_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
-scripts/glm_analysis_nilearn.py	65	output	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data",
-scripts/glm_analysis_regularized.py	37	output	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	--out_root /project/def-pbellec/xuan/fmri_dataset_project/data \
-scripts/glm_analysis_regularized.py	70	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled")
-scripts/glm_analysis_regularized.py	71	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--conf_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
-scripts/glm_analysis_regularized.py	72	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--events_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
-scripts/glm_analysis_regularized.py	73	output	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data")
 scripts/glm_output.log	2	input	reviewed (proposed: historical)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/run_single_session.py", line 242, in <module>
 scripts/glm_output.log	4	input	reviewed (proposed: historical)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/glm_analysis_nilearn.py", line 271, in evaluate_glm_performance
 scripts/glm_output.log	8	input	reviewed (proposed: historical)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/run_single_session.py", line 242, in <module>
 scripts/glm_output.log	10	input	reviewed (proposed: historical)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/glm_analysis_nilearn.py", line 271, in evaluate_glm_performance
-scripts/glm_per_task_concat.py	70	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled")
-scripts/glm_per_task_concat.py	71	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--conf_root", default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
-scripts/glm_per_task_concat.py	72	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--events_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
-scripts/glm_per_task_concat.py	73	input	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--designs_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
-scripts/glm_per_task_concat.py	74	output	reviewed (proposed: superseded-by -> scripts/glm_analysis.py)	p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data")
-scripts/glm_ps_children.txt	3	obsolete-candidate	reviewed (proposed: obsolete)	279341       09:25  0.0  0.0 /home/xuan/.cursor-server/bin/224838f96445be37e3db643a163a817c15b36060/resources/helpers/cursorsandbox --sandbox-policy-cwd /projec
-scripts/glm_ps_children.txt	4	obsolete-candidate	reviewed (proposed: obsolete)	279370       09:25  436  0.2 python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --estimator wls_ar1 --out_root /project/def-pbellec/xuan/f
-scripts/glm_ps_status.txt	2	obsolete-candidate	reviewed (proposed: obsolete)	279218       09:14  0.0  0.0 /bin/bash -O extglob -c snap=$(command cat <&3) && builtin shopt -s extglob && builtin eval -- "$snap" && { builtin set +u 2>/dev/n
-scripts/glm_python_ps_status.txt	2	obsolete-candidate	reviewed (proposed: obsolete)	279370       11:52  425  0.1 python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --estimator wls_ar1 --out_root /project/def-pbellec/xuan/f
-scripts/glm_python_ps_status2.txt	2	obsolete-candidate	reviewed (proposed: obsolete)	279370       14:30  444  0.1 python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --estimator wls_ar1 --out_root /project/def-pbellec/xuan/f
 scripts/hierarchical_clustering_chunk_analysis.py	19	input	reviewed (proposed: migrate-blocked-invalid-input)	--matrix_npy /project/def-pbellec/xuan/fmri_dataset_project/results/clustered/sub-03_reordered_matrix_per_network.npy \
 scripts/hierarchical_clustering_chunk_analysis.py	20	input	reviewed (proposed: migrate-blocked-invalid-input)	--cluster_csv /project/def-pbellec/xuan/fmri_dataset_project/results/clustered/sub-03_cluster_assignments_per_network.csv \
 scripts/hierarchical_clustering_chunk_analysis.py	21	output	reviewed (proposed: migrate-blocked-invalid-input)	--out_prefix /project/def-pbellec/xuan/fmri_dataset_project/results/clustered/sub-03_network_blocks
 scripts/hierarchical_clustering_conditions.py	23	input	reviewed (proposed: migrate-blocked-invalid-input)	--matrix_npy /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-06_cond_similarity_mean_matrix_per_network.npy \
 scripts/hierarchical_clustering_conditions.py	24	input	reviewed (proposed: migrate-blocked-invalid-input)	--cond_json  /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-06_cond_names_per_network.json \
 scripts/hierarchical_clustering_conditions.py	25	output	reviewed (proposed: migrate-blocked-invalid-input)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/clustered \
+scripts/legacy/README.md		archived	reviewed (archived; scripts/legacy/README.md)	1 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/accuracy_plot.py		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/aggregate_subject_beta_activation_vertex.py		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/check_beta_consistency.py		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/fd_distribution.py		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/figure_making/investigate_r2_one_voxels.py		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/glm_analysis_condition_based.py		archived	reviewed (archived; scripts/legacy/README.md)	4 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/glm_analysis_regularized.py		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/glm_per_task_concat.py		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/logs/check_beta_consistency_output.txt		archived	reviewed (archived; scripts/legacy/README.md)	1 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/logs/events_diag_shell_log.txt		archived	reviewed (archived; scripts/legacy/README.md)	15 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/logs/glm_ps_children.txt		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/logs/glm_ps_status.txt		archived	reviewed (archived; scripts/legacy/README.md)	1 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/logs/glm_python_ps_status.txt		archived	reviewed (archived; scripts/legacy/README.md)	1 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/logs/glm_python_ps_status2.txt		archived	reviewed (archived; scripts/legacy/README.md)	1 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/logs/ols_pid_check.txt		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/logs/ols_test_ps2.txt		archived	reviewed (archived; scripts/legacy/README.md)	1 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/logs/run1_adjusted_output.txt		archived	reviewed (archived; scripts/legacy/README.md)	21 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/comprehensive_glm_assessment.py		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/create_nilearn_result.py		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/evaluate_nilearn_glm.py		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/glm_analysis_nilearn.py		archived	reviewed (archived; scripts/legacy/README.md)	9 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/glm_evaluation_nilearn.py		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/nilearn_quality_assessment.py		archived	reviewed (archived; scripts/legacy/README.md)	4 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/quick_glm_evaluation.py		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/quick_nilearn_evaluation.py		archived	reviewed (archived; scripts/legacy/README.md)	4 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/run_glm_nilearn_permutations.sh		archived	reviewed (archived; scripts/legacy/README.md)	6 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/run_nilearn_analysis.py		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/run_single_session.py		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/nilearn/test_single_run.py		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/noise_ceiling.py		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/noise_ceiling_final_version.py		archived	reviewed (archived; scripts/legacy/README.md)	10 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/noise_ceiling_tradition.py		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_all_processed.py		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/beta_contrast_vis.py		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/beta_contrast_vis_condition_level.py		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/beta_contrast_vis_per_task_concat.py		archived	reviewed (archived; scripts/legacy/README.md)	4 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/beta_contrast_vis_roi_condition_level.py		archived	reviewed (archived; scripts/legacy/README.md)	4 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/beta_contrast_vis_roi_trial_level.py		archived	reviewed (archived; scripts/legacy/README.md)	4 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/beta_contrast_vis_task_aggregated_condition_level.py		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/beta_contrast_vis_task_aggregated_trial_level.py		archived	reviewed (archived; scripts/legacy/README.md)	4 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/beta_contrast_vis_trial_level.py		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/debug_parcel_loading.py		archived	reviewed (archived; scripts/legacy/README.md)	1 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/debug_synthetic_vs_glm_design.py		archived	reviewed (archived; scripts/legacy/README.md)	1 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/glm_evaluation_noise_ceiling.py		archived	reviewed (archived; scripts/legacy/README.md)	1 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/raw_data_snr_analysis.py		archived	reviewed (archived; scripts/legacy/README.md)	4 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/vertex_level_analysis.py		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/sanity_check/visualize_raw_timeseries.py		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/backup_data_to_dropbox.sh		archived	reviewed (archived; scripts/legacy/README.md)	4 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/cifti_resample.sh		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/datalad_sync.sh		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/run_glm_permutations.sh		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/smooth_glasser_sm4.sh		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/smooth_glasser_sm4_array.sh		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/submit_aggregate_subject_r2.sh		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/submit_build_bids_release.sh		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/submit_glm_clean_regenerate.sh		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/submit_regenerate_grouped_betas.sh		archived	reviewed (archived; scripts/legacy/README.md)	4 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/submit_smooth_sm4_array.sh		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/submit_tar_release.sh		archived	reviewed (archived; scripts/legacy/README.md)	2 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/slurm/sync_betas_to_shared.sh		archived	reviewed (archived; scripts/legacy/README.md)	3 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/subject_within_vs_cross_similarity.py		archived	reviewed (archived; scripts/legacy/README.md)	5 legacy-path lines kept verbatim (not maintained)
+scripts/legacy/task_condition_repetition_check_raw_data.py		archived	reviewed (archived; scripts/legacy/README.md)	1 legacy-path lines kept verbatim (not maintained)
 scripts/nilearn_quality.log	18	input	reviewed (proposed: historical)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/nilearn_quality_assessment.py", line 701, in <module>
 scripts/nilearn_quality.log	20	input	reviewed (proposed: historical)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/nilearn_quality_assessment.py", line 660, in main
 scripts/nilearn_quality.log	22	input	reviewed (proposed: historical)	File "/lustre09/project/6002071/xuan/fmri_dataset_project/scripts/nilearn_quality_assessment.py", line 123, in compute_r_squared_map
-scripts/nilearn_quality_assessment.py	8	input	reviewed (proposed: obsolete)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
-scripts/nilearn_quality_assessment.py	42	input	reviewed (proposed: obsolete)	fmri_root = Path('/project/def-pbellec/xuan/cneuromod.multfs.fmriprep') / self.subj
-scripts/nilearn_quality_assessment.py	43	input	reviewed (proposed: obsolete)	events_root = Path('/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior') / self.subj
-scripts/nilearn_quality_assessment.py	672	output	reviewed (proposed: obsolete)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/nilearn_quality_assessment")
-scripts/noise_ceiling.py	14	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-01_task_condition_betas
-scripts/noise_ceiling.py	15	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
-scripts/noise_ceiling.py	16	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
-scripts/noise_ceiling.py	17	output	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--unit region --sqrt_to_r 1 --output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/variance_based
-scripts/noise_ceiling.py	221	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
-scripts/noise_ceiling_final_version.py	9	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-01_task_condition_betas
-scripts/noise_ceiling_final_version.py	10	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
-scripts/noise_ceiling_final_version.py	11	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
-scripts/noise_ceiling_final_version.py	12	output	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/traditional_way/task_level \
-scripts/noise_ceiling_final_version.py	28	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-01_task_condition_betas
-scripts/noise_ceiling_final_version.py	29	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
-scripts/noise_ceiling_final_version.py	30	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
-scripts/noise_ceiling_final_version.py	31	output	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/final_version \
-scripts/noise_ceiling_final_version.py	239	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
-scripts/noise_ceiling_final_version.py	248	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	ap.add_argument("--vertex_mask_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy",
-scripts/noise_ceiling_tradition.py	7	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-06_task_condition_betas
-scripts/noise_ceiling_tradition.py	8	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
-scripts/noise_ceiling_tradition.py	9	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
-scripts/noise_ceiling_tradition.py	10	output	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/noise_ceiling/traditional_way \
-scripts/noise_ceiling_tradition.py	164	input	reviewed (proposed: superseded-by -> scripts/noise_ceiling_clean/noise_ceiling_clean.py (branch taskscape-migration-nc))	ap.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii",
-scripts/ols_pid_check.txt	5	obsolete-candidate	reviewed (proposed: obsolete)	3110029       14:11  0.0  0.0 Sl   /home/xuan/.cursor-server/bin/224838f96445be37e3db643a163a817c15b36060/resources/helpers/cursorsandbox --sandbox-policy-cwd /
-scripts/ols_pid_check.txt	6	obsolete-candidate	reviewed (proposed: obsolete)	3110051       14:11  0.0  0.0 I    python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --runs run-1 --estimator ols --out_root /project/def
-scripts/ols_test_ps2.txt	3	obsolete-candidate	reviewed (proposed: obsolete)	3147811       05:20  0.0  0.0 I    python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --runs run-1 --estimator ols --out_root /project/def
 scripts/plot_taskwise_similarity_distribution.py	19	input	reviewed (proposed: migrate-blocked-invalid-input)	--matrix_npy /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-03_cond_similarity_mean_matrix_per_network.npy \
 scripts/plot_taskwise_similarity_distribution.py	20	input	reviewed (proposed: migrate-blocked-invalid-input)	--cond_json  /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-03_cond_names_per_network.json \
 scripts/plot_taskwise_similarity_distribution.py	21	output	reviewed (proposed: migrate-blocked-invalid-input)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/taskwise_similarity/ \
-scripts/quick_glm_evaluation.py	7	input	reviewed (proposed: obsolete)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
-scripts/quick_glm_evaluation.py	215	input	reviewed (proposed: obsolete)	original_file = f"/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01/ses-001/func/{base_name}_betas.h5"
-scripts/quick_glm_evaluation.py	216	input	reviewed (proposed: obsolete)	nilearn_file = f"/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data/trial_level_betas/sub-01/ses-001/func/{base_name}_nilearn_betas.h5"
-scripts/quick_nilearn_evaluation.py	7	input	reviewed (proposed: obsolete)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
-scripts/quick_nilearn_evaluation.py	35	input	reviewed (proposed: obsolete)	fmri_root = Path('/project/def-pbellec/xuan/cneuromod.multfs.fmriprep') / subj
-scripts/quick_nilearn_evaluation.py	36	input	reviewed (proposed: obsolete)	events_root = Path('/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior') / subj
-scripts/quick_nilearn_evaluation.py	291	output	reviewed (proposed: obsolete)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results")
 scripts/reformat_behavior.py	305	input	reviewed (proposed: obsolete)	root_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/behavior")
 scripts/reformat_behavior.py	306	input	reviewed (proposed: obsolete)	target_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior")
 scripts/region_level_task_correlation.py	20	input	reviewed (proposed: migrate-blocked-invalid-input)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-03_task_condition_betas
@@ -215,95 +156,15 @@ scripts/repro/compare_fidelity.py		migrated	reviewed
 scripts/repro/fallback_audit.py		migrated (legacy path only in guard constants or comments)	reviewed	1 remaining mentions (comments/docstrings only)
 scripts/repro/path_migration_table.py		migrated (legacy path only in guard constants or comments)	reviewed	1 remaining mentions (comments/docstrings only)
 scripts/repro/submit_fidelity.sh		migrated	reviewed	
-scripts/run1_adjusted_output.txt	7617	obsolete-candidate	reviewed (proposed: obsolete)	+ builtin export PWD=/lustre09/project/6002071/xuan/fmri_dataset_project/scripts
-scripts/run1_adjusted_output.txt	7618	obsolete-candidate	reviewed (proposed: obsolete)	+ PWD=/lustre09/project/6002071/xuan/fmri_dataset_project/scripts
-scripts/run1_adjusted_output.txt	7620	obsolete-candidate	reviewed (proposed: obsolete)	+ builtin eval 'source /project/def-pbellec/xuan/nilearn/bin/activate && set -x && python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --ru
-scripts/run1_adjusted_output.txt	7652	obsolete-candidate	reviewed (proposed: obsolete)	++ python glm_analysis.py --subj sub-01 --sessions ses-001 --tasks interdms --runs run-1 --estimator ols --out_root /project/def-pbellec/xuan/fmri_dataset_proje
-scripts/run1_adjusted_output.txt	7658	obsolete-candidate	reviewed (proposed: obsolete)	[save] h5: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-1_betas.h5
-scripts/run1_adjusted_output.txt	7659	obsolete-candidate	reviewed (proposed: obsolete)	[save] design: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-1_desig
-scripts/run1_adjusted_output.txt	7660	obsolete-candidate	reviewed (proposed: obsolete)	[save] design_matrix: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-
-scripts/run1_adjusted_output.txt	7661	obsolete-candidate	reviewed (proposed: obsolete)	[save] sanity_r2_hist: /project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_histogram.png
-scripts/run1_adjusted_output.txt	7662	obsolete-candidate	reviewed (proposed: obsolete)	[save] sanity_examples: /project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/example_vertices.png
-scripts/run1_adjusted_output.txt	7663	obsolete-candidate	reviewed (proposed: obsolete)	[save] sanity_corr: /project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/design_matrix_correlation.png
-scripts/run1_adjusted_output.txt	7664	obsolete-candidate	reviewed (proposed: obsolete)	[save] sanity_vif: /project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/vif_task_regressors.png
-scripts/run1_adjusted_output.txt	7679	obsolete-candidate	reviewed (proposed: obsolete)	+ _emit /lustre09/project/6002071/xuan/fmri_dataset_project/scripts
-scripts/run1_adjusted_output.txt	7681	historical	reviewed (proposed: obsolete)	' /lustre09/project/6002071/xuan/fmri_dataset_project/scripts
-scripts/run1_adjusted_output.txt	7817	obsolete-candidate	reviewed (proposed: obsolete)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
-scripts/run1_adjusted_output.txt	7827	obsolete-candidate	reviewed (proposed: obsolete)	declare -x SCRATCH="/scratch/xuan"
-scripts/run1_adjusted_output.txt	8021	obsolete-candidate	reviewed (proposed: obsolete)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
-scripts/run1_adjusted_output.txt	8031	obsolete-candidate	reviewed (proposed: obsolete)	declare -x SCRATCH="/scratch/xuan"
-scripts/run1_adjusted_output.txt	8225	obsolete-candidate	reviewed (proposed: obsolete)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
-scripts/run1_adjusted_output.txt	8235	obsolete-candidate	reviewed (proposed: obsolete)	declare -x SCRATCH="/scratch/xuan"
-scripts/run1_adjusted_output.txt	8430	obsolete-candidate	reviewed (proposed: obsolete)	declare -x PWD="/lustre09/project/6002071/xuan/fmri_dataset_project/scripts"
-scripts/run1_adjusted_output.txt	8440	obsolete-candidate	reviewed (proposed: obsolete)	declare -x SCRATCH="/scratch/xuan"
+scripts/repro/submit_smoke.sh		migrated	reviewed	
 scripts/run1_surface_diagnosis_report.txt	7	obsolete-candidate	reviewed (proposed: historical)	/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_histogram.png | exists=True
 scripts/run1_surface_diagnosis_report.txt	8	obsolete-candidate	reviewed (proposed: historical)	/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_surface.png | exists=True
 scripts/run1_surface_diagnosis_report.txt	9	obsolete-candidate	reviewed (proposed: historical)	/project/def-pbellec/xuan/fmri_dataset_project/data/glm_sanity/sub-01/ses-001/run-1/r2_task_adj_surface_both_views.png | exists=True
-scripts/run_glm_nilearn_permutations.sh	21	obsolete-candidate	reviewed (proposed: obsolete)	SCRIPT_DIR="/project/def-pbellec/xuan/fmri_dataset_project/scripts"
-scripts/run_glm_nilearn_permutations.sh	25	obsolete-candidate	reviewed (proposed: obsolete)	FMRI_ROOT="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep"
-scripts/run_glm_nilearn_permutations.sh	26	obsolete-candidate	reviewed (proposed: obsolete)	CONF_ROOT="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep"
-scripts/run_glm_nilearn_permutations.sh	27	obsolete-candidate	reviewed (proposed: obsolete)	EVENTS_ROOT="/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior"
-scripts/run_glm_nilearn_permutations.sh	28	obsolete-candidate	reviewed (proposed: obsolete)	OUT_ROOT="/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data"
-scripts/run_glm_nilearn_permutations.sh	29	obsolete-candidate	reviewed (proposed: obsolete)	EVAL_OUT="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/nilearn_glm"
-scripts/run_glm_permutations.sh	32	obsolete-candidate	reviewed (proposed: obsolete)	cd /project/def-pbellec/xuan/fmri_dataset_project/scripts
-scripts/run_glm_permutations.sh	42	obsolete-candidate	reviewed (proposed: obsolete)	mkdir -p "/project/def-pbellec/xuan/fmri_dataset_project/data/${root}"
-scripts/run_glm_permutations.sh	52	obsolete-candidate	reviewed (proposed: obsolete)	outdir="/project/def-pbellec/xuan/fmri_dataset_project/data/${output_root}"
-scripts/run_nilearn_analysis.py	101	input	reviewed (proposed: obsolete)	data_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data/trial_level_betas")
-scripts/run_nilearn_analysis.py	169	output	reviewed (proposed: obsolete)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data")
-scripts/run_nilearn_analysis.py	173	input	reviewed (proposed: obsolete)	eval_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/nilearn_evaluation")
-scripts/run_single_session.py	7	input	reviewed (proposed: obsolete)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
-scripts/run_single_session.py	22	input	reviewed (proposed: obsolete)	fmri_root='/project/def-pbellec/xuan/cneuromod.multfs.fmriprep',
-scripts/run_single_session.py	23	input	reviewed (proposed: obsolete)	conf_root='/project/def-pbellec/xuan/cneuromod.multfs.fmriprep',
-scripts/run_single_session.py	24	input	reviewed (proposed: obsolete)	events_root='/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior',
-scripts/run_single_session.py	25	output	reviewed (proposed: obsolete)	out_root='/project/def-pbellec/xuan/fmri_dataset_project/data',
-scripts/sanity_all_processed.py	13	input	reviewed (proposed: obsolete)	design_file_path = f"/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs/{subject}_design_design_with_converted.tsv"
-scripts/sanity_all_processed.py	31	input	reviewed (proposed: obsolete)	betas_root = Path(f"/project/def-pbellec/xuan/fmri_dataset_project/data/betas/{subject}")
-scripts/sanity_check/beta_contrast_vis.py	13	obsolete-candidate	reviewed (proposed: obsolete)	data_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/betas")
-scripts/sanity_check/beta_contrast_vis.py	14	obsolete-candidate	reviewed (proposed: obsolete)	glasser_atlas_path = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
-scripts/sanity_check/beta_contrast_vis.py	15	obsolete-candidate	reviewed (proposed: obsolete)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/sanity_check")
-scripts/sanity_check/beta_contrast_vis_condition_level.py	2	historical	reviewed (proposed: obsolete)	#     --folder /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas \
-scripts/sanity_check/beta_contrast_vis_condition_level.py	3	historical	reviewed (proposed: obsolete)	#     --stats_output /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/stats \
-scripts/sanity_check/beta_contrast_vis_condition_level.py	5	historical	reviewed (proposed: obsolete)	#     --output_csv /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/stats/summary.csv
-scripts/sanity_check/beta_contrast_vis_per_task_concat.py	33	obsolete-candidate	reviewed (proposed: obsolete)	p.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data",
-scripts/sanity_check/beta_contrast_vis_per_task_concat.py	35	obsolete-candidate	reviewed (proposed: obsolete)	p.add_argument("--results_root", default="/project/def-pbellec/xuan/fmri_dataset_project/results",
-scripts/sanity_check/beta_contrast_vis_per_task_concat.py	37	obsolete-candidate	reviewed (proposed: obsolete)	p.add_argument("--designs_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs",
-scripts/sanity_check/beta_contrast_vis_per_task_concat.py	41	obsolete-candidate	reviewed (proposed: obsolete)	p.add_argument("--atlas_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii")
-scripts/sanity_check/beta_contrast_vis_roi_condition_level.py	19	obsolete-candidate	reviewed (proposed: obsolete)	--folder /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas \
-scripts/sanity_check/beta_contrast_vis_roi_condition_level.py	20	obsolete-candidate	reviewed (proposed: obsolete)	--roi_output /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/roi_stats \
-scripts/sanity_check/beta_contrast_vis_roi_condition_level.py	21	obsolete-candidate	reviewed (proposed: obsolete)	--atlas /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
-scripts/sanity_check/beta_contrast_vis_roi_condition_level.py	23	obsolete-candidate	reviewed (proposed: obsolete)	--output_csv /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/roi_stats/summary_enc_minus_delay.csv
-scripts/sanity_check/beta_contrast_vis_roi_trial_level.py	32	obsolete-candidate	reviewed (proposed: obsolete)	--folder      /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01 \
-scripts/sanity_check/beta_contrast_vis_roi_trial_level.py	33	obsolete-candidate	reviewed (proposed: obsolete)	--atlas       /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
-scripts/sanity_check/beta_contrast_vis_roi_trial_level.py	34	obsolete-candidate	reviewed (proposed: obsolete)	--roi_output  /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/roi_stats \
-scripts/sanity_check/beta_contrast_vis_roi_trial_level.py	37	obsolete-candidate	reviewed (proposed: obsolete)	--output_csv  /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/roi_stats/sub-01/summary_enc_vs_delay.csv
-scripts/sanity_check/beta_contrast_vis_task_aggregated_condition_level.py	35	obsolete-candidate	reviewed (proposed: obsolete)	--roi_stats_root /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/roi_stats \
-scripts/sanity_check/beta_contrast_vis_task_aggregated_condition_level.py	36	obsolete-candidate	reviewed (proposed: obsolete)	--out_root       /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/task_level_roi_stats \
-scripts/sanity_check/beta_contrast_vis_task_aggregated_condition_level.py	38	obsolete-candidate	reviewed (proposed: obsolete)	--output_csv     /project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/task_level_roi_stats/summary_enc_minus_delay.csv
-scripts/sanity_check/beta_contrast_vis_task_aggregated_trial_level.py	33	obsolete-candidate	reviewed (proposed: obsolete)	--glm_root   /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas \
-scripts/sanity_check/beta_contrast_vis_task_aggregated_trial_level.py	34	obsolete-candidate	reviewed (proposed: obsolete)	--atlas      /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
-scripts/sanity_check/beta_contrast_vis_task_aggregated_trial_level.py	35	obsolete-candidate	reviewed (proposed: obsolete)	--out_root   /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/task_level_roi_stats \
-scripts/sanity_check/beta_contrast_vis_task_aggregated_trial_level.py	39	obsolete-candidate	reviewed (proposed: obsolete)	--output_csv /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/task_level_roi_stats/summary_enc_vs_delay_1back.csv
-scripts/sanity_check/beta_contrast_vis_trial_level.py	38	obsolete-candidate	reviewed (proposed: obsolete)	--folder /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01 \
-scripts/sanity_check/beta_contrast_vis_trial_level.py	39	obsolete-candidate	reviewed (proposed: obsolete)	--stats_output /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/stats/sub-01 \
-scripts/sanity_check/beta_contrast_vis_trial_level.py	41	obsolete-candidate	reviewed (proposed: obsolete)	--p_thresh 0.05 --output_csv /project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/stats/sub-01/summary_enc_vs_delay.csv \
-scripts/sanity_check/beta_contrast_vis_trial_level.py	42	obsolete-candidate	reviewed (proposed: obsolete)	--atlas /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
-scripts/sanity_check/beta_contrast_vis_trial_level.py	43	obsolete-candidate	reviewed (proposed: obsolete)	--roi_output /project/def-pbellec/xuan/fmri_dataset_project/data//trial_level_betas/roi_stats/sub-01 --roi_method ivw --tail two-sided
 scripts/sanity_check/compare_ground_truth_vs_fitted_betas.py	34	obsolete-candidate	reviewed (proposed: migrate)	SYNTHETIC_DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/synthetic_data")
-scripts/sanity_check/debug_parcel_loading.py	14	obsolete-candidate	reviewed (proposed: obsolete)	fmri_file = "/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled/sub-01/ses-001/sub-01_ses-001_task-ctxdm_run-1_space-Glasser64k_bold.dtseries
-scripts/sanity_check/debug_synthetic_vs_glm_design.py	18	obsolete-candidate	reviewed (proposed: obsolete)	SYNTHETIC_DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/synthetic_data")
 scripts/sanity_check/design_matrix_vis.py	19	obsolete-candidate	reviewed (proposed: migrate)	/project/def-pbellec/xuan/fmri_dataset_project/data/condition_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-ctxdm_run-01_betas.h5
 scripts/sanity_check/design_matrix_vis.py	23	obsolete-candidate	reviewed (proposed: migrate)	/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01 --recursive
 scripts/sanity_check/design_matrix_vis.py	27	obsolete-candidate	reviewed (proposed: migrate)	/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-ctxdm_run-01_design_matrix.csv --title "sub-01_ses
-scripts/sanity_check/glm_evaluation.py	24	obsolete-candidate	reviewed (proposed: migrate)	--glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_decoding/trial_level_betas  \
-scripts/sanity_check/glm_evaluation.py	25	obsolete-candidate	reviewed (proposed: migrate)	--fmri_root /project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled  \
-scripts/sanity_check/glm_evaluation.py	26	obsolete-candidate	reviewed (proposed: migrate)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_decoding \
-scripts/sanity_check/glm_evaluation.py	76	obsolete-candidate	reviewed (proposed: migrate)	p.add_argument("--glm_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas")
-scripts/sanity_check/glm_evaluation.py	77	obsolete-candidate	reviewed (proposed: migrate)	p.add_argument("--fmri_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled")
-scripts/sanity_check/glm_evaluation.py	78	obsolete-candidate	reviewed (proposed: migrate)	p.add_argument("--output_dir", default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm")
-scripts/sanity_check/glm_evaluation_nilearn.py	14	obsolete-candidate	reviewed (proposed: obsolete)	--glm_root /project/def-pbellec/xuan/fmri_dataset_project/data/nilearn_data/trial_level_betas \
-scripts/sanity_check/glm_evaluation_nilearn.py	15	obsolete-candidate	reviewed (proposed: obsolete)	--fmri_root /project/def-pbellec/xuan/cneuromod.multfs.fmriprep \
-scripts/sanity_check/glm_evaluation_nilearn.py	16	obsolete-candidate	reviewed (proposed: obsolete)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/nilearn_glm \
-scripts/sanity_check/glm_evaluation_noise_ceiling.py	3	historical	reviewed (proposed: obsolete)	# /project/def-pbellec/xuan/fmri_dataset_project/scripts/task_condition_identification.py
+scripts/sanity_check/glm_evaluation.py		migrated	reviewed	
 scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_full_region_avg_summary.txt	6	obsolete-candidate	reviewed (proposed: historical)	h5_root: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
 scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_full_region_avg_summary.txt	7	obsolete-candidate	reviewed (proposed: historical)	atlas: /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii
 scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_task_adj_region_avg_summary.txt	4	obsolete-candidate	reviewed (proposed: historical)	h5_root: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
@@ -311,73 +172,24 @@ scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssm
 scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_task_region_avg_summary.txt	4	obsolete-candidate	reviewed (proposed: historical)	h5_root: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
 scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/sub-03_all_sessions_runs_r2_task_region_avg_summary.txt	5	obsolete-candidate	reviewed (proposed: historical)	atlas: /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii
 scripts/sanity_check/make_synthetic_glm_dataset.py	30	obsolete-candidate	reviewed (proposed: migrate)	ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/synthetic_data")
-scripts/sanity_check/plot_adjusted_r2_distribution_all_tasks.py	45	obsolete-candidate	reviewed (proposed: migrate)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
-scripts/sanity_check/plot_adjusted_r2_distribution_all_tasks.py	50	obsolete-candidate	reviewed (proposed: migrate)	default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc",
-scripts/sanity_check/plot_subject_region_average_r2.py	26	obsolete-candidate	reviewed (proposed: migrate)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
-scripts/sanity_check/plot_subject_region_average_r2.py	31	obsolete-candidate	reviewed (proposed: migrate)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii",
-scripts/sanity_check/plot_subject_region_average_r2.py	48	obsolete-candidate	reviewed (proposed: migrate)	default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc",
-scripts/sanity_check/plot_unadjusted_r2_distribution_all_tasks.py	59	obsolete-candidate	reviewed (proposed: migrate)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
-scripts/sanity_check/plot_unadjusted_r2_distribution_all_tasks.py	65	historical	reviewed (proposed: migrate)	"/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/"
-scripts/sanity_check/raw_data_snr_analysis.py	20	obsolete-candidate	reviewed (proposed: obsolete)	--fmriprep_root /project/def-pbellec/xuan/cneuromod.multfs.fmriprep \
-scripts/sanity_check/raw_data_snr_analysis.py	21	obsolete-candidate	reviewed (proposed: obsolete)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/raw_data_snr
-scripts/sanity_check/raw_data_snr_analysis.py	42	obsolete-candidate	reviewed (proposed: obsolete)	default="/project/def-pbellec/xuan/cneuromod.multfs.fmriprep",
-scripts/sanity_check/raw_data_snr_analysis.py	45	obsolete-candidate	reviewed (proposed: obsolete)	default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/raw_data_snr",
-scripts/sanity_check/vertex_level_analysis.py	36	obsolete-candidate	reviewed (proposed: obsolete)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled",
-scripts/sanity_check/vertex_level_analysis.py	39	obsolete-candidate	reviewed (proposed: obsolete)	default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check",
-scripts/sanity_check/visualize_raw_timeseries.py	17	obsolete-candidate	reviewed (proposed: obsolete)	--fmri_root /project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled
-scripts/sanity_check/visualize_raw_timeseries.py	38	obsolete-candidate	reviewed (proposed: obsolete)	default="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled",
-scripts/sanity_check/visualize_raw_timeseries.py	41	obsolete-candidate	reviewed (proposed: obsolete)	default="/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check",
+scripts/sanity_check/plot_adjusted_r2_distribution_all_tasks.py		migrated	reviewed	
+scripts/sanity_check/plot_subject_region_average_r2.py		migrated	reviewed	
+scripts/sanity_check/plot_unadjusted_r2_distribution_all_tasks.py		migrated	reviewed	
 scripts/session_consistency_dms.py	224	input	reviewed (proposed: migrate)	betas_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas")
 scripts/session_consistency_dms.py	225	input	reviewed (proposed: migrate)	atlas_path = "/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii"
 scripts/session_consistency_dms.py	226	output	reviewed (proposed: migrate)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/session_consistency")
 scripts/similarity_analysis_clean.py		migrated	reviewed	
-scripts/smooth_glasser_sm4.sh	6	obsolete-candidate	reviewed (proposed: obsolete)	BASEDIR="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled"
-scripts/smooth_glasser_sm4.sh	7	obsolete-candidate	reviewed (proposed: obsolete)	FIGDIR="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled/smoothing_verification"
-scripts/smooth_glasser_sm4.sh	8	obsolete-candidate	reviewed (proposed: obsolete)	LEFT_SURF="/project/def-pbellec/xuan/fmri_dataset_project/data/fsLR_32k_midthickness/tpl-fsLR_hemi-L_den-32k_midthickness.surf.gii"
-scripts/smooth_glasser_sm4.sh	9	obsolete-candidate	reviewed (proposed: obsolete)	RIGHT_SURF="/project/def-pbellec/xuan/fmri_dataset_project/data/fsLR_32k_midthickness/tpl-fsLR_hemi-R_den-32k_midthickness.surf.gii"
-scripts/smooth_glasser_sm4.sh	10	obsolete-candidate	reviewed (proposed: obsolete)	VERIFY_SCRIPT="/project/def-pbellec/xuan/fmri_dataset_project/scripts/verify_smoothing.py"
-scripts/smooth_glasser_sm4_array.sh	8	historical	reviewed (proposed: obsolete)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/smooth_sm4_%A_%a.log
-scripts/smooth_glasser_sm4_array.sh	9	historical	reviewed (proposed: obsolete)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/smooth_sm4_%A_%a.err
-scripts/smooth_glasser_sm4_array.sh	18	obsolete-candidate	reviewed (proposed: obsolete)	BASEDIR="/project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled"
-scripts/smooth_glasser_sm4_array.sh	19	obsolete-candidate	reviewed (proposed: obsolete)	LEFT_SURF="/project/def-pbellec/xuan/fmri_dataset_project/data/fsLR_32k_midthickness/tpl-fsLR_hemi-L_den-32k_midthickness.surf.gii"
-scripts/smooth_glasser_sm4_array.sh	20	obsolete-candidate	reviewed (proposed: obsolete)	RIGHT_SURF="/project/def-pbellec/xuan/fmri_dataset_project/data/fsLR_32k_midthickness/tpl-fsLR_hemi-R_den-32k_midthickness.surf.gii"
 scripts/split_half_consistency_dms.py	265	input	reviewed (proposed: migrate)	betas_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas")
 scripts/split_half_consistency_dms.py	266	input	reviewed (proposed: migrate)	atlas_path = "/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii"
 scripts/split_half_consistency_dms.py	267	output	reviewed (proposed: migrate)	output_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results/split_half_consistency")
-scripts/subject_within_vs_cross_similarity.py	26	input	reviewed (proposed: superseded-by -> scripts/similarity_analysis_clean.py)	--input_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only \
-scripts/subject_within_vs_cross_similarity.py	27	output	reviewed (proposed: superseded-by -> scripts/similarity_analysis_clean.py)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/task_rsa_cross_subject \
-scripts/subject_within_vs_cross_similarity.py	30	input	reviewed (proposed: superseded-by -> scripts/similarity_analysis_clean.py)	--network_assignments_path /project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt \
-scripts/subject_within_vs_cross_similarity.py	31	input	reviewed (proposed: superseded-by -> scripts/similarity_analysis_clean.py)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii
-scripts/subject_within_vs_cross_similarity.py	184	input	reviewed (proposed: superseded-by -> scripts/similarity_analysis_clean.py)	ap.add_argument("--vertex_mask_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy",
-scripts/submit_aggregate_subject_r2.sh	22	obsolete-candidate	reviewed (proposed: obsolete)	cd /project/def-pbellec/xuan/fmri_dataset_project/scripts
-scripts/submit_aggregate_subject_r2.sh	25	obsolete-candidate	reviewed (proposed: obsolete)	OUT_ROOT="/project/def-pbellec/xuan/fmri_dataset_project/data/r2_averaged_glasser64k"
-scripts/submit_build_bids_release.sh	8	historical	reviewed (proposed: obsolete)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%A_%a.log
-scripts/submit_build_bids_release.sh	9	historical	reviewed (proposed: obsolete)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%A_%a.err
-scripts/submit_build_bids_release.sh	27	obsolete-candidate	reviewed (proposed: obsolete)	python /project/def-pbellec/xuan/fmri_dataset_project/scripts/build_bids_release.py \
 scripts/submit_glm_array.sh	8	historical	reviewed (proposed: obsolete)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/glm_%A_%a.log
 scripts/submit_glm_array.sh	9	historical	reviewed (proposed: obsolete)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/glm_%A_%a.err
 scripts/submit_glm_array.sh	25	obsolete-candidate	reviewed (proposed: obsolete)	python /project/def-pbellec/xuan/fmri_dataset_project/scripts/glm_analysis.py \
 scripts/submit_glm_array.sh	29	obsolete-candidate	reviewed (proposed: obsolete)	--fmri_root /project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled \
 scripts/submit_glm_array.sh	30	obsolete-candidate	reviewed (proposed: obsolete)	--out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay \
-scripts/submit_glm_clean_regenerate.sh	8	historical	reviewed (proposed: obsolete)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/glm_clean_%A_%a.log
-scripts/submit_glm_clean_regenerate.sh	9	historical	reviewed (proposed: obsolete)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/glm_clean_%A_%a.err
-scripts/submit_glm_clean_regenerate.sh	29	obsolete-candidate	reviewed (proposed: obsolete)	python /project/def-pbellec/xuan/fmri_dataset_project/scripts/glm_analysis.py \
-scripts/submit_glm_clean_regenerate.sh	33	obsolete-candidate	reviewed (proposed: obsolete)	--fmri_root /project/def-pbellec/xuan/fmri_dataset_project/data/glasser_resampled \
-scripts/submit_glm_clean_regenerate.sh	34	obsolete-candidate	reviewed (proposed: obsolete)	--out_root /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay \
-scripts/submit_regenerate_grouped_betas.sh	8	historical	reviewed (proposed: obsolete)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/group_betas_%A_%a.log
-scripts/submit_regenerate_grouped_betas.sh	9	historical	reviewed (proposed: obsolete)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/group_betas_%A_%a.err
-scripts/submit_regenerate_grouped_betas.sh	24	obsolete-candidate	reviewed (proposed: obsolete)	GLM_ROOT=/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
-scripts/submit_regenerate_grouped_betas.sh	26	obsolete-candidate	reviewed (proposed: obsolete)	python /project/def-pbellec/xuan/fmri_dataset_project/scripts/task_condition_identification.py \
-scripts/submit_smooth_sm4_array.sh	4	obsolete-candidate	reviewed (proposed: obsolete)	mkdir -p /project/def-pbellec/xuan/fmri_dataset_project/logs
-scripts/submit_smooth_sm4_array.sh	5	obsolete-candidate	reviewed (proposed: obsolete)	sbatch /project/def-pbellec/xuan/fmri_dataset_project/scripts/smooth_glasser_sm4_array.sh
-scripts/submit_tar_release.sh	8	historical	reviewed (proposed: obsolete)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%A_%a.log
-scripts/submit_tar_release.sh	9	historical	reviewed (proposed: obsolete)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%A_%a.err
 scripts/summarize_condition_correlations.py	23	input	reviewed (proposed: migrate-blocked-invalid-input)	--matrix_npy /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-06_cond_similarity_mean_matrix_per_network.npy \
 scripts/summarize_condition_correlations.py	24	input	reviewed (proposed: migrate-blocked-invalid-input)	--cond_json  /project/def-pbellec/xuan/fmri_dataset_project/results/condition_similarity/sub-06_cond_names_per_network.json \
 scripts/summarize_condition_correlations.py	25	output	reviewed (proposed: migrate-blocked-invalid-input)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/clustered \
-scripts/sync_betas_to_shared.sh	7	historical	reviewed (proposed: obsolete)	#SBATCH --output=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%j.log
-scripts/sync_betas_to_shared.sh	8	historical	reviewed (proposed: obsolete)	#SBATCH --error=/project/def-pbellec/xuan/fmri_dataset_project/logs/%x_%j.err
-scripts/sync_betas_to_shared.sh	13	obsolete-candidate	reviewed (proposed: obsolete)	SRC=/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas
 scripts/task_col_uniqueness_checks.txt	2	obsolete-candidate	reviewed (proposed: historical)	Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-interdms_run-1_design_matrix.
 scripts/task_col_uniqueness_checks.txt	8	obsolete-candidate	reviewed (proposed: historical)	Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-ctxdm_run-1_design_matrix.csv
 scripts/task_col_uniqueness_checks.txt	14	obsolete-candidate	reviewed (proposed: historical)	Path: /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/sub-01/ses-001/func/sub-01_ses-001_task-dms_run-1_design_matrix.csv
@@ -391,20 +203,14 @@ scripts/task_condition_identification.py	62	output	reviewed (proposed: supersede
 scripts/task_condition_identification.py	521	input	reviewed (proposed: superseded-by -> scripts/build_clean_delay_betas.py)	ap.add_argument("--glm_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas",
 scripts/task_condition_identification.py	523	output	reviewed (proposed: superseded-by -> scripts/build_clean_delay_betas.py)	ap.add_argument("--out_root", default="/project/def-pbellec/xuan/fmri_dataset_project/data/trial_level_betas",
 scripts/task_condition_identification.py	559	input	reviewed (proposed: superseded-by -> scripts/build_clean_delay_betas.py)	design_file_df = pd.read_csv(f"/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs/{subj}_design_design_with_converted.tsv", sep="\t")
-scripts/task_condition_repetition_check_raw_data.py	27	input	reviewed (proposed: obsolete)	base_dir = "/project/def-pbellec/xuan/cneuromod.multfs.fmriprep/sourcedata/cneuromod.multfs.raw/sub-03"
 scripts/task_similarity_across_units.py	31	input	reviewed (proposed: migrate-blocked-invalid-input)	--input_pickle /project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas/grouped_betas/task_relevant_only/sub-03_task_condition_betas
 scripts/task_similarity_across_units.py	32	input	reviewed (proposed: migrate-blocked-invalid-input)	--atlas_path /project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii \
 scripts/task_similarity_across_units.py	34	output	reviewed (proposed: migrate-blocked-invalid-input)	--output_dir /project/def-pbellec/xuan/fmri_dataset_project/results/task_similarity \
 scripts/task_similarity_across_units.py	36	input	reviewed (proposed: migrate-blocked-invalid-input)	/project/def-pbellec/xuan/fmri_dataset_project/data/cortex_parcel_network_assignments.txt
 scripts/task_similarity_across_units.py	394	input	reviewed (proposed: migrate-blocked-invalid-input)	ap.add_argument("--vertex_mask_path", default="/project/def-pbellec/xuan/fmri_dataset_project/data/valid_vertex_mask.npy",
-scripts/test_single_run.py	7	input	reviewed (proposed: obsolete)	sys.path.append('/project/def-pbellec/xuan/fmri_dataset_project/scripts')
-scripts/test_single_run.py	22	input	reviewed (proposed: obsolete)	fmri_root='/project/def-pbellec/xuan/cneuromod.multfs.fmriprep',
-scripts/test_single_run.py	23	input	reviewed (proposed: obsolete)	conf_root='/project/def-pbellec/xuan/cneuromod.multfs.fmriprep',
-scripts/test_single_run.py	24	input	reviewed (proposed: obsolete)	events_root='/project/def-pbellec/xuan/fmri_dataset_project/data/reformated_behavior',
-scripts/test_single_run.py	25	output	reviewed (proposed: obsolete)	out_root='/project/def-pbellec/xuan/fmri_dataset_project/data',
 scripts/update_dms_reformatted_mods.py	16	input	reviewed (proposed: obsolete)	ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project")
 scripts/utils.py		migrated	reviewed	
 scripts/validate_clean_delay_betas.py		migrated	reviewed	
-scripts/verify_encoding_delay_beta_compliance.py	18	historical	reviewed (proposed: migrate)	"/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas"
+scripts/verify_encoding_delay_beta_compliance.py		migrated	reviewed	
 scripts/verify_run_labels_from_blockfiles.py		migrated (legacy path only in guard constants or comments)	reviewed	1 remaining mentions (comments/docstrings only)
 scripts/verify_smoothing.py	15	historical	reviewed (proposed: migrate)	"/project/def-pbellec/xuan/fmri_dataset_project/data/Glasser_LR_Dense64k.dlabel.nii"

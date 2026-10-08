@@ -1,5 +1,6 @@
 """Generate 1x5 FD distribution panels for all subjects."""
 
+import argparse
 from pathlib import Path
 import sys
 
@@ -7,16 +8,21 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# EXTERNAL style dependency: /project/def-pbellec/xuan/figure_style (separate repo; not legacy, not dataset)
 workspace_root = Path(__file__).resolve().parents[3]
 if str(workspace_root) not in sys.path:
     sys.path.append(str(workspace_root))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from figure_style.figure_utils import get_figsize, apply_clean_spines
+from config import paths  # noqa: E402  TaskScape-WM inputs only; rejects the legacy tree
 
 subjects = ["sub-01", "sub-02", "sub-03", "sub-05", "sub-06"]
-data_root = Path("/project/def-pbellec/xuan/cneuromod.multfs.fmriprep")
-save_root = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/fd_distribution")
-save_root.mkdir(parents=True, exist_ok=True)
+# Set in main() after paths.configure():
+#   data_root -> <dataset>/derivatives/fmriprep  (legacy equivalent: /project/def-pbellec/xuan/cneuromod.multfs.fmriprep)
+#   save_root -> <output_root>/figures/fd_distribution  (legacy equivalent: scripts/figure_making/figures/fd_distribution)
+data_root: Path | None = None
+save_root: Path | None = None
 
 FD_COLOR = "#5B6C8E"
 
@@ -117,7 +123,22 @@ def plot_mean_fd_per_run_panels(fd_by_subject):
     plt.close(fig)
 
 
+def get_args():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--dataset_root", default=None, help="TaskScape-WM root (default: config.paths / $TASKSCAPE_DATASET_ROOT)")
+    p.add_argument("--output_root", default=None, help="analysis output root (default: config.paths / $TASKSCAPE_OUTPUT_ROOT)")
+    return p.parse_args()
+
+
 def main():
+    global data_root, save_root
+    args = get_args()
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard("plot_fd_distribution")
+    # Input: derivatives/fmriprep/<sub>/<ses>/func/*_desc-confounds_timeseries.tsv
+    data_root = paths.fmriprep_dir()
+    save_root = paths.output_dir("figures", "fd_distribution")
+
     fd_by_subject = {}
     for subject in subjects:
         frame_fd, run_fd = load_subject_fd(subject)

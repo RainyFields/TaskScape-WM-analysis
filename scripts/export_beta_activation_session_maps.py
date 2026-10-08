@@ -34,32 +34,31 @@ import numpy as np
 _SCRIPT_DIR = Path(__file__).resolve().parent
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from encoding_delay_beta_compliance import is_compliant_h5, iter_run_beta_h5
+from config import paths  # noqa: E402  TaskScape-WM inputs only; rejects the legacy tree
 
 N_VERTICES = 64984
 BASELINE_TASK = "dms"
 TASKS = ("1back", "ctxdm", "dms", "interdms")
 SUBJECTS = ("sub-01", "sub-02", "sub-03", "sub-05", "sub-06")
-DEFAULT_H5_ROOT = Path(
-    "/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas"
-)
-DEFAULT_SESSION_OUT = Path(
-    "/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
-    "beta_activation_glasser64k/session_level"
-)
-DEFAULT_CORRECTED_OUT = Path(
-    "/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/"
-    "beta_activation_glasser64k/task_averaged_level1_dms_demean"
-)
+# Input (TaskScape-WM): derivatives/glm/<sub>/<ses>/func/*_run-NN_betas.h5 (complete H5: betas, valid_mask, attrs).
+# legacy equivalent: data/encoding_delay/trial_level_betas
+# Outputs: <output_root>/beta_activation_glasser64k/{session_level,task_averaged_level1_dms_demean}/<sub>/
+# legacy equivalent: data/encoding_delay/beta_activation_glasser64k/{session_level,task_averaged_level1_dms_demean}
 
 
 def get_args():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--subj", default=None, help="Single subject (default: all SUBJECTS)")
-    p.add_argument("--h5-root", type=Path, default=DEFAULT_H5_ROOT)
-    p.add_argument("--session-out-root", type=Path, default=DEFAULT_SESSION_OUT)
-    p.add_argument("--corrected-out-root", type=Path, default=DEFAULT_CORRECTED_OUT)
+    p.add_argument("--h5-root", type=Path, default=None, help="default: <dataset>/derivatives/glm")
+    p.add_argument("--session-out-root", type=Path, default=None,
+                   help="default: <output_root>/beta_activation_glasser64k/session_level")
+    p.add_argument("--corrected-out-root", type=Path, default=None,
+                   help="default: <output_root>/beta_activation_glasser64k/task_averaged_level1_dms_demean")
+    p.add_argument("--dataset_root", default=None, help="TaskScape-WM root (default: config.paths / $TASKSCAPE_DATASET_ROOT)")
+    p.add_argument("--output_root", default=None, help="analysis output root (default: config.paths / $TASKSCAPE_OUTPUT_ROOT)")
     p.add_argument(
         "--require-compliant",
         action=argparse.BooleanOptionalAction,
@@ -78,7 +77,16 @@ def get_args():
         default=True,
         help="Apply DMS session baseline subtraction and write corrected task averages.",
     )
-    return p.parse_args()
+    a = p.parse_args()
+    paths.configure(a.dataset_root, a.output_root)
+    paths.install_legacy_guard("export_beta_activation_session_maps")
+    a.h5_root = paths.require_not_legacy(a.h5_root or paths.glm_dir(), "--h5-root")
+    a.session_out_root = paths.require_not_legacy(
+        a.session_out_root or paths.output_dir("beta_activation_glasser64k", "session_level"), "--session-out-root")
+    a.corrected_out_root = paths.require_not_legacy(
+        a.corrected_out_root or paths.output_dir("beta_activation_glasser64k", "task_averaged_level1_dms_demean"),
+        "--corrected-out-root")
+    return a
 
 
 def parse_h5_path(h5_path: Path) -> tuple[str, str, str]:

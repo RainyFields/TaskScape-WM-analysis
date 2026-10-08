@@ -8,11 +8,21 @@ from matplotlib.patches import Patch
 
 # --- 0. Configuration & Style Setup ---
 
-workspace_root = Path(__file__).resolve().parents[3]
+workspace_root = Path(__file__).resolve().parents[3]   # EXTERNAL figure_style repo lives next to the analysis repo
 if str(workspace_root) not in sys.path:
     sys.path.append(str(workspace_root))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from figure_style.figure_utils import get_figsize, save_figure, apply_clean_spines
+from config import paths  # TaskScape-WM inputs / OUTPUT_ROOT only; rejects the legacy tree
+
+import argparse
+_ap = argparse.ArgumentParser(description="Single-column accuracy panels per task (figure_style).")
+_ap.add_argument("--dataset_root", default=None)
+_ap.add_argument("--output_root", default=None)
+_args = _ap.parse_args()
+paths.configure(_args.dataset_root, _args.output_root)
+paths.install_legacy_guard("plot_accuracy")
 
 # Define the tasks
 tasks = ["1back", "dms", "interdms", "ctxdm"]
@@ -30,8 +40,11 @@ style_path = workspace_root / "figure_style" / "nature_style.mplstyle"
 plt.style.use(style_path)
 
 # Base directory
-results_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results")
-design_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
+# previous-analysis input: {task}_accuracy_results.csv written by scripts/accuracy_level.py to OUTPUT_ROOT/behavior
+# (legacy equivalent: results/{task}_accuracy_results.csv)
+results_dir = paths.output_dir("behavior")
+# legacy equivalent: data/study_designs/
+design_dir = paths.study_designs_dir()
 
 
 def normalize_run(value):
@@ -137,7 +150,7 @@ panel_w_mm = panel_w_mm * width_scale
 panel_h_mm = panel_h_mm * height_scale
 
 # --- 3. Save Figure ---
-save_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/behavioral_performance/")
+save_dir = paths.output_dir("figures", "behavioral_performance")  # legacy equivalent: scripts/figure_making/figures/behavioral_performance/
 os.makedirs(save_dir, exist_ok=True)
 
 for task in tasks:

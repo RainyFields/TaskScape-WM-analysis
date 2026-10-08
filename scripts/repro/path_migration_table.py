@@ -4,7 +4,8 @@
 One row per (file, line) that mentions the frozen legacy project or the upstream annex trees, plus one row per
 file migrated in the taskscape-migration branches (now free of legacy references). Classes:
 
-  migrated            file moved to config.paths (reviewed; exercised by scripts/repro/submit_fidelity.sh)
+  migrated            file moved to config.paths (reviewed; exercised by scripts/repro/submit_fidelity.sh or submit_smoke.sh)
+  archived            file under scripts/legacy/ (git mv on 2026-10-07; legacy paths kept verbatim; see its README)
   input / output      runnable code reading / writing a legacy path (auto-classified; NOT yet migrated)
   historical          comment, docstring or usage example (auto-classified; annotate, leave)
   obsolete-candidate  shell/SLURM helper or one-off diagnostic (auto-classified; candidate for scripts/legacy/)
@@ -49,6 +50,10 @@ def main():
     rows = []
     for f in sorted(files):
         p = REPO / f
+        if f.startswith("scripts/legacy/"):
+            hits = [1 for l in p.read_text(errors="replace").splitlines() if PAT.search(l)] if p.is_file() else []
+            rows.append((f, "", "archived", "reviewed (archived; scripts/legacy/README.md)", f"{len(hits)} legacy-path lines kept verbatim (not maintained)"))
+            continue
         if not p.is_file() or p.suffix in (".pyc", ".png", ".pdf", ".npy", ".npz", ".h5"):
             continue
         try:

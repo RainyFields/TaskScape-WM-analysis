@@ -1,4 +1,30 @@
-# AGENTS.md — fMRI Dataset Project
+# AGENTS.md — TaskScape-WM-analysis
+
+> **Migrated repository (2026-10-07).** This is the analysis repository for the TaskScape-WM BIDS dataset
+> (`/project/def-pbellec/xuan/TaskScape-WM`). Inputs come ONLY from that dataset through `config/paths.py`
+> (`TASKSCAPE_DATASET_ROOT`, `--dataset_root`); outputs go ONLY under `TASKSCAPE_OUTPUT_ROOT` (default `outputs/`,
+> untracked). `config.paths` rejects any path inside the frozen legacy project and installs an audit hook that
+> blocks legacy reads. The text below this banner is the legacy project's AGENTS.md kept for reference: its paths
+> (`data/...`, `/project/def-pbellec/xuan/fmri_dataset_project/...`) are the LEGACY equivalents of the dataset paths
+> listed in `config/paths.py`.
+>
+> Migrated entry points (fidelity-verified, `results/restructure/repro_report.md`): `scripts/glm_analysis.py`,
+> `scripts/verify_run_labels_from_blockfiles.py`, `scripts/build_clean_delay_betas.py`,
+> `scripts/validate_clean_delay_betas.py`, `scripts/similarity_analysis_clean.py`,
+> `scripts/figure_making/plot_fig8_regenerated_clean.py`, and on branch `taskscape-migration-nc`
+> `scripts/noise_ceiling_clean/{prepare_nc_bundle.py,noise_ceiling_clean.py,job_clean_primary_taskscape.sh}`.
+> Migrated active scripts (smoke-tested 2026-10-07): `accuracy_level.py`, `export_beta_activation_session_maps.py`,
+> `aggregate_subject_r2_vertex_maps.py`, `verify_encoding_delay_beta_compliance.py`, `figure_making/{plot_fd_distribution,
+> plot_glm_sanity_check,plot_response_rate,plot_behavioral_performance,plot_accuracy}.py`,
+> `sanity_check/{glm_evaluation,plot_unadjusted_r2_distribution_all_tasks,plot_adjusted_r2_distribution_all_tasks,
+> plot_subject_region_average_r2}.py`. Archived (not deleted) scripts: `scripts/legacy/README.md`. Per-file
+> dispositions: `results/restructure/path_migration_review.tsv`. Harness: `scripts/repro/`.
+>
+> Legacy project doc kept below. Migration workspace: `/project/def-pbellec/xuan/TaskScape-WM-migration` (read its `HANDOFF.md`).
+
+---
+
+# (legacy) AGENTS.md — fMRI Dataset Project
 
 Context for coding agents working on the CNeuroMod multi-task working-memory fMRI analysis pipeline on Alliance Canada (Rorqual).
 

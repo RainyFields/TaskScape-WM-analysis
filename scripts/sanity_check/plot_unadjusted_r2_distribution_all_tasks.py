@@ -28,15 +28,23 @@ if str(_SCRIPTS_ROOT) not in sys.path:
 if str(_SANITY_ROOT) not in sys.path:
     sys.path.insert(0, str(_SANITY_ROOT))
 
+# EXTERNAL style dependency: /project/def-pbellec/xuan/figure_style (separate repo; not legacy, not dataset)
 _PROJECT_PARENT = Path(__file__).resolve().parents[3]
 if str(_PROJECT_PARENT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_PARENT))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import h5py  # noqa: E402
 
 from figure_style.figure_utils import apply_clean_spines, get_palette, mm_to_inches, save_figure  # noqa: E402
 from glm_evaluation import A4_WIDTH_MM, DIST_FIG_WIDTH_MM  # noqa: E402
-from utils import load_valid_vertex_mask  # noqa: E402
+from utils import load_valid_vertex_mask  # noqa: E402  mask = <dataset>/derivatives/taskscape-surface/atlas/valid_vertex_mask.npy
+from config import paths  # noqa: E402  TaskScape-WM inputs only; rejects the legacy tree
+
+# Input: derivatives/glm/<sub>/<ses>/func/*_betas.h5 (r2_full/r2_noise/r2_task datasets).
+# legacy equivalent: data/encoding_delay/trial_level_betas
+# Output: <output_root>/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/unadjusted_r2_distribution
+# legacy equivalent: scripts/sanity_check/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/unadjusted_r2_distribution
 
 DEFAULT_TASKS = ("1back", "ctxdm", "dms", "interdms")
 DEFAULT_SUBJECTS = ("sub-01", "sub-02", "sub-03", "sub-05", "sub-06")
@@ -56,23 +64,31 @@ def get_args():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument(
         "--glm_root",
-        default="/project/def-pbellec/xuan/fmri_dataset_project/data/encoding_delay/trial_level_betas",
-        help="Root containing <subj>/<ses>/func/*_betas.h5",
+        default=None,
+        help="Root containing <subj>/<ses>/func/*_betas.h5 (default: <dataset>/derivatives/glm)",
     )
     p.add_argument(
         "--output_dir",
-        default=(
-            "/project/def-pbellec/xuan/fmri_dataset_project/scripts/sanity_check/"
-            "glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/"
-            "unadjusted_r2_distribution"
-        ),
+        default=None,
+        help="default: <output_root>/glm_fitting_check_results/customized_glm/encoding_delay_ssmoothing_psc/"
+             "unadjusted_r2_distribution",
     )
     p.add_argument("--subjects", nargs="+", default=list(DEFAULT_SUBJECTS))
     p.add_argument("--tasks", nargs="+", default=list(DEFAULT_TASKS))
     p.add_argument("--dist_full_width_mm", type=float, default=DIST_FIG_WIDTH_MM)
     p.add_argument("--dist_hw_ratio", type=float, default=DEFAULT_HW_RATIO)
     p.add_argument("--n_bins", type=int, default=N_BINS)
-    return p.parse_args()
+    p.add_argument("--dataset_root", default=None, help="TaskScape-WM root (default: config.paths / $TASKSCAPE_DATASET_ROOT)")
+    p.add_argument("--output_root", default=None, help="analysis output root (default: config.paths / $TASKSCAPE_OUTPUT_ROOT)")
+    a = p.parse_args()
+    paths.configure(a.dataset_root, a.output_root)
+    paths.install_legacy_guard("plot_unadjusted_r2_distribution_all_tasks")
+    a.glm_root = str(paths.require_not_legacy(a.glm_root or paths.glm_dir(), "--glm_root"))
+    a.output_dir = str(paths.require_not_legacy(
+        a.output_dir or paths.output_dir("glm_fitting_check_results", "customized_glm",
+                                         "encoding_delay_ssmoothing_psc", "unadjusted_r2_distribution"),
+        "--output_dir"))
+    return a
 
 
 def _task_from_h5_name(name: str) -> str | None:

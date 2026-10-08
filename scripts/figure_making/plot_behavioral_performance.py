@@ -1,9 +1,12 @@
 """
 Behavioral Performance Analysis: Accuracy and Response Rate
 Generates Nature-style publication figures for all tasks.
-Reads from existing CSV results in /project/def-pbellec/xuan/fmri_dataset_project/results/
+Reads the per-run CSVs written by scripts/accuracy_level.py and
+scripts/figure_making/plot_response_rate.py under <output_root>/behavior/.
 """
 
+import argparse
+import sys
 import pandas as pd
 import numpy as np
 import os
@@ -13,6 +16,9 @@ import warnings
 import re
 
 warnings.filterwarnings("ignore")
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import paths  # noqa: E402  TaskScape-WM inputs only; rejects the legacy tree
 
 # ============================================================================
 # Nature Scientific Data Figure Standards
@@ -49,10 +55,15 @@ set_nature_rcparams()
 # ============================================================================
 # Configuration
 # ============================================================================
-results_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/results")
-figure_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/figures/behavioral_performance")
-figure_dir.mkdir(parents=True, exist_ok=True)
-design_dir = Path("/project/def-pbellec/xuan/fmri_dataset_project/data/study_designs")
+# Set in main() after paths.configure():
+#   results_dir -> <output_root>/behavior  (previous-analysis outputs of accuracy_level.py / plot_response_rate.py;
+#                  legacy equivalent: results/{task}_accuracy_results.csv, results/{task}_responserate_results.csv)
+#   figure_dir  -> <output_root>/figures/behavioral_performance
+#                  (legacy equivalent: scripts/figure_making/figures/behavioral_performance)
+#   design_dir  -> <dataset>/sourcedata/study-designs  (legacy equivalent: data/study_designs)
+results_dir: Path | None = None
+figure_dir: Path | None = None
+design_dir: Path | None = None
 
 subjects = ['sub-01', 'sub-02', 'sub-03', 'sub-05', 'sub-06']
 tasks = ['1back', 'dms', 'ctxdm', 'interdms']
@@ -95,35 +106,41 @@ GROUP_SUBTASKS = {
 # Load Data
 # ============================================================================
 
-print("="*80)
-print("LOADING DATA FROM EXISTING CSVs")
-print("="*80)
+def load_data():
+    """Load the per-run accuracy / response-rate CSVs and attach fine-task labels."""
+    print("="*80)
+    print("LOADING DATA FROM EXISTING CSVs")
+    print("="*80)
 
-# Load accuracy data
-accuracy_dfs = []
-for task in tasks:
-    csv_path = results_dir / f"{task}_accuracy_results.csv"
-    if csv_path.exists():
-        df = pd.read_csv(csv_path)
-        accuracy_dfs.append(df)
-        print(f"  Loaded {task} accuracy: {len(df)} records")
-    else:
-        print(f"  WARNING: {csv_path} not found")
+    # Load accuracy data
+    accuracy_dfs = []
+    for task in tasks:
+        csv_path = results_dir / f"{task}_accuracy_results.csv"
+        if csv_path.exists():
+            df = pd.read_csv(csv_path)
+            accuracy_dfs.append(df)
+            print(f"  Loaded {task} accuracy: {len(df)} records")
+        else:
+            print(f"  WARNING: {csv_path} not found")
 
-accuracy_df = pd.concat(accuracy_dfs, ignore_index=True) if accuracy_dfs else pd.DataFrame()
+    accuracy_df = pd.concat(accuracy_dfs, ignore_index=True) if accuracy_dfs else pd.DataFrame()
 
-# Load response rate data
-responserate_dfs = []
-for task in tasks:
-    csv_path = results_dir / f"{task}_responserate_results.csv"
-    if csv_path.exists():
-        df = pd.read_csv(csv_path)
-        responserate_dfs.append(df)
-        print(f"  Loaded {task} response rate: {len(df)} records")
-    else:
-        print(f"  WARNING: {csv_path} not found")
+    # Load response rate data
+    responserate_dfs = []
+    for task in tasks:
+        csv_path = results_dir / f"{task}_responserate_results.csv"
+        if csv_path.exists():
+            df = pd.read_csv(csv_path)
+            responserate_dfs.append(df)
+            print(f"  Loaded {task} response rate: {len(df)} records")
+        else:
+            print(f"  WARNING: {csv_path} not found")
 
-responserate_df = pd.concat(responserate_dfs, ignore_index=True) if responserate_dfs else pd.DataFrame()
+    responserate_df = pd.concat(responserate_dfs, ignore_index=True) if responserate_dfs else pd.DataFrame()
+
+    fine_task_lookup = build_fine_task_lookup()
+    accuracy_df = add_fine_task_column(accuracy_df, fine_task_lookup)
+    return accuracy_df, responserate_df
 
 
 def build_fine_task_lookup():
@@ -169,9 +186,6 @@ def add_fine_task_column(df, filename_to_fine_task):
     return out
 
 
-fine_task_lookup = build_fine_task_lookup()
-accuracy_df = add_fine_task_column(accuracy_df, fine_task_lookup)
-
 # ============================================================================
 # Summary Statistics
 # ============================================================================
@@ -210,12 +224,6 @@ def print_summary_table(df, metric_name, metric_col):
             print(f"{np.mean(task_all)*100:.1f}±{np.std(task_all)*100:.1f}%")
         else:
             print("N/A")
-
-if not accuracy_df.empty:
-    print_summary_table(accuracy_df, "Accuracy", "accuracy")
-    
-if not responserate_df.empty:
-    print_summary_table(responserate_df, "Response Rate", "response_rate")
 
 # ============================================================================
 # Plotting Functions
@@ -574,48 +582,78 @@ def plot_accuracy_within_group(df, group_name, output_name):
 # Generate Figures
 # ============================================================================
 
-print("\n" + "="*80)
-print("GENERATING FIGURES")
-print("="*80)
+def get_args():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--dataset_root", default=None, help="TaskScape-WM root (default: config.paths / $TASKSCAPE_DATASET_ROOT)")
+    p.add_argument("--output_root", default=None, help="analysis output root (default: config.paths / $TASKSCAPE_OUTPUT_ROOT)")
+    return p.parse_args()
 
-# Accuracy figures
-if not accuracy_df.empty:
-    # Grouped by subject
-    plot_grouped_boxplot(accuracy_df, 'accuracy', 'Accuracy', 'all_tasks_accuracy_grouped')
-    
-    # Summary by task
-    plot_task_summary(accuracy_df, 'accuracy', 'Accuracy', 'all_tasks_accuracy_summary')
-    
-    # Per subject
-    for subject in subjects:
-        plot_single_subject_boxplot(accuracy_df, subject, 'accuracy', 'Accuracy',
-                                    f'{subject}_accuracy_by_task')
 
-    # One figure per task group (requested)
-    for task in tasks:
-        plot_single_task_accuracy(accuracy_df, task, f'accuracy_{task}_by_subject')
+def main():
+    global results_dir, figure_dir, design_dir
+    args = get_args()
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard("plot_behavioral_performance")
+    # Previous-analysis outputs: same folder accuracy_level.py / plot_response_rate.py write to.
+    results_dir = paths.output_dir("behavior")
+    figure_dir = paths.output_dir("figures", "behavioral_performance")
+    figure_dir.mkdir(parents=True, exist_ok=True)
+    design_dir = paths.study_designs_dir()
 
-    # Per-group, per-subtask accuracy figures
-    for group_name in ["1back", "ctxdm", "interdms", "dms"]:
-        plot_accuracy_within_group(
-            accuracy_df,
-            group_name,
-            f"accuracy_within_group_{group_name}",
-        )
+    accuracy_df, responserate_df = load_data()
 
-# Response rate figures
-if not responserate_df.empty:
-    # Grouped by subject
-    plot_grouped_boxplot(responserate_df, 'response_rate', 'Response Rate', 
-                         'all_tasks_response_rate_grouped')
-    
-    # Summary by task
-    plot_task_summary(responserate_df, 'response_rate', 'Response Rate',
-                      'all_tasks_response_rate_summary')
-    
-    # Per subject
-    for subject in subjects:
-        plot_single_subject_boxplot(responserate_df, subject, 'response_rate', 'Response Rate',
-                                    f'{subject}_response_rate_by_task')
+    if not accuracy_df.empty:
+        print_summary_table(accuracy_df, "Accuracy", "accuracy")
 
-print(f"\nAll figures saved to: {figure_dir}")
+    if not responserate_df.empty:
+        print_summary_table(responserate_df, "Response Rate", "response_rate")
+
+    print("\n" + "="*80)
+    print("GENERATING FIGURES")
+    print("="*80)
+
+    # Accuracy figures
+    if not accuracy_df.empty:
+        # Grouped by subject
+        plot_grouped_boxplot(accuracy_df, 'accuracy', 'Accuracy', 'all_tasks_accuracy_grouped')
+
+        # Summary by task
+        plot_task_summary(accuracy_df, 'accuracy', 'Accuracy', 'all_tasks_accuracy_summary')
+
+        # Per subject
+        for subject in subjects:
+            plot_single_subject_boxplot(accuracy_df, subject, 'accuracy', 'Accuracy',
+                                        f'{subject}_accuracy_by_task')
+
+        # One figure per task group (requested)
+        for task in tasks:
+            plot_single_task_accuracy(accuracy_df, task, f'accuracy_{task}_by_subject')
+
+        # Per-group, per-subtask accuracy figures
+        for group_name in ["1back", "ctxdm", "interdms", "dms"]:
+            plot_accuracy_within_group(
+                accuracy_df,
+                group_name,
+                f"accuracy_within_group_{group_name}",
+            )
+
+    # Response rate figures
+    if not responserate_df.empty:
+        # Grouped by subject
+        plot_grouped_boxplot(responserate_df, 'response_rate', 'Response Rate',
+                             'all_tasks_response_rate_grouped')
+
+        # Summary by task
+        plot_task_summary(responserate_df, 'response_rate', 'Response Rate',
+                          'all_tasks_response_rate_summary')
+
+        # Per subject
+        for subject in subjects:
+            plot_single_subject_boxplot(responserate_df, subject, 'response_rate', 'Response Rate',
+                                        f'{subject}_response_rate_by_task')
+
+    print(f"\nAll figures saved to: {figure_dir}")
+
+
+if __name__ == "__main__":
+    main()

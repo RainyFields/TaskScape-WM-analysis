@@ -11,12 +11,17 @@ Usage:
     python plot_glm_sanity_check.py
 """
 
+import argparse
+import sys
 import h5py
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
 import nibabel as nib
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from config import paths  # noqa: E402  TaskScape-WM inputs only; rejects the legacy tree
 
 # ============================================================================
 # GLOBAL MATPLOTLIB SETTINGS - Nature Scientific Data Standards
@@ -58,11 +63,20 @@ TR = 1.49  # seconds
 TMASK = 1  # frames dropped at start
 N_VOXELS_SAMPLE = 10  # number of voxels to visualize
 
-# Paths
-DATA_ROOT = Path("/project/def-pbellec/xuan/fmri_dataset_project/data")
-FMRI_ROOT = DATA_ROOT / "glasser_resampled" / SUBJ
-BETA_ROOT = DATA_ROOT / "encoding_delay/trial_level_betas" / SUBJ
-OUTPUT_DIR = Path("/project/def-pbellec/xuan/fmri_dataset_project/scripts/figure_making/results/glm_sanity_figures")
+# Paths (set in main() after paths.configure()):
+#   BETA_ROOT  -> <dataset>/derivatives/glm/<SUBJ>           (legacy equivalent: data/encoding_delay/trial_level_betas/<SUBJ>)
+#   BOLD       -> derivatives/taskscape-surface/<sub>/<ses>/func/*_space-fsLR_den-32k_bold.dtseries.nii (unsmoothed, as before)
+#                 (legacy equivalent: data/glasser_resampled/<SUBJ>/<ses>/*_space-Glasser64k_bold.dtseries.nii)
+#   OUTPUT_DIR -> <output_root>/figures/glm_sanity_figures  (legacy equivalent: scripts/figure_making/results/glm_sanity_figures)
+BETA_ROOT: Path | None = None
+OUTPUT_DIR: Path | None = None
+
+
+def get_args():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--dataset_root", default=None, help="TaskScape-WM root (default: config.paths / $TASKSCAPE_DATASET_ROOT)")
+    p.add_argument("--output_root", default=None, help="analysis output root (default: config.paths / $TASKSCAPE_OUTPUT_ROOT)")
+    return p.parse_args()
 
 
 def find_first_run(subj: str):
@@ -128,15 +142,10 @@ def load_bold_data(h5_path: Path):
     ses = parts[1]
     task = parts[2].replace("task-", "")
     run = parts[3]
-    
-    ts_path = FMRI_ROOT / ses / f"{subj}_{ses}_task-{task}_{run}_space-Glasser64k_bold.dtseries.nii"
-    
-    if not ts_path.exists():
-        # Try alternative run format
-        run_num = run.replace("run-", "")
-        alt_run = f"run-{int(run_num):02d}" if len(run_num) == 1 else f"run-{int(run_num)}"
-        ts_path = FMRI_ROOT / ses / f"{subj}_{ses}_task-{task}_{alt_run}_space-Glasser64k_bold.dtseries.nii"
-    
+
+    # Unsmoothed surface BOLD (same choice as the legacy script); paths.run_label() normalises run-1 / run-01.
+    ts_path = paths.surface_bold(subj, ses, task, run, smoothed=False)
+
     if not ts_path.exists():
         raise FileNotFoundError(f"Timeseries not found: {ts_path}")
     
@@ -469,6 +478,12 @@ def plot_r2_distribution(r2, flat_mask, output_dir, run_name):
 
 def main():
     """Generate all GLM sanity check figures."""
+    global BETA_ROOT, OUTPUT_DIR
+    args = get_args()
+    paths.configure(args.dataset_root, args.output_root)
+    paths.install_legacy_guard("plot_glm_sanity_check")
+    BETA_ROOT = paths.glm_dir() / SUBJ
+    OUTPUT_DIR = paths.output_dir("figures", "glm_sanity_figures")
     # Create output directory
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     

@@ -73,12 +73,16 @@ def iter_run_beta_h5(beta_root: Path):
 
 
 def run_bundle_paths(h5_path: Path) -> list[Path]:
-    """Sibling artifacts for one GLM run (same basename)."""
+    """Sibling artifacts for one GLM run (same basename).
+
+    TaskScape-WM derivatives/glm names: *_betas.h5, *_trials.tsv, *_designmatrix.tsv
+    (legacy equivalent: *_betas.h5, *_design.csv, *_design_matrix.csv).
+    """
     base = h5_path.name.replace("_betas.h5", "")
     parent = h5_path.parent
     names = [
         f"{base}_betas.h5",
-        f"{base}_design.csv",
-        f"{base}_design_matrix.csv",
+        f"{base}_trials.tsv",
+        f"{base}_designmatrix.tsv",
     ]
     return [parent / n for n in names if (parent / n).exists()]
