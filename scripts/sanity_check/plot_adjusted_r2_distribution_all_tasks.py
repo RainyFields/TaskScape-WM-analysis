@@ -144,6 +144,19 @@ def collect_adjusted_r2(
     return pooled, used_files
 
 
+def write_summary_json(out_base, used_files, arrays: dict, extra: dict | None = None) -> None:
+    """Reviewable numeric sidecar for the figure (same inputs as the plot): n, mean, sd, median, quantiles per metric."""
+    import json
+    qs = (0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99)
+    summ = {"n_runs": len(used_files), "runs": sorted(str(Path(f).name) for f in used_files)}
+    for k, v in arrays.items():
+        v = np.asarray(v, dtype=float); v = v[np.isfinite(v)]
+        summ[k] = {"n": int(v.size), "mean": float(v.mean()), "sd": float(v.std(ddof=1)), "median": float(np.median(v)),
+                   **{f"q{int(q*100):02d}": float(np.quantile(v, q)) for q in qs}}
+    if extra: summ.update(extra)
+    Path(str(out_base) + "_summary.json").write_text(json.dumps(summ, indent=2))
+
+
 def main():
     args = get_args()
     glm_root = Path(args.glm_root)
@@ -182,6 +195,8 @@ def main():
         hw_ratio=args.dist_hw_ratio,
     )
 
+    write_summary_json(out_base, used_files, {"r2_full_adj": r2_full, "r2_noise_adj": r2_noise, "r2_task_adj": r2_task},
+                       {"subjects": sorted(subjects), "tasks": sorted(tasks), "n_valid_vertices": int(np.sum(valid_mask)), "glm_root": str(glm_root)})
     print(f"Pooled {len(used_files)} runs across tasks={sorted(tasks)} subjects={sorted(subjects)}")
     print(f"Observations per metric: full={r2_full.size:,}, noise={r2_noise.size:,}, task={r2_task.size:,}")
     print(f"Figure width: {args.dist_full_width_mm:.1f} mm ({args.dist_full_width_mm / A4_WIDTH_MM:.0%} A4)")

@@ -226,6 +226,19 @@ def plot_unadjusted_r2_distribution(
     return out_base
 
 
+def write_summary_json(out_base, used_files, arrays: dict, extra: dict | None = None) -> None:
+    """Reviewable numeric sidecar for the figure (same inputs as the plot): n, mean, sd, median, quantiles per metric."""
+    import json
+    qs = (0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99)
+    summ = {"n_runs": len(used_files), "runs": sorted(str(Path(f).name) for f in used_files)}
+    for k, v in arrays.items():
+        v = np.asarray(v, dtype=float); v = v[np.isfinite(v)]
+        summ[k] = {"n": int(v.size), "mean": float(v.mean()), "sd": float(v.std(ddof=1)), "median": float(np.median(v)),
+                   **{f"q{int(q*100):02d}": float(np.quantile(v, q)) for q in qs}}
+    if extra: summ.update(extra)
+    Path(str(out_base) + "_summary.json").write_text(json.dumps(summ, indent=2))
+
+
 def main():
     args = get_args()
     glm_root = Path(args.glm_root)
@@ -257,6 +270,9 @@ def main():
         n_bins=args.n_bins,
     )
 
+    write_summary_json(out_base, used_files, {"r2_full": r2_full, "r2_noise": r2_noise, "r2_task": r2_task},
+                       {"subjects": sorted(args.subjects), "tasks": sorted(args.tasks), "n_valid_vertices": int(np.sum(valid_mask)),
+                        "max_abs_r2_task_minus_full_minus_noise": float(max_abs_diff), "glm_root": str(glm_root)})
     print(f"Pooled {len(used_files)} runs across tasks={sorted(args.tasks)} subjects={sorted(args.subjects)}")
     print(f"Valid vertices in mask: {int(np.sum(valid_mask)):,}")
     print(_summarize("r2_full", r2_full))
