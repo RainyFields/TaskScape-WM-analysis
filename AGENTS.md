@@ -21,6 +21,15 @@
 > dispositions: `results/restructure/path_migration_review.tsv`. Harness: `scripts/repro/`.
 >
 > Legacy project doc kept below. Migration workspace: `/project/def-pbellec/xuan/TaskScape-WM-migration` (read its `HANDOFF.md`).
+>
+> **Shared use on Rorqual (2026-10-09).** Dataset stays at `/project/def-pbellec/xuan/TaskScape-WM` (read-only for
+> everyone; never write into it). Collaborators clone this repo (`--branch taskscape-migration`) into their own
+> directory; `DEFAULT_OUTPUT_ROOT` is `<clone>/outputs`; set `TASKSCAPE_OUTPUT_ROOT` in SLURM jobs. Figure scripts
+> need `figure_style` next to the clone (symlink `/project/def-pbellec/xuan/figure_style`). Access needs groups
+> `def-pbellec` + `rrg-pbellec` (raw/fMRIPrep are symlinks into the CNeuroMod RIA store); check with
+> `python3 scripts/check_dataset_access.py --full`. Environment: shared venv `/project/def-pbellec/xuan/nilearn`
+> (read-only) or `requirements.txt`. GitHub: `https://github.com/RainyFields/TaskScape-WM-analysis` (public; default
+> branch on GitHub is still the legacy `main`). Workflow and dataset locations: `readme.md`.
 
 ---
 
