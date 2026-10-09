@@ -3,7 +3,8 @@
 Inputs come only from the TaskScape-WM BIDS dataset; outputs go only to OUTPUT_ROOT. Nothing reads from
 the frozen legacy project (`fmri_dataset_project`), and this module enforces that:
 
-* ``DATASET_ROOT`` / ``OUTPUT_ROOT`` default to the canonical cluster locations and can be overridden with
+* ``DATASET_ROOT`` defaults to the shared dataset on Rorqual, ``OUTPUT_ROOT`` to ``<this clone>/outputs``; both can be
+  overridden with
   ``TASKSCAPE_DATASET_ROOT`` / ``TASKSCAPE_OUTPUT_ROOT`` (scripts may also pass ``--dataset_root`` /
   ``--output_root`` and call :func:`configure`).
 * Any root or input path that resolves into the legacy tree raises ``SystemExit``.
@@ -36,9 +37,9 @@ LEGACY_ROOTS = tuple(Path(p) for p in (
 ))
 WATCH_PREFIXES = ("/project/def-pbellec/xuan", "/lustre09/project/6002071/xuan")
 
-DEFAULT_DATASET_ROOT = Path("/project/def-pbellec/xuan/TaskScape-WM")
-DEFAULT_OUTPUT_ROOT = Path("/project/def-pbellec/xuan/TaskScape-WM-analysis/outputs")
 REPO_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_DATASET_ROOT = Path("/project/def-pbellec/xuan/TaskScape-WM")  # shared, read-only dataset on Rorqual
+DEFAULT_OUTPUT_ROOT = REPO_ROOT / "outputs"  # inside this clone (gitignored); override with TASKSCAPE_OUTPUT_ROOT
 
 SURFACE_SPACE = "space-fsLR_den-32k"
 
