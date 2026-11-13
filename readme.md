@@ -5,9 +5,15 @@ Analysis code, results and figures for **TaskScape-WM**, the CNeuroMod multi-tas
 
 | What | Where |
 |---|---|
-| Dataset (shared, read-only, BIDS + derivatives) | `/project/def-pbellec/xuan/TaskScape-WM` on Rorqual |
+| Dataset (shared, read-only, BIDS + derivatives) | `<DATASET_ROOT>` |
 | This repository | `https://github.com/RainyFields/TaskScape-WM-analysis` — branch **`taskscape-migration`** (current code); `taskscape-migration-nc` (clean noise ceiling); `main`, `spatial_smoothed`, `noise-ceiling-regen` and tags `pre-migration-2026-10*` are the frozen pre-migration history |
-| Owner's checkout | `/project/def-pbellec/xuan/TaskScape-WM-analysis` (do not write there; clone your own) |
+| Owner's checkout | `<OWNER_CHECKOUT>` (do not write there; clone your own) |
+
+> **Path placeholders.** Data storage locations are not final yet, so this README uses placeholders that will be
+> filled in by a later update:
+> `<DATASET_ROOT>` (dataset root), `<RAW_STORE>` (store holding the raw and fMRIPrep imaging payloads),
+> `<DATASET_PARENT>` (directory containing the dataset root), `<OWNER_CHECKOUT>` (owner's copy of this repository),
+> `<TASK_STIMULI>` (task-stimuli repository). Ask the dataset owner for the current locations.
 
 The previous README (legacy `fmri_dataset_project` layout) is preserved at tag `pre-migration-2026-10`.
 
@@ -15,13 +21,12 @@ The previous README (legacy `fmri_dataset_project` layout) is preserved at tag `
 
 - Membership in **`def-pbellec`** (dataset tree, surface/GLM/clean-delay files) **and `rrg-pbellec`** (raw and
   fMRIPrep imaging: these files are symlinks into the CNeuroMod git-annex store
-  `/lustre09/project/6003287/ria-rorqual`, group `rrg-pbellec`, mode 640). Today both groups have the same members.
-- The path `/project/def-pbellec/xuan` is traverse-only for `def-pbellec` (you cannot list it; use full paths).
+  `<RAW_STORE>`, group `rrg-pbellec`, mode 640). Today both groups have the same members.
+- The path `<DATASET_PARENT>` is traverse-only for `def-pbellec` (you cannot list it; use full paths).
 - Check your access (read-only, standard-library Python, seconds; `--full` scans every file, ~1–2 min):
 
 ```bash
-python3 /project/def-pbellec/xuan/TaskScape-WM-analysis/scripts/check_dataset_access.py --full
-# or, from your clone: python3 scripts/check_dataset_access.py --full
+python3 scripts/check_dataset_access.py --full      # from your clone
 ```
 
 It prints PASS/FAIL for: group membership, traversal, `participants.tsv`, BIDS events, raw BOLD NIfTI header (RIA),
@@ -49,9 +54,9 @@ All paths come from `config/paths.py`:
 
 | Setting | Default | Override |
 |---|---|---|
-| Dataset root (read-only input) | `/project/def-pbellec/xuan/TaskScape-WM` | `export TASKSCAPE_DATASET_ROOT=...` or `--dataset_root` |
+| Dataset root (read-only input) | `<DATASET_ROOT>` | `export TASKSCAPE_DATASET_ROOT=...` or `--dataset_root` |
 | Output root (must be writable) | `<your clone>/outputs` (gitignored) | `export TASKSCAPE_OUTPUT_ROOT=...` or `--output_root` |
-| Task-stimuli repo (run-label verification only) | `/project/def-pbellec/xuan/task_stimuli/data/multfs` | `export TASKSCAPE_TASK_STIMULI=...` |
+| Task-stimuli repo (run-label verification only) | `<TASK_STIMULI>/data/multfs` | `export TASKSCAPE_TASK_STIMULI=...` |
 
 `config.paths` refuses an output root inside the dataset and any path inside the frozen legacy project.
 
